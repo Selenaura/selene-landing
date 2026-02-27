@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SELENE — Ciencia y consciencia de lo invisible</title>
+<meta name="description" content="Academia de desarrollo intuitivo. Neurociencia, cronobiología e intuición: formación online respaldada por estudios científicos. Carta Astral Premium, cursos y más.">
+<meta property="og:title" content="SELENE — Ciencia y consciencia de lo invisible">
+<meta property="og:description" content="Academia de desarrollo intuitivo respaldada por estudios científicos. Carta Astral Premium de +5.000 palabras con consulta interactiva.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://selenaura.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0F; --bg-deep: #050508; --bg-card: #0F0F18;
+  --gold: #C9A84C; --gold-dim: rgba(201,168,76,0.5); --gold-faint: rgba(201,168,76,0.15);
+  --white: #F0EDE4; --dim: rgba(240,237,228,0.65); --faint: rgba(240,237,228,0.35);
+  --violet: #6B4C9A; --rose: #D4A0C0;
+  --border: rgba(201,168,76,0.12); --border-light: rgba(240,237,228,0.06);
+  --cg: 'Cormorant Garamond', Georgia, serif;
+  --of: 'Outfit', system-ui, sans-serif;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--white); font-family: var(--of); overflow-x: hidden; }
+::selection { background: rgba(201,168,76,0.3); color: var(--white); }
+a { text-decoration: none; }
+
+/* Stars canvas */
+#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* Navbar */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 32px; transition: all 0.4s ease; border-bottom: 1px solid transparent; }
+.nav.scrolled { background: rgba(10,10,15,0.92); backdrop-filter: blur(20px); border-bottom-color: var(--border-light); }
+.nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav-logo { font-family: var(--cg); font-size: 28px; font-weight: 700; color: var(--white); letter-spacing: 2px; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-link { color: var(--dim); font-size: 13px; font-weight: 400; letter-spacing: 0.5px; transition: color 0.3s; }
+.nav-link:hover { color: var(--gold); }
+.nav-cta { padding: 10px 24px; border-radius: 100px; border: 1px solid var(--gold); color: var(--gold); font-size: 12px; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; }
+.nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+/* Mobile nav */
+.nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.nav-burger span { display: block; width: 22px; height: 1.5px; background: var(--dim); margin: 5px 0; transition: all 0.3s; }
+.mobile-menu { display: none; }
+
+@media (max-width: 768px) {
+  .nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-burger { display: block; }
+  .mobile-menu.open { display: flex; flex-direction: column; position: fixed; top: 72px; left: 0; right: 0; background: rgba(10,10,15,0.97); backdrop-filter: blur(20px); padding: 24px; gap: 20px; border-bottom: 1px solid var(--border-light); z-index: 99; }
+  .mobile-menu a { color: var(--dim); font-size: 16px; padding: 8px 0; }
+}
+
+/* Sections */
+.section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; opacity: 0; transform: translateY(40px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.section.visible { opacity: 1; transform: translateY(0); }
+
+/* Tag pill */
+.tag { display: inline-block; padding: 6px 18px; border-radius: 100px; border: 1px solid var(--border); background: var(--gold-faint); font-family: var(--of); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; color: var(--gold); text-transform: uppercase; }
+
+/* Divider */
+.divider { text-align: center; padding: 20px 0; position: relative; z-index: 1; color: var(--gold-dim); font-family: var(--cg); font-size: 14px; letter-spacing: 12px; }
+
+/* Hero */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; position: relative; z-index: 1; }
+.hero-glow { position: absolute; top: 20%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 600px; border-radius: 50%; background: radial-gradient(ellipse, rgba(107,76,154,0.12) 0%, rgba(201,168,76,0.06) 40%, transparent 70%); filter: blur(80px); pointer-events: none; }
+.hero h1 { font-family: var(--cg); font-size: clamp(42px, 6.5vw, 82px); font-weight: 400; line-height: 1.1; margin: 40px 0 0; max-width: 800px; letter-spacing: -0.5px; }
+.hero h1 em { color: var(--gold); font-style: italic; }
+.hero p { font-size: clamp(15px, 1.8vw, 18px); color: var(--dim); line-height: 1.8; max-width: 560px; margin: 32px 0 48px; font-weight: 300; }
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.btn-gold { padding: 16px 40px; border-radius: 100px; background: linear-gradient(135deg, var(--gold), #B8943F); color: var(--bg); font-family: var(--of); font-size: 14px; font-weight: 600; letter-spacing: 0.5px; box-shadow: 0 0 40px rgba(201,168,76,0.25); transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer; }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(201,168,76,0.4); }
+.btn-ghost { padding: 16px 40px; border-radius: 100px; border: 1px solid var(--border); color: var(--white); font-family: var(--of); font-size: 14px; font-weight: 400; letter-spacing: 0.5px; background: rgba(255,255,255,0.03); transition: all 0.3s; }
+.btn-ghost:hover { border-color: var(--gold); }
+.trust-bar { display: flex; gap: 40px; margin-top: 80px; flex-wrap: wrap; justify-content: center; }
+.trust-item { font-size: 12px; color: var(--faint); letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+.trust-item::before { content: '◆'; color: var(--gold); font-size: 8px; }
+.scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); opacity: 0.3; }
+.scroll-dot { width: 24px; height: 40px; border-radius: 12px; border: 1px solid var(--dim); display: flex; justify-content: center; padding-top: 8px; }
+.scroll-dot::after { content: ''; width: 3px; height: 8px; border-radius: 2px; background: var(--gold); animation: scrollBounce 2s infinite; }
+@keyframes scrollBounce { 0%,100% { transform: translateY(0); opacity: 0.4; } 50% { transform: translateY(8px); opacity: 1; } }
+
+/* About grid */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-grid h2 { font-family: var(--cg); font-size: 44px; font-weight: 400; line-height: 1.2; margin: 28px 0 24px; }
+.about-grid h2 em { color: var(--gold); font-style: italic; }
+.about-grid p { color: var(--dim); font-size: 15px; line-height: 1.9; font-weight: 300; margin-bottom: 20px; }
+.about-quote { padding: 20px 0; border-top: 1px solid var(--border-light); font-family: var(--cg); font-size: 20px; font-style: italic; color: var(--gold); line-height: 1.6; }
+
+/* Orbital visual */
+.orbital { width: 100%; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--border); position: relative; display: flex; align-items: center; justify-content: center; }
+.orbital-mid { width: 70%; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--gold-faint); display: flex; align-items: center; justify-content: center; }
+.orbital-core { width: 50%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.15), transparent); display: flex; align-items: center; justify-content: center; font-family: var(--cg); font-size: 48px; color: var(--gold); }
+.orbital-dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; transform: translate(-50%,-50%); }
+.orbital-label { position: absolute; padding: 6px 14px; border-radius: 8px; background: rgba(15,15,24,0.8); border: 1px solid var(--border); font-size: 11px; color: var(--dim); letter-spacing: 0.5px; backdrop-filter: blur(10px); }
+
+/* Pillars */
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 80px; }
+.pillar { padding: 36px; border-radius: 16px; background: rgba(15,15,24,0.5); border: 1px solid var(--border-light); transition: border-color 0.3s; }
+.pillar:hover { border-color: var(--border); }
+.pillar-icon { font-size: 28px; margin-bottom: 16px; }
+.pillar h3 { font-family: var(--cg); font-size: 22px; font-weight: 500; margin-bottom: 12px; }
+.pillar p { font-size: 14px; color: var(--dim); line-height: 1.8; font-weight: 300; }
+
+/* Carta Astral */
+.carta-header { text-align: center; margin-bottom: 60px; }
+.carta-header h2 { font-family: var(--cg); font-size: 52px; font-weight: 400; margin: 28px 0 16px; line-height: 1.15; }
+.carta-header h2 em { color: var(--gold); font-style: italic; }
+.carta-header p { color: var(--dim); font-size: 17px; max-width: 600px; margin: 0 auto; line-height: 1.8; font-weight: 300; }
+
+.product-card { border-radius: 24px; border: 1px solid var(--border); overflow: hidden; background: linear-gradient(170deg, rgba(15,15,24,0.9), rgba(10,10,15,0.95)); }
+.product-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.product-left { padding: 56px 48px; }
+.product-left p { font-size: 15px; color: var(--dim); line-height: 1.9; font-weight: 300; margin-bottom: 24px; }
+.product-highlight { padding: 20px 24px; border-radius: 12px; background: var(--gold-faint); border: 1px solid var(--border); margin-bottom: 32px; }
+.product-highlight p { font-family: var(--cg); font-size: 18px; color: var(--gold); font-style: italic; line-height: 1.6; margin: 0; }
+.product-price { font-family: var(--cg); font-size: 48px; color: var(--gold); font-weight: 500; }
+.product-price-note { font-size: 14px; color: var(--faint); margin-left: 12px; }
+.product-right { padding: 56px 48px; border-left: 1px solid var(--border-light); background: rgba(201,168,76,0.02); }
+.product-right h3 { font-family: var(--cg); font-size: 24px; margin-bottom: 32px; }
+.feature-row { display: flex; gap: 16px; margin-bottom: 24px; }
+.feature-icon { font-size: 18px; color: var(--gold); width: 24px; flex-shrink: 0; text-align: center; }
+.feature-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+.feature-desc { font-size: 13px; color: var(--faint); font-weight: 300; }
+
+.audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+.audience-box { padding: 32px; border-radius: 16px; border: 1px solid var(--border-light); }
+.audience-box h4 { font-family: var(--cg); font-size: 20px; margin-bottom: 20px; }
+.audience-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: 14px; color: var(--dim); line-height: 1.6; font-weight: 300; }
+
+/* Academia */
+.academia-header { text-align: center; margin-bottom: 60px; }
+.academia-header h2 { font-family: var(--cg); font-size: 48px; font-weight: 400; margin: 28px 0 16px; line-height: 1.15; }
+.academia-header h2 em { color: var(--gold); font-style: italic; }
+.academia-header p { color: var(--dim); font-size: 17px; max-width: 560px; margin: 0 auto; line-height: 1.8; font-weight: 300; }
+.academia-card { padding: 48px; border-radius: 24px; border: 1px solid var(--border-light); background: linear-gradient(170deg, rgba(107,76,154,0.06), rgba(15,15,24,0.5)); }
+.academia-card > p { font-size: 15px; color: var(--dim); line-height: 1.9; font-weight: 300; max-width: 680px; margin-bottom: 40px; }
+.modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.module-card { padding: 28px; border-radius: 14px; border: 1px solid var(--border-light); background: rgba(10,10,15,0.5); transition: border-color 0.3s; }
+.module-card:hover { border-color: var(--border); }
+.module-num { font-family: var(--cg); font-size: 32px; color: var(--gold-dim); font-weight: 300; }
+.module-card h4 { font-family: var(--cg); font-size: 19px; margin: 12px 0 8px; }
+.module-card p { font-size: 13px; color: var(--faint); line-height: 1.7; font-weight: 300; }
+.journals { display: flex; justify-content: center; gap: 48px; margin-top: 48px; flex-wrap: wrap; }
+.journals span { font-size: 12px; color: var(--faint); letter-spacing: 0.5px; font-weight: 300; opacity: 0.6; }
+
+/* FAQ */
+.faq-header { text-align: center; margin-bottom: 60px; }
+.faq-header h2 { font-family: var(--cg); font-size: 44px; font-weight: 400; }
+.faq-header h2 em { color: var(--gold); font-style: italic; }
+.faq-list { max-width: 740px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border-light); padding: 24px 0; cursor: pointer; }
+.faq-q { display: flex; justify-content: space-between; align-items: center; }
+.faq-q h3 { font-family: var(--cg); font-size: 20px; font-weight: 500; transition: color 0.3s; }
+.faq-q span { color: var(--gold); font-size: 20px; transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
+.faq-item.open .faq-q h3 { color: var(--gold); }
+.faq-item.open .faq-q span { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-item.open .faq-a { max-height: 300px; }
+.faq-a p { font-size: 14px; color: var(--dim); line-height: 1.85; font-weight: 300; padding-top: 16px; }
+
+/* Newsletter */
+.newsletter { padding: 64px 48px; border-radius: 24px; text-align: center; border: 1px solid var(--border); background: radial-gradient(ellipse at center, rgba(201,168,76,0.08), rgba(10,10,15,0.9)); }
+.newsletter h2 { font-family: var(--cg); font-size: 44px; font-weight: 400; margin: 28px 0 16px; }
+.newsletter h2 em { color: var(--gold); font-style: italic; }
+.newsletter > p { color: var(--dim); font-size: 15px; max-width: 480px; margin: 0 auto 40px; line-height: 1.8; font-weight: 300; }
+.email-form { display: flex; gap: 12px; max-width: 440px; margin: 0 auto; }
+.email-input { flex: 1; padding: 14px 20px; border-radius: 100px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--white); font-family: var(--of); font-size: 14px; outline: none; transition: border-color 0.3s; }
+.email-input:focus { border-color: var(--gold); }
+.email-input::placeholder { color: rgba(240,237,228,0.3); }
+.email-btn { padding: 14px 28px; border-radius: 100px; border: none; cursor: pointer; background: var(--gold); color: var(--bg); font-family: var(--of); font-size: 14px; font-weight: 600; white-space: nowrap; transition: transform 0.2s; }
+.email-btn:hover { transform: translateY(-1px); }
+.email-note { font-size: 11px; color: var(--faint); margin-top: 16px; }
+
+/* Footer */
+footer { border-top: 1px solid var(--border-light); padding: 60px 24px 40px; position: relative; z-index: 1; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
+.footer-logo { font-family: var(--cg); font-size: 24px; font-weight: 700; letter-spacing: 2px; margin-bottom: 12px; }
+.footer-logo span { color: var(--gold); }
+.footer-desc { font-size: 13px; color: var(--faint); line-height: 1.7; max-width: 280px; font-weight: 300; }
+.footer-cols { display: flex; gap: 60px; }
+.footer-col h4 { font-size: 11px; letter-spacing: 1.5px; color: var(--dim); margin-bottom: 16px; font-weight: 500; }
+.footer-col a { display: block; color: var(--faint); font-size: 13px; margin-bottom: 10px; font-weight: 300; transition: color 0.3s; }
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom { max-width: 1100px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; font-size: 11px; color: var(--faint); font-weight: 300; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-grid .orbital-wrap { order: -1; max-width: 300px; margin: 0 auto; }
+  .pillars { grid-template-columns: 1fr; }
+  .product-grid { grid-template-columns: 1fr; }
+  .product-right { border-left: none; border-top: 1px solid var(--border-light); }
+  .product-left, .product-right { padding: 36px 28px; }
+  .audience-grid { grid-template-columns: 1fr; }
+  .modules-grid { grid-template-columns: 1fr; }
+  .email-form { flex-direction: column; }
+  .footer-cols { flex-direction: column; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
+  .newsletter { padding: 40px 24px; }
+  .academia-card { padding: 28px; }
+  .carta-header h2 { font-size: 38px; }
+  .hero h1 { font-size: clamp(36px, 8vw, 60px); }
+  .trust-bar { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<canvas id="stars"></canvas>
+
+<!-- Navbar -->
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">S<span>ELENE</span></div>
+    <div class="nav-links">
+      <a href="#sobre" class="nav-link">Sobre SELENE</a>
+      <a href="#carta" class="nav-link">Carta Astral</a>
+      <a href="#academia" class="nav-link">Academia</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#newsletter" class="nav-cta">EMPIEZA GRATIS</a>
+    </div>
+    <button class="nav-burger" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#sobre" onclick="this.parentElement.classList.remove('open')">Sobre SELENE</a>
+  <a href="#carta" onclick="this.parentElement.classList.remove('open')">Carta Astral</a>
+  <a href="#academia" onclick="this.parentElement.classList.remove('open')">Academia</a>
+  <a href="#faq" onclick="this.parentElement.classList.remove('open')">FAQ</a>
+  <a href="#newsletter" onclick="this.parentElement.classList.remove('open')">Empieza gratis</a>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <span class="tag">Academia de desarrollo intuitivo</span>
+  <h1>Ciencia y consciencia<br><em>de lo invisible</em></h1>
+  <p>Neurociencia, cronobiología e intuición: formación online respaldada por estudios científicos para quienes quieren despertar sin dejar de pensar.</p>
+  <div class="hero-btns">
+    <a href="#carta" class="btn-gold">Descubre tu Carta Astral</a>
+    <a href="#academia" class="btn-ghost">Empieza gratis</a>
+  </div>
+  <div class="trust-bar">
+    <span class="trust-item">Datos astronómicos reales</span>
+    <span class="trust-item">Estudios peer-reviewed</span>
+    <span class="trust-item">100% en español</span>
+    <span class="trust-item">+5.000 palabras por lectura</span>
+  </div>
+  <div class="scroll-indicator"><div class="scroll-dot"></div></div>
+</div>
+
+<div class="divider">✦ ── ✦ ── ✦</div>
+
+<!-- Sobre SELENE -->
+<section class="section" id="sobre">
+  <div class="about-grid">
+    <div>
+      <span class="tag">Quiénes somos</span>
+      <h2>Donde la ciencia<br>encuentra a la <em>intuición</em></h2>
+      <p>SELENE nace de una convicción simple: lo que sientes cuando miras el cielo nocturno no es casualidad. Es tu sistema nervioso respondiendo a algo real.</p>
+      <p>Somos una academia de desarrollo intuitivo que integra la sabiduría ancestral de disciplinas como la astrología, el tarot y la meditación con los hallazgos más recientes de la neurociencia, la cronobiología y los estudios de consciencia.</p>
+      <div class="about-quote">«Tu intuición es un sistema neurológico entrenable. Nosotros te enseñamos a usarlo.»</div>
+    </div>
+    <div class="orbital-wrap">
+      <div class="orbital">
+        <div class="orbital-mid">
+          <div class="orbital-core">☉</div>
+        </div>
+        <div class="orbital-dot" style="left:89%;top:25%;background:var(--gold)"></div>
+        <div class="orbital-dot" style="left:75%;top:93%;background:var(--dim);opacity:0.4"></div>
+        <div class="orbital-dot" style="left:11%;top:65%;background:var(--dim);opacity:0.4"></div>
+        <div class="orbital-dot" style="left:30%;top:8%;background:var(--dim);opacity:0.4"></div>
+        <div class="orbital-dot" style="left:60%;top:5%;background:var(--dim);opacity:0.3"></div>
+        <div class="orbital-dot" style="left:5%;top:35%;background:var(--dim);opacity:0.3"></div>
+        <div class="orbital-label" style="top:10%;right:-10%">Neurociencia</div>
+        <div class="orbital-label" style="bottom:10%;right:-5%">Cronobiología</div>
+        <div class="orbital-label" style="top:50%;left:-12%">Consciencia</div>
+      </div>
+    </div>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">🧬</div>
+      <h3>Neurociencia aplicada</h3>
+      <p>Protocolos basados en estudios sobre meditación, neuroplasticidad y toma de decisiones intuitiva.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🌙</div>
+      <h3>Cronobiología lunar</h3>
+      <p>Alinea tu práctica con los ritmos circadianos y ultradianos que la ciencia ha documentado.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">✦</div>
+      <h3>Práctica real</h3>
+      <p>Ejercicios diseñados para tu día a día. Sin dogmas, sin promesas vacías, sin gurús.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider">✦ ── ✦ ── ✦</div>
+
+<!-- Carta Astral Premium -->
+<section class="section" id="carta">
+  <div class="carta-header">
+    <span class="tag">Servicio estrella</span>
+    <h2>Carta Astral <em>Premium</em></h2>
+    <p>Tu mapa natal completo con lectura personalizada de +5.000 palabras y consulta interactiva incluida.</p>
+  </div>
+  <div class="product-card">
+    <div class="product-grid">
+      <div class="product-left">
+        <p>No es un horóscopo. No es un resumen genérico de tu signo. Es una lectura de más de 5.000 palabras escrita específicamente para ti, basada en la posición exacta de los planetas en el momento y lugar de tu nacimiento.</p>
+        <p>15 secciones de análisis profundo: desde tu esencia tripartita (Sol, Luna y Ascendente) hasta los tránsitos que están afectando tu vida ahora mismo.</p>
+        <div class="product-highlight">
+          <p>Lo que hace única esta experiencia es lo que viene después: SELENE inicia una conversación contigo. No eres tú quien pregunta — es SELENE quien detecta las tensiones de tu carta y te hace preguntas que nadie te ha hecho antes.</p>
+        </div>
+        <div style="margin-bottom:8px">
+          <span class="product-price">€44,99</span>
+          <span class="product-price-note">pago único</span>
+        </div>
+        <p style="font-size:12px;color:var(--faint);margin-bottom:28px">Acceso inmediato · 14 días de garantía</p>
+        <a href="#" class="btn-gold" style="display:inline-block">Descubre tu carta astral →</a>
+      </div>
+      <div class="product-right">
+        <h3>Qué incluye</h3>
+        <div class="feature-row"><span class="feature-icon">☉</span><div><div class="feature-title">Lectura de +5.000 palabras</div><div class="feature-desc">15 secciones de análisis personalizado</div></div></div>
+        <div class="feature-row"><span class="feature-icon">◈</span><div><div class="feature-title">Datos astronómicos reales</div><div class="feature-desc">Efemérides suizas de precisión científica</div></div></div>
+        <div class="feature-row"><span class="feature-icon">✦</span><div><div class="feature-title">La Consulta</div><div class="feature-desc">Sesión interactiva donde SELENE te guía</div></div></div>
+        <div class="feature-row"><span class="feature-icon">↻</span><div><div class="feature-title">Tránsitos actualizados</div><div class="feature-desc">Qué está pasando en tu cielo ahora</div></div></div>
+        <div class="feature-row"><span class="feature-icon">📑</span><div><div class="feature-title">Respaldo científico</div><div class="feature-desc">Cada sección cita estudios peer-reviewed</div></div></div>
+        <div class="feature-row"><span class="feature-icon">💬</span><div><div class="feature-title">Chat libre incluido</div><div class="feature-desc">10-15 mensajes para explorar tu carta</div></div></div>
+        <div class="feature-row"><span class="feature-icon">↓</span><div><div class="feature-title">Descarga completa</div><div class="feature-desc">Guarda y relee tu carta siempre</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="audience-grid">
+    <div class="audience-box" style="background:rgba(201,168,76,0.03)">
+      <h4 style="color:var(--gold)">Para ti si...</h4>
+      <div class="audience-item"><span style="color:var(--gold);flex-shrink:0">✓</span> Los horóscopos genéricos no te representan</div>
+      <div class="audience-item"><span style="color:var(--gold);flex-shrink:0">✓</span> Quieres entender tus patrones en relaciones y decisiones</div>
+      <div class="audience-item"><span style="color:var(--gold);flex-shrink:0">✓</span> Te interesa la astrología con base real</div>
+      <div class="audience-item"><span style="color:var(--gold);flex-shrink:0">✓</span> Buscas una experiencia premium, no un PDF más</div>
+      <div class="audience-item"><span style="color:var(--gold);flex-shrink:0">✓</span> Estás en un momento de cambio y necesitas claridad</div>
+    </div>
+    <div class="audience-box" style="background:rgba(240,237,228,0.02)">
+      <h4 style="color:var(--dim)">No es para ti si...</h4>
+      <div class="audience-item"><span style="color:var(--faint);flex-shrink:0">✕</span><span style="color:var(--faint)"> Buscas predicciones tipo «en marzo te llega el amor»</span></div>
+      <div class="audience-item"><span style="color:var(--faint);flex-shrink:0">✕</span><span style="color:var(--faint)"> Quieres que te digan lo que quieres oír sin matices</span></div>
+      <div class="audience-item"><span style="color:var(--faint);flex-shrink:0">✕</span><span style="color:var(--faint)"> Prefieres un resumen de 2 párrafos sobre tu signo</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">✦ ── ✦ ── ✦</div>
+
+<!-- Academia -->
+<section class="section" id="academia">
+  <div class="academia-header">
+    <span class="tag">Curso gratuito · Tu primer paso</span>
+    <h2>Despierta tu <em>Brújula Interior</em></h2>
+    <p>6 módulos · 12 horas · Introducción al desarrollo intuitivo con base neurocientífica. Gratis, solo necesitas tu email.</p>
+  </div>
+  <div class="academia-card">
+    <p>¿Alguna vez has sentido algo que no podías explicar? Una corazonada que resultó ser cierta. La certeza de que alguien iba a llamarte — justo antes de que sonara el teléfono. Eso no es casualidad. Es tu sistema intuitivo funcionando. Este curso te enseña a usarlo.</p>
+    <div class="modules-grid">
+      <div class="module-card"><span class="module-num">01</span><h4>Espiritualidad consciente</h4><p>Neuroplasticidad, atención plena y modelos de consciencia</p></div>
+      <div class="module-card"><span class="module-num">02</span><h4>Tu cuerpo como antena</h4><p>Interocepción: la ciencia de sentir desde dentro</p></div>
+      <div class="module-card"><span class="module-num">03</span><h4>Percepción expandida</h4><p>Entrena tu atención para captar señales que ignoras</p></div>
+      <div class="module-card"><span class="module-num">04</span><h4>Ciclos naturales</h4><p>Cronobiología: ritmos lunares, circadianos y estacionales</p></div>
+      <div class="module-card"><span class="module-num">05</span><h4>Simbología profunda</h4><p>Jung, arquetipos y la conexión con astrología y tarot</p></div>
+      <div class="module-card"><span class="module-num">06</span><h4>Tu camino personal</h4><p>Diseña tu práctica diaria integrada</p></div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="#" class="btn-ghost" style="display:inline-block;border-color:var(--gold);color:var(--gold)">Empezar gratis →</a>
+      <p style="font-size:12px;color:var(--faint);margin-top:12px">Sin tarjeta · Sin compromiso · Solo tu email</p>
+    </div>
+  </div>
+  <div class="journals">
+    <span>Current Biology</span>
+    <span>Frontiers in Psychology</span>
+    <span>BMC Neuroscience</span>
+    <span>HeartMath Institute</span>
+    <span>Max Planck</span>
+  </div>
+</section>
+
+<div class="divider">✦ ── ✦ ── ✦</div>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="faq-header">
+    <h2>Preguntas <em>frecuentes</em></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><h3>¿SELENE es una IA?</h3><span>+</span></div>
+      <div class="faq-a"><p>SELENE utiliza tecnología avanzada para generar lecturas personalizadas basadas en datos astronómicos reales y modelos psicológicos contrastados. Cada lectura se genera específicamente para ti, usando la posición exacta de los planetas. No es un horóscopo genérico: es contenido único creado para tu carta.</p></div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><h3>¿La astrología tiene base científica?</h3><span>+</span></div>
+      <div class="faq-a"><p>La astrología como sistema predictivo no está validada por la ciencia convencional, y somos transparentes con esto. Lo que sí está respaldado es el uso de arquetipos como herramienta de autoconocimiento, la influencia de ciclos naturales en el comportamiento humano, y la eficacia de prácticas contemplativas. Nuestro enfoque integra la riqueza simbólica de la tradición con hallazgos verificables de la neurociencia.</p></div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><h3>¿Necesito saber mi hora de nacimiento?</h3><span>+</span></div>
+      <div class="faq-a"><p>Para la Carta Astral Premium, sí es recomendable. La hora determina tu Ascendente y las Casas astrológicas. Si no la conoces exactamente, puedes usar una aproximación — la lectura seguirá siendo valiosa. Puedes consultar tu hora en el Registro Civil o en tu libro de familia.</p></div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><h3>¿En qué se diferencia de otras apps?</h3><span>+</span></div>
+      <div class="faq-a"><p>Tres cosas nos hacen diferentes. Cada lectura cita estudios científicos reales. Incluimos La Consulta — una sesión interactiva donde SELENE te hace preguntas basadas en tu carta, algo que nadie más ofrece. Y todo está en español nativo, no traducido.</p></div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><h3>¿Puedo pedir un reembolso?</h3><span>+</span></div>
+      <div class="faq-a"><p>Sí. 14 días de garantía en todos los productos de pago, sin preguntas. Si no estás satisfecha, te devolvemos el importe íntegro.</p></div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><h3>¿Los cursos caducan?</h3><span>+</span></div>
+      <div class="faq-a"><p>No. Acceso permanente, a tu ritmo, sin fecha límite. Sin prisas, sin caducidad.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">✦ ── ✦ ── ✦</div>
+
+<!-- Newsletter -->
+<section class="section" id="newsletter">
+  <div class="newsletter">
+    <span class="tag">Únete a la comunidad SELENE</span>
+    <h2>Tu dosis semanal de<br><em>ciencia y consciencia</em></h2>
+    <p>Cada semana: un insight astrológico real, un dato neurocientífico que no conocías, y una práctica breve de 5 minutos. Sin spam. Sin misticismo vacío.</p>
+    <div class="email-form">
+      <input type="email" class="email-input" placeholder="tu@email.com">
+      <button class="email-btn">Suscribirme →</button>
+    </div>
+    <p class="email-note">Cancela cuando quieras · Datos protegidos · Sin spam</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">S<span>ELENE</span></div>
+      <p class="footer-desc">Ciencia y consciencia de lo invisible. Academia de desarrollo intuitivo.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>EXPLORA</h4>
+        <a href="#carta">Carta Astral Premium</a>
+        <a href="#academia">Curso gratuito</a>
+        <a href="#sobre">Sobre SELENE</a>
+      </div>
+      <div class="footer-col">
+        <h4>LEGAL</h4>
+        <a href="#">Política de privacidad</a>
+        <a href="#">Términos de servicio</a>
+        <a href="#">Aviso legal</a>
+      </div>
+      <div class="footer-col">
+        <h4>CONTACTO</h4>
+        <a href="mailto:info@selenaura.com">info@selenaura.com</a>
+        <a href="https://instagram.com/selenaura" style="margin-top:4px">@selenaura</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 SELENE. Todos los derechos reservados.</span>
+    <span>selenaura.com</span>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+// Section reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+// Animated stars
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let w, h;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+}
+resize();
+window.addEventListener('resize', resize);
+
+const stars = Array.from({ length: 180 }, () => ({
+  x: Math.random() * 3000, y: Math.random() * 15000,
+  r: Math.random() * 1.5 + 0.3, o: Math.random() * 0.5 + 0.1,
+  speed: Math.random() * 0.003 + 0.001, phase: Math.random() * Math.PI * 2,
+}));
+
+function drawStars(t) {
+  ctx.clearRect(0, 0, w, h);
+  stars.forEach(s => {
+    if (s.x > w || s.y > h) return;
+    const flicker = 0.5 + 0.5 * Math.sin(t * s.speed + s.phase);
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(240,237,228,${s.o * flicker})`;
+    ctx.fill();
+    if (s.r > 1.2) {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r * 3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,168,76,${0.04 * flicker})`;
+      ctx.fill();
+    }
+  });
+  requestAnimationFrame(drawStars);
+}
+requestAnimationFrame(drawStars);
+
+// Resize stars canvas on content change
+setTimeout(resize, 1000);
+</script>
+</body>
+</html>
