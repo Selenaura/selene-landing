@@ -19,6 +19,7 @@
   --white: #F0EDE4; --dim: rgba(240,237,228,0.65); --faint: rgba(240,237,228,0.35); --muted: rgba(240,237,228,0.12);
   --rose: #D4A0C0; --rose-dim: rgba(212,160,192,0.5); --rose-faint: rgba(212,160,192,0.12);
   --violet: #8B7BBF; --teal: #6BA8A0;
+  --blue: #4A7BD4; --blue-dim: rgba(74,123,212,0.5); --blue-faint: rgba(74,123,212,0.12);
   --border: rgba(201,168,76,0.12); --border-light: rgba(240,237,228,0.06);
   --cg: 'Cormorant Garamond', Georgia, serif;
   --of: 'Outfit', system-ui, sans-serif;
@@ -76,6 +77,8 @@ img { max-width: 100%; }
 .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 .btn-rose { display: inline-block; padding: 14px 36px; border-radius: 100px; border: none; cursor: pointer; background: linear-gradient(135deg, var(--rose), #B8849E); color: var(--bg); font-family: var(--of); font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s; box-shadow: 0 0 40px rgba(212,160,192,0.15); }
 .btn-rose:hover { transform: translateY(-2px); box-shadow: 0 4px 50px rgba(212,160,192,0.25); }
+.btn-blue { display: inline-block; padding: 14px 36px; border-radius: 100px; border: none; cursor: pointer; background: linear-gradient(135deg, var(--blue), #3A6BC4); color: var(--white); font-family: var(--of); font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s; box-shadow: 0 0 40px rgba(74,123,212,0.15); }
+.btn-blue:hover { transform: translateY(-2px); box-shadow: 0 4px 50px rgba(74,123,212,0.25); }
 
 /* ═══ ORNAMENTAL DIVIDERS ═══ */
 .divider { text-align: center; padding: 24px 0; position: relative; z-index: 1; }
@@ -168,6 +171,28 @@ img { max-width: 100%; }
 .compat-info p { font-size: 15px; color: var(--dim); line-height: 1.9; font-weight: 300; margin-bottom: 20px; text-align: justify; }
 .compat-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
 .compat-tag { font-size: 11px; color: var(--dim); padding: 5px 12px; border-radius: 100px; border: 1px solid var(--border-light); }
+
+/* Quirología */
+.quiro-card { border-radius: 24px; border: 1px solid var(--blue-faint); overflow: hidden; background: linear-gradient(170deg, rgba(74,123,212,0.03), rgba(15,15,24,0.9)); position: relative; }
+.quiro-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 40% 20%, rgba(74,123,212,0.05), transparent 50%), radial-gradient(ellipse at 60% 80%, rgba(201,168,76,0.03), transparent 50%); pointer-events: none; }
+.quiro-inner { position: relative; z-index: 1; padding: 56px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.quiro-visual { text-align: center; }
+.quiro-palm { font-size: 80px; display: block; margin-bottom: 20px; filter: drop-shadow(0 0 30px rgba(74,123,212,0.2)); animation: float 4s ease-in-out infinite; }
+.quiro-info h3 { font-family: var(--cg); font-size: 28px; font-weight: 500; margin-bottom: 14px; text-align: left; }
+.quiro-info h3 em { color: var(--blue); font-style: italic; }
+.quiro-info p { font-size: 15px; color: var(--dim); line-height: 1.9; font-weight: 300; margin-bottom: 20px; text-align: justify; }
+.quiro-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+.quiro-feat { display: flex; align-items: flex-start; gap: 10px; }
+.quiro-feat-icon { color: var(--gold); font-size: 12px; margin-top: 3px; flex-shrink: 0; }
+.quiro-feat-text { font-size: 13px; color: var(--dim); line-height: 1.5; font-weight: 300; }
+
+@media (max-width: 768px) {
+  .quiro-inner { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
+  .quiro-info h3 { text-align: center; }
+  .quiro-info p { text-align: justify; }
+  .quiro-features { grid-template-columns: 1fr; }
+  .quiro-info > div:last-child { text-align: center; }
+}
 
 /* Academia */
 .academia-card { padding: 48px; border-radius: 24px; border: 1px solid var(--border-light); background: linear-gradient(170deg, rgba(107,76,154,0.05), rgba(15,15,24,0.5)); position: relative; overflow: hidden; }
@@ -263,6 +288,7 @@ footer { border-top: 1px solid var(--border-light); padding: 56px 24px 36px; pos
       <a href="#cosmos" class="nav-link">Hoy</a>
       <a href="#carta" class="nav-link">Carta Astral</a>
       <a href="#compatibilidad" class="nav-link">Compatibilidad</a>
+      <a href="#quirologia" class="nav-link">Quirología</a>
       <a href="#academia" class="nav-link">Academia</a>
       <a href="https://carta.selenaura.com" class="nav-cta">Tu Carta Astral</a>
     </div>
@@ -275,6 +301,7 @@ footer { border-top: 1px solid var(--border-light); padding: 56px 24px 36px; pos
   <a href="#cosmos" onclick="this.parentElement.classList.remove('open')">El Cosmos Hoy</a>
   <a href="#carta" onclick="this.parentElement.classList.remove('open')">Carta Astral</a>
   <a href="#compatibilidad" onclick="this.parentElement.classList.remove('open')">Compatibilidad</a>
+  <a href="#quirologia" onclick="this.parentElement.classList.remove('open')">Quirología</a>
   <a href="#academia" onclick="this.parentElement.classList.remove('open')">Academia</a>
   <a href="https://carta.selenaura.com" onclick="this.parentElement.classList.remove('open')" style="color:var(--gold)">Tu Carta Astral →</a>
 </div>
@@ -476,6 +503,52 @@ footer { border-top: 1px solid var(--border-light); padding: 56px 24px 36px; pos
 <!-- Divider -->
 <div class="divider">
   <svg width="300" height="30" viewBox="0 0 300 30">
+    <line x1="40" y1="15" x2="130" y2="15" stroke="rgba(74,123,212,0.12)" stroke-width="0.5"/>
+    <circle cx="140" cy="15" r="1.5" fill="rgba(74,123,212,0.2)"/>
+    <circle cx="150" cy="15" r="3" fill="rgba(74,123,212,0.3)"/>
+    <circle cx="160" cy="15" r="1.5" fill="rgba(74,123,212,0.2)"/>
+    <line x1="170" y1="15" x2="260" y2="15" stroke="rgba(74,123,212,0.12)" stroke-width="0.5"/>
+  </svg>
+</div>
+
+<!-- ═══ QUIROLOGÍA ═══ -->
+<section class="section" id="quirologia">
+  <div class="product-header">
+    <span class="tag" style="border-color:rgba(74,123,212,0.25);color:var(--blue);background:rgba(74,123,212,0.06)">Nuevo · Gratis</span>
+    <h2 style="color:var(--white)">Quirología <em style="color:var(--blue)">Intuitiva</em></h2>
+    <p>Sube una foto de tu palma y recibe una lectura personalizada basada en la tradición quirológica y el análisis de dermatoglifos. Tu mano tiene más que contarte de lo que imaginas.</p>
+  </div>
+  <div class="quiro-card">
+    <div class="quiro-inner">
+      <div class="quiro-visual">
+        <div class="quiro-palm">✋</div>
+        <div style="display:flex;justify-content:center;gap:32px;margin-top:8px">
+          <div style="text-align:center"><div style="font-family:var(--cg);font-size:26px;color:var(--gold)">6</div><div style="font-size:11px;color:var(--faint)">Líneas</div></div>
+          <div style="text-align:center"><div style="font-family:var(--cg);font-size:26px;color:var(--gold)">7</div><div style="font-size:11px;color:var(--faint)">Montes</div></div>
+          <div style="text-align:center"><div style="font-family:var(--cg);font-size:26px;color:var(--gold)">✦</div><div style="font-size:11px;color:var(--faint)">Ritual</div></div>
+        </div>
+      </div>
+      <div class="quiro-info">
+        <h3>Qué revela <em>tu palma</em></h3>
+        <p>No es adivinación — es una lectura profunda que conecta la tradición quirológica milenaria con tu momento vital. Cada línea, cada monte, cada proporción cuenta tu historia.</p>
+        <div class="quiro-features">
+          <div class="quiro-feat"><span class="quiro-feat-icon">✦</span><span class="quiro-feat-text">Cuestionario de sintonización energética</span></div>
+          <div class="quiro-feat"><span class="quiro-feat-icon">✦</span><span class="quiro-feat-text">Análisis de líneas, montes y marcas</span></div>
+          <div class="quiro-feat"><span class="quiro-feat-icon">✦</span><span class="quiro-feat-text">Tu arquetipo, cristal y frecuencia</span></div>
+          <div class="quiro-feat"><span class="quiro-feat-icon">✦</span><span class="quiro-feat-text">Lectura express gratuita al instante</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+          <a href="https://quiro.selenaura.com" class="btn-blue" target="_blank">Leer mi palma →</a>
+          <span style="font-size:12px;color:var(--faint)">Lectura express gratuita</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="divider">
+  <svg width="300" height="30" viewBox="0 0 300 30">
     <line x1="40" y1="15" x2="130" y2="15" stroke="rgba(139,123,191,0.12)" stroke-width="0.5"/>
     <circle cx="150" cy="15" r="3" fill="rgba(139,123,191,0.25)"/>
     <line x1="170" y1="15" x2="260" y2="15" stroke="rgba(139,123,191,0.12)" stroke-width="0.5"/>
@@ -575,6 +648,7 @@ footer { border-top: 1px solid var(--border-light); padding: 56px 24px 36px; pos
         <h4>EXPLORA</h4>
         <a href="https://carta.selenaura.com">Carta Astral Premium</a>
         <a href="https://carta.selenaura.com/compatibilidad">Compatibilidad Cósmica</a>
+        <a href="https://quiro.selenaura.com">Quirología Intuitiva</a>
         <a href="#academia">Curso gratuito</a>
         <a href="#cosmos">El cosmos hoy</a>
       </div>
