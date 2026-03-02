@@ -755,15 +755,49 @@ const horoTemplates = [
   "Día de conexión con la naturaleza. Los niveles de cortisol se optimizan con 20 minutos al aire libre — tu sistema inmune también lo agradecerá.",
 ];
 
-function getDailyHoroscope(signIndex) {
+function getFallbackHoroscope(signIndex) {
   const now = new Date();
   const dayOfYear = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
   const seed = (dayOfYear * 7 + signIndex * 13) % horoTemplates.length;
   return horoTemplates[seed];
 }
 
+// ═══ AI HOROSCOPE DATA ═══
+let aiHoroscopes = null;
+const signKeys = ["aries","tauro","geminis","cancer","leo","virgo",
+                  "libra","escorpio","sagitario","capricornio","acuario","piscis"];
+
+async function loadAIHoroscopes() {
+  try {
+    const resp = await fetch('/data/horoscope.json?v=' + new Date().toISOString().split('T')[0]);
+    if (!resp.ok) return;
+    const data = await resp.json();
+    // Verificar que es de hoy
+    const today = new Date().toISOString().split('T')[0];
+    if (data.date === today && data.horoscopes) {
+      aiHoroscopes = data;
+      // Actualizar dato cósmico si viene de la IA
+      if (data.cosmicFact) {
+        document.getElementById('cosmicFact').textContent = '"' + data.cosmicFact.text + '"';
+        document.getElementById('cosmicSource').textContent = '— ' + data.cosmicFact.source;
+      }
+      console.log('✦ Horóscopo IA cargado para', today);
+    }
+  } catch (e) {
+    // Silencioso — usará fallback
+  }
+}
+
+function getDailyHoroscope(signIndex) {
+  if (aiHoroscopes && aiHoroscopes.horoscopes) {
+    const key = signKeys[signIndex];
+    if (aiHoroscopes.horoscopes[key]) return aiHoroscopes.horoscopes[key];
+  }
+  return getFallbackHoroscope(signIndex);
+}
+
 // ═══ INIT DYNAMIC CONTENT ═══
-function init() {
+async function init() {
   // Moon
   const moon = getMoonPhase();
   document.getElementById('moonEmoji').textContent = moon.emoji;
@@ -778,7 +812,7 @@ function init() {
   const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
   document.getElementById('moonNext').textContent = 'Próxima luna llena: ' + nextFull.getDate() + ' ' + months[nextFull.getMonth()];
 
-  // Cosmic fact
+  // Cosmic fact (static fallback — may be overridden by AI)
   const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(),0,0)) / 86400000);
   const fact = cosmicFacts[dayOfYear % cosmicFacts.length];
   document.getElementById('cosmicFact').textContent = fact.text;
@@ -797,6 +831,9 @@ function init() {
   grid.innerHTML = signs.map((s,i) =>
     `<button class="sign-btn" onclick="selectSign(${i})" data-idx="${i}">${s.symbol} ${s.name}</button>`
   ).join('');
+
+  // Load AI horoscopes (non-blocking)
+  await loadAIHoroscopes();
 }
 
 function selectSign(idx) {
