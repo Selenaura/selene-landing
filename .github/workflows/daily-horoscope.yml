@@ -1,0 +1,29 @@
+name: Daily Horoscope Generation
+
+on:
+  schedule:
+    # 5:00 UTC = 6:00 hora España (CET) / 7:00 CEST
+    - cron: '0 5 * * *'
+  workflow_dispatch: # Permite ejecutar manualmente desde GitHub
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate daily horoscope
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-horoscope.js
+
+      - name: Commit and push
+        run: |
+          git config user.name "SELENE Bot"
+          git config user.email "bot@selenaura.com"
+          git add public/data/horoscope.json
+          git diff --staged --quiet || (git commit -m "✦ Horóscopo $(date +%Y-%m-%d)" && git push)
