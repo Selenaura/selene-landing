@@ -5,7 +5,8 @@ on:
     # 5:00 UTC = 6:00 hora España (CET) / 7:00 CEST
     - cron: '0 5 * * *'
   workflow_dispatch: # Permite ejecutar manualmente desde GitHub
-
+permissions:
+  contents: write
 jobs:
   generate:
     runs-on: ubuntu-latest
