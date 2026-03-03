@@ -730,23 +730,38 @@ const observer=new IntersectionObserver((entries)=>{
 },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
+// ═══ EXTERNAL LINKS → NEW TAB ═══
+document.querySelectorAll('a[href^="http"]').forEach(a=>{
+  if(!a.href.includes(location.hostname)){
+    a.setAttribute('target','_blank');
+    a.setAttribute('rel','noopener');
+  }
+});
+
+// ═══ SUBDOMAIN LINKS → NEW TAB ═══
+document.querySelectorAll('a[href*="carta.selenaura"],a[href*="tarot.selenaura"],a[href*="quiro.selenaura"],a[href*="academia.selenaura"]').forEach(a=>{
+  a.setAttribute('target','_blank');
+  a.setAttribute('rel','noopener');
+});
+
+// ═══ HOROSCOPE SECTION (keep anchor links internal) ═══
+// Links to #horoscopo-section stay in same tab (already handled by default)
+
 // ═══ COOKIE BANNER ═══
 (function(){
   if(localStorage.getItem('selene_cookie_consent'))return;
   const banner=document.createElement('div');
   banner.id='cookieBanner';
-  banner.innerHTML=`
-    <div style="position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:16px 20px;background:rgba(17,17,24,.97);border-top:1px solid rgba(201,168,76,.15);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
-      <p style="font-size:12px;color:#9A9AAF;margin:0;max-width:600px;line-height:1.7">
-        Utilizamos cookies técnicas necesarias para el funcionamiento del sitio. Consulta nuestra
-        <a href="/cookies.html" style="color:#C9A84C;text-decoration:none">Política de Cookies</a> para más información.
-      </p>
-      <div style="display:flex;gap:8px;flex-shrink:0">
-        <button onclick="acceptCookies()" style="padding:8px 20px;border-radius:100px;border:none;background:linear-gradient(135deg,#C9A84C,#B8943F);color:#0A0A0F;font-size:11px;font-weight:600;cursor:pointer;font-family:Outfit,sans-serif;letter-spacing:.5px">Aceptar</button>
-        <button onclick="acceptCookies()" style="padding:8px 20px;border-radius:100px;border:1px solid rgba(201,168,76,.2);background:none;color:#9A9AAF;font-size:11px;cursor:pointer;font-family:Outfit,sans-serif">Solo necesarias</button>
-      </div>
-    </div>
-  `;
+  banner.innerHTML=
+    '<div style="position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:16px 20px;background:rgba(17,17,24,.97);border-top:1px solid rgba(201,168,76,.15);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">'+
+    '<p style="font-size:12px;color:#9A9AAF;margin:0;max-width:600px;line-height:1.7">'+
+    'Utilizamos cookies técnicas necesarias para el funcionamiento del sitio. Consulta nuestra '+
+    '<a href="/cookies.html" style="color:#C9A84C;text-decoration:none">Política de Cookies</a> para más información.'+
+    '</p>'+
+    '<div style="display:flex;gap:8px;flex-shrink:0">'+
+    '<button onclick="acceptCookies()" style="padding:8px 20px;border-radius:100px;border:none;background:linear-gradient(135deg,#C9A84C,#B8943F);color:#0A0A0F;font-size:11px;font-weight:600;cursor:pointer;font-family:Outfit,sans-serif;letter-spacing:.5px">Aceptar</button>'+
+    '<button onclick="acceptCookies()" style="padding:8px 20px;border-radius:100px;border:1px solid rgba(201,168,76,.2);background:none;color:#9A9AAF;font-size:11px;cursor:pointer;font-family:Outfit,sans-serif">Solo necesarias</button>'+
+    '</div></div>';
   document.body.appendChild(banner);
   window.acceptCookies=function(){
     localStorage.setItem('selene_cookie_consent','accepted');
@@ -755,4 +770,11 @@ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 })();
 
 // ═══ COOKIE SETTINGS LINK ═══
-document.getElementById('cookieSettingsLink')?.addEventListe
+document.getElementById('cookieSettingsLink')?.addEventListener('click',function(e){
+  e.preventDefault();
+  localStorage.removeItem('selene_cookie_consent');
+  location.reload();
+});
+</script>
+</body>
+</html>
