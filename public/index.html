@@ -766,4 +766,7 @@ document.querySelectorAll('a[href*="carta.selenaura"],a[href*="tarot.selenaura"]
   document.body.appendChild(banner);
   window.acceptCookies=function(){
     localStorage.setItem('selene_cookie_consent','accepted');
-    b
+      document.getElementById('cookieBanner').remove();
+  };
+})();
+</script>
