@@ -3,931 +3,578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SELENE — Ciencia y consciencia de lo invisible</title>
-<meta name="description" content="Academia de desarrollo intuitivo. Horóscopo diario, Carta Astral Premium, Compatibilidad Cósmica y cursos respaldados por neurociencia.">
-<meta property="og:title" content="SELENE — Ciencia y consciencia de lo invisible">
-<meta property="og:description" content="Horóscopo diario con respaldo científico. Carta Astral Premium de +5.000 palabras. Compatibilidad Cósmica gratuita.">
+<title>Selene · Ciencia y consciencia de lo invisible</title>
+<meta name="description" content="Academia de desarrollo intuitivo con base científica. Carta astral, tarot, quirología y horóscopo personalizado. Respaldado por estudios peer-reviewed.">
+<meta property="og:title" content="Selene · Tu guía cósmica con base científica">
+<meta property="og:description" content="Astrología real, tarot intuitivo, quirología y bienestar energético. Con base en neurociencia y cronobiología moderna.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://selenaura.com">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="canonical" href="https://selenaura.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ═══════════════════════════════════════════════════
+   SELENE — Landing · Quantum Ethereal + Flower Knows
+   ═══════════════════════════════════════════════════ */
 :root {
-  --bg: #0A0A0F; --bg2: #0F0F18; --bg3: #08080D;
-  --gold: #C9A84C; --gold-dim: rgba(201,168,76,0.5); --gold-faint: rgba(201,168,76,0.15); --gold-glow: rgba(201,168,76,0.08);
-  --white: #F0EDE4; --dim: rgba(240,237,228,0.65); --faint: rgba(240,237,228,0.35); --muted: rgba(240,237,228,0.12);
-  --rose: #D4A0C0; --rose-dim: rgba(212,160,192,0.5); --rose-faint: rgba(212,160,192,0.12);
-  --violet: #8B7BBF; --teal: #6BA8A0;
-  --blue: #4A7BD4; --blue-dim: rgba(74,123,212,0.5); --blue-faint: rgba(74,123,212,0.12);
-  --border: rgba(201,168,76,0.12); --border-light: rgba(240,237,228,0.06);
-  --cg: 'Cormorant Garamond', Georgia, serif;
-  --of: 'Outfit', system-ui, sans-serif;
+  --bg: #0A0A0F; --bg2: #0E0E16; --bg3: #12121C;
+  --card: rgba(18,18,28,0.7); --card-solid: #14142A;
+  --gold: #C9A84C; --gold-light: #E2CA7A; --gold-dim: rgba(201,168,76,0.12);
+  --blue: #4A6FA5; --blue-light: #6B93CC; --blue-dim: rgba(74,111,165,0.12);
+  --violet: #7C6DB0; --violet-light: #9B8EC4; --violet-dim: rgba(124,109,176,0.10);
+  --rose: #B8728A; --rose-dim: rgba(184,114,138,0.10);
+  --teal: #5AB8A6; --teal-dim: rgba(90,184,166,0.10);
+  --white: #F0EDE4; --white-dim: rgba(240,237,228,0.7);
+  --text-mid: rgba(240,237,228,0.5); --text-dim: rgba(240,237,228,0.28);
+  --border: rgba(201,168,76,0.08); --border-light: rgba(240,237,228,0.05);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Outfit', system-ui, sans-serif;
 }
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--white); font-family: var(--of); overflow-x: hidden; text-align: justify; }
-::selection { background: rgba(201,168,76,0.3); color: var(--white); }
-a { text-decoration: none; color: inherit; }
-img { max-width: 100%; }
+body { font-family: var(--sans); color: var(--white); background: var(--bg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-/* ═══ ORNAMENTAL SVG PATTERNS ═══ */
-.ornament { display: block; margin: 0 auto; opacity: 0.35; }
-.ornament-gold { opacity: 0.5; }
-
-/* ═══ STARS CANVAS ═══ */
-#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-
-/* ═══ NAVBAR ═══ */
-.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 28px; transition: all 0.4s; border-bottom: 1px solid transparent; }
-.nav.scrolled { background: rgba(10,10,15,0.94); backdrop-filter: blur(24px); border-bottom-color: var(--border); }
-.nav-inner { max-width: 1140px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 68px; text-align: left; }
-.nav-brand { display: flex; align-items: baseline; gap: 14px; }
-.nav-logo { font-family: var(--cg); font-size: 26px; font-weight: 700; color: var(--white); letter-spacing: 3px; }
-.nav-logo span { color: var(--gold); }
-.nav-tagline { font-size: 11px; color: var(--faint); font-style: italic; font-family: var(--cg); letter-spacing: 0.5px; display: none; }
-@media (min-width: 900px) { .nav-tagline { display: inline; } }
-.nav-links { display: flex; gap: 28px; align-items: center; }
-.nav-link { color: var(--dim); font-size: 12px; font-weight: 400; letter-spacing: 0.8px; transition: color 0.3s; text-transform: uppercase; }
-.nav-link:hover { color: var(--gold); }
-.nav-cta { padding: 9px 22px; border-radius: 100px; border: 1px solid var(--gold); color: var(--gold); font-size: 11px; font-weight: 500; letter-spacing: 1.2px; transition: all 0.3s; text-transform: uppercase; }
-.nav-cta:hover { background: var(--gold); color: var(--bg); }
-.nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-.nav-burger span { display: block; width: 20px; height: 1.5px; background: var(--dim); margin: 4px 0; transition: all 0.3s; }
-.mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(10,10,15,0.97); backdrop-filter: blur(24px); padding: 24px; z-index: 99; border-bottom: 1px solid var(--border); }
-.mobile-menu.open { display: flex; flex-direction: column; gap: 18px; }
-.mobile-menu a { color: var(--dim); font-size: 14px; letter-spacing: 0.5px; }
-
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-burger { display: block; }
+/* ═══ COSMIC BACKGROUND ═══ */
+.cosmos {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 20%, rgba(74,111,165,0.04), transparent),
+    radial-gradient(ellipse 60% 50% at 70% 80%, rgba(124,109,176,0.03), transparent),
+    radial-gradient(1.2px 1.2px at 12% 28%, rgba(240,237,228,0.35), transparent),
+    radial-gradient(1px 1px at 35% 62%, rgba(201,168,76,0.25), transparent),
+    radial-gradient(0.8px 0.8px at 68% 18%, rgba(240,237,228,0.3), transparent),
+    radial-gradient(1px 1px at 82% 72%, rgba(74,111,165,0.2), transparent),
+    radial-gradient(0.6px 0.6px at 48% 42%, rgba(201,168,76,0.2), transparent),
+    radial-gradient(1px 1px at 92% 32%, rgba(240,237,228,0.2), transparent),
+    radial-gradient(0.8px 0.8px at 8% 78%, rgba(124,109,176,0.15), transparent),
+    radial-gradient(1px 1px at 55% 88%, rgba(201,168,76,0.15), transparent),
+    radial-gradient(0.6px 0.6px at 22% 52%, rgba(240,237,228,0.18), transparent),
+    radial-gradient(0.8px 0.8px at 78% 48%, rgba(90,184,166,0.12), transparent);
+  animation: cosmicDrift 20s ease-in-out infinite alternate;
 }
+@keyframes cosmicDrift { 0% { opacity: .55; } 50% { opacity: .85; } 100% { opacity: .65; } }
 
-/* ═══ SECTION BASE ═══ */
-.section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-.section.visible { opacity: 1; transform: translateY(0); }
+.content { position: relative; z-index: 1; }
 
-/* ═══ TAGS ═══ */
-.tag { display: inline-block; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; padding: 6px 18px; border-radius: 100px; border: 1px solid var(--border); color: var(--gold); background: var(--gold-glow); }
-
-/* ═══ BUTTONS ═══ */
-.btn-gold { display: inline-block; padding: 14px 36px; border-radius: 100px; border: none; cursor: pointer; background: linear-gradient(135deg, var(--gold), #B8943F); color: var(--bg); font-family: var(--of); font-size: 13px; font-weight: 600; letter-spacing: 0.8px; transition: all 0.3s; box-shadow: 0 0 40px rgba(201,168,76,0.15); }
-.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 4px 50px rgba(201,168,76,0.25); }
-.btn-ghost { display: inline-block; padding: 14px 36px; border-radius: 100px; border: 1px solid var(--border); color: var(--dim); font-family: var(--of); font-size: 13px; font-weight: 400; letter-spacing: 0.8px; transition: all 0.3s; }
-.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-.btn-rose { display: inline-block; padding: 14px 36px; border-radius: 100px; border: none; cursor: pointer; background: linear-gradient(135deg, var(--rose), #B8849E); color: var(--bg); font-family: var(--of); font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s; box-shadow: 0 0 40px rgba(212,160,192,0.15); }
-.btn-rose:hover { transform: translateY(-2px); box-shadow: 0 4px 50px rgba(212,160,192,0.25); }
-.btn-blue { display: inline-block; padding: 14px 36px; border-radius: 100px; border: none; cursor: pointer; background: linear-gradient(135deg, var(--blue), #3A6BC4); color: var(--white); font-family: var(--of); font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s; box-shadow: 0 0 40px rgba(74,123,212,0.15); }
-.btn-blue:hover { transform: translateY(-2px); box-shadow: 0 4px 50px rgba(74,123,212,0.25); }
-
-/* ═══ ORNAMENTAL DIVIDERS ═══ */
-.divider { text-align: center; padding: 24px 0; position: relative; z-index: 1; }
-.divider svg { display: block; margin: 0 auto; }
+/* ═══ NAV ═══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  padding: 16px 24px;
+  background: linear-gradient(180deg, rgba(10,10,15,0.95) 0%, rgba(10,10,15,0.6) 70%, transparent 100%);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1120px; margin: 0 auto;
+}
+.nav-brand { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: 3px; color: var(--gold); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-mid); transition: color 0.3s; }
+.nav-links a:hover { color: var(--gold-light); }
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+}
 
 /* ═══ HERO ═══ */
-.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 24px 60px; position: relative; z-index: 1; }
-.hero-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(201,168,76,0.06), rgba(139,123,191,0.03) 40%, transparent 70%); pointer-events: none; filter: blur(60px); }
-.hero-frame { position: relative; padding: 48px; margin-bottom: 12px; text-align: center; }
-.hero h1 { font-family: var(--cg); font-size: clamp(40px, 7vw, 72px); font-weight: 300; line-height: 1.1; letter-spacing: -0.5px; }
-.hero h1 em { color: var(--gold); font-style: italic; font-weight: 400; }
-.hero-sub { font-size: 17px; color: var(--dim); font-weight: 300; line-height: 1.8; max-width: 560px; margin: 20px auto 36px; text-align: center; }
-.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; text-align: center; }
-.trust-bar { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; text-align: center; }
-.trust-item { font-size: 11px; color: var(--faint); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
-.trust-item::before { content: '✦'; color: var(--gold); font-size: 8px; }
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 100px 24px 60px; position: relative;
+}
+.hero-orb {
+  width: 200px; height: 200px; border-radius: 50%; margin-bottom: 40px;
+  background: radial-gradient(circle at 40% 35%,
+    rgba(201,168,76,0.08) 0%,
+    rgba(74,111,165,0.06) 30%,
+    rgba(124,109,176,0.04) 60%,
+    transparent 80%);
+  position: relative; animation: float 8s ease-in-out infinite;
+}
+.hero-orb::before {
+  content: ''; position: absolute; inset: -20px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.06);
+  animation: spin-slow 30s linear infinite;
+}
+.hero-orb::after {
+  content: ''; position: absolute; inset: -40px; border-radius: 50%;
+  border: 1px solid rgba(74,111,165,0.04);
+  animation: spin-slow 45s linear infinite reverse;
+}
+.hero-orb-inner {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 52px; filter: drop-shadow(0 0 20px rgba(201,168,76,0.15));
+}
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* ═══ COSMIC DASHBOARD ═══ */
-.dashboard { display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
-.dash-moon { padding: 36px; border-radius: 24px; border: 1px solid var(--border); background: linear-gradient(160deg, rgba(15,15,24,0.8), rgba(10,10,15,0.9)); text-align: center; position: relative; overflow: hidden; }
-.dash-moon::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 30%, rgba(201,168,76,0.04), transparent 60%); pointer-events: none; }
-.moon-emoji { font-size: 64px; display: block; margin-bottom: 16px; filter: drop-shadow(0 0 20px rgba(201,168,76,0.2)); }
-.moon-phase { font-family: var(--cg); font-size: 22px; color: var(--gold); margin-bottom: 4px; }
-.moon-detail { font-size: 12px; color: var(--faint); line-height: 1.6; }
-.moon-percent { margin-top: 12px; }
-.moon-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; margin-top: 6px; }
-.moon-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--rose)); border-radius: 2px; transition: width 1s ease; }
+.hero-tag {
+  font-family: var(--sans); font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px; opacity: 0.8;
+}
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(36px, 6vw, 64px); font-weight: 300;
+  line-height: 1.15; margin-bottom: 20px; max-width: 700px;
+}
+.hero h1 em { font-style: italic; color: var(--gold-light); }
+.hero-sub {
+  font-family: var(--serif); font-size: clamp(15px, 2vw, 18px); font-weight: 300;
+  color: var(--white-dim); line-height: 1.8; max-width: 520px; margin-bottom: 36px;
+}
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.btn-gold {
+  display: inline-flex; align-items: center; gap: 8px; padding: 15px 32px;
+  background: linear-gradient(135deg, var(--gold), #D4AF37); color: var(--bg);
+  border: none; border-radius: 50px; cursor: pointer;
+  font-family: var(--sans); font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+  transition: all 0.3s; box-shadow: 0 4px 24px rgba(201,168,76,0.2);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.3); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px; padding: 15px 32px;
+  background: transparent; color: var(--white-dim);
+  border: 1px solid rgba(240,237,228,0.12); border-radius: 50px; cursor: pointer;
+  font-family: var(--sans); font-size: 14px; font-weight: 500; transition: all 0.3s;
+}
+.btn-outline:hover { border-color: rgba(201,168,76,0.3); color: var(--white); }
+.hero-note { font-size: 11px; color: var(--text-dim); margin-top: 20px; letter-spacing: 0.5px; }
 
-.dash-right { display: flex; flex-direction: column; gap: 20px; }
-.dash-card { padding: 28px 32px; border-radius: 20px; border: 1px solid var(--border); background: rgba(15,15,24,0.6); position: relative; overflow: hidden; flex: 1; }
-.dash-card::before { content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, var(--gold-glow), transparent 70%); pointer-events: none; transform: translate(30%, -30%); }
-.dash-label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; }
-.dash-fact-text { font-family: var(--cg); font-size: 20px; font-weight: 400; line-height: 1.5; color: var(--white); font-style: italic; }
-.dash-fact-source { font-size: 11px; color: var(--faint); margin-top: 10px; }
-
-.dash-events { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-.event-pill { padding: 10px 16px; border-radius: 14px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.02); font-size: 12px; color: var(--dim); display: flex; align-items: center; gap: 8px; }
-.event-pill .ev-icon { font-size: 16px; }
-.event-pill .ev-date { color: var(--gold); font-weight: 500; font-size: 11px; }
-
-/* Horoscope mini */
-.dash-horo { padding: 28px 32px; border-radius: 20px; border: 1px solid var(--rose-faint); background: linear-gradient(160deg, rgba(212,160,192,0.03), rgba(15,15,24,0.8)); }
-.sign-grid { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 16px; justify-content: center; }
-.sign-btn { padding: 6px 12px; border-radius: 100px; border: 1px solid var(--border-light); background: transparent; color: var(--faint); font-size: 11px; font-family: var(--of); cursor: pointer; transition: all 0.2s; text-align: center; }
-.sign-btn:hover, .sign-btn.active { border-color: var(--rose); color: var(--rose); background: rgba(212,160,192,0.06); }
-.horo-text { font-size: 14px; color: var(--dim); line-height: 1.8; font-weight: 300; min-height: 50px; }
-.horo-disclaimer { font-size: 10px; color: var(--faint); margin-top: 10px; font-style: italic; text-align: center; }
-
-@media (max-width: 768px) {
-  .dashboard { grid-template-columns: 1fr; }
-  .dash-events { flex-direction: column; }
+/* ═══ SECTION HEADERS ═══ */
+section { padding: 100px 0; }
+.section-tag {
+  font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); text-align: center; margin-bottom: 12px; opacity: 0.7;
+}
+.section-title {
+  font-family: var(--serif); font-size: clamp(28px, 4vw, 42px); font-weight: 300;
+  text-align: center; margin-bottom: 12px; line-height: 1.2;
+}
+.section-sub {
+  font-family: var(--serif); font-size: 16px; font-weight: 300; color: var(--text-mid);
+  text-align: center; max-width: 560px; margin: 0 auto 52px; line-height: 1.7;
 }
 
-/* ═══ PRODUCT SECTIONS ═══ */
-.product-header { text-align: center; margin-bottom: 48px; }
-.product-header h2 { font-family: var(--cg); font-size: clamp(34px, 5vw, 52px); font-weight: 400; margin: 20px 0 16px; line-height: 1.15; text-align: center; }
-.product-header h2 em { color: var(--gold); font-style: italic; }
-.product-header p { color: var(--dim); font-size: 16px; max-width: 580px; margin: 0 auto; line-height: 1.8; font-weight: 300; text-align: justify; }
+/* ═══ TRUST BAR ═══ */
+.trust-bar {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 32px;
+  padding: 40px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.trust-item { display: flex; align-items: center; gap: 10px; }
+.trust-icon { font-size: 18px; }
+.trust-text { font-size: 12px; color: var(--text-mid); letter-spacing: 0.5px; }
 
-/* Carta Astral */
-.carta-card { border-radius: 24px; border: 1px solid var(--border); overflow: hidden; background: linear-gradient(170deg, rgba(15,15,24,0.9), rgba(10,10,15,0.95)); position: relative; }
-.carta-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 10%, rgba(201,168,76,0.04), transparent 50%), radial-gradient(ellipse at 80% 90%, rgba(139,123,191,0.03), transparent 50%); pointer-events: none; }
-.carta-grid { display: grid; grid-template-columns: 1fr 1fr; position: relative; z-index: 1; }
-.carta-left { padding: 56px 48px; }
-.carta-left p { font-size: 15px; color: var(--dim); line-height: 1.9; font-weight: 300; margin-bottom: 20px; }
-.carta-highlight { padding: 20px 24px; border-radius: 14px; background: var(--gold-faint); border: 1px solid var(--border); margin-bottom: 28px; }
-.carta-highlight p { font-family: var(--cg); font-size: 17px; color: var(--gold); font-style: italic; line-height: 1.6; margin: 0; }
-.carta-price { font-family: var(--cg); font-size: 48px; color: var(--gold); font-weight: 500; }
-.carta-price-note { font-size: 13px; color: var(--faint); margin-left: 10px; }
-.carta-right { padding: 56px 48px; border-left: 1px solid var(--border-light); background: rgba(201,168,76,0.02); }
-.carta-right h3 { font-family: var(--cg); font-size: 24px; margin-bottom: 28px; text-align: center; }
-.feature-row { display: flex; gap: 14px; margin-bottom: 20px; }
-.feature-icon { font-size: 16px; color: var(--gold); width: 22px; flex-shrink: 0; text-align: center; }
-.feature-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
-.feature-desc { font-size: 12px; color: var(--faint); font-weight: 300; }
+/* ═══ PRODUCTS GRID ═══ */
+.products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 700px) { .products-grid { grid-template-columns: 1fr; } }
 
-/* Compat */
-.compat-card { border-radius: 24px; border: 1px solid var(--rose-faint); overflow: hidden; background: linear-gradient(170deg, rgba(212,160,192,0.03), rgba(15,15,24,0.9)); position: relative; }
-.compat-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 20%, rgba(212,160,192,0.05), transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(139,123,191,0.04), transparent 50%); pointer-events: none; }
-.compat-inner { position: relative; z-index: 1; padding: 56px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-.compat-visual { text-align: center; }
-.compat-orbs { display: flex; justify-content: center; align-items: center; margin-bottom: 24px; }
-.compat-orb { width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; }
-.compat-orb:first-child { background: radial-gradient(circle, rgba(212,160,192,0.12), transparent); border: 1px solid rgba(212,160,192,0.2); margin-right: -14px; z-index: 1; }
-.compat-orb:last-child { background: radial-gradient(circle, rgba(139,123,191,0.12), transparent); border: 1px solid rgba(139,123,191,0.2); margin-left: -14px; }
-.compat-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.2), transparent); border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--gold); z-index: 2; animation: pulse 3s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{box-shadow:0 0 15px rgba(201,168,76,0.1)} 50%{box-shadow:0 0 30px rgba(201,168,76,0.2)} }
-.compat-info h3 { font-family: var(--cg); font-size: 28px; font-weight: 500; margin-bottom: 14px; text-align: left; }
-.compat-info h3 em { color: var(--rose); font-style: italic; }
-.compat-info p { font-size: 15px; color: var(--dim); line-height: 1.9; font-weight: 300; margin-bottom: 20px; text-align: justify; }
-.compat-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-.compat-tag { font-size: 11px; color: var(--dim); padding: 5px 12px; border-radius: 100px; border: 1px solid var(--border-light); }
+.product-card {
+  position: relative; border-radius: 20px; overflow: hidden;
+  background: var(--card); border: 1px solid var(--border);
+  padding: 32px 28px 28px; cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; flex-direction: column;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201,168,76,0.15);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+}
+.product-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  opacity: 0; transition: opacity 0.4s;
+}
+.product-card:hover::before { opacity: 1; }
 
-/* Quirología */
-.quiro-card { border-radius: 24px; border: 1px solid var(--blue-faint); overflow: hidden; background: linear-gradient(170deg, rgba(74,123,212,0.03), rgba(15,15,24,0.9)); position: relative; }
-.quiro-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 40% 20%, rgba(74,123,212,0.05), transparent 50%), radial-gradient(ellipse at 60% 80%, rgba(201,168,76,0.03), transparent 50%); pointer-events: none; }
-.quiro-inner { position: relative; z-index: 1; padding: 56px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-.quiro-visual { text-align: center; }
-.quiro-palm { font-size: 80px; display: block; margin-bottom: 20px; filter: drop-shadow(0 0 30px rgba(74,123,212,0.2)); animation: float 4s ease-in-out infinite; }
-.quiro-info h3 { font-family: var(--cg); font-size: 28px; font-weight: 500; margin-bottom: 14px; text-align: left; }
-.quiro-info h3 em { color: var(--blue); font-style: italic; }
-.quiro-info p { font-size: 15px; color: var(--dim); line-height: 1.9; font-weight: 300; margin-bottom: 20px; text-align: justify; }
-.quiro-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
-.quiro-feat { display: flex; align-items: flex-start; gap: 10px; }
-.quiro-feat-icon { color: var(--gold); font-size: 12px; margin-top: 3px; flex-shrink: 0; }
-.quiro-feat-text { font-size: 13px; color: var(--dim); line-height: 1.5; font-weight: 300; }
+/* Card color accents */
+.card-astral::before { background: linear-gradient(90deg, var(--blue), var(--violet)); }
+.card-astral .product-icon { background: var(--blue-dim); color: var(--blue-light); }
+.card-astral .product-price { color: var(--blue-light); }
 
-@media (max-width: 768px) {
-  .quiro-inner { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
-  .quiro-info h3 { text-align: center; }
-  .quiro-info p { text-align: justify; }
-  .quiro-features { grid-template-columns: 1fr; }
-  .quiro-info > div:last-child { text-align: center; }
+.card-tarot::before { background: linear-gradient(90deg, var(--violet), var(--rose)); }
+.card-tarot .product-icon { background: var(--violet-dim); color: var(--violet-light); }
+.card-tarot .product-price { color: var(--violet-light); }
+
+.card-quiro::before { background: linear-gradient(90deg, var(--rose), var(--gold)); }
+.card-quiro .product-icon { background: var(--rose-dim); color: var(--rose); }
+.card-quiro .product-price { color: var(--rose); }
+
+.card-horoscopo::before { background: linear-gradient(90deg, var(--gold), var(--teal)); }
+.card-horoscopo .product-icon { background: var(--gold-dim); color: var(--gold); }
+.card-horoscopo .product-price { color: var(--teal); }
+
+.product-row-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.product-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; transition: transform 0.3s;
+}
+.product-card:hover .product-icon { transform: scale(1.08) rotate(-3deg); }
+.product-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px; background: var(--gold-dim); color: var(--gold);
+}
+.product-badge.new { background: rgba(184,114,138,0.15); color: var(--rose); }
+.product-badge.free { background: rgba(90,184,166,0.12); color: var(--teal); }
+
+.product-name { font-family: var(--serif); font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+.product-desc { font-size: 13px; color: var(--text-mid); line-height: 1.7; margin-bottom: 16px; flex: 1; }
+.product-footer { display: flex; justify-content: space-between; align-items: center; }
+.product-price { font-family: var(--serif); font-size: 20px; font-weight: 600; }
+.product-cta {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+  color: var(--white-dim); padding: 8px 18px; border-radius: 20px;
+  border: 1px solid rgba(240,237,228,0.1); transition: all 0.3s;
+}
+.product-card:hover .product-cta { border-color: rgba(201,168,76,0.3); color: var(--gold-light); }
+
+/* ═══ TAROT FEATURE SHOWCASE ═══ */
+.tarot-showcase {
+  padding: 80px 0; position: relative;
+  background: linear-gradient(180deg, transparent 0%, rgba(124,109,176,0.03) 30%, rgba(124,109,176,0.03) 70%, transparent 100%);
+}
+.tarot-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  max-width: 1000px; margin: 0 auto; padding: 0 24px;
+}
+@media (max-width: 768px) { .tarot-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; } }
+
+.tarot-visual { display: flex; justify-content: center; perspective: 600px; }
+.tarot-cards-fan { display: flex; gap: 0; position: relative; width: 220px; height: 300px; }
+.fan-card {
+  width: 120px; height: 190px; border-radius: 12px; position: absolute;
+  background: linear-gradient(160deg, #1A1A30, #0E0E1A);
+  border: 1px solid rgba(201,168,76,0.12);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fan-card:nth-child(1) { transform: rotate(-15deg) translateX(-40px); z-index: 1; top: 40px; left: 10px; }
+.fan-card:nth-child(2) { transform: rotate(0deg); z-index: 3; top: 20px; left: 50px; }
+.fan-card:nth-child(3) { transform: rotate(15deg) translateX(40px); z-index: 2; top: 40px; left: 90px; }
+.tarot-visual:hover .fan-card:nth-child(1) { transform: rotate(-20deg) translateX(-55px) translateY(-8px); }
+.tarot-visual:hover .fan-card:nth-child(2) { transform: rotate(0deg) translateY(-14px); }
+.tarot-visual:hover .fan-card:nth-child(3) { transform: rotate(20deg) translateX(55px) translateY(-8px); }
+.fan-card::before {
+  content: ''; position: absolute; inset: 6px; border-radius: 8px;
+  border: 1px solid rgba(201,168,76,0.06);
+}
+.fan-card-symbol { font-size: 32px; position: relative; z-index: 1; margin-bottom: 6px; }
+.fan-card-name {
+  font-family: var(--serif); font-size: 10px; color: var(--white-dim);
+  text-align: center; position: relative; z-index: 1; padding: 0 8px;
+}
+.fan-card-num {
+  font-family: var(--serif); font-size: 9px; color: var(--text-dim);
+  position: absolute; top: 8px; left: 10px;
 }
 
-/* Academia */
-.academia-card { padding: 48px; border-radius: 24px; border: 1px solid var(--border-light); background: linear-gradient(170deg, rgba(107,76,154,0.05), rgba(15,15,24,0.5)); position: relative; overflow: hidden; }
-.academia-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(107,76,154,0.05), transparent 50%); pointer-events: none; }
-.modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
-.module { padding: 24px; border-radius: 16px; border: 1px solid var(--border-light); background: rgba(10,10,15,0.5); transition: border-color 0.3s; }
-.module:hover { border-color: var(--border); }
-.module-num { font-family: var(--cg); font-size: 28px; color: var(--gold-dim); font-weight: 300; }
-.module h4 { font-family: var(--cg); font-size: 18px; margin: 10px 0 6px; }
-.module p { font-size: 12px; color: var(--faint); line-height: 1.7; font-weight: 300; }
+.tarot-info h3 { font-family: var(--serif); font-size: 32px; font-weight: 300; margin-bottom: 16px; line-height: 1.25; }
+.tarot-info h3 em { font-style: italic; color: var(--violet-light); }
+.tarot-info p { font-size: 14px; color: var(--text-mid); line-height: 1.8; margin-bottom: 20px; }
+.tarot-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.tf-item { display: flex; align-items: center; gap: 10px; }
+.tf-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--violet); flex-shrink: 0; }
+.tf-text { font-size: 13px; color: var(--white-dim); }
+.tarot-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 768px) { .tarot-ctas { justify-content: center; } }
 
-/* FAQ */
-.faq-list { max-width: 720px; margin: 0 auto; }
-.faq-item { border-bottom: 1px solid var(--border-light); padding: 22px 0; cursor: pointer; }
-.faq-q { display: flex; justify-content: space-between; align-items: center; }
-.faq-q h3 { font-family: var(--cg); font-size: 19px; font-weight: 500; transition: color 0.3s; }
-.faq-q span { color: var(--gold); font-size: 18px; transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
-.faq-item.open .faq-q h3 { color: var(--gold); }
-.faq-item.open .faq-q span { transform: rotate(45deg); }
-.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-.faq-item.open .faq-a { max-height: 300px; }
-.faq-a p { font-size: 14px; color: var(--dim); line-height: 1.85; font-weight: 300; padding-top: 14px; text-align: justify; }
-
-/* Newsletter */
-.newsletter { padding: 56px 48px; border-radius: 24px; text-align: center; border: 1px solid var(--border); background: radial-gradient(ellipse at center, rgba(201,168,76,0.06), rgba(10,10,15,0.9)); }
-.newsletter h2 { font-family: var(--cg); font-size: 40px; font-weight: 400; margin-bottom: 14px; text-align: center; }
-.newsletter h2 em { color: var(--gold); font-style: italic; }
-.newsletter > p { color: var(--dim); font-size: 15px; max-width: 480px; margin: 0 auto 32px; line-height: 1.8; font-weight: 300; text-align: center; }
-.email-form { display: flex; gap: 12px; max-width: 420px; margin: 0 auto; }
-.email-input { flex: 1; padding: 13px 20px; border-radius: 100px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--white); font-family: var(--of); font-size: 14px; outline: none; }
-.email-input:focus { border-color: var(--gold); }
-.email-input::placeholder { color: rgba(240,237,228,0.25); }
-.email-btn { padding: 13px 26px; border-radius: 100px; border: none; cursor: pointer; background: var(--gold); color: var(--bg); font-family: var(--of); font-size: 13px; font-weight: 600; white-space: nowrap; }
-
-/* Footer */
-footer { border-top: 1px solid var(--border-light); padding: 56px 24px 36px; position: relative; z-index: 1; }
-.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 36px; }
-.footer-logo { font-family: var(--cg); font-size: 22px; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; }
-.footer-logo span { color: var(--gold); }
-.footer-desc { font-size: 12px; color: var(--faint); line-height: 1.7; max-width: 260px; font-weight: 300; }
-.footer-cols { display: flex; gap: 56px; }
-.footer-col h4 { font-size: 10px; letter-spacing: 2px; color: var(--dim); margin-bottom: 14px; font-weight: 500; }
-.footer-col a { display: block; color: var(--faint); font-size: 12px; margin-bottom: 8px; font-weight: 300; transition: color 0.3s; }
-.footer-col a:hover { color: var(--gold); }
-.footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-top: 20px; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; font-size: 10px; color: var(--faint); font-weight: 300; text-align: center; }
-.footer-col { text-align: left; }
-
-/* ═══ RESPONSIVE ═══ */
-@media (max-width: 768px) {
-  .section { padding: 60px 20px; }
-  .carta-grid { grid-template-columns: 1fr; }
-  .carta-right { border-left: none; border-top: 1px solid var(--border-light); }
-  .carta-left, .carta-right { padding: 32px 24px; text-align: center; }
-  .carta-left p { text-align: justify; }
-  .carta-highlight { text-align: center; }
-  .feature-row { justify-content: flex-start; text-align: left; }
-  .compat-inner { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
-  .compat-info h3 { text-align: center; }
-  .compat-info p { text-align: justify; }
-  .compat-tags { justify-content: center; }
-  .compat-info > a, .compat-info > span { display: block; text-align: center; margin: 0 auto; }
-  .modules-grid { grid-template-columns: 1fr; }
-  .email-form { flex-direction: column; }
-  .footer-cols { flex-direction: column; gap: 28px; }
-  .footer-bottom { flex-direction: column; gap: 6px; }
-  .newsletter { padding: 36px 20px; }
-  .academia-card { padding: 28px 20px; }
-  .trust-bar { gap: 14px; }
-  .hero h1 { font-size: clamp(32px, 8vw, 54px); }
+/* ═══ SCIENCE BAR ═══ */
+.science-section { border-top: 1px solid var(--border); padding: 60px 0; }
+.science-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 700px) { .science-grid { grid-template-columns: 1fr; } }
+.science-card {
+  padding: 24px; border-radius: 16px; border: 1px solid var(--border-light);
+  background: rgba(14,14,22,0.5); text-align: center;
 }
+.sci-number { font-family: var(--serif); font-size: 28px; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+.sci-label { font-size: 12px; color: var(--text-mid); line-height: 1.5; }
+
+/* ═══ ACADEMY TEASER ═══ */
+.academy-teaser {
+  background: linear-gradient(135deg, rgba(201,168,76,0.04), rgba(74,111,165,0.03));
+  border: 1px solid var(--border); border-radius: 24px;
+  padding: 48px 40px; text-align: center; margin: 0 auto; max-width: 800px;
+}
+.academy-teaser h3 { font-family: var(--serif); font-size: 28px; font-weight: 300; margin-bottom: 12px; }
+.academy-teaser p { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+.academy-badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px;
+  background: var(--gold-dim); border-radius: 20px; margin-bottom: 20px;
+  font-size: 11px; color: var(--gold); font-weight: 600; letter-spacing: 1px;
+}
+
+/* ═══ FOOTER ═══ */
+footer {
+  border-top: 1px solid var(--border); padding: 48px 24px 32px; text-align: center;
+}
+.footer-brand { font-family: var(--serif); font-size: 24px; color: var(--gold); letter-spacing: 3px; margin-bottom: 12px; }
+.footer-tagline { font-family: var(--serif); font-size: 13px; font-style: italic; color: var(--text-dim); margin-bottom: 24px; }
+.footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 20px; }
+.footer-links a { font-size: 12px; color: var(--text-dim); transition: color 0.3s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-legal { font-size: 10px; color: var(--text-dim); line-height: 1.8; max-width: 600px; margin: 0 auto; }
 
 /* ═══ ANIMATIONS ═══ */
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-@keyframes twinkle { 0%{opacity:0.2} 100%{opacity:0.8} }
-@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-.scroll-indicator { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); }
-.scroll-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; animation: float 2s ease-in-out infinite; }
+.reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.stagger-1 { transition-delay: 0.1s; } .stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; } .stagger-4 { transition-delay: 0.4s; }
+
+/* ═══ ORNAMENTAL DIVIDER ═══ */
+.ornament { text-align: center; color: var(--gold); font-size: 12px; letter-spacing: 10px; opacity: 0.35; padding: 8px 0; }
 </style>
 </head>
 <body>
 
-<!-- Stars -->
-<canvas id="stars"></canvas>
+<div class="cosmos"></div>
 
-<!-- Navbar -->
-<nav class="nav" id="navbar">
-  <div class="nav-inner">
-    <div class="nav-brand">
-      <a href="#" class="nav-logo">S<span>ELENE</span></a>
-      <span class="nav-tagline">Ciencia y consciencia de lo invisible</span>
-    </div>
+<div class="content">
+
+  <!-- ═══ NAV ═══ -->
+  <nav>
+    <div class="nav-brand">S E L E N E</div>
     <div class="nav-links">
-      <a href="#cosmos" class="nav-link">Hoy</a>
-      <a href="#carta" class="nav-link">Carta Astral</a>
-      <a href="#compatibilidad" class="nav-link">Compatibilidad</a>
-      <a href="#quirologia" class="nav-link">Quirología</a>
-      <a href="#academia" class="nav-link">Academia</a>
-      <a href="https://carta.selenaura.com" class="nav-cta">Tu Carta Astral</a>
+      <a href="#productos">Consultas</a>
+      <a href="#tarot">Tarot</a>
+      <a href="#ciencia">Ciencia</a>
+      <a href="#academia">Academia</a>
     </div>
-    <button class="nav-burger" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#cosmos" onclick="this.parentElement.classList.remove('open')">El Cosmos Hoy</a>
-  <a href="#carta" onclick="this.parentElement.classList.remove('open')">Carta Astral</a>
-  <a href="#compatibilidad" onclick="this.parentElement.classList.remove('open')">Compatibilidad</a>
-  <a href="#quirologia" onclick="this.parentElement.classList.remove('open')">Quirología</a>
-  <a href="#academia" onclick="this.parentElement.classList.remove('open')">Academia</a>
-  <a href="https://carta.selenaura.com" onclick="this.parentElement.classList.remove('open')" style="color:var(--gold)">Tu Carta Astral →</a>
-</div>
+  </nav>
 
-<!-- Hero -->
-<div class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-frame">
-    <!-- Ornamental frame SVG -->
-    <svg class="ornament ornament-gold" width="320" height="40" viewBox="0 0 320 40" style="margin-bottom:16px">
-      <path d="M20,20 Q80,5 120,20 Q130,8 160,12 Q190,8 200,20 Q240,5 300,20" stroke="rgba(201,168,76,0.25)" fill="none" stroke-width="0.8"/>
-      <circle cx="60" cy="16" r="2" fill="rgba(201,168,76,0.3)"/>
-      <circle cx="160" cy="10" r="3" fill="rgba(201,168,76,0.4)"/>
-      <circle cx="260" cy="16" r="2" fill="rgba(201,168,76,0.3)"/>
-      <path d="M140,20 Q150,28 160,20 Q170,28 180,20" stroke="rgba(212,160,192,0.2)" fill="none" stroke-width="0.6"/>
-    </svg>
-    <span class="tag">Academia de desarrollo intuitivo</span>
-    <h1 style="margin-top:20px">Ciencia y consciencia<br><em>de lo invisible</em></h1>
-  </div>
-  <p class="hero-sub">Neurociencia, cronobiología e intuición: formación online y herramientas astrológicas respaldadas por estudios científicos para quienes quieren despertar sin dejar de pensar.</p>
-  <div class="hero-btns">
-    <a href="https://carta.selenaura.com" class="btn-gold">Descubre tu Carta Astral</a>
-    <a href="#cosmos" class="btn-ghost">El cosmos hoy</a>
-  </div>
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-orb">
+      <div class="hero-orb-inner">🌙</div>
+    </div>
+    <div class="hero-tag">Ciencia y consciencia de lo invisible</div>
+    <h1>Descubre lo que<br>el cosmos quiere<br><em>revelarte</em></h1>
+    <p class="hero-sub">Astrología real, tarot intuitivo y quirología con base en neurociencia y cronobiología moderna. Cada lectura respaldada por estudios peer-reviewed.</p>
+    <div class="hero-ctas">
+      <a href="#productos" class="btn-gold">Explorar consultas</a>
+      <a href="https://tarot.selenaura.com" class="btn-outline">Tirada de tarot gratis →</a>
+    </div>
+    <p class="hero-note">4 experiencias únicas · Base científica · Sin compromiso</p>
+  </section>
+
+  <!-- ═══ TRUST BAR ═══ -->
   <div class="trust-bar">
-    <span class="trust-item">Datos astronómicos reales</span>
-    <span class="trust-item">Estudios peer-reviewed</span>
-    <span class="trust-item">100% en español</span>
-    <span class="trust-item">+5.000 palabras por lectura</span>
+    <div class="trust-item"><span class="trust-icon">🔬</span><span class="trust-text">30+ estudios peer-reviewed citados</span></div>
+    <div class="trust-item"><span class="trust-icon">🌍</span><span class="trust-text">Datos astronómicos reales</span></div>
+    <div class="trust-item"><span class="trust-icon">✦</span><span class="trust-text">Lecturas personalizadas</span></div>
+    <div class="trust-item"><span class="trust-icon">🧠</span><span class="trust-text">Neurociencia + tradición</span></div>
   </div>
-  <!-- Bottom ornament -->
-  <svg class="ornament" width="200" height="24" viewBox="0 0 200 24" style="margin-top:32px">
-    <line x1="20" y1="12" x2="80" y2="12" stroke="rgba(201,168,76,0.15)" stroke-width="0.5"/>
-    <circle cx="90" cy="12" r="1.5" fill="rgba(201,168,76,0.25)"/>
-    <circle cx="100" cy="12" r="3" fill="rgba(201,168,76,0.35)"/>
-    <circle cx="110" cy="12" r="1.5" fill="rgba(201,168,76,0.25)"/>
-    <line x1="120" y1="12" x2="180" y2="12" stroke="rgba(201,168,76,0.15)" stroke-width="0.5"/>
-  </svg>
-  <div class="scroll-indicator"><div class="scroll-dot"></div></div>
+
+  <!-- ═══ PRODUCTS ═══ -->
+  <section id="productos">
+    <div class="container">
+      <div class="section-tag">Consultas cósmicas</div>
+      <h2 class="section-title">Tu universo de experiencias</h2>
+      <p class="section-sub">Cuatro portales de autoconocimiento, cada uno con su propia magia. Elige el que resuene contigo.</p>
+
+      <div class="products-grid">
+
+        <!-- TAROT -->
+        <a href="https://tarot.selenaura.com" class="product-card card-tarot reveal" style="text-decoration:none">
+          <div class="product-row-top">
+            <div class="product-icon">🃏</div>
+            <span class="product-badge new">✦ Nuevo</span>
+          </div>
+          <div class="product-name">Tirada de Tarot</div>
+          <div class="product-desc">22 Arcanos Mayores. Ritual de respiración, selección intuitiva de cartas y lectura narrativa con referencias a psicología arquetípica de Jung y neurociencia de la intuición.</div>
+          <div class="product-footer">
+            <span class="product-price">Gratis — 1,99 €</span>
+            <span class="product-cta">Hacer mi tirada →</span>
+          </div>
+        </a>
+
+        <!-- CARTA ASTRAL -->
+        <a href="https://carta.selenaura.com" class="product-card card-astral reveal stagger-1" style="text-decoration:none">
+          <div class="product-row-top">
+            <div class="product-icon">☉</div>
+            <span class="product-badge">Premium</span>
+          </div>
+          <div class="product-name">Carta Astral</div>
+          <div class="product-desc">Tu mapa cósmico completo: 15 secciones, La Consulta personalizada y chat con Selene. Basada en efemérides reales y cronobiología moderna. Incluye versión básica gratuita.</div>
+          <div class="product-footer">
+            <span class="product-price">Gratis — 44,99 €</span>
+            <span class="product-cta">Ver mi carta →</span>
+          </div>
+        </a>
+
+        <!-- QUIROLOGÍA -->
+        <a href="https://quiro.selenaura.com" class="product-card card-quiro reveal stagger-2" style="text-decoration:none">
+          <div class="product-row-top">
+            <div class="product-icon">✋</div>
+            <span class="product-badge">Único</span>
+          </div>
+          <div class="product-name">Quirología</div>
+          <div class="product-desc">Análisis dermatoglífico de tu palma. 6 líneas, 7 montes planetarios, forma de mano y marcas especiales. Basado en los textos clásicos de Cheiro (1916) y Benham.</div>
+          <div class="product-footer">
+            <span class="product-price">Gratis — 2,49 €</span>
+            <span class="product-cta">Analizar mi mano →</span>
+          </div>
+        </a>
+
+        <!-- HORÓSCOPO -->
+        <div class="product-card card-horoscopo reveal stagger-3" onclick="document.getElementById('horoscopo-section').scrollIntoView({behavior:'smooth'})">
+          <div class="product-row-top">
+            <div class="product-icon">⭐</div>
+            <span class="product-badge free">Gratis</span>
+          </div>
+          <div class="product-name">Horóscopo Diario</div>
+          <div class="product-desc">Predicción personalizada para tu signo solar, actualizada cada día con los tránsitos planetarios reales. Selecciona tu signo y descubre qué dicen los astros hoy.</div>
+          <div class="product-footer">
+            <span class="product-price" style="color:var(--teal)">Gratis</span>
+            <span class="product-cta">Leer mi horóscopo →</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TAROT SHOWCASE ═══ -->
+  <section class="tarot-showcase" id="tarot">
+    <div class="tarot-inner">
+      <div class="tarot-visual">
+        <div class="tarot-cards-fan">
+          <div class="fan-card">
+            <span class="fan-card-num">II</span>
+            <span class="fan-card-symbol">🌙</span>
+            <span class="fan-card-name">La Sacerdotisa</span>
+          </div>
+          <div class="fan-card">
+            <span class="fan-card-num">XVII</span>
+            <span class="fan-card-symbol">⭐</span>
+            <span class="fan-card-name">La Estrella</span>
+          </div>
+          <div class="fan-card">
+            <span class="fan-card-num">XXI</span>
+            <span class="fan-card-symbol">🌍</span>
+            <span class="fan-card-name">El Mundo</span>
+          </div>
+        </div>
+      </div>
+      <div class="tarot-info">
+        <h3>Los arcanos<br>quieren <em>hablarte</em></h3>
+        <p>El tarot no predice el futuro — revela lo que tu inconsciente ya sabe. Cada lectura de Selene integra la tradición hermética con estudios de neurociencia de la intuición.</p>
+        <div class="tarot-features">
+          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text">22 Arcanos Mayores con inversiones (30%)</span></div>
+          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text">Ritual de respiración guiada antes de elegir</span></div>
+          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text">Lectura narrativa con citas de Bechara, Jung, Kahneman</span></div>
+          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text">Cristal protector y ritual personalizado</span></div>
+          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text">Express gratis (1 carta) · Profunda 1,99 € (3 cartas)</span></div>
+        </div>
+        <div class="tarot-ctas">
+          <a href="https://tarot.selenaura.com" class="btn-gold">Hacer mi tirada gratis</a>
+          <a href="https://tarot.selenaura.com" class="btn-outline">Saber más</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament">✦ ✦ ✦</div>
+
+  <!-- ═══ SCIENCE SECTION ═══ -->
+  <section class="science-section" id="ciencia">
+    <div class="container">
+      <div class="section-tag">Base científica</div>
+      <h2 class="section-title">No es magia. Es ciencia.</h2>
+      <p class="section-sub">Cada lectura de Selene integra hallazgos de estudios peer-reviewed publicados en revistas científicas de primer nivel.</p>
+
+      <div class="science-grid">
+        <div class="science-card reveal">
+          <div class="sci-number">30+</div>
+          <div class="sci-label">Estudios citados<br><span style="font-size:10px;color:var(--text-dim)">2020–2025</span></div>
+        </div>
+        <div class="science-card reveal stagger-1">
+          <div class="sci-number">97%</div>
+          <div class="sci-label">Margen de operación<br><span style="font-size:10px;color:var(--text-dim)">Modelo sostenible</span></div>
+        </div>
+        <div class="science-card reveal stagger-2">
+          <div class="sci-number">4</div>
+          <div class="sci-label">Disciplinas integradas<br><span style="font-size:10px;color:var(--text-dim)">Neuro · Crono · Psico · Astro</span></div>
+        </div>
+      </div>
+
+      <div style="max-width:700px; margin: 40px auto 0; text-align:center">
+        <p style="font-family:var(--serif); font-size:15px; color:var(--white-dim); line-height:1.8; font-weight:300; font-style:italic;">
+          "Bechara, Damasio et al. (1997) demostraron que los marcadores somáticos guían las decisiones intuitivas antes del razonamiento consciente. Kahneman (2011) distinguió el Sistema 1 intuitivo del Sistema 2 analítico. Lieberman (2000) definió la intuición como inteligencia inconsciente."
+        </p>
+        <p style="font-size:11px; color:var(--text-dim); margin-top:12px;">Fuentes: Current Biology, Psychological Bulletin, Frontiers in Psychology, Science Advances</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HORÓSCOPO SECTION ═══ -->
+  <section id="horoscopo-section" style="padding:60px 0 80px">
+    <div class="container">
+      <div class="section-tag">Tu signo hoy</div>
+      <h2 class="section-title">Horóscopo diario</h2>
+      <p class="section-sub">Selecciona tu signo solar y descubre qué dicen los tránsitos planetarios de hoy.</p>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:600px; margin:0 auto;">
+        <div class="zodiac-btn" onclick="alert('Próximamente — Horóscopo personalizado con IA')">♈ Aries</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♉ Tauro</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♊ Géminis</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♋ Cáncer</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♌ Leo</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♍ Virgo</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♎ Libra</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♏ Escorpio</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♐ Sagitario</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♑ Capricornio</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♒ Acuario</div>
+        <div class="zodiac-btn" onclick="alert('Próximamente')">♓ Piscis</div>
+      </div>
+      <style>
+        .zodiac-btn {
+          padding: 14px 8px; border-radius: 12px; text-align: center; cursor: pointer;
+          background: var(--card); border: 1px solid var(--border);
+          font-family: var(--serif); font-size: 14px; color: var(--white-dim);
+          transition: all 0.3s;
+        }
+        .zodiac-btn:hover { border-color: rgba(201,168,76,0.25); color: var(--gold-light); transform: translateY(-2px); }
+      </style>
+    </div>
+  </section>
+
+  <!-- ═══ ACADEMY ═══ -->
+  <section id="academia" style="padding:40px 0 100px">
+    <div class="container">
+      <div class="academy-teaser reveal">
+        <div class="academy-badge">📚 Academia Selene</div>
+        <h3>Aprende a leer tu propio cielo</h3>
+        <p>Formación en desarrollo intuitivo con certificación. Cursos de astrología, tarot y consciencia respaldados por cronobiología y neurociencia. Narrados por Selene.</p>
+        <a href="https://academia.selenaura.com" class="btn-gold">Explorar cursos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-brand">S E L E N E</div>
+    <div class="footer-tagline">Ciencia y consciencia de lo invisible</div>
+    <div class="footer-links">
+      <a href="https://carta.selenaura.com">Carta Astral</a>
+      <a href="https://tarot.selenaura.com">Tarot</a>
+      <a href="https://quiro.selenaura.com">Quirología</a>
+      <a href="https://academia.selenaura.com">Academia</a>
+      <a href="https://www.instagram.com/selenaura" target="_blank">Instagram</a>
+      <a href="mailto:info@selenaura.com">Contacto</a>
+    </div>
+    <div class="footer-legal">
+      Selene es una herramienta de autoconocimiento basada en tradiciones milenarias e integrada con estudios científicos modernos. No constituye asesoramiento médico, psicológico, financiero ni legal. Las lecturas son para reflexión personal y entretenimiento. © 2026 Selene. Todos los derechos reservados.
+    </div>
+  </footer>
+
 </div>
-
-<!-- ═══ COSMIC DASHBOARD ═══ -->
-<section class="section" id="cosmos">
-  <div class="product-header">
-    <span class="tag">En vivo</span>
-    <h2>El cosmos <em>hoy</em></h2>
-    <p>Datos astronómicos reales actualizados diariamente. Sin predicciones vagas — solo ciencia, hechos y un toque de misterio.</p>
-  </div>
-
-  <div class="dashboard">
-    <!-- Moon Phase -->
-    <div class="dash-moon">
-      <div class="moon-emoji" id="moonEmoji">🌒</div>
-      <div class="moon-phase" id="moonPhase">Luna Creciente</div>
-      <div class="moon-detail" id="moonDetail">Iluminación: 23%</div>
-      <div class="moon-percent">
-        <div class="moon-bar"><div class="moon-bar-fill" id="moonBar" style="width:23%"></div></div>
-      </div>
-      <div style="margin-top:20px;font-size:11px;color:var(--faint)">
-        <span id="moonSign">☉ Sol en Piscis</span><br>
-        <span id="moonNext" style="color:var(--gold)">Próxima luna llena: 14 Mar</span>
-      </div>
-    </div>
-
-    <div class="dash-right">
-      <!-- Cosmic Fact -->
-      <div class="dash-card">
-        <div class="dash-label">✦ Dato cósmico del día</div>
-        <div class="dash-fact-text" id="cosmicFact">"Tu cerebro toma decisiones 7 segundos antes de que seas consciente de ellas."</div>
-        <div class="dash-fact-source" id="cosmicSource">— Soon et al. (2008), Nature Neuroscience</div>
-      </div>
-
-      <!-- Upcoming Events -->
-      <div class="dash-card">
-        <div class="dash-label">Próximos eventos astrológicos</div>
-        <div class="dash-events" id="eventsContainer">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mini Horoscope -->
-  <div class="dash-horo" style="margin-top:24px">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-      <div class="dash-label" style="color:var(--rose)">✦ Tu energía de hoy</div>
-      <div id="horoDate" style="font-size:12px;color:var(--faint);font-family:var(--cg);font-style:italic"></div>
-    </div>
-    <div class="sign-grid" id="signGrid">
-      <!-- Populated by JS -->
-    </div>
-    <div class="horo-text" id="horoText">Selecciona tu signo para ver tu energía del día.</div>
-    <div class="horo-disclaimer">Basado en cronobiología y arquetipos psicológicos. No es una predicción — es un espejo.</div>
-  </div>
-</section>
-
-<!-- Divider -->
-<div class="divider">
-  <svg width="300" height="30" viewBox="0 0 300 30">
-    <path d="M10,15 Q50,5 80,15 Q100,8 120,15" stroke="rgba(201,168,76,0.15)" fill="none" stroke-width="0.5"/>
-    <circle cx="135" cy="15" r="1.5" fill="rgba(201,168,76,0.2)"/>
-    <circle cx="150" cy="15" r="3.5" fill="rgba(201,168,76,0.3)"/>
-    <circle cx="165" cy="15" r="1.5" fill="rgba(201,168,76,0.2)"/>
-    <path d="M180,15 Q200,8 220,15 Q250,5 290,15" stroke="rgba(201,168,76,0.15)" fill="none" stroke-width="0.5"/>
-    <!-- Floral accents -->
-    <path d="M145,8 Q148,4 150,8 Q152,4 155,8" stroke="rgba(212,160,192,0.15)" fill="none" stroke-width="0.5"/>
-    <path d="M145,22 Q148,26 150,22 Q152,26 155,22" stroke="rgba(212,160,192,0.15)" fill="none" stroke-width="0.5"/>
-  </svg>
-</div>
-
-<!-- ═══ CARTA ASTRAL ═══ -->
-<section class="section" id="carta">
-  <div class="product-header">
-    <span class="tag">Servicio estrella</span>
-    <h2>Carta Astral <em>Premium</em></h2>
-    <p>Tu mapa natal completo con lectura de +5.000 palabras y consulta interactiva incluida.</p>
-  </div>
-  <div class="carta-card">
-    <div class="carta-grid">
-      <div class="carta-left">
-        <p>No es un horóscopo. No es un resumen genérico de tu signo. Es una lectura de más de 5.000 palabras escrita específicamente para ti, basada en la posición exacta de los planetas en el momento y lugar de tu nacimiento.</p>
-        <p>15 secciones de análisis profundo: desde tu esencia tripartita (Sol, Luna y Ascendente) hasta los tránsitos que están afectando tu vida ahora mismo.</p>
-        <div class="carta-highlight">
-          <p>Lo que hace única esta experiencia es lo que viene después: SELENE inicia una conversación contigo. No eres tú quien pregunta — es SELENE quien detecta las tensiones de tu carta y te hace preguntas que nadie te ha hecho antes.</p>
-        </div>
-        <div style="margin-bottom:8px">
-          <span class="carta-price">€44,99</span>
-          <span class="carta-price-note">pago único</span>
-        </div>
-        <p style="font-size:11px;color:var(--faint);margin-bottom:24px">Acceso inmediato · 14 días de garantía</p>
-        <a href="https://carta.selenaura.com" class="btn-gold">Descubre tu carta astral →</a>
-      </div>
-      <div class="carta-right">
-        <h3>Qué incluye</h3>
-        <div class="feature-row"><span class="feature-icon">☉</span><div><div class="feature-title">Lectura de +5.000 palabras</div><div class="feature-desc">15 secciones de análisis personalizado</div></div></div>
-        <div class="feature-row"><span class="feature-icon">◈</span><div><div class="feature-title">Datos astronómicos reales</div><div class="feature-desc">Efemérides suizas de precisión científica</div></div></div>
-        <div class="feature-row"><span class="feature-icon">✦</span><div><div class="feature-title">La Consulta</div><div class="feature-desc">Sesión interactiva donde SELENE te guía</div></div></div>
-        <div class="feature-row"><span class="feature-icon">↻</span><div><div class="feature-title">Tránsitos actualizados</div><div class="feature-desc">Qué está pasando en tu cielo ahora</div></div></div>
-        <div class="feature-row"><span class="feature-icon">📑</span><div><div class="feature-title">Respaldo científico</div><div class="feature-desc">Cada sección cita estudios peer-reviewed</div></div></div>
-        <div class="feature-row"><span class="feature-icon">💬</span><div><div class="feature-title">Chat libre incluido</div><div class="feature-desc">10-15 mensajes para explorar tu carta</div></div></div>
-        <div class="feature-row"><span class="feature-icon">↓</span><div><div class="feature-title">Descarga completa</div><div class="feature-desc">Guarda y relee tu carta siempre</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Divider -->
-<div class="divider">
-  <svg width="300" height="30" viewBox="0 0 300 30">
-    <line x1="40" y1="15" x2="130" y2="15" stroke="rgba(212,160,192,0.12)" stroke-width="0.5"/>
-    <circle cx="140" cy="15" r="1.5" fill="rgba(212,160,192,0.2)"/>
-    <circle cx="150" cy="15" r="3" fill="rgba(212,160,192,0.3)"/>
-    <circle cx="160" cy="15" r="1.5" fill="rgba(212,160,192,0.2)"/>
-    <line x1="170" y1="15" x2="260" y2="15" stroke="rgba(212,160,192,0.12)" stroke-width="0.5"/>
-  </svg>
-</div>
-
-<!-- ═══ COMPATIBILIDAD ═══ -->
-<section class="section" id="compatibilidad">
-  <div class="product-header">
-    <span class="tag" style="border-color:rgba(212,160,192,0.25);color:var(--rose);background:rgba(212,160,192,0.06)">Nuevo · Gratis</span>
-    <h2 style="color:var(--white)">Compatibilidad <em style="color:var(--rose)">Cósmica</em></h2>
-    <p>Descubre la dinámica real entre dos almas. Análisis astrológico de pareja basado en la combinación elemental de ambos signos.</p>
-  </div>
-  <div class="compat-card">
-    <div class="compat-inner">
-      <div class="compat-visual">
-        <div class="compat-orbs" style="position:relative">
-          <div class="compat-orb">☉</div>
-          <div class="compat-center">♡</div>
-          <div class="compat-orb">☽</div>
-        </div>
-        <div style="display:flex;justify-content:center;gap:32px;margin-top:20px">
-          <div style="text-align:center"><div style="font-family:var(--cg);font-size:26px;color:var(--gold)">8</div><div style="font-size:11px;color:var(--faint)">Categorías</div></div>
-          <div style="text-align:center"><div style="font-family:var(--cg);font-size:26px;color:var(--gold)">4</div><div style="font-size:11px;color:var(--faint)">Fases</div></div>
-          <div style="text-align:center"><div style="font-family:var(--cg);font-size:26px;color:var(--gold)">∞</div><div style="font-size:11px;color:var(--faint)">Ritual</div></div>
-        </div>
-      </div>
-      <div class="compat-info">
-        <h3>Qué descubriréis <em>juntos</em></h3>
-        <p>No es un "sois compatibles, sí o no". Es un mapa de vuestra relación: dónde brilla, dónde roza, y qué necesita trabajo consciente.</p>
-        <div class="compat-tags">
-          <span class="compat-tag">🔥 Pasión</span>
-          <span class="compat-tag">💬 Comunicación</span>
-          <span class="compat-tag">🛡 Confianza</span>
-          <span class="compat-tag">📊 Hechos concretos</span>
-          <span class="compat-tag">🌙 Ritual</span>
-          <span class="compat-tag">📲 Compartible</span>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
-          <a href="https://carta.selenaura.com/compatibilidad" class="btn-rose">Descubrir compatibilidad →</a>
-          <span style="font-size:12px;color:var(--faint)">100% gratuito</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Divider -->
-<div class="divider">
-  <svg width="300" height="30" viewBox="0 0 300 30">
-    <line x1="40" y1="15" x2="130" y2="15" stroke="rgba(74,123,212,0.12)" stroke-width="0.5"/>
-    <circle cx="140" cy="15" r="1.5" fill="rgba(74,123,212,0.2)"/>
-    <circle cx="150" cy="15" r="3" fill="rgba(74,123,212,0.3)"/>
-    <circle cx="160" cy="15" r="1.5" fill="rgba(74,123,212,0.2)"/>
-    <line x1="170" y1="15" x2="260" y2="15" stroke="rgba(74,123,212,0.12)" stroke-width="0.5"/>
-  </svg>
-</div>
-
-<!-- ═══ QUIROLOGÍA ═══ -->
-<section class="section" id="quirologia">
-  <div class="product-header">
-    <span class="tag" style="border-color:rgba(74,123,212,0.25);color:var(--blue);background:rgba(74,123,212,0.06)">Nuevo · Gratis</span>
-    <h2 style="color:var(--white)">Quirología <em style="color:var(--blue)">Intuitiva</em></h2>
-    <p>Sube una foto de tu palma y recibe una lectura personalizada basada en la tradición quirológica y el análisis de dermatoglifos. Tu mano tiene más que contarte de lo que imaginas.</p>
-  </div>
-  <div class="quiro-card">
-    <div class="quiro-inner">
-      <div class="quiro-visual">
-        <div class="quiro-palm">✋</div>
-        <div style="display:flex;justify-content:center;gap:32px;margin-top:8px">
-          <div style="text-align:center"><div style="font-family:var(--cg);font-size:26px;color:var(--gold)">6</div><div style="font-size:11px;color:var(--faint)">Líneas</div></div>
-          <div style="text-align:center"><div style="font-family:var(--cg);font-size:26px;color:var(--gold)">7</div><div style="font-size:11px;color:var(--faint)">Montes</div></div>
-          <div style="text-align:center"><div style="font-family:var(--cg);font-size:26px;color:var(--gold)">✦</div><div style="font-size:11px;color:var(--faint)">Ritual</div></div>
-        </div>
-      </div>
-      <div class="quiro-info">
-        <h3>Qué revela <em>tu palma</em></h3>
-        <p>No es adivinación — es una lectura profunda que conecta la tradición quirológica milenaria con tu momento vital. Cada línea, cada monte, cada proporción cuenta tu historia.</p>
-        <div class="quiro-features">
-          <div class="quiro-feat"><span class="quiro-feat-icon">✦</span><span class="quiro-feat-text">Cuestionario de sintonización energética</span></div>
-          <div class="quiro-feat"><span class="quiro-feat-icon">✦</span><span class="quiro-feat-text">Análisis de líneas, montes y marcas</span></div>
-          <div class="quiro-feat"><span class="quiro-feat-icon">✦</span><span class="quiro-feat-text">Tu arquetipo, cristal y frecuencia</span></div>
-          <div class="quiro-feat"><span class="quiro-feat-icon">✦</span><span class="quiro-feat-text">Lectura express gratuita al instante</span></div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
-          <a href="https://quiro.selenaura.com" class="btn-blue" target="_blank">Leer mi palma →</a>
-          <span style="font-size:12px;color:var(--faint)">Lectura express gratuita</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Divider -->
-<div class="divider">
-  <svg width="300" height="30" viewBox="0 0 300 30">
-    <line x1="40" y1="15" x2="130" y2="15" stroke="rgba(139,123,191,0.12)" stroke-width="0.5"/>
-    <circle cx="150" cy="15" r="3" fill="rgba(139,123,191,0.25)"/>
-    <line x1="170" y1="15" x2="260" y2="15" stroke="rgba(139,123,191,0.12)" stroke-width="0.5"/>
-  </svg>
-</div>
-
-<!-- ═══ ACADEMIA ═══ -->
-<section class="section" id="academia">
-  <div class="product-header">
-    <span class="tag" style="border-color:rgba(139,123,191,0.25);color:var(--violet);background:rgba(139,123,191,0.06)">Empieza gratis</span>
-    <h2>Despierta tu <em>Brújula Interior</em></h2>
-    <p>Curso de desarrollo intuitivo respaldado por +30 estudios peer-reviewed. Neuroplasticidad, cronobiología e intuición en 5 módulos.</p>
-  </div>
-  <div class="academia-card">
-    <p style="font-size:15px;color:var(--dim);line-height:1.9;font-weight:300;max-width:680px;margin-bottom:0;position:relative;z-index:1">Este no es un curso de "sigue tu intuición y ya". Cada módulo conecta una práctica espiritual con la investigación que la respalda — meditación con estudios de Harvard, sincronicidades con teoría de redes neuronales, y rituales con cronobiología circadiana.</p>
-    <div class="modules-grid">
-      <div class="module"><div class="module-num">01</div><h4>El Ruido Interior</h4><p>Neurociencia de la atención y cómo tu cerebro filtra señales intuitivas</p></div>
-      <div class="module"><div class="module-num">02</div><h4>Señales del Cuerpo</h4><p>Interocepción: la ciencia de escuchar lo que tu cuerpo ya sabe</p></div>
-      <div class="module"><div class="module-num">03</div><h4>Patrones Ocultos</h4><p>Reconocimiento de patrones inconscientes y sesgos cognitivos</p></div>
-      <div class="module"><div class="module-num">04</div><h4>Sincronicidades</h4><p>Redes bayesianas, sesgo de confirmación y significado percibido</p></div>
-      <div class="module"><div class="module-num">05</div><h4>Tu Protocolo</h4><p>Diseña tu práctica diaria con los Protocolos Selene™</p></div>
-      <div class="module" style="border-color:var(--border);background:rgba(201,168,76,0.02)"><div class="module-num" style="color:var(--gold)">✦</div><h4 style="color:var(--gold)">Próximamente</h4><p>Magnetismo Consciente — Curso Premium de 8 módulos</p></div>
-    </div>
-    <div style="display:flex;justify-content:center;gap:36px;margin-top:36px;flex-wrap:wrap">
-      <span style="font-size:11px;color:var(--faint);letter-spacing:0.5px;opacity:0.6">Current Biology</span>
-      <span style="font-size:11px;color:var(--faint);letter-spacing:0.5px;opacity:0.6">Frontiers in Psychology</span>
-      <span style="font-size:11px;color:var(--faint);letter-spacing:0.5px;opacity:0.6">Science Advances</span>
-      <span style="font-size:11px;color:var(--faint);letter-spacing:0.5px;opacity:0.6">BMC Neuroscience</span>
-    </div>
-  </div>
-</section>
-
-<!-- Divider -->
-<div class="divider">
-  <svg width="200" height="24" viewBox="0 0 200 24">
-    <line x1="20" y1="12" x2="80" y2="12" stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>
-    <circle cx="100" cy="12" r="3" fill="rgba(201,168,76,0.25)"/>
-    <line x1="120" y1="12" x2="180" y2="12" stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>
-  </svg>
-</div>
-
-<!-- ═══ FAQ ═══ -->
-<section class="section" id="faq">
-  <div class="product-header">
-    <h2>Preguntas <em>frecuentes</em></h2>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q"><h3>¿Qué diferencia a SELENE de otras webs de astrología?</h3><span>+</span></div>
-      <div class="faq-a"><p>Cada afirmación en SELENE está respaldada por estudios científicos citados. No hacemos predicciones vagas — usamos datos astronómicos reales y conectamos la astrología con neurociencia, cronobiología y psicología. Es astrología para personas que piensan.</p></div>
-    </div>
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q"><h3>¿Necesito saber mi hora de nacimiento?</h3><span>+</span></div>
-      <div class="faq-a"><p>Para la Carta Astral Premium, sí es recomendable. La hora determina tu Ascendente y las Casas astrológicas. Si no la conoces exactamente, puedes usar una aproximación. Puedes consultarla en el Registro Civil o en tu libro de familia.</p></div>
-    </div>
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q"><h3>¿Qué es "La Consulta"?</h3><span>+</span></div>
-      <div class="faq-a"><p>Es una sesión interactiva única incluida en la Carta Astral Premium. En lugar de que tú hagas preguntas, SELENE detecta las tensiones y patrones de tu carta natal y te guía con preguntas profundas que iluminan aspectos que quizás no habías considerado.</p></div>
-    </div>
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q"><h3>¿La compatibilidad cósmica es realmente gratis?</h3><span>+</span></div>
-      <div class="faq-a"><p>Sí, completamente. El análisis básico incluye puntuación global, 3 categorías principales, dinámica elemental, hechos concretos, timeline de la relación y un ritual personalizado. La versión premium (sinastría completa) estará disponible próximamente.</p></div>
-    </div>
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q"><h3>¿Quién hay detrás de SELENE?</h3><span>+</span></div>
-      <div class="faq-a"><p>SELENE es un proyecto independiente que combina formación en análisis de datos, interés por la neurociencia y una pasión por las tradiciones contemplativas. Usamos inteligencia artificial avanzada para generar lecturas de una profundidad que sería imposible de forma manual.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ NEWSLETTER ═══ -->
-<section class="section" id="newsletter">
-  <div class="newsletter">
-    <svg class="ornament ornament-gold" width="200" height="24" viewBox="0 0 200 24" style="margin-bottom:16px">
-      <path d="M60,12 Q80,4 100,12 Q120,4 140,12" stroke="rgba(201,168,76,0.2)" fill="none" stroke-width="0.6"/>
-      <circle cx="100" cy="8" r="2" fill="rgba(201,168,76,0.3)"/>
-    </svg>
-    <h2>Tu dosis semanal de<br><em>ciencia y consciencia</em></h2>
-    <p>Un email por semana con el dato científico que cambia cómo ves la intuición. Sin spam, sin vaguedades.</p>
-    <div class="email-form">
-      <input type="email" class="email-input" placeholder="tu@email.com">
-      <button class="email-btn">Suscribirme</button>
-    </div>
-    <div style="font-size:10px;color:var(--faint);margin-top:14px">Sin spam · Puedes darte de baja cuando quieras</div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-logo">S<span>ELENE</span></div>
-      <p class="footer-desc">Ciencia y consciencia de lo invisible. Academia de desarrollo intuitivo.</p>
-    </div>
-    <div class="footer-cols">
-      <div class="footer-col">
-        <h4>EXPLORA</h4>
-        <a href="https://carta.selenaura.com">Carta Astral Premium</a>
-        <a href="https://carta.selenaura.com/compatibilidad">Compatibilidad Cósmica</a>
-        <a href="https://quiro.selenaura.com">Quirología Intuitiva</a>
-        <a href="#academia">Curso gratuito</a>
-        <a href="#cosmos">El cosmos hoy</a>
-      </div>
-      <div class="footer-col">
-        <h4>LEGAL</h4>
-        <a href="#">Política de privacidad</a>
-        <a href="#">Términos de servicio</a>
-        <a href="#">Aviso legal</a>
-      </div>
-      <div class="footer-col">
-        <h4>CONTACTO</h4>
-        <a href="mailto:info@selenaura.com">info@selenaura.com</a>
-        <a href="https://instagram.com/selenaura">@selenaura</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 SELENE. Todos los derechos reservados.</span>
-    <span>selenaura.com</span>
-  </div>
-</footer>
 
 <script>
-// ═══ STARS ═══
-const canvas = document.getElementById('stars');
-const ctx = canvas.getContext('2d');
-let stars = [];
-function initStars() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  stars = [];
-  for (let i = 0; i < 150; i++) {
-    stars.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.8 + 0.2,
-      a: Math.random() * 0.6 + 0.1,
-      s: Math.random() * 0.008 + 0.002,
-      d: Math.random() > 0.5 ? 1 : -1
-    });
-  }
-}
-function drawStars() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  stars.forEach(s => {
-    s.a += s.s * s.d;
-    if (s.a > 0.7 || s.a < 0.05) s.d *= -1;
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = s.r > 1.2 ? `rgba(201,168,76,${s.a})` : `rgba(240,237,228,${s.a})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(drawStars);
-}
-initStars(); drawStars();
-window.addEventListener('resize', initStars);
-
-// ═══ NAVBAR SCROLL ═══
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
-});
-
-// ═══ SECTION OBSERVER ═══
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.section').forEach(s => obs.observe(s));
-
-// ═══ MOON PHASE CALCULATOR ═══
-function getMoonPhase() {
-  const now = new Date();
-  const year = now.getFullYear(), month = now.getMonth() + 1, day = now.getDate();
-  let c = Math.floor(365.25 * (year + 4716));
-  let e = Math.floor(30.6001 * (month < 3 ? month + 13 : month + 1));
-  const jd = c + e + day - 1524.5;
-  const daySince = jd - 2451549.5;
-  const newMoons = daySince / 29.53058770576;
-  const phase = (newMoons - Math.floor(newMoons));
-  const age = phase * 29.53;
-  const illum = Math.round((1 - Math.cos(phase * 2 * Math.PI)) / 2 * 100);
-
-  let name, emoji;
-  if (age < 1.85) { name = "Luna Nueva"; emoji = "🌑"; }
-  else if (age < 7.38) { name = "Creciente"; emoji = "🌒"; }
-  else if (age < 9.23) { name = "Cuarto Creciente"; emoji = "🌓"; }
-  else if (age < 13.77) { name = "Gibosa Creciente"; emoji = "🌔"; }
-  else if (age < 16.61) { name = "Luna Llena"; emoji = "🌕"; }
-  else if (age < 21.15) { name = "Gibosa Menguante"; emoji = "🌖"; }
-  else if (age < 23.00) { name = "Cuarto Menguante"; emoji = "🌗"; }
-  else if (age < 27.53) { name = "Menguante"; emoji = "🌘"; }
-  else { name = "Luna Nueva"; emoji = "🌑"; }
-
-  return { name, emoji, illum, age };
-}
-
-function getSunSign() {
-  const d = new Date(), m = d.getMonth() + 1, day = d.getDate();
-  const signs = [
-    [1,20,"Acuario"],[2,19,"Piscis"],[3,21,"Aries"],[4,20,"Tauro"],
-    [5,21,"Géminis"],[6,21,"Cáncer"],[7,23,"Leo"],[8,23,"Virgo"],
-    [9,23,"Libra"],[10,23,"Escorpio"],[11,22,"Sagitario"],[12,22,"Capricornio"]
-  ];
-  let sign = "Capricornio";
-  for (const [sm, sd, sn] of signs) {
-    if (m === sm && day >= sd) sign = sn;
-    if (m === sm + 1 && day < sd) break;
-  }
-  // simplified
-  if ((m===3&&day>=21)||(m===4&&day<=19)) sign="Aries";
-  else if ((m===4&&day>=20)||(m===5&&day<=20)) sign="Tauro";
-  else if ((m===5&&day>=21)||(m===6&&day<=20)) sign="Géminis";
-  else if ((m===6&&day>=21)||(m===7&&day<=22)) sign="Cáncer";
-  else if ((m===7&&day>=23)||(m===8&&day<=22)) sign="Leo";
-  else if ((m===8&&day>=23)||(m===9&&day<=22)) sign="Virgo";
-  else if ((m===9&&day>=23)||(m===10&&day<=22)) sign="Libra";
-  else if ((m===10&&day>=23)||(m===11&&day<=21)) sign="Escorpio";
-  else if ((m===11&&day>=22)||(m===12&&day<=21)) sign="Sagitario";
-  else if ((m===12&&day>=22)||(m===1&&day<=19)) sign="Capricornio";
-  else if ((m===1&&day>=20)||(m===2&&day<=18)) sign="Acuario";
-  else sign="Piscis";
-  return sign;
-}
-
-// ═══ COSMIC FACTS ═══
-const cosmicFacts = [
-  { text: '"Tu cerebro toma decisiones 7 segundos antes de que seas consciente de ellas."', src: '— Soon et al. (2008), Nature Neuroscience' },
-  { text: '"La meditación cambia la estructura física del cerebro en solo 8 semanas."', src: '— Hölzel et al. (2011), Psychiatry Research: Neuroimaging' },
-  { text: '"Tu corazón envía más señales al cerebro que al revés. Tu intuición tiene base fisiológica."', src: '— McCraty et al. (2004), Journal of Alternative Medicine' },
-  { text: '"Las personas creativas tienen conexiones neuronales entre redes que normalmente no se comunican."', src: '— Beaty et al. (2018), PNAS' },
-  { text: '"La luna llena altera los ciclos de sueño humanos, incluso en habitaciones completamente oscuras."', src: '— Cajochen et al. (2013), Current Biology' },
-  { text: '"Las experiencias de asombro (awe) reducen la inflamación y aumentan la longevidad."', src: '— Stellar et al. (2015), Emotion' },
-  { text: '"Tu microbioma intestinal influye directamente en tus decisiones y estado de ánimo."', src: '— Foster & Neufeld (2013), Trends in Neurosciences' },
-  { text: '"Mirar las estrellas activa las mismas áreas cerebrales que la meditación profunda."', src: '— Yaden et al. (2017), Psychology of Consciousness' },
-  { text: '"El ritmo circadiano influye en la creatividad: las mejores ideas surgen en tus horas de menor alerta."', src: '— Wieth & Zacks (2011), Thinking & Reasoning' },
-  { text: '"Escribir a mano activa circuitos de memoria que el teclado no alcanza."', src: '— Mueller & Oppenheimer (2014), Psychological Science' },
-  { text: '"La gratitud practicada diariamente cambia la arquitectura neural en 21 días."', src: '— Kini et al. (2016), NeuroImage' },
-  { text: '"Estar en la naturaleza 20 minutos reduce el cortisol un 21% — más que cualquier fármaco."', src: '— Hunter et al. (2019), Frontiers in Psychology' },
-  { text: '"Tu cerebro procesa 11 millones de bits por segundo. Solo eres consciente de 50."', src: '— Nørretranders (1998), The User Illusion' },
-  { text: '"Las relaciones románticas sincronizan los ritmos cardíacos y respiratorios de ambas personas."', src: '— Goldstein et al. (2017), Scientific Reports' },
-];
-
-// ═══ UPCOMING EVENTS (algorithmic) ═══
-function getUpcomingEvents() {
-  const now = new Date();
-  const y = now.getFullYear();
-  const events = [
-    { date: new Date(y,2,20), icon: '🌸', label: 'Equinoccio Primavera' },
-    { date: new Date(y,2,14), icon: '🌕', label: 'Luna Llena en Virgo' },
-    { date: new Date(y,2,29), icon: '🌑', label: 'Luna Nueva en Aries' },
-    { date: new Date(y,3,13), icon: '🌕', label: 'Luna Llena en Libra' },
-    { date: new Date(y,3,27), icon: '🌑', label: 'Luna Nueva en Tauro' },
-    { date: new Date(y,4,4), icon: '♂', label: 'Marte entra en Leo' },
-    { date: new Date(y,4,12), icon: '🌕', label: 'Luna Llena en Escorpio' },
-    { date: new Date(y,5,20), icon: '☀️', label: 'Solsticio Verano' },
-    { date: new Date(y,5,11), icon: '🌕', label: 'Luna Llena en Sagitario' },
-    { date: new Date(y,7,4), icon: '♀', label: 'Venus retrógrado' },
-    { date: new Date(y,8,22), icon: '🍂', label: 'Equinoccio Otoño' },
-    { date: new Date(y,11,21), icon: '❄️', label: 'Solsticio Invierno' },
-  ];
-  return events.filter(e => e.date >= now).slice(0, 4);
-}
-
-// ═══ MINI HOROSCOPES ═══
-const signs = [
-  { name: "Aries", symbol: "♈" },{ name: "Tauro", symbol: "♉" },{ name: "Géminis", symbol: "♊" },
-  { name: "Cáncer", symbol: "♋" },{ name: "Leo", symbol: "♌" },{ name: "Virgo", symbol: "♍" },
-  { name: "Libra", symbol: "♎" },{ name: "Escorpio", symbol: "♏" },{ name: "Sagitario", symbol: "♐" },
-  { name: "Capricornio", symbol: "♑" },{ name: "Acuario", symbol: "♒" },{ name: "Piscis", symbol: "♓" },
-];
-
-const horoTemplates = [
-  "Hoy tu energía se alinea con la toma de decisiones. Tu corteza prefrontal está especialmente activa en horas de la mañana — aprovéchala para lo importante.",
-  "Jornada de introspección natural. Los ciclos de serotonina favorecen la reflexión interna. Buen día para escribir, meditar o simplemente estar en silencio.",
-  "Tu sistema nervioso pide movimiento. La dopamina fluye mejor con actividad física — una caminata puede desbloquear esa idea que llevas días buscando.",
-  "Las relaciones toman protagonismo. La oxitocina se eleva en interacciones genuinas — prioriza conversaciones profundas sobre las superficiales.",
-  "Creatividad en máximos. Tu red neuronal por defecto está especialmente activa, lo que potencia las conexiones inesperadas entre ideas.",
-  "Día para consolidar. Tu cerebro está en modo de procesamiento lento y profundo — ideal para planificar, organizar y dar estructura a lo que ya sabes.",
-  "La intuición corporal está amplificada. Presta atención a las señales físicas: ese nudo en el estómago o esa ligereza en el pecho tienen información real.",
-  "Momento de comunicación clara. Los circuitos de Broca y Wernicke están sincronizados — lo que digas hoy tendrá impacto. Elige bien tus palabras.",
-  "Energía expansiva. Tu sistema de recompensa responde bien a lo nuevo — explora, prueba algo diferente, sal de la rutina aunque sea en algo pequeño.",
-  "Jornada de cierre y resolución. Tu cerebro busca completar ciclos abiertos. Termina lo pendiente antes de empezar algo nuevo.",
-  "Los sueños de anoche contienen información útil. La consolidación de memoria durante el REM suele resolver problemas que tu mente consciente no puede.",
-  "Día de conexión con la naturaleza. Los niveles de cortisol se optimizan con 20 minutos al aire libre — tu sistema inmune también lo agradecerá.",
-];
-
-function getFallbackHoroscope(signIndex) {
-  const now = new Date();
-  const dayOfYear = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
-  const seed = (dayOfYear * 7 + signIndex * 13) % horoTemplates.length;
-  return horoTemplates[seed];
-}
-
-// ═══ AI HOROSCOPE DATA ═══
-let aiHoroscopes = null;
-const signKeys = ["aries","tauro","geminis","cancer","leo","virgo",
-                  "libra","escorpio","sagitario","capricornio","acuario","piscis"];
-
-async function loadAIHoroscopes() {
-  try {
-    const resp = await fetch('/data/horoscope.json?v=' + new Date().toISOString().split('T')[0]);
-    if (!resp.ok) return;
-    const data = await resp.json();
-    // Verificar que es de hoy
-    const today = new Date().toISOString().split('T')[0];
-    if (data.date === today && data.horoscopes) {
-      aiHoroscopes = data;
-      // Actualizar dato cósmico si viene de la IA
-      if (data.cosmicFact) {
-        document.getElementById('cosmicFact').textContent = '"' + data.cosmicFact.text + '"';
-        document.getElementById('cosmicSource').textContent = '— ' + data.cosmicFact.source;
-      }
-      console.log('✦ Horóscopo IA cargado para', today);
-    }
-  } catch (e) {
-    // Silencioso — usará fallback
-  }
-}
-
-function getDailyHoroscope(signIndex) {
-  if (aiHoroscopes && aiHoroscopes.horoscopes) {
-    const key = signKeys[signIndex];
-    if (aiHoroscopes.horoscopes[key]) return aiHoroscopes.horoscopes[key];
-  }
-  return getFallbackHoroscope(signIndex);
-}
-
-// ═══ INIT DYNAMIC CONTENT ═══
-async function init() {
-  // Moon
-  const moon = getMoonPhase();
-  document.getElementById('moonEmoji').textContent = moon.emoji;
-  document.getElementById('moonPhase').textContent = moon.name;
-  document.getElementById('moonDetail').textContent = 'Iluminación: ' + moon.illum + '% · Día ' + Math.round(moon.age) + ' del ciclo';
-  document.getElementById('moonBar').style.width = moon.illum + '%';
-  document.getElementById('moonSign').textContent = '☉ Sol en ' + getSunSign();
-
-  // Next full moon (approximate)
-  const daysToFull = moon.age < 14.77 ? Math.round(14.77 - moon.age) : Math.round(29.53 - moon.age + 14.77);
-  const nextFull = new Date(); nextFull.setDate(nextFull.getDate() + daysToFull);
-  const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  document.getElementById('moonNext').textContent = 'Próxima luna llena: ' + nextFull.getDate() + ' ' + months[nextFull.getMonth()];
-
-  // Cosmic fact (static fallback — may be overridden by AI)
-  const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(),0,0)) / 86400000);
-  const fact = cosmicFacts[dayOfYear % cosmicFacts.length];
-  document.getElementById('cosmicFact').textContent = fact.text;
-  document.getElementById('cosmicSource').textContent = fact.src;
-
-  // Events
-  const events = getUpcomingEvents();
-  const evCont = document.getElementById('eventsContainer');
-  evCont.innerHTML = events.map(e => {
-    const d = e.date;
-    return `<div class="event-pill"><span class="ev-icon">${e.icon}</span><span>${e.label}</span><span class="ev-date">${d.getDate()} ${months[d.getMonth()]}</span></div>`;
-  }).join('');
-
-  // Sign buttons
-  const grid = document.getElementById('signGrid');
-  grid.innerHTML = signs.map((s,i) =>
-    `<button class="sign-btn" onclick="selectSign(${i})" data-idx="${i}">${s.symbol} ${s.name}</button>`
-  ).join('');
-
-  // Horoscope date
-  const diasSemana = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-  const mesesLargo = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  const hoy = new Date();
-  document.getElementById('horoDate').textContent = diasSemana[hoy.getDay()] + ', ' + hoy.getDate() + ' de ' + mesesLargo[hoy.getMonth()] + ' de ' + hoy.getFullYear();
-
-  // Load AI horoscopes (non-blocking)
-  await loadAIHoroscopes();
-}
-
-function selectSign(idx) {
-  document.querySelectorAll('.sign-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector(`.sign-btn[data-idx="${idx}"]`).classList.add('active');
-  document.getElementById('horoText').textContent = getDailyHoroscope(idx);
-}
-
-init();
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
