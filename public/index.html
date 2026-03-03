@@ -484,7 +484,7 @@ footer{padding:48px 24px 28px;text-align:center}
       <div class="nd-label" data-es="Conecta" data-en="Connect">Conecta</div>
       <div class="nd-social">
         <a href="https://www.instagram.com/selenaura" target="_blank">Instagram</a>
-        <a href="mailto:info@selenaura.com">info@selenaura.com</a>
+        <a href="/cdn-cgi/l/email-protection#bad3d4dcd5fac9dfd6dfd4dbcfc8db94d9d5d7"><span class="__cf_email__" data-cfemail="e58c8b838aa5968089808b84909784cb868a88">[email&#160;protected]</span></a>
       </div>
     </div>
   </div>
@@ -690,6 +690,12 @@ footer{padding:48px 24px 28px;text-align:center}
       <a href="https://www.instagram.com/selenaura" target="_blank">Instagram</a>
       <a href="mailto:info@selenaura.com" data-es="Contacto" data-en="Contact">Contacto</a>
     </div>
+    <div class="footer-links" style="margin-bottom:12px">
+      <a href="/aviso-legal.html" data-es="Aviso Legal" data-en="Legal Notice">Aviso Legal</a>
+      <a href="/privacidad.html" data-es="Política de Privacidad" data-en="Privacy Policy">Política de Privacidad</a>
+      <a href="/cookies.html" data-es="Política de Cookies" data-en="Cookie Policy">Política de Cookies</a>
+      <a href="#" id="cookieSettingsLink" data-es="Configurar cookies" data-en="Cookie settings">Configurar cookies</a>
+    </div>
     <div class="footer-legal" data-es="Selene es una herramienta de autoconocimiento basada en tradiciones milenarias e integrada con estudios científicos modernos. No constituye asesoramiento médico, psicológico, financiero ni legal. Las lecturas son para reflexión personal. © 2026 Selene." data-en="Selene is a self-knowledge tool based on ancient traditions integrated with modern scientific studies. It does not constitute medical, psychological, financial or legal advice. Readings are for personal reflection. © 2026 Selene.">Selene es una herramienta de autoconocimiento basada en tradiciones milenarias e integrada con estudios científicos modernos. No constituye asesoramiento médico, psicológico, financiero ni legal. Las lecturas son para reflexión personal. © 2026 Selene.</div>
   </footer>
 
@@ -716,10 +722,43 @@ function toggleMenu(){
 }
 
 // ═══ SCROLL REVEAL ═══
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}
+  });
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ═══ COOKIE BANNER ═══
+(function(){
+  if(localStorage.getItem('selene_cookie_consent'))return;
+  const banner=document.createElement('div');
+  banner.id='cookieBanner';
+  banner.innerHTML=`
+    <div style="position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:16px 20px;background:rgba(17,17,24,.97);border-top:1px solid rgba(201,168,76,.15);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+      <p style="font-size:12px;color:#9A9AAF;margin:0;max-width:600px;line-height:1.7">
+        Utilizamos cookies técnicas necesarias para el funcionamiento del sitio. Consulta nuestra
+        <a href="/cookies.html" style="color:#C9A84C;text-decoration:none">Política de Cookies</a> para más información.
+      </p>
+      <div style="display:flex;gap:8px;flex-shrink:0">
+        <button onclick="acceptCookies()" style="padding:8px 20px;border-radius:100px;border:none;background:linear-gradient(135deg,#C9A84C,#B8943F);color:#0A0A0F;font-size:11px;font-weight:600;cursor:pointer;font-family:Outfit,sans-serif;letter-spacing:.5px">Aceptar</button>
+        <button onclick="acceptCookies()" style="padding:8px 20px;border-radius:100px;border:1px solid rgba(201,168,76,.2);background:none;color:#9A9AAF;font-size:11px;cursor:pointer;font-family:Outfit,sans-serif">Solo necesarias</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(banner);
+  window.acceptCookies=function(){
+    localStorage.setItem('selene_cookie_consent','accepted');
+    banner.remove();
+  };
+})();
+
+// ═══ COOKIE SETTINGS LINK ═══
+document.getElementById('cookieSettingsLink')?.addEventListener('click',function(e){
+  e.preventDefault();
+  localStorage.removeItem('selene_cookie_consent');
+  location.reload();
+});
 </script>
 </body>
 </html>
