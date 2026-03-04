@@ -384,6 +384,17 @@ section{padding:90px 0}
   font-family:var(--serif);font-size:13px;color:var(--white-dim);transition:all .3s;
 }
 .zodiac-btn:hover{border-color:rgba(201,168,76,.2);color:var(--gold-light);transform:translateY(-2px)}
+.zodiac-btn.active{background:rgba(201,168,76,.12);border-color:var(--gold);color:var(--gold-light);transform:translateY(-2px)}
+.horo-display{max-width:620px;margin:32px auto 0;display:none}
+.horo-display.visible{display:block;animation:fadeUp .5s ease}
+.horo-sign-title{font-family:var(--serif);font-size:24px;color:var(--gold-light);text-align:center;margin-bottom:6px}
+.horo-date{font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:1px;text-transform:uppercase}
+.horo-text{font-size:14.5px;line-height:1.85;color:var(--text-mid);text-align:center;padding:24px 28px;background:var(--card);border:1px solid var(--border);border-radius:16px}
+.horo-fact{margin-top:20px;padding:16px 20px;border-left:2px solid var(--gold);background:rgba(201,168,76,.03);border-radius:0 12px 12px 0;font-size:12px;color:var(--text-dim);line-height:1.7}
+.horo-fact strong{color:var(--gold);font-weight:600;font-size:10px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:4px}
+.horo-cta{text-align:center;margin-top:24px}
+.horo-cta a{display:inline-block;padding:12px 28px;background:var(--gold-dim);color:var(--gold);border-radius:24px;font-size:13px;font-weight:600;text-decoration:none;transition:all .3s}
+.horo-cta a:hover{background:var(--gold);color:var(--bg)}
 
 /* ═══ ACADEMY ═══ */
 .academy-teaser{
@@ -730,12 +741,26 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
       <h2 class="section-title" data-es="Horóscopo diario" data-en="Daily horoscope">Horóscopo diario</h2>
       <p class="section-sub" data-es="Selecciona tu signo solar y descubre qué dicen los tránsitos planetarios de hoy." data-en="Select your sun sign and discover what today's planetary transits reveal.">Selecciona tu signo solar y descubre qué dicen los tránsitos planetarios de hoy.</p>
       <div class="zodiac-grid">
-        <div class="zodiac-btn">♈ Aries</div><div class="zodiac-btn">♉ Tauro</div>
-        <div class="zodiac-btn">♊ Géminis</div><div class="zodiac-btn">♋ Cáncer</div>
-        <div class="zodiac-btn">♌ Leo</div><div class="zodiac-btn">♍ Virgo</div>
-        <div class="zodiac-btn">♎ Libra</div><div class="zodiac-btn">♏ Escorpio</div>
-        <div class="zodiac-btn">♐ Sagitario</div><div class="zodiac-btn">♑ Capricornio</div>
-        <div class="zodiac-btn">♒ Acuario</div><div class="zodiac-btn">♓ Piscis</div>
+        <div class="zodiac-btn" data-sign="aries">♈ Aries</div><div class="zodiac-btn" data-sign="tauro">♉ Tauro</div>
+        <div class="zodiac-btn" data-sign="geminis">♊ Géminis</div><div class="zodiac-btn" data-sign="cancer">♋ Cáncer</div>
+        <div class="zodiac-btn" data-sign="leo">♌ Leo</div><div class="zodiac-btn" data-sign="virgo">♍ Virgo</div>
+        <div class="zodiac-btn" data-sign="libra">♎ Libra</div><div class="zodiac-btn" data-sign="escorpio">♏ Escorpio</div>
+        <div class="zodiac-btn" data-sign="sagitario">♐ Sagitario</div><div class="zodiac-btn" data-sign="capricornio">♑ Capricornio</div>
+        <div class="zodiac-btn" data-sign="acuario">♒ Acuario</div><div class="zodiac-btn" data-sign="piscis">♓ Piscis</div>
+      </div>
+      <!-- Horoscope display -->
+      <div class="horo-display" id="horoDisplay">
+        <div class="horo-sign-title" id="horoSignTitle"></div>
+        <div class="horo-date" id="horoDate"></div>
+        <div class="horo-text" id="horoText"></div>
+        <div class="horo-fact" id="horoFact" style="display:none">
+          <strong data-es="Dato cósmico del día" data-en="Cosmic fact of the day">Dato cósmico del día</strong>
+          <span id="horoFactText"></span>
+          <span id="horoFactSource" style="display:block;margin-top:6px;font-style:italic;font-size:11px"></span>
+        </div>
+        <div class="horo-cta">
+          <a href="https://carta.selenaura.com" data-es="Descubre tu carta astral completa →" data-en="Discover your full birth chart →">Descubre tu carta astral completa →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1061,6 +1086,66 @@ async function submitLectura(){
     showState('nlError');
   }
 }
+// ═══ HORÓSCOPO DIARIO ═══
+let horoData = null;
+
+document.querySelectorAll('.zodiac-btn').forEach(btn => {
+  btn.addEventListener('click', () => loadHoroscope(btn));
+});
+
+async function loadHoroscope(btn) {
+  const sign = btn.dataset.sign;
+  if (!sign) return;
+
+  // Active state
+  document.querySelectorAll('.zodiac-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Fetch JSON once, cache in memory
+  if (!horoData) {
+    try {
+      const resp = await fetch('/data/horoscope.json');
+      if (!resp.ok) throw new Error('No horoscope data');
+      horoData = await resp.json();
+    } catch(e) {
+      console.error('Horoscope fetch error:', e);
+      return;
+    }
+  }
+
+  // Map sign names (handle accents)
+  const signMap = {
+    'aries':'aries','tauro':'tauro','geminis':'geminis','cancer':'cancer',
+    'leo':'leo','virgo':'virgo','libra':'libra','escorpio':'escorpio',
+    'sagitario':'sagitario','capricornio':'capricornio','acuario':'acuario','piscis':'piscis'
+  };
+
+  const signKey = signMap[sign];
+  const reading = horoData.horoscopes?.[signKey];
+  if (!reading) return;
+
+  const signLabels = {
+    'aries':'♈ Aries','tauro':'♉ Tauro','geminis':'♊ Géminis','cancer':'♋ Cáncer',
+    'leo':'♌ Leo','virgo':'♍ Virgo','libra':'♎ Libra','escorpio':'♏ Escorpio',
+    'sagitario':'♐ Sagitario','capricornio':'♑ Capricornio','acuario':'♒ Acuario','piscis':'♓ Piscis'
+  };
+
+  document.getElementById('horoSignTitle').textContent = signLabels[sign];
+  document.getElementById('horoDate').textContent = horoData.date;
+  document.getElementById('horoText').textContent = reading;
+
+  // Cosmic fact
+  if (horoData.cosmicFact) {
+    document.getElementById('horoFactText').textContent = horoData.cosmicFact.text;
+    document.getElementById('horoFactSource').textContent = horoData.cosmicFact.source;
+    document.getElementById('horoFact').style.display = 'block';
+  }
+
+  const display = document.getElementById('horoDisplay');
+  display.classList.add('visible');
+  display.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
 </script>
 </body>
 </html>
