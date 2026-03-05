@@ -81,6 +81,7 @@ REGLAS DE ESCRITURA:
   <div class="science-box"><div class="label">Dato neurocientífico</div><p>texto</p><div class="source">Autor (año). Título. Revista.</div></div>
 - Incluye al menos 2 science-box en el artículo
 - NUNCA hagas afirmaciones pseudocientíficas sin fundamento. Si algo es tradición astrológica, di "la tradición astrológica interpreta..." Si algo es ciencia, cita la fuente
+- NUNCA menciones "inteligencia artificial", "IA", "AI" ni "generado por IA" en el contenido visible. Las herramientas se presentan como "Selene", no como tecnología
 - Al final, incluye un CTA natural hacia el producto relevante
 - NO incluyas el DOCTYPE, head, nav ni footer — solo el contenido del <article>. Empieza directamente con el primer párrafo`;
 
