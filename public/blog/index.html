@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Blog Selene · Astrología con base científica</title>
+<meta name="description" content="Artículos de astrología, tarot y desarrollo intuitivo respaldados por neurociencia, cronobiología y estudios peer-reviewed. El blog de Selene.">
+<meta property="og:title" content="Blog Selene · Astrología con base científica">
+<meta property="og:description" content="Artículos de astrología, tarot y desarrollo intuitivo respaldados por neurociencia y cronobiología.">
+<meta name="p:domain_verify" content="597160e7a6e46fe761d945c8de0f9b87"/>
+<!-- Pinterest Tag -->
+<script>
+!function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
+pintrk('load','2612436578863');
+pintrk('page');
+</script>
+<noscript><img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?event=init&tid=2612436578863&noscript=1" /></noscript>
+<!-- end Pinterest Tag -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0F;--card:rgba(255,255,255,.03);--border:rgba(255,255,255,.06);
+  --gold:#C9A84C;--gold-light:#E8D5A3;--gold-dim:rgba(201,168,76,.08);
+  --white:#F0EDE4;--white-dim:rgba(240,237,228,.85);--text-mid:rgba(240,237,228,.65);--text-dim:rgba(240,237,228,.4);
+  --teal:#4A6FA5;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--white);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* ═══ NAV ═══ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-brand{font-family:var(--serif);font-size:20px;letter-spacing:5px;color:var(--gold)}
+.nav-links{display:flex;gap:24px;font-size:13px;color:var(--text-mid)}
+.nav-links a:hover{color:var(--gold)}
+@media(max-width:600px){.nav-links{display:none}}
+
+/* ═══ HERO ═══ */
+.blog-hero{padding:140px 24px 60px;text-align:center;position:relative;overflow:hidden}
+.blog-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(201,168,76,.06),transparent 70%);pointer-events:none}
+.blog-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:500}
+.blog-hero h1{font-family:var(--serif);font-size:clamp(32px,5vw,52px);font-weight:300;line-height:1.2;margin-bottom:16px}
+.blog-hero h1 em{font-style:italic;color:var(--gold-light)}
+.blog-hero p{font-size:15px;color:var(--text-mid);max-width:540px;margin:0 auto}
+
+/* ═══ ARTICLES GRID ═══ */
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+.articles-grid{display:grid;gap:28px;padding-bottom:80px}
+
+.article-card{
+  display:block;border:1px solid var(--border);border-radius:20px;padding:36px 32px;
+  background:var(--card);transition:all .4s;position:relative;overflow:hidden;
+}
+.article-card::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 200px 150px at 20% 30%,rgba(201,168,76,.04),transparent);
+  opacity:0;transition:opacity .4s;
+}
+.article-card:hover{border-color:rgba(201,168,76,.15);transform:translateY(-3px)}
+.article-card:hover::before{opacity:1}
+
+.card-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:12px;font-weight:500}
+.card-date{font-size:11px;color:var(--text-dim);margin-bottom:14px}
+.card-title{font-family:var(--serif);font-size:24px;font-weight:400;line-height:1.3;margin-bottom:12px;position:relative}
+.card-excerpt{font-size:14px;color:var(--text-mid);line-height:1.8;margin-bottom:20px}
+.card-cta{font-size:12px;color:var(--gold);font-weight:500;letter-spacing:1px;display:inline-flex;align-items:center;gap:6px}
+.card-cta::after{content:'→';transition:transform .3s}
+.article-card:hover .card-cta::after{transform:translateX(4px)}
+
+/* Featured card */
+.article-card.featured{border-color:rgba(201,168,76,.12);background:rgba(201,168,76,.02)}
+.article-card.featured .card-tag{color:var(--gold)}
+
+/* ═══ CTA SECTION ═══ */
+.blog-cta{text-align:center;padding:60px 24px 80px;border-top:1px solid var(--border)}
+.blog-cta h3{font-family:var(--serif);font-size:24px;font-weight:300;margin-bottom:12px}
+.blog-cta p{font-size:13px;color:var(--text-mid);margin-bottom:24px}
+.btn-gold{display:inline-block;padding:14px 32px;background:var(--gold-dim);color:var(--gold);border-radius:28px;font-size:13px;font-weight:500;transition:all .3s;border:1px solid rgba(201,168,76,.15)}
+.btn-gold:hover{background:var(--gold);color:var(--bg)}
+
+/* ═══ FOOTER ═══ */
+footer{padding:40px 24px 28px;text-align:center;border-top:1px solid var(--border)}
+.footer-brand{font-family:var(--serif);font-size:20px;color:var(--gold);letter-spacing:4px;margin-bottom:6px}
+.footer-tagline{font-family:var(--serif);font-size:11px;font-style:italic;color:var(--text-dim);margin-bottom:20px}
+.footer-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:16px}
+.footer-links a{font-size:11px;color:var(--text-dim);transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-legal{font-size:10px;color:var(--text-dim)}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;animation:fadeUp .6s ease forwards}
+.stagger-1{animation-delay:.1s}.stagger-2{animation-delay:.2s}.stagger-3{animation-delay:.3s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-brand">SELENE</a>
+  <div class="nav-links">
+    <a href="/">Inicio</a>
+    <a href="/blog/" style="color:var(--gold)">Blog</a>
+    <a href="https://carta.selenaura.com">Carta Astral</a>
+    <a href="https://tarot.selenaura.com">Tarot</a>
+    <a href="https://quiro.selenaura.com">Quirología</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="blog-hero">
+  <div class="blog-tag">El observatorio de Selene</div>
+  <h1>Ciencia y consciencia<br>de lo <em>invisible</em></h1>
+  <p>Astrología, tarot y desarrollo intuitivo respaldados por neurociencia, cronobiología y estudios peer-reviewed.</p>
+</header>
+
+<!-- ARTICLES -->
+<main class="container">
+  <div class="articles-grid">
+
+    <!-- ARTICLE 1 — FEATURED -->
+    <a href="/blog/mercurio-retrogrado-2026.html" class="article-card featured reveal stagger-1">
+      <div class="card-tag">✦ Destacado · Tránsitos 2026</div>
+      <div class="card-date">5 marzo 2026</div>
+      <h2 class="card-title">Mercurio Retrógrado 2026: fechas, significado real y cómo aprovecharlo según la neurociencia</h2>
+      <p class="card-excerpt">Mercurio retrógrado no es lo que crees. Tres períodos en 2026 (Piscis, Cáncer, Escorpio) y lo que la psicología cognitiva y la cronobiología dicen sobre por qué parece que todo falla. Guía completa con fechas exactas y estrategias basadas en evidencia.</p>
+      <span class="card-cta">Leer artículo</span>
+    </a>
+
+    <!-- PLACEHOLDER — próximos artículos -->
+    <!--
+    <a href="/blog/que-es-carta-astral.html" class="article-card reveal stagger-2">
+      <div class="card-tag">Guía esencial</div>
+      <div class="card-date">Próximamente</div>
+      <h2 class="card-title">Qué es una carta astral y para qué sirve: guía científica completa</h2>
+      <p class="card-excerpt">Tu carta natal es un mapa del cielo en el momento exacto de tu nacimiento. Descubre qué mide realmente, qué dice la cronobiología sobre nacer en diferentes estaciones, y cómo interpretar sol, luna y ascendente.</p>
+      <span class="card-cta">Leer artículo</span>
+    </a>
+
+    <a href="/blog/quiromancia-lectura-manos-online.html" class="article-card reveal stagger-3">
+      <div class="card-tag">Quirología</div>
+      <div class="card-date">Próximamente</div>
+      <h2 class="card-title">Quiromancia online: lectura de manos con inteligencia artificial</h2>
+      <p class="card-excerpt">La quirología combina observación centenaria con dermatoglifia moderna. Descubre qué revelan las líneas de tu mano y prueba la primera lectura quirológica con IA en español.</p>
+      <span class="card-cta">Leer artículo</span>
+    </a>
+    -->
+
+  </div>
+</main>
+
+<!-- CTA -->
+<section class="blog-cta">
+  <h3>¿Quieres tu lectura personalizada?</h3>
+  <p>Recibe una lectura cósmica express gratuita generada por Selene, basada en tu fecha de nacimiento.</p>
+  <a href="/#lectura-express" class="btn-gold">Descubrir mi lectura ✦</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">SELENE</div>
+  <div class="footer-tagline">Ciencia y consciencia de lo invisible</div>
+  <div class="footer-links">
+    <a href="/">Inicio</a>
+    <a href="/blog/">Blog</a>
+    <a href="/aviso-legal.html">Aviso Legal</a>
+    <a href="/privacidad.html">Privacidad</a>
+    <a href="/cookies.html">Cookies</a>
+  </div>
+  <div class="footer-legal">© 2026 Selene. Todos los derechos reservados.</div>
+</footer>
+
+</body>
+</html>
