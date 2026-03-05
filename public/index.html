@@ -143,6 +143,10 @@ nav{
   display:flex;align-items:center;justify-content:space-between;
 }
 .nav-brand{font-family:var(--serif);font-size:20px;font-weight:400;letter-spacing:4px;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:24px;font-size:13px;font-weight:300;color:var(--text-mid)}
+.nav-links a{color:var(--text-mid);transition:color .3s;text-decoration:none}
+.nav-links a:hover{color:var(--gold)}
+@media(max-width:768px){.nav-links{display:none}}
 .nav-right{display:flex;align-items:center;gap:12px}
 
 .lang-toggle{
@@ -540,6 +544,12 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-brand">S E L E N E</a>
+    <div class="nav-links">
+      <a href="https://carta.selenaura.com" data-es="Carta Astral" data-en="Birth Chart">Carta Astral</a>
+      <a href="https://tarot.selenaura.com">Tarot</a>
+      <a href="https://quiro.selenaura.com" data-es="Quirología" data-en="Palmistry">Quirología</a>
+      <a href="/blog/">Blog</a>
+    </div>
     <div class="nav-right">
       <div class="lang-toggle">
         <span class="lang-option active" data-lang="es" onclick="setLang('es')">ES</span>
