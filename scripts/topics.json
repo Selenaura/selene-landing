@@ -1,0 +1,227 @@
+{
+  "config": {
+    "articlesPerWeek": 2,
+    "model": "claude-sonnet-4-5-20250929",
+    "maxTokens": 4000,
+    "language": "es"
+  },
+  "topics": [
+    {
+      "slug": "mercurio-retrogrado-2026",
+      "title": "Mercurio Retrógrado 2026: fechas, significado real y cómo aprovecharlo según la neurociencia",
+      "keywords": "mercurio retrógrado 2026, mercurio retrógrado fechas, mercurio retrógrado piscis",
+      "focus": "Fechas exactas de los 3 períodos, explicación astronómica vs astrológica, sesgo de confirmación, cronobiología estacional, 5 estrategias basadas en evidencia",
+      "cta": "carta-astral",
+      "category": "Tránsitos 2026",
+      "status": "published",
+      "publishedAt": "2026-03-05"
+    },
+    {
+      "slug": "que-es-carta-astral",
+      "title": "Qué es una carta astral y para qué sirve: guía científica completa",
+      "keywords": "qué es carta astral, carta natal, carta astral significado, carta astral gratis",
+      "focus": "Definición clara, los 3 componentes clave (sol/luna/ascendente), qué mide realmente, estudios de cronobiología sobre estacionalidad del nacimiento (Kanekar 2015), cómo se calcula, diferencia entre astrología pop y carta completa",
+      "cta": "carta-astral",
+      "category": "Guía esencial",
+      "status": "pending"
+    },
+    {
+      "slug": "ascendente-que-es-como-calcularlo",
+      "title": "Ascendente en astrología: qué es, cómo calcularlo y por qué importa más que tu signo solar",
+      "keywords": "ascendente astrología, cómo calcular ascendente, qué es ascendente zodiacal",
+      "focus": "El ascendente como máscara social, por qué necesitas hora exacta de nacimiento, correlaciones con cronobiología circadiana (nacimiento mañana vs noche), cada ascendente explicado brevemente",
+      "cta": "carta-astral",
+      "category": "Guía esencial",
+      "status": "pending"
+    },
+    {
+      "slug": "luna-en-los-signos-significado",
+      "title": "La Luna en tu carta natal: significado en cada signo y lo que dice la ciencia sobre las emociones",
+      "keywords": "luna en carta natal, luna en aries, luna en tauro, luna signos significado",
+      "focus": "Luna como mapa emocional, luna en cada signo (breve), estudios sobre ciclos lunares y sueño (Cajochen 2013 Current Biology), regulación emocional y neurociencia afectiva",
+      "cta": "carta-astral",
+      "category": "Guía esencial",
+      "status": "pending"
+    },
+    {
+      "slug": "compatibilidad-signos-zodiacales",
+      "title": "Compatibilidad entre signos: lo que dice la astrología y lo que dice la psicología de parejas",
+      "keywords": "compatibilidad signos, signos compatibles, compatibilidad zodiacal pareja",
+      "focus": "Elementos y modalidades en compatibilidad, las combinaciones clásicas, estudios de Gottman sobre predictores reales de éxito en parejas, teoría del apego vs elementos zodiacales, herramienta de compatibilidad IA",
+      "cta": "compatibilidad",
+      "category": "Relaciones",
+      "status": "pending"
+    },
+    {
+      "slug": "quiromancia-lectura-manos-online",
+      "title": "Quiromancia online: lectura de manos con inteligencia artificial",
+      "keywords": "quiromancia, lectura de manos, líneas de la mano significado, quiromancia online",
+      "focus": "Historia de la quiromancia, dermatoglifia moderna (ciencia de las huellas y líneas), las 4 líneas principales, qué dice la investigación sobre líneas palmares y salud (Kücken & Newell 2005), primera lectura quirológica con IA en español",
+      "cta": "quirologia",
+      "category": "Quirología",
+      "status": "pending"
+    },
+    {
+      "slug": "tarot-arcanos-mayores-significado",
+      "title": "Los 22 Arcanos Mayores del Tarot: significado completo y arquetipos de Jung",
+      "keywords": "arcanos mayores significado, tarot significado cartas, 22 arcanos mayores",
+      "focus": "Cada arcano como arquetipo junguiano, breve significado de los 22, Jung y la sincronicidad, el tarot como herramienta proyectiva (similar a test de Rorschach), estudios sobre intuición y toma de decisiones",
+      "cta": "tarot",
+      "category": "Tarot",
+      "status": "pending"
+    },
+    {
+      "slug": "eclipse-solar-2026",
+      "title": "Eclipse solar 2026: fechas, significado astrológico y efectos documentados en el comportamiento humano",
+      "keywords": "eclipse solar 2026, eclipse agosto 2026, eclipse solar españa",
+      "focus": "Eclipse solar total 12 agosto 2026 visible desde España, datos astronómicos, tradición astrológica de eclipses, estudios sobre comportamiento humano durante eclipses, efectos en animales documentados",
+      "cta": "carta-astral",
+      "category": "Eventos cósmicos",
+      "status": "pending"
+    },
+    {
+      "slug": "luna-llena-significado-efectos",
+      "title": "Luna llena: significado, efectos reales en el cuerpo y rituales con base científica",
+      "keywords": "luna llena significado, luna llena efectos, ritual luna llena, luna llena y sueño",
+      "focus": "Ciclo lunar de 29.5 días, estudio Cajochen 2013 (sueño y luna llena), estudio Röösli 2006 (no efecto en urgencias), melatonina y luminancia lunar, rituales de reflexión como práctica de mindfulness",
+      "cta": "lectura-express",
+      "category": "Ciclos lunares",
+      "status": "pending"
+    },
+    {
+      "slug": "linea-del-corazon-mano",
+      "title": "La línea del corazón en la mano: qué significa y qué dice la dermatoglifia",
+      "keywords": "línea del corazón mano, líneas de la mano amor, quiromancia línea corazón",
+      "focus": "Ubicación y variaciones de la línea del corazón, interpretación tradicional, estudios de dermatoglifia sobre surcos palmares transversales, relación con desarrollo prenatal, lectura con IA",
+      "cta": "quirologia",
+      "category": "Quirología",
+      "status": "pending"
+    },
+    {
+      "slug": "signos-de-fuego-caracteristicas",
+      "title": "Signos de fuego (Aries, Leo, Sagitario): características y lo que dice la cronobiología estacional",
+      "keywords": "signos de fuego, aries leo sagitario, características signos fuego",
+      "focus": "Rasgos compartidos del elemento fuego, cada signo brevemente, estudios sobre estacionalidad del nacimiento y rasgos de personalidad (Chotai 2000, Disanto 2012), por qué nacer en primavera-verano correlaciona con ciertos temperamentos",
+      "cta": "carta-astral",
+      "category": "Elementos",
+      "status": "pending"
+    },
+    {
+      "slug": "signos-de-agua-caracteristicas",
+      "title": "Signos de agua (Cáncer, Escorpio, Piscis): emociones, intuición y neurociencia empática",
+      "keywords": "signos de agua, cáncer escorpio piscis, características signos agua",
+      "focus": "Rasgos del elemento agua, empatía y neuronas espejo (Rizzolatti), inteligencia emocional (Goleman), regulación emocional y corteza prefrontal, por qué la tradición asocia agua con intuición",
+      "cta": "carta-astral",
+      "category": "Elementos",
+      "status": "pending"
+    },
+    {
+      "slug": "signos-de-tierra-caracteristicas",
+      "title": "Signos de tierra (Tauro, Virgo, Capricornio): estabilidad, cuerpo y neurociencia somática",
+      "keywords": "signos de tierra, tauro virgo capricornio, características signos tierra",
+      "focus": "Rasgos del elemento tierra, interocepción y consciencia corporal (Craig 2002), mindfulness somático, por qué la estabilidad emocional correlaciona con regulación autonómica, grounding como práctica neurocientífica",
+      "cta": "carta-astral",
+      "category": "Elementos",
+      "status": "pending"
+    },
+    {
+      "slug": "signos-de-aire-caracteristicas",
+      "title": "Signos de aire (Géminis, Libra, Acuario): comunicación, pensamiento y plasticidad neuronal",
+      "keywords": "signos de aire, géminis libra acuario, características signos aire",
+      "focus": "Rasgos del elemento aire, pensamiento divergente y corteza asociativa, plasticidad neuronal (Draganski 2004), bilingüismo y flexibilidad cognitiva, por qué la tradición asocia aire con intelecto",
+      "cta": "carta-astral",
+      "category": "Elementos",
+      "status": "pending"
+    },
+    {
+      "slug": "tirada-tarot-gratis-online",
+      "title": "Tirada de tarot gratis online: cómo funciona y por qué el tarot con IA puede sorprenderte",
+      "keywords": "tirada tarot gratis, tarot online gratis, tarot gratis 2026",
+      "focus": "Cómo funciona una tirada online, aleatorización vs intuición, el tarot como herramienta de reflexión (no predicción), sesgo de Barnum y por qué las lecturas resuenan, IA y generación de lecturas personalizadas",
+      "cta": "tarot",
+      "category": "Tarot",
+      "status": "pending"
+    },
+    {
+      "slug": "meditacion-y-astrologia",
+      "title": "Meditación y astrología: cómo usar tu carta natal para elegir tu práctica ideal",
+      "keywords": "meditación astrología, meditación según signo, mindfulness astrología",
+      "focus": "Estudios de HeartMath sobre coherencia cardíaca, meditación y corteza prefrontal (Davidson 2003), tipos de meditación por elemento zodiacal (fuego=movimiento, agua=visualización, tierra=body scan, aire=respiración), práctica personalizada",
+      "cta": "carta-astral",
+      "category": "Bienestar",
+      "status": "pending"
+    },
+    {
+      "slug": "saturno-retorno-significado",
+      "title": "Retorno de Saturno: qué es, cuándo ocurre y por qué la crisis de los 29 tiene base psicológica",
+      "keywords": "retorno de saturno, saturno return, crisis de los 29, saturno astrología",
+      "focus": "Ciclo de Saturno (29.5 años), coincidencia con transición neurológica adulta (corteza prefrontal madura ~25-30), Erik Erikson y las etapas psicosociales, crisis de identidad en la transición 20s-30s, cómo usarlo como herramienta de autoconocimiento",
+      "cta": "carta-astral",
+      "category": "Tránsitos",
+      "status": "pending"
+    },
+    {
+      "slug": "casas-astrologicas-significado",
+      "title": "Las 12 casas astrológicas: qué significan y cómo leer tu carta natal",
+      "keywords": "casas astrológicas, 12 casas astrología, casas carta natal significado",
+      "focus": "Cada casa brevemente, sistema de casas Placidus, las casas como áreas de vida (no predicción), correlación con ciclos circadianos (casas como horas del día), cómo interpretar planetas en casas",
+      "cta": "carta-astral",
+      "category": "Guía esencial",
+      "status": "pending"
+    },
+    {
+      "slug": "solsticio-verano-2026",
+      "title": "Solsticio de verano 2026: significado astronómico, astrológico y rituales con evidencia",
+      "keywords": "solsticio verano 2026, solsticio junio 2026, ritual solsticio verano",
+      "focus": "Datos astronómicos del solsticio, cronobiología de máxima exposición solar, serotonina y vitamina D, tradiciones solsticiales, rituales de intención como práctica de psicología positiva (Seligman)",
+      "cta": "lectura-express",
+      "category": "Eventos cósmicos",
+      "status": "pending"
+    },
+    {
+      "slug": "intuicion-que-es-neurociencia",
+      "title": "Intuición: qué es realmente según la neurociencia y cómo desarrollarla",
+      "keywords": "intuición neurociencia, qué es la intuición, desarrollar intuición, sexto sentido ciencia",
+      "focus": "Definición neurocientífica de intuición (procesamiento implícito), estudio Bechara/Damasio Iowa Gambling Task, marcadores somáticos, gut feeling como información interoceptiva, entrenamiento de la intuición basado en evidencia",
+      "cta": "lectura-express",
+      "category": "Neurociencia",
+      "status": "pending"
+    },
+    {
+      "slug": "horoscopo-diario-funciona",
+      "title": "¿Funciona el horóscopo diario? Lo que dice la psicología sobre por qué lo leemos",
+      "keywords": "horóscopo diario, horóscopo funciona, por qué leemos horóscopo, efecto barnum",
+      "focus": "Efecto Barnum/Forer (1949), necesidad humana de sentido (Frankl), ilusión de control, por qué el horóscopo puede ser útil como herramienta de reflexión sin ser literalmente predictivo, cómo Selene genera horóscopos con IA",
+      "cta": "horoscopo",
+      "category": "Astrología",
+      "status": "pending"
+    },
+    {
+      "slug": "mano-izquierda-derecha-quiromancia",
+      "title": "Mano izquierda o derecha en quiromancia: cuál leer y por qué",
+      "keywords": "mano izquierda quiromancia, mano derecha quiromancia, qué mano leer quiromancia",
+      "focus": "Tradición de mano dominante vs no dominante, lateralidad cerebral (Geschwind & Galaburda), diferencias entre líneas palmares en ambas manos, dermatoglifia y desarrollo embrionario, lectura con IA de ambas manos",
+      "cta": "quirologia",
+      "category": "Quirología",
+      "status": "pending"
+    },
+    {
+      "slug": "neptuno-en-aries-2026",
+      "title": "Neptuno en Aries 2025-2039: el tránsito generacional que cambiará la espiritualidad",
+      "keywords": "neptuno en aries, neptuno aries 2025, tránsitos generacionales 2026",
+      "focus": "Ciclo de Neptuno (165 años), salida de Piscis tras 14 años, qué significó Neptuno en Piscis (2012-2025), predicción astrológica para Aries, correlación histórica con ciclos culturales, espiritualidad activa vs contemplativa",
+      "cta": "carta-astral",
+      "category": "Tránsitos 2026",
+      "status": "pending"
+    },
+    {
+      "slug": "eclipse-lunar-2026-fechas",
+      "title": "Eclipses lunares 2026: fechas, signos y cómo prepararte",
+      "keywords": "eclipse lunar 2026, eclipses 2026, eclipse lunar virgo, eclipse lunar piscis",
+      "focus": "Fechas de eclipses lunares 2026, mecánica astronómica, eje Virgo-Piscis, tradición astrológica de eclipses como puntos de inflexión, estudios sobre luna llena y sueño aplicados a eclipses, rituales de cierre",
+      "cta": "carta-astral",
+      "category": "Eventos cósmicos",
+      "status": "pending"
+    }
+  ]
+}
