@@ -23,7 +23,8 @@
       "focus": "Definición clara, los 3 componentes clave (sol/luna/ascendente), qué mide realmente, estudios de cronobiología sobre estacionalidad del nacimiento (Kanekar 2015), cómo se calcula, diferencia entre astrología pop y carta completa",
       "cta": "carta-astral",
       "category": "Guía esencial",
-      "status": "pending"
+      "status": "published",
+      "publishedAt": "2026-03-05"
     },
     {
       "slug": "ascendente-que-es-como-calcularlo",
