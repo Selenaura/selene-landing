@@ -6,7 +6,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="google-site-verification" content="vDNw7wez4SCnT41XvCEkyoJAz5-zFff4THJB7nLk9_4" />
 <title>Selene · Ciencia y consciencia de lo invisible</title>
-<meta name="description" content="Academia de desarrollo intuitivo con base científica. Carta astral, tarot, quirología y horóscopo personalizado.">
+<meta name="description" content="Academia de desarrollo intuitivo con base científica. Carta astral, tarot, quirología, sueños y horóscopo personalizado.">
     <meta name="p:domain_verify" content="597160e7a6e46fe761d945c8de0f9b87"/>
 <!-- Pinterest Tag -->
 <script>
@@ -214,6 +214,7 @@ nav{
 .nd-item-astral .nd-icon{background:var(--blue-dim);color:var(--blue-light)}
 .nd-item-quiro .nd-icon{background:var(--rose-dim);color:var(--rose)}
 .nd-item-horo .nd-icon{background:var(--gold-dim);color:var(--gold)}
+.nd-item-suenos .nd-icon{background:var(--blue-dim);color:var(--blue-light)}
 .nd-item-academia .nd-icon{background:rgba(90,184,166,.1);color:var(--teal)}
 
 .nd-flourish{
@@ -310,6 +311,9 @@ section{padding:90px 0}
 .card-quiro .accent-line{background:linear-gradient(90deg,var(--rose),var(--gold))}
 .card-quiro .product-icon{background:var(--rose-dim);color:var(--rose)}
 .card-quiro .product-price{color:var(--rose)}
+.card-suenos .accent-line{background:linear-gradient(90deg,var(--blue),var(--violet))}
+.card-suenos .product-icon{background:var(--blue-dim);color:var(--blue-light)}
+.card-suenos .product-price{color:var(--blue-light)}
 .card-horoscopo .accent-line{background:linear-gradient(90deg,var(--gold),var(--teal))}
 .card-horoscopo .product-icon{background:var(--gold-dim);color:var(--gold)}
 .card-horoscopo .product-price{color:var(--teal)}
@@ -548,6 +552,7 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
       <a href="https://carta.selenaura.com" data-es="Carta Astral" data-en="Birth Chart">Carta Astral</a>
       <a href="https://tarot.selenaura.com">Tarot</a>
       <a href="https://quiro.selenaura.com" data-es="Quirología" data-en="Palmistry">Quirología</a>
+      <a href="https://suenos.selenaura.com" data-es="Sueños" data-en="Dreams">Sueños</a>
       <a href="/blog/">Blog</a>
     </div>
     <div class="nav-right">
@@ -581,6 +586,11 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
       <a href="https://quiro.selenaura.com" class="nd-item nd-item-quiro" onclick="toggleMenu()">
         <div class="nd-icon">✋</div>
         <div class="nd-info"><div class="nd-name" data-es="Quirología" data-en="Palmistry">Quirología</div><div class="nd-desc" data-es="Lectura personalizada de tu palma" data-en="Personalized palm reading">Lectura personalizada de tu palma</div></div>
+        <div class="nd-price" data-es="Gratis" data-en="Free">Gratis</div>
+      </a>
+      <a href="https://suenos.selenaura.com" class="nd-item nd-item-suenos" onclick="toggleMenu()">
+        <div class="nd-icon">☾</div>
+        <div class="nd-info"><div class="nd-name" data-es="Sueños" data-en="Dreams">Sueños</div><div class="nd-desc" data-es="Interpretación onírica · Neurociencia" data-en="Dream interpretation · Neuroscience">Interpretación onírica · Neurociencia</div></div>
         <div class="nd-price" data-es="Gratis" data-en="Free">Gratis</div>
       </a>
       <a href="#horoscopo-section" class="nd-item nd-item-horo" onclick="toggleMenu()">
@@ -625,7 +635,7 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
         <a href="#productos" class="btn-gold" data-es="Explorar consultas" data-en="Explore readings">Explorar consultas</a>
         <a href="https://tarot.selenaura.com" class="btn-outline" data-es="Tirada de tarot gratis →" data-en="Free tarot reading →">Tirada de tarot gratis →</a>
       </div>
-      <p class="hero-note" data-es="4 experiencias únicas · Base científica · Sin compromiso" data-en="4 unique experiences · Science-based · No commitment">4 experiencias únicas · Base científica · Sin compromiso</p>
+      <p class="hero-note" data-es="5 experiencias únicas · Base científica · Sin compromiso" data-en="5 unique experiences · Science-based · No commitment">5 experiencias únicas · Base científica · Sin compromiso</p>
     </div>
   </section>
 
@@ -656,7 +666,7 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
     <div class="container">
       <div class="section-tag" data-es="Consultas cósmicas" data-en="Cosmic readings">Consultas cósmicas</div>
       <h2 class="section-title" data-es="Tu universo de experiencias" data-en="Your universe of experiences">Tu universo de experiencias</h2>
-      <p class="section-sub" data-es="Cuatro portales de autoconocimiento, cada uno con su propia magia. Elige el que resuene contigo." data-en="Four portals of self-knowledge, each with its own magic. Choose the one that resonates with you.">Cuatro portales de autoconocimiento, cada uno con su propia magia. Elige el que resuene contigo.</p>
+      <p class="section-sub" data-es="Cinco portales de autoconocimiento, cada uno con su propia magia. Elige el que resuene contigo." data-en="Five portals of self-knowledge, each with its own magic. Choose the one that resonates with you.">Cinco portales de autoconocimiento, cada uno con su propia magia. Elige el que resuene contigo.</p>
       <div class="products-grid">
         <a href="https://tarot.selenaura.com" class="product-card card-tarot fk-frame fk-card-glow reveal">
           <div class="accent-line"></div>
@@ -679,7 +689,14 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
           <div class="product-desc" data-es="Análisis dermatoglífico de tu palma. 6 líneas, 7 montes planetarios, forma de mano y marcas especiales. Basado en los textos clásicos de Cheiro (1916) y Benham." data-en="Dermatoglyphic analysis of your palm. 6 lines, 7 planetary mounts, hand shape and special marks. Based on classic texts by Cheiro (1916) and Benham.">Análisis dermatoglífico de tu palma. 6 líneas, 7 montes planetarios, forma de mano y marcas especiales. Basado en los textos clásicos de Cheiro (1916) y Benham.</div>
           <div class="product-footer"><span class="product-price" data-es="Gratis — 2,49 €" data-en="Free — €2.49">Gratis — 2,49 €</span><span class="product-cta" data-es="Analizar mi mano →" data-en="Analyze my palm →">Analizar mi mano →</span></div>
         </a>
-        <a href="#horoscopo-section" class="product-card card-horoscopo fk-frame fk-card-glow reveal stagger-3">
+        <a href="https://suenos.selenaura.com" class="product-card card-suenos fk-frame fk-card-glow reveal stagger-3">
+          <div class="accent-line"></div>
+          <div class="product-row-top"><div class="product-icon">☾</div><span class="product-badge new">✦ Nuevo</span></div>
+          <div class="product-name" data-es="Sueños" data-en="Dreams">Sueños</div>
+          <div class="product-desc" data-es="Interpretación onírica con neurociencia del sueño (Walker, Revonsuo, Schredl) y simbolismo jungiano. Descubre qué te dicen tus sueños con base científica real." data-en="Dream interpretation with sleep neuroscience (Walker, Revonsuo, Schredl) and Jungian symbolism. Discover what your dreams tell you with real scientific backing.">Interpretación onírica con neurociencia del sueño (Walker, Revonsuo, Schredl) y simbolismo jungiano. Descubre qué te dicen tus sueños con base científica real.</div>
+          <div class="product-footer"><span class="product-price" data-es="Gratis — 1,99 €" data-en="Free — €1.99">Gratis — 1,99 €</span><span class="product-cta" data-es="Interpretar mi sueño →" data-en="Interpret my dream →">Interpretar mi sueño →</span></div>
+        </a>
+        <a href="#horoscopo-section" class="product-card card-horoscopo fk-frame fk-card-glow reveal stagger-4">
           <div class="accent-line"></div>
           <div class="product-row-top"><div class="product-icon">⭐</div><span class="product-badge free" data-es="Gratis" data-en="Free">Gratis</span></div>
           <div class="product-name" data-es="Horóscopo Diario" data-en="Daily Horoscope">Horóscopo Diario</div>
@@ -771,7 +788,6 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
         <div class="zodiac-btn" data-sign="sagitario">♐ Sagitario</div><div class="zodiac-btn" data-sign="capricornio">♑ Capricornio</div>
         <div class="zodiac-btn" data-sign="acuario">♒ Acuario</div><div class="zodiac-btn" data-sign="piscis">♓ Piscis</div>
       </div>
-      <!-- Horoscope display -->
       <div class="horo-display" id="horoDisplay">
         <div class="horo-sign-title" id="horoSignTitle"></div>
         <div class="horo-date" id="horoDate"></div>
@@ -806,7 +822,6 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
         <span class="fk-corner-tr"></span>
         <span class="fk-corner-bl"></span>
 
-        <!-- ── FORM STATE ── -->
         <div id="nlFormWrap">
           <span class="nl-icon">✨</span>
           <h3 class="nl-title" data-es="Tu lectura cósmica<br><em>express</em>" data-en="Your express<br>cosmic <em>reading</em>">Tu lectura cósmica<br><em>express</em></h3>
@@ -825,7 +840,6 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
           <div class="nl-legal" data-es="Responsable: Selene — selenaura.com (info@selenaura.com). Finalidad: generación y envío de lectura astrológica personalizada y contenido relacionado. Base legal: consentimiento del interesado (Art. 6.1.a RGPD). Destinatarios: MailerLite (UE), Anthropic (procesamiento IA). Derechos: acceso, rectificación, supresión, portabilidad y oposición escribiendo a info@selenaura.com." data-en="Controller: Selene — selenaura.com (info@selenaura.com). Purpose: generation and delivery of personalized astrological reading and related content. Legal basis: consent (Art. 6.1.a GDPR). Recipients: MailerLite (EU), Anthropic (AI processing). Rights: access, rectification, erasure, portability and objection by writing to info@selenaura.com.">Responsable: Selene — selenaura.com (info@selenaura.com). Finalidad: generación y envío de lectura astrológica personalizada y contenido relacionado. Base legal: consentimiento del interesado (Art. 6.1.a RGPD). Destinatarios: MailerLite (UE), Anthropic (procesamiento IA). Derechos: acceso, rectificación, supresión, portabilidad y oposición escribiendo a info@selenaura.com.</div>
         </div>
 
-        <!-- ── LOADING STATE ── -->
         <div class="nl-loading" id="nlLoading">
           <div class="nl-loading-orb">
             <div class="nl-loading-ring"></div>
@@ -835,7 +849,6 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
           <p class="nl-loading-sub" data-es="Calculando posiciones planetarias de tu nacimiento" data-en="Calculating planetary positions from your birth">Calculando posiciones planetarias de tu nacimiento</p>
         </div>
 
-        <!-- ── RESULT STATE ── -->
         <div class="nl-result" id="nlResult">
           <span class="nl-result-badge" data-es="✦ Tu Lectura Cósmica Express" data-en="✦ Your Express Cosmic Reading">✦ Tu Lectura Cósmica Express</span>
           <div class="nl-result-sign" id="nlResultSign"></div>
@@ -847,7 +860,6 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
           <p class="nl-result-email-note" data-es="📩 Hemos enviado esta lectura a tu email. Confirma tu suscripción para recibir contenido personalizado." data-en="📩 We've sent this reading to your email. Confirm your subscription for personalized content.">📩 Hemos enviado esta lectura a tu email. Confirma tu suscripción para recibir contenido personalizado.</p>
         </div>
 
-        <!-- ── ERROR STATE ── -->
         <div class="nl-error" id="nlError">
           <span style="font-size:32px;display:block;margin-bottom:12px">⚡</span>
           <p style="font-family:var(--serif);font-size:18px;color:var(--gold-light);margin-bottom:8px" data-es="Los astros están ocupados" data-en="The stars are busy">Los astros están ocupados</p>
@@ -889,6 +901,7 @@ input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7)
       <a href="https://carta.selenaura.com" data-es="Carta Astral" data-en="Birth Chart">Carta Astral</a>
       <a href="https://tarot.selenaura.com">Tarot</a>
       <a href="https://quiro.selenaura.com" data-es="Quirología" data-en="Palmistry">Quirología</a>
+      <a href="https://suenos.selenaura.com" data-es="Sueños" data-en="Dreams">Sueños</a>
       <a href="https://academia.selenaura.com">Academia</a>
       <a href="https://www.instagram.com/selenaura" target="_blank">Instagram</a>
       <a href="mailto:info@selenaura.com" data-es="Contacto" data-en="Contact">Contacto</a>
@@ -941,7 +954,7 @@ document.querySelectorAll('a[href^="http"]').forEach(function(a){
 });
 
 // ═══ SUBDOMAIN LINKS → NEW TAB ═══
-document.querySelectorAll('a[href*="carta.selenaura"],a[href*="tarot.selenaura"],a[href*="quiro.selenaura"],a[href*="academia.selenaura"]').forEach(function(a){
+document.querySelectorAll('a[href*="carta.selenaura"],a[href*="tarot.selenaura"],a[href*="quiro.selenaura"],a[href*="suenos.selenaura"],a[href*="academia.selenaura"]').forEach(function(a){
   a.setAttribute('target','_blank');
   a.setAttribute('rel','noopener');
 });
@@ -982,7 +995,6 @@ function acceptCookies(){
 
 // ═══ LECTURA CÓSMICA EXPRESS ═══
 
-// Zodiac sign from date
 function getZodiacSign(dateStr){
   var d=new Date(dateStr+'T12:00:00');
   var day=d.getDate(), month=d.getMonth()+1;
@@ -1011,7 +1023,6 @@ function getZodiacSign(dateStr){
   return signs[0];
 }
 
-// Form validation
 (function(){
   var email=document.getElementById('nlEmail');
   var birth=document.getElementById('nlBirth');
@@ -1019,7 +1030,6 @@ function getZodiacSign(dateStr){
   var submit=document.getElementById('nlSubmit');
   if(!email||!birth||!consent||!submit)return;
 
-  // Mark date as has-value when filled
   birth.addEventListener('change',function(){
     this.classList.toggle('has-value',!!this.value);
     checkValid();
@@ -1033,7 +1043,6 @@ function getZodiacSign(dateStr){
   consent.addEventListener('change',checkValid);
 })();
 
-// State transitions
 function showState(stateId){
   ['nlFormWrap','nlLoading','nlResult','nlError'].forEach(function(id){
     var el=document.getElementById(id);
@@ -1051,7 +1060,6 @@ function resetLectura(){
   submit.disabled=false;
 }
 
-// Main submit
 async function submitLectura(){
   var email=document.getElementById('nlEmail').value.trim();
   var birthDate=document.getElementById('nlBirth').value;
@@ -1061,22 +1069,9 @@ async function submitLectura(){
   var lang=document.documentElement.lang||'es';
   var sign=getZodiacSign(birthDate);
 
-  // Show loading
   showState('nlLoading');
 
   try{
-    /*
-     * ═══ LECTURA EXPRESS API ═══
-     * Este endpoint se despliega en selenaura.com como Vercel Serverless Function.
-     * Ruta: /api/lectura-express
-     * Recibe: { email, birthDate, sign, lang }
-     * Devuelve: { reading, signName, signSymbol }
-     * Internamente:
-     *   1. Llama a Claude Sonnet para generar la lectura (~3 párrafos)
-     *   2. Suscribe al email en MailerLite (con custom field fecha_nacimiento + signo_solar)
-     *   3. Envía la lectura por email via MailerLite automation
-     */
-
     var API_URL='/api/lectura-express';
 
     var response=await fetch(API_URL,{
@@ -1094,14 +1089,11 @@ async function submitLectura(){
     if(!response.ok) throw new Error('API error '+response.status);
     var data=await response.json();
 
-    // Populate result
     document.getElementById('nlResultSign').innerHTML=sign.symbol+' '+(lang==='en'?sign.en:sign.name);
     document.getElementById('nlResultText').innerHTML=data.reading||data.lectura||'';
 
-    // Show result
     showState('nlResult');
 
-    // Smooth scroll to result
     document.getElementById('lectura-express').scrollIntoView({behavior:'smooth',block:'start'});
 
   }catch(err){
@@ -1109,6 +1101,7 @@ async function submitLectura(){
     showState('nlError');
   }
 }
+
 // ═══ HORÓSCOPO DIARIO ═══
 let horoData = null;
 
@@ -1120,11 +1113,9 @@ async function loadHoroscope(btn) {
   const sign = btn.dataset.sign;
   if (!sign) return;
 
-  // Active state
   document.querySelectorAll('.zodiac-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  // Fetch JSON once, cache in memory
   if (!horoData) {
     try {
       const resp = await fetch('/data/horoscope.json');
@@ -1136,7 +1127,6 @@ async function loadHoroscope(btn) {
     }
   }
 
-  // Map sign names (handle accents)
   const signMap = {
     'aries':'aries','tauro':'tauro','geminis':'geminis','cancer':'cancer',
     'leo':'leo','virgo':'virgo','libra':'libra','escorpio':'escorpio',
@@ -1157,7 +1147,6 @@ async function loadHoroscope(btn) {
   document.getElementById('horoDate').textContent = horoData.date;
   document.getElementById('horoText').textContent = reading;
 
-  // Cosmic fact
   if (horoData.cosmicFact) {
     document.getElementById('horoFactText').textContent = horoData.cosmicFact.text;
     document.getElementById('horoFactSource').textContent = horoData.cosmicFact.source;
