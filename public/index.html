@@ -1,1163 +1,672 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="google-site-verification" content="vDNw7wez4SCnT41XvCEkyoJAz5-zFff4THJB7nLk9_4" />
-<title>Selene · Ciencia y consciencia de lo invisible</title>
-<meta name="description" content="Academia de desarrollo intuitivo con base científica. Carta astral, tarot, quirología, sueños y horóscopo personalizado.">
-    <meta name="p:domain_verify" content="597160e7a6e46fe761d945c8de0f9b87"/>
-<!-- Pinterest Tag -->
-<script>
-!function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
-pintrk('load','2612436578863');
-pintrk('page');
-</script>
-<noscript><img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?event=init&tid=2612436578863&noscript=1" /></noscript>
-<!-- end Pinterest Tag -->
-<meta property="og:title" content="Selene · Tu guía cósmica con base científica">
-<meta property="og:description" content="Astrología real, tarot intuitivo, quirología y bienestar energético.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #0A0A0F; --bg2: #0E0E16; --bg3: #12121C;
-  --card: rgba(18,18,28,0.65); --card-solid: #14142A;
-  --gold: #C9A84C; --gold-light: #E2CA7A; --gold-dim: rgba(201,168,76,0.12);
-  --gold-glow: rgba(201,168,76,0.06);
-  --blue: #4A6FA5; --blue-light: #6B93CC; --blue-dim: rgba(74,111,165,0.12);
-  --violet: #7C6DB0; --violet-light: #9B8EC4; --violet-dim: rgba(124,109,176,0.10);
-  --rose: #B8728A; --rose-light: #D4A0B2; --rose-dim: rgba(184,114,138,0.10);
-  --teal: #5AB8A6; --teal-dim: rgba(90,184,166,0.10);
-  --white: #F0EDE4; --white-dim: rgba(240,237,228,0.7);
-  --text-mid: rgba(240,237,228,0.5); --text-dim: rgba(240,237,228,0.28);
-  --border: rgba(201,168,76,0.08); --border-light: rgba(240,237,228,0.05);
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Outfit', system-ui, sans-serif;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--white);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-.container{max-width:1120px;margin:0 auto;padding:0 24px}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selene · Interpretación de Sueños</title>
+  <meta name="description" content="Descubre el significado de tus sueños con Selene. Interpretación onírica con base neurocientífica y sabiduría simbólica. Ciencia y consciencia de lo invisible.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ═══ COSMIC BG ═══ */
-.cosmos{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 80% 60% at 30% 20%,rgba(74,111,165,.05),transparent),
-    radial-gradient(ellipse 60% 50% at 70% 80%,rgba(124,109,176,.04),transparent),
-    radial-gradient(1.2px 1.2px at 12% 28%,rgba(240,237,228,.35),transparent),
-    radial-gradient(1px 1px at 35% 62%,rgba(201,168,76,.25),transparent),
-    radial-gradient(.8px .8px at 68% 18%,rgba(240,237,228,.3),transparent),
-    radial-gradient(1px 1px at 82% 72%,rgba(74,111,165,.2),transparent),
-    radial-gradient(.6px .6px at 48% 42%,rgba(201,168,76,.2),transparent),
-    radial-gradient(1px 1px at 92% 32%,rgba(240,237,228,.2),transparent),
-    radial-gradient(.8px .8px at 8% 78%,rgba(124,109,176,.15),transparent),
-    radial-gradient(1px 1px at 55% 88%,rgba(201,168,76,.15),transparent);
-  animation:cosmicDrift 20s ease-in-out infinite alternate;
-}
-@keyframes cosmicDrift{0%{opacity:.55}50%{opacity:.85}100%{opacity:.65}}
-.content{position:relative;z-index:1}
+    :root {
+      --black: #0A0A0F;
+      --gold: #C9A84C;
+      --gold-dim: rgba(201,168,76,0.15);
+      --gold-border: rgba(201,168,76,0.25);
+      --gold-glow: rgba(201,168,76,0.08);
+      --white: #F0EDE4;
+      --white-60: rgba(240,237,228,0.6);
+      --white-40: rgba(240,237,228,0.4);
+      --white-80: rgba(240,237,228,0.85);
+      --cosmos: #1a1a3e;
+      --font-title: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Outfit', sans-serif;
+    }
 
-/* ═══════════════════════════════════════
-   FLOWER KNOWS ROCOCO
-   ═══════════════════════════════════════ */
-.fk-divider{
-  display:flex;align-items:center;justify-content:center;gap:16px;
-  padding:24px 0;opacity:.55;
-}
-.fk-divider svg{flex-shrink:0}
-.fk-divider .fk-line{
-  flex:1;max-width:120px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-}
-.fk-divider-lg{padding:36px 0;opacity:.65}
-.fk-divider-lg .fk-line{max-width:160px}
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-.fk-frame{position:relative}
-.fk-frame::before,.fk-frame::after{
-  content:'';position:absolute;pointer-events:none;z-index:2;
-  width:44px;height:44px;
-  border-color:rgba(201,168,76,.18);border-style:solid;
-  transition:border-color .4s,width .4s,height .4s;
-}
-.fk-frame::before{top:12px;left:12px;border-width:2px 0 0 2px;border-radius:6px 0 0 0}
-.fk-frame::after{bottom:12px;right:12px;border-width:0 2px 2px 0;border-radius:0 0 6px 0}
-.fk-frame:hover::before,.fk-frame:hover::after{border-color:rgba(201,168,76,.35);width:52px;height:52px}
+    /* --- BACKGROUND --- */
+    .bg-stars {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(26,26,62,0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.05) 0%, transparent 50%),
+        linear-gradient(170deg, #0A0A0F 0%, #0d0d1a 50%, #0A0A0F 100%);
+      z-index: 0;
+    }
+    .bg-stars::after {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 15% 25%, rgba(240,237,228,0.3), transparent),
+        radial-gradient(1px 1px at 45% 65%, rgba(240,237,228,0.2), transparent),
+        radial-gradient(1.5px 1.5px at 75% 15%, rgba(201,168,76,0.4), transparent),
+        radial-gradient(1px 1px at 85% 75%, rgba(240,237,228,0.25), transparent),
+        radial-gradient(1px 1px at 35% 85%, rgba(201,168,76,0.3), transparent),
+        radial-gradient(1px 1px at 55% 35%, rgba(240,237,228,0.2), transparent),
+        radial-gradient(1.5px 1.5px at 25% 55%, rgba(201,168,76,0.35), transparent),
+        radial-gradient(1px 1px at 65% 90%, rgba(240,237,228,0.2), transparent);
+    }
 
-.fk-frame-full{position:relative}
-.fk-frame-full .fk-corner-tr,.fk-frame-full .fk-corner-bl{
-  position:absolute;pointer-events:none;z-index:2;
-  width:44px;height:44px;
-  border-color:rgba(201,168,76,.18);border-style:solid;
-  transition:border-color .4s;
-}
-.fk-frame-full .fk-corner-tr{top:12px;right:12px;border-width:2px 2px 0 0;border-radius:0 6px 0 0}
-.fk-frame-full .fk-corner-bl{bottom:12px;left:12px;border-width:0 0 2px 2px;border-radius:0 0 0 6px}
+    .container {
+      position: relative; z-index: 1;
+      max-width: 640px; margin: 0 auto; padding: 20px;
+      min-height: 100vh;
+    }
 
-.fk-glow{position:relative}
-.fk-glow::before{
-  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(ellipse 350px 250px at 8% 15%,rgba(201,168,76,.035),transparent),
-    radial-gradient(ellipse 300px 400px at 92% 85%,rgba(124,109,176,.03),transparent),
-    radial-gradient(ellipse 250px 250px at 50% 50%,rgba(184,114,138,.02),transparent);
-}
+    /* --- HEADER --- */
+    .header {
+      text-align: center; padding: 48px 0 32px;
+    }
+    .header-icon { font-size: 40px; margin-bottom: 12px; }
+    .header-brand {
+      font-family: var(--font-title); font-size: 11px;
+      color: var(--gold); letter-spacing: 4px; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 16px;
+    }
+    .header h1 {
+      font-family: var(--font-title); font-size: 36px; font-weight: 700;
+      line-height: 1.15; margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--white) 0%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .header p {
+      font-size: 15px; color: var(--white-60); line-height: 1.6;
+      max-width: 440px; margin: 0 auto;
+    }
 
-.fk-rule{
-  height:2px;max-width:500px;margin:0 auto;position:relative;
-  background:linear-gradient(90deg,
-    transparent 0%,rgba(201,168,76,.03) 8%,rgba(201,168,76,.2) 25%,
-    var(--gold) 50%,
-    rgba(201,168,76,.2) 75%,rgba(201,168,76,.03) 92%,transparent 100%);
-}
-.fk-rule::before{
-  content:'✦';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-size:12px;color:var(--gold);background:var(--bg);padding:0 12px;
-}
+    /* --- SECTIONS / STEPS --- */
+    .section { display: none; animation: fadeIn 0.5s ease; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-.fk-card-glow{position:relative;overflow:hidden}
-.fk-card-glow::after{
-  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;pointer-events:none;
-  background:radial-gradient(circle at 50% 50%,rgba(201,168,76,.05),transparent 60%);
-  opacity:0;transition:opacity .5s;
-}
-.fk-card-glow:hover::after{opacity:1}
+    /* --- FORM ELEMENTS --- */
+    .step-label {
+      font-family: var(--font-title); font-size: 11px;
+      color: var(--gold); letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .step-title {
+      font-family: var(--font-title); font-size: 24px; font-weight: 600;
+      margin-bottom: 8px; color: var(--white);
+    }
+    .step-desc {
+      font-size: 14px; color: var(--white-60); margin-bottom: 24px; line-height: 1.6;
+    }
 
-.fk-quote{position:relative;padding:32px 40px}
-.fk-quote::before,.fk-quote::after{
-  font-family:var(--serif);font-size:52px;color:rgba(201,168,76,.18);
-  position:absolute;line-height:1;
-}
-.fk-quote::before{content:'\201C';top:8px;left:10px}
-.fk-quote::after{content:'\201D';bottom:-8px;right:10px}
+    textarea, input[type="text"], input[type="date"] {
+      width: 100%; background: rgba(240,237,228,0.04);
+      border: 1px solid var(--gold-border); border-radius: 12px;
+      padding: 16px; color: var(--white); font-family: var(--font-body);
+      font-size: 15px; resize: vertical; outline: none;
+      transition: border-color 0.3s;
+    }
+    textarea:focus, input:focus {
+      border-color: var(--gold);
+    }
+    textarea { min-height: 140px; }
+    textarea::placeholder, input::placeholder {
+      color: var(--white-40); font-style: italic;
+    }
 
-/* ═══ NAV ═══ */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:50;
-  padding:14px 24px;
-  background:linear-gradient(180deg,rgba(10,10,15,.95),rgba(10,10,15,.6) 70%,transparent);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.nav-brand{font-family:var(--serif);font-size:20px;font-weight:400;letter-spacing:4px;color:var(--gold)}
-.nav-links{display:flex;align-items:center;gap:24px;font-size:13px;font-weight:300;color:var(--text-mid)}
-.nav-links a{color:var(--text-mid);transition:color .3s;text-decoration:none}
-.nav-links a:hover{color:var(--gold)}
-@media(max-width:768px){.nav-links{display:none}}
-.nav-right{display:flex;align-items:center;gap:12px}
+    /* --- CHIPS (emociones, hora) --- */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .chip {
+      background: rgba(240,237,228,0.05); border: 1px solid var(--gold-border);
+      border-radius: 20px; padding: 8px 18px; font-size: 13px;
+      cursor: pointer; transition: all 0.25s; color: var(--white-80);
+      user-select: none;
+    }
+    .chip:hover { border-color: var(--gold); background: var(--gold-dim); }
+    .chip.selected {
+      background: var(--gold); color: var(--black);
+      border-color: var(--gold); font-weight: 600;
+    }
 
-.lang-toggle{
-  display:flex;border-radius:20px;overflow:hidden;
-  border:1px solid rgba(201,168,76,.15);background:rgba(10,10,15,.6);
-}
-.lang-option{
-  padding:6px 12px;font-size:10px;letter-spacing:1px;font-weight:600;
-  color:var(--text-dim);transition:all .3s;font-family:var(--sans);user-select:none;cursor:pointer;
-}
-.lang-option.active{background:var(--gold-dim);color:var(--gold)}
-.lang-option:hover:not(.active){color:var(--white-dim)}
+    /* --- TOGGLE --- */
+    .toggle-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 0; margin-bottom: 16px;
+    }
+    .toggle {
+      width: 44px; height: 24px; background: rgba(240,237,228,0.1);
+      border-radius: 12px; position: relative; cursor: pointer;
+      transition: background 0.3s; flex-shrink: 0;
+    }
+    .toggle::after {
+      content: ''; position: absolute; top: 3px; left: 3px;
+      width: 18px; height: 18px; background: var(--white-60);
+      border-radius: 50%; transition: all 0.3s;
+    }
+    .toggle.on { background: var(--gold); }
+    .toggle.on::after { left: 23px; background: var(--black); }
+    .toggle-label { font-size: 14px; color: var(--white-80); }
 
-.hamburger{
-  width:40px;height:40px;border:1px solid rgba(201,168,76,.15);border-radius:10px;
-  background:rgba(10,10,15,.6);cursor:pointer;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
-  transition:all .3s;position:relative;z-index:52;
-}
-.hamburger:hover{border-color:rgba(201,168,76,.3)}
-.hamburger span{
-  display:block;width:18px;height:1.5px;background:var(--gold);border-radius:2px;
-  transition:all .3s;
-}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
-.hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    /* --- BUTTONS --- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 14px 32px; border-radius: 28px; font-size: 15px;
+      font-weight: 600; cursor: pointer; transition: all 0.3s;
+      border: none; font-family: var(--font-body); width: 100%;
+    }
+    .btn-gold {
+      background: var(--gold); color: var(--black);
+    }
+    .btn-gold:hover { background: #d4b35a; transform: translateY(-1px); }
+    .btn-gold:disabled {
+      opacity: 0.4; cursor: not-allowed; transform: none;
+    }
+    .btn-outline {
+      background: transparent; color: var(--gold);
+      border: 1px solid var(--gold-border);
+    }
+    .btn-outline:hover { background: var(--gold-dim); border-color: var(--gold); }
+    .btn-back {
+      background: none; border: none; color: var(--white-40);
+      font-size: 13px; cursor: pointer; padding: 8px 0; margin-bottom: 16px;
+      font-family: var(--font-body);
+    }
+    .btn-back:hover { color: var(--white); }
+    .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+    .btn-row .btn { flex: 1; }
 
-.nav-dropdown{
-  position:fixed;top:0;right:0;width:320px;max-width:90vw;height:100dvh;
-  background:linear-gradient(180deg,#0C0C14 0%,#0A0A12 100%);
-  border-left:1px solid rgba(201,168,76,.08);
-  transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);
-  z-index:51;overflow-y:auto;
-  padding:80px 28px 40px;
-}
-.nav-dropdown.open{transform:translateX(0)}
-.nav-dropdown-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:50;
-  opacity:0;pointer-events:none;transition:opacity .3s;
-}
-.nav-dropdown-overlay.open{opacity:1;pointer-events:auto}
+    /* --- TIER CARDS --- */
+    .tier-cards { display: flex; flex-direction: column; gap: 14px; }
+    .tier-card {
+      background: rgba(240,237,228,0.03);
+      border: 1px solid var(--gold-border); border-radius: 16px;
+      padding: 24px; cursor: pointer; transition: all 0.3s;
+      position: relative;
+    }
+    .tier-card:hover { border-color: var(--gold); background: var(--gold-glow); }
+    .tier-card.featured { border-color: var(--gold); }
+    .tier-card.featured::before {
+      content: '✦ RECOMENDADA'; position: absolute; top: -10px; right: 20px;
+      background: var(--gold); color: var(--black); font-size: 10px;
+      font-weight: 700; padding: 3px 12px; border-radius: 8px;
+      letter-spacing: 1px;
+    }
+    .tier-name {
+      font-family: var(--font-title); font-size: 20px; font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .tier-price { color: var(--gold); font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .tier-desc { font-size: 13px; color: var(--white-60); line-height: 1.6; }
+    .tier-badge {
+      display: inline-block; background: rgba(76,175,80,0.15);
+      color: #4CAF50; font-size: 11px; font-weight: 600;
+      padding: 2px 10px; border-radius: 8px; margin-bottom: 8px;
+    }
 
-.nd-section{margin-bottom:28px}
-.nd-label{
-  font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);
-  margin-bottom:12px;opacity:.6;
-}
-.nd-item{
-  display:flex;align-items:center;gap:14px;padding:14px 16px;
-  border-radius:12px;border:1px solid transparent;
-  transition:all .3s;cursor:pointer;margin-bottom:4px;
-}
-.nd-item:hover{background:rgba(201,168,76,.04);border-color:rgba(201,168,76,.08)}
-.nd-icon{
-  width:40px;height:40px;border-radius:10px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:18px;
-}
-.nd-info{flex:1}
-.nd-name{font-family:var(--serif);font-size:16px;font-weight:500;margin-bottom:2px}
-.nd-desc{font-size:11px;color:var(--text-mid);line-height:1.4}
-.nd-price{font-family:var(--serif);font-size:13px;font-weight:600;color:var(--gold);white-space:nowrap}
+    /* --- LOADING --- */
+    .loading-container {
+      text-align: center; padding: 60px 0;
+    }
+    .moon-loader {
+      font-size: 48px; animation: pulse 2s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.05); } }
+    .loading-text {
+      font-family: var(--font-title); font-size: 18px; font-style: italic;
+      color: var(--white-60);
+    }
+    .loading-dots::after {
+      content: ''; animation: dots 1.5s steps(3, end) infinite;
+    }
+    @keyframes dots { 0% { content: ''; } 33% { content: '.'; } 66% { content: '..'; } 100% { content: '...'; } }
 
-.nd-item-tarot .nd-icon{background:var(--violet-dim);color:var(--violet-light)}
-.nd-item-astral .nd-icon{background:var(--blue-dim);color:var(--blue-light)}
-.nd-item-quiro .nd-icon{background:var(--rose-dim);color:var(--rose)}
-.nd-item-horo .nd-icon{background:var(--gold-dim);color:var(--gold)}
-.nd-item-suenos .nd-icon{background:var(--blue-dim);color:var(--blue-light)}
-.nd-item-academia .nd-icon{background:rgba(90,184,166,.1);color:var(--teal)}
+    /* --- RESULT --- */
+    .result-container {
+      background: linear-gradient(180deg, rgba(201,168,76,0.06) 0%, transparent 30%);
+      border: 1px solid var(--gold-border); border-radius: 20px;
+      padding: 32px 24px; margin-top: 8px;
+    }
+    .result-header {
+      text-align: center; margin-bottom: 24px;
+      padding-bottom: 20px; border-bottom: 1px solid var(--gold-border);
+    }
+    .result-header h2 {
+      font-family: var(--font-title); font-size: 26px; font-weight: 600;
+      color: var(--gold); margin-bottom: 4px;
+    }
+    .result-tier {
+      font-size: 11px; color: var(--white-40);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    .result-text {
+      font-size: 15px; line-height: 1.85; color: var(--white-80);
+      white-space: pre-wrap;
+    }
+    .result-text p { margin-bottom: 16px; }
+    .result-footer {
+      margin-top: 28px; padding-top: 20px;
+      border-top: 1px solid var(--gold-border); text-align: center;
+    }
+    .result-footer p {
+      font-size: 12px; color: var(--white-40);
+      font-style: italic; margin-bottom: 16px;
+    }
+    .result-cta {
+      background: linear-gradient(135deg, rgba(201,168,76,0.1) 0%, rgba(26,26,62,0.3) 100%);
+      border: 1px solid var(--gold-border); border-radius: 14px;
+      padding: 20px; margin-top: 20px; text-align: center;
+    }
+    .result-cta h3 {
+      font-family: var(--font-title); font-size: 18px;
+      color: var(--gold); margin-bottom: 8px;
+    }
+    .result-cta p { font-size: 13px; color: var(--white-60); margin-bottom: 14px; line-height: 1.5; }
 
-.nd-flourish{
-  text-align:center;padding:12px 0;font-family:var(--serif);
-  font-size:11px;letter-spacing:6px;color:var(--gold);opacity:.25;
-}
+    /* --- CROSS-SELL --- */
+    .cross-sell {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      margin-top: 24px;
+    }
+    .cross-sell a {
+      display: block; background: rgba(240,237,228,0.03);
+      border: 1px solid var(--gold-border); border-radius: 12px;
+      padding: 14px; text-decoration: none; text-align: center;
+      transition: all 0.3s;
+    }
+    .cross-sell a:hover { border-color: var(--gold); background: var(--gold-glow); }
+    .cross-sell .cs-icon { font-size: 24px; margin-bottom: 6px; }
+    .cross-sell .cs-name { font-size: 13px; color: var(--white); font-weight: 500; }
+    .cross-sell .cs-desc { font-size: 11px; color: var(--white-40); }
 
-.nd-social{display:flex;gap:16px;padding:8px 16px}
-.nd-social a{font-size:12px;color:var(--text-dim);transition:color .3s}
-.nd-social a:hover{color:var(--gold)}
+    /* --- FOOTER --- */
+    .footer {
+      text-align: center; padding: 40px 0 24px;
+      font-size: 11px; color: var(--white-40);
+    }
+    .footer a { color: var(--gold); text-decoration: none; }
+    .footer-brand {
+      font-family: var(--font-title); letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 8px; font-size: 10px;
+      color: var(--gold-border);
+    }
 
-/* ═══ HERO ═══ */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:100px 24px 60px;
-}
-.hero-frame{position:relative;padding:60px 40px}
-.hero-frame::before{
-  content:'';position:absolute;inset:0;
-  border:1px solid rgba(201,168,76,.06);
-  border-radius:40%/48%;
-  pointer-events:none;animation:frameBreath 10s ease-in-out infinite;
-}
-@keyframes frameBreath{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.02);opacity:.9}}
+    /* --- OPTIONAL FIELDS COLLAPSIBLE --- */
+    .optional-toggle {
+      font-size: 13px; color: var(--gold); cursor: pointer;
+      margin: 16px 0 8px; display: flex; align-items: center; gap: 6px;
+    }
+    .optional-toggle:hover { text-decoration: underline; }
+    .optional-fields { display: none; margin-top: 12px; }
+    .optional-fields.open { display: block; animation: fadeIn 0.3s ease; }
+    .field-group { margin-bottom: 16px; }
+    .field-label { font-size: 13px; color: var(--white-60); margin-bottom: 6px; }
 
-.hero-orb{
-  width:170px;height:170px;border-radius:50%;margin:0 auto 32px;
-  background:radial-gradient(circle at 38% 32%,rgba(201,168,76,.08),rgba(74,111,165,.05) 40%,rgba(124,109,176,.03) 70%,transparent 85%);
-  position:relative;animation:float 8s ease-in-out infinite;
-}
-.hero-orb::before{content:'';position:absolute;inset:-22px;border-radius:50%;border:1px solid rgba(201,168,76,.06);animation:spin-slow 30s linear infinite}
-.hero-orb::after{content:'';position:absolute;inset:-44px;border-radius:50%;border:1px solid rgba(74,111,165,.04);animation:spin-slow 50s linear infinite reverse}
-.hero-orb-ring{position:absolute;inset:-66px;border-radius:50%;border:1px dashed rgba(201,168,76,.03);animation:spin-slow 80s linear infinite;pointer-events:none}
-.hero-orb-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:46px;filter:drop-shadow(0 0 20px rgba(201,168,76,.12))}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-.hero-tag{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;opacity:.7}
-.hero h1{font-family:var(--serif);font-size:clamp(32px,5.5vw,56px);font-weight:300;line-height:1.18;margin-bottom:16px;max-width:620px}
-.hero h1 em{font-style:italic;color:var(--gold-light)}
-.hero-sub{font-family:var(--serif);font-size:clamp(14px,1.8vw,17px);font-weight:300;color:var(--white-dim);line-height:1.85;max-width:480px;margin:0 auto 30px}
-.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-.btn-gold{
-  display:inline-flex;align-items:center;gap:8px;padding:14px 28px;
-  background:linear-gradient(135deg,var(--gold),#D4AF37);color:var(--bg);
-  border:none;border-radius:50px;cursor:pointer;
-  font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.5px;
-  transition:all .3s;box-shadow:0 4px 20px rgba(201,168,76,.18);text-decoration:none;
-}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.28)}
-.btn-outline{
-  display:inline-flex;align-items:center;gap:8px;padding:14px 28px;
-  background:transparent;color:var(--white-dim);
-  border:1px solid rgba(240,237,228,.1);border-radius:50px;cursor:pointer;
-  font-family:var(--sans);font-size:13px;font-weight:500;transition:all .3s;text-decoration:none;
-}
-.btn-outline:hover{border-color:rgba(201,168,76,.25);color:var(--white)}
-.hero-note{font-size:11px;color:var(--text-dim);margin-top:16px;letter-spacing:.5px}
-
-/* ═══ SECTIONS ═══ */
-section{padding:90px 0}
-.section-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:12px;opacity:.65}
-.section-title{font-family:var(--serif);font-size:clamp(26px,3.5vw,40px);font-weight:300;text-align:center;margin-bottom:12px;line-height:1.2}
-.section-sub{font-family:var(--serif);font-size:15px;font-weight:300;color:var(--text-mid);text-align:center;max-width:520px;margin:0 auto 48px;line-height:1.75}
-
-/* ═══ TRUST ═══ */
-.trust-bar{display:flex;justify-content:center;flex-wrap:wrap;gap:28px;padding:36px 24px}
-.trust-item{display:flex;align-items:center;gap:10px}
-.trust-icon{font-size:16px}
-.trust-text{font-size:11px;color:var(--text-mid);letter-spacing:.5px}
-
-/* ═══ PRODUCTS ═══ */
-.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-@media(max-width:700px){.products-grid{grid-template-columns:1fr}}
-
-.product-card{
-  position:relative;border-radius:20px;overflow:hidden;
-  background:var(--card);border:1px solid var(--border);
-  padding:28px 24px 24px;cursor:pointer;
-  transition:all .4s cubic-bezier(.4,0,.2,1);
-  display:flex;flex-direction:column;
-  backdrop-filter:blur(10px);text-decoration:none!important;
-}
-.product-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.15);box-shadow:0 16px 48px rgba(0,0,0,.3)}
-.product-card .accent-line{position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .4s}
-.product-card:hover .accent-line{opacity:1}
-
-.card-tarot .accent-line{background:linear-gradient(90deg,var(--violet),var(--rose))}
-.card-tarot .product-icon{background:var(--violet-dim);color:var(--violet-light)}
-.card-tarot .product-price{color:var(--violet-light)}
-.card-astral .accent-line{background:linear-gradient(90deg,var(--blue),var(--violet))}
-.card-astral .product-icon{background:var(--blue-dim);color:var(--blue-light)}
-.card-astral .product-price{color:var(--blue-light)}
-.card-quiro .accent-line{background:linear-gradient(90deg,var(--rose),var(--gold))}
-.card-quiro .product-icon{background:var(--rose-dim);color:var(--rose)}
-.card-quiro .product-price{color:var(--rose)}
-.card-suenos .accent-line{background:linear-gradient(90deg,var(--blue),var(--violet))}
-.card-suenos .product-icon{background:var(--blue-dim);color:var(--blue-light)}
-.card-suenos .product-price{color:var(--blue-light)}
-.card-horoscopo .accent-line{background:linear-gradient(90deg,var(--gold),var(--teal))}
-.card-horoscopo .product-icon{background:var(--gold-dim);color:var(--gold)}
-.card-horoscopo .product-price{color:var(--teal)}
-
-.product-row-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
-.product-icon{
-  width:48px;height:48px;border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;transition:transform .3s;
-}
-.product-card:hover .product-icon{transform:scale(1.08) rotate(-3deg)}
-.product-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:var(--gold-dim);color:var(--gold)}
-.product-badge.new{background:rgba(184,114,138,.15);color:var(--rose);animation:pulseNew 2s ease-in-out infinite}
-.product-badge.free{background:rgba(90,184,166,.12);color:var(--teal)}
-@keyframes pulseNew{0%,100%{opacity:1}50%{opacity:.6}}
-
-.product-name{font-family:var(--serif);font-size:21px;font-weight:500;margin-bottom:8px;color:var(--white)}
-.product-desc{font-size:12.5px;color:var(--text-mid);line-height:1.7;margin-bottom:16px;flex:1}
-.product-footer{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--border)}
-.product-price{font-family:var(--serif);font-size:18px;font-weight:600}
-.product-cta{font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--text-dim);padding:7px 16px;border-radius:20px;border:1px solid rgba(240,237,228,.08);transition:all .3s}
-.product-card:hover .product-cta{border-color:rgba(201,168,76,.25);color:var(--gold-light)}
-
-/* ═══ TAROT SHOWCASE ═══ */
-.tarot-showcase{padding:80px 0;position:relative}
-.tarot-showcase::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 500px 300px at 20% 50%,rgba(124,109,176,.04),transparent),
-             radial-gradient(ellipse 400px 400px at 80% 60%,rgba(184,114,138,.03),transparent);
-}
-.tarot-inner{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;max-width:960px;margin:0 auto;padding:0 24px;position:relative}
-@media(max-width:768px){.tarot-inner{grid-template-columns:1fr;gap:36px;text-align:center}}
-
-.tarot-visual{display:flex;justify-content:center;perspective:600px}
-.tarot-cards-fan{position:relative;width:240px;height:310px}
-.fan-card{
-  width:130px;height:200px;border-radius:14px;position:absolute;
-  background:linear-gradient(160deg,#1A1A30,#12122A 60%,#0E0E1A);
-  border:1px solid rgba(201,168,76,.1);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  box-shadow:0 12px 36px rgba(0,0,0,.5),inset 0 1px 0 rgba(201,168,76,.06);
-  transition:all .6s cubic-bezier(.4,0,.2,1);
-}
-.fan-card:nth-child(1){transform:rotate(-15deg) translateX(-40px);z-index:1;top:40px;left:8px}
-.fan-card:nth-child(2){transform:rotate(0deg);z-index:3;top:16px;left:55px}
-.fan-card:nth-child(3){transform:rotate(15deg) translateX(40px);z-index:2;top:40px;left:100px}
-.tarot-visual:hover .fan-card:nth-child(1){transform:rotate(-22deg) translateX(-58px) translateY(-10px)}
-.tarot-visual:hover .fan-card:nth-child(2){transform:rotate(0deg) translateY(-16px)}
-.tarot-visual:hover .fan-card:nth-child(3){transform:rotate(22deg) translateX(58px) translateY(-10px)}
-
-.fan-card-frame{position:absolute;inset:6px;border-radius:10px;border:1px solid rgba(201,168,76,.08);pointer-events:none}
-.fan-card-pattern{position:absolute;inset:14px;pointer-events:none;opacity:.05;background:repeating-conic-gradient(rgba(201,168,76,.6) 0% 25%,transparent 0% 50%) 50%/16px 16px}
-.fan-card-symbol{font-size:34px;position:relative;z-index:1;margin-bottom:8px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
-.fan-card-name{font-family:var(--serif);font-size:10px;color:var(--white-dim);text-align:center;position:relative;z-index:1;padding:0 8px}
-.fan-card-num{font-family:var(--serif);font-size:9px;color:var(--text-dim);position:absolute;top:10px;left:12px;z-index:1}
-
-.tarot-info{position:relative;z-index:1}
-.tarot-info h3{font-family:var(--serif);font-size:30px;font-weight:300;margin-bottom:14px;line-height:1.28}
-.tarot-info h3 em{font-style:italic;color:var(--violet-light)}
-.tarot-info>p{font-size:13.5px;color:var(--text-mid);line-height:1.8;margin-bottom:20px}
-.tarot-features{display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
-.tf-item{display:flex;align-items:center;gap:10px}
-.tf-dot{width:5px;height:5px;border-radius:50%;background:var(--violet);flex-shrink:0}
-.tf-text{font-size:12.5px;color:var(--white-dim)}
-.tarot-ctas{display:flex;gap:12px;flex-wrap:wrap}
-@media(max-width:768px){.tarot-ctas{justify-content:center}}
-
-/* ═══ SCIENCE ═══ */
-.science-section{padding:70px 0}
-.science-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:700px){.science-grid{grid-template-columns:1fr}}
-.science-card{
-  padding:28px 20px;border-radius:16px;border:1px solid var(--border-light);
-  background:rgba(14,14,22,.5);text-align:center;position:relative;
-}
-.sci-number{font-family:var(--serif);font-size:30px;color:var(--gold);font-weight:600;margin-bottom:4px}
-.sci-label{font-size:12px;color:var(--text-mid);line-height:1.5}
-
-/* ═══ HOROSCOPO ═══ */
-.zodiac-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:560px;margin:0 auto}
-@media(max-width:500px){.zodiac-grid{grid-template-columns:repeat(3,1fr)}}
-.zodiac-btn{
-  padding:14px 6px;border-radius:12px;text-align:center;cursor:pointer;
-  background:var(--card);border:1px solid var(--border);
-  font-family:var(--serif);font-size:13px;color:var(--white-dim);transition:all .3s;
-}
-.zodiac-btn:hover{border-color:rgba(201,168,76,.2);color:var(--gold-light);transform:translateY(-2px)}
-.zodiac-btn.active{background:rgba(201,168,76,.12);border-color:var(--gold);color:var(--gold-light);transform:translateY(-2px)}
-.horo-display{max-width:620px;margin:32px auto 0;display:none}
-.horo-display.visible{display:block;animation:fadeUp .5s ease}
-.horo-sign-title{font-family:var(--serif);font-size:24px;color:var(--gold-light);text-align:center;margin-bottom:6px}
-.horo-date{font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:20px;letter-spacing:1px;text-transform:uppercase}
-.horo-text{font-size:14.5px;line-height:1.85;color:var(--text-mid);text-align:center;padding:24px 28px;background:var(--card);border:1px solid var(--border);border-radius:16px}
-.horo-fact{margin-top:20px;padding:16px 20px;border-left:2px solid var(--gold);background:rgba(201,168,76,.03);border-radius:0 12px 12px 0;font-size:12px;color:var(--text-dim);line-height:1.7}
-.horo-fact strong{color:var(--gold);font-weight:600;font-size:10px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:4px}
-.horo-cta{text-align:center;margin-top:24px}
-.horo-cta a{display:inline-block;padding:12px 28px;background:var(--gold-dim);color:var(--gold);border-radius:24px;font-size:13px;font-weight:600;text-decoration:none;transition:all .3s}
-.horo-cta a:hover{background:var(--gold);color:var(--bg)}
-
-/* ═══ ACADEMY ═══ */
-.academy-teaser{
-  border:1px solid rgba(201,168,76,.1);border-radius:24px;padding:48px 36px;text-align:center;
-  margin:0 auto;max-width:780px;position:relative;overflow:hidden;
-}
-.academy-teaser::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 300px 200px at 20% 30%,rgba(201,168,76,.04),transparent),
-             radial-gradient(ellipse 250px 250px at 80% 70%,rgba(74,111,165,.03),transparent);
-}
-.academy-teaser h3{font-family:var(--serif);font-size:28px;font-weight:300;margin-bottom:12px;position:relative}
-.academy-teaser p{font-size:14px;color:var(--text-mid);line-height:1.7;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;position:relative}
-.academy-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--gold-dim);border-radius:20px;margin-bottom:20px;font-size:11px;color:var(--gold);font-weight:600;letter-spacing:1px;position:relative}
-
-/* ═══ FOOTER ═══ */
-footer{padding:48px 24px 28px;text-align:center}
-.footer-brand{font-family:var(--serif);font-size:22px;color:var(--gold);letter-spacing:4px;margin-bottom:8px}
-.footer-tagline{font-family:var(--serif);font-size:12px;font-style:italic;color:var(--text-dim);margin-bottom:24px}
-.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:20px}
-.footer-links a{font-size:11px;color:var(--text-dim);transition:color .3s}
-.footer-links a:hover{color:var(--gold)}
-.footer-legal{font-size:10px;color:var(--text-dim);line-height:1.8;max-width:580px;margin:0 auto}
-
-/* ═══ NEWSLETTER / LECTURA EXPRESS ═══ */
-.newsletter-section{padding:60px 0 20px}
-.newsletter-card{
-  max-width:620px;margin:0 auto;padding:44px 36px;text-align:center;
-  border:1px solid rgba(201,168,76,.1);border-radius:24px;
-  background:linear-gradient(160deg,rgba(18,18,28,.7),rgba(14,14,22,.8));
-  backdrop-filter:blur(12px);position:relative;overflow:hidden;
-}
-.newsletter-card::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 300px 200px at 30% 20%,rgba(201,168,76,.04),transparent),
-             radial-gradient(ellipse 250px 200px at 70% 80%,rgba(124,109,176,.03),transparent);
-}
-.nl-icon{font-size:32px;margin-bottom:14px;display:block;position:relative}
-.nl-title{font-family:var(--serif);font-size:26px;font-weight:300;margin-bottom:8px;position:relative;line-height:1.3}
-.nl-title em{font-style:italic;color:var(--gold-light)}
-.nl-sub{font-size:13px;color:var(--text-mid);line-height:1.7;margin-bottom:24px;position:relative;max-width:440px;margin-left:auto;margin-right:auto}
-.nl-form{display:flex;flex-direction:column;gap:12px;position:relative;max-width:380px;margin:0 auto}
-.nl-field{
-  padding:13px 18px;border-radius:12px;border:1px solid rgba(201,168,76,.12);
-  background:rgba(10,10,15,.6);color:var(--white);font-family:var(--sans);font-size:13px;
-  transition:all .3s;outline:none;width:100%;appearance:none;-webkit-appearance:none;
-}
-.nl-field::placeholder{color:var(--text-dim)}
-.nl-field:focus{border-color:rgba(201,168,76,.35);box-shadow:0 0 0 3px rgba(201,168,76,.06)}
-input[type="date"].nl-field{color:var(--text-dim)}
-input[type="date"].nl-field.has-value{color:var(--white)}
-input[type="date"].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7) sepia(.3) hue-rotate(10deg);cursor:pointer}
-.nl-consent{display:flex;align-items:flex-start;gap:10px;text-align:left;position:relative;margin-top:4px}
-.nl-consent input[type="checkbox"]{
-  width:18px;height:18px;min-width:18px;flex-shrink:0;margin-top:1px;cursor:pointer;
-  accent-color:var(--gold);
-}
-.nl-consent label{font-size:11px;color:var(--text-mid);line-height:1.6;cursor:pointer}
-.nl-consent label a{color:var(--gold);text-decoration:underline;text-underline-offset:2px}
-.nl-submit{
-  padding:14px 28px;border:none;border-radius:50px;cursor:pointer;
-  background:linear-gradient(135deg,var(--gold),#D4AF37);color:var(--bg);
-  font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.5px;
-  transition:all .3s;box-shadow:0 4px 20px rgba(201,168,76,.18);margin-top:4px;
-}
-.nl-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.28)}
-.nl-submit:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-.nl-legal{font-size:9.5px;color:var(--text-dim);line-height:1.7;margin-top:16px;position:relative;max-width:440px;margin-left:auto;margin-right:auto}
-
-/* Loading */
-.nl-loading{display:none;text-align:center;padding:30px 0;position:relative}
-.nl-loading.show{display:block}
-.nl-loading-orb{
-  width:80px;height:80px;margin:0 auto 20px;position:relative;
-  display:flex;align-items:center;justify-content:center;font-size:32px;
-}
-.nl-loading-ring{
-  position:absolute;inset:-8px;border-radius:50%;
-  border:2px solid transparent;border-top-color:var(--gold);
-  animation:nlSpin 1.2s linear infinite;
-}
-.nl-loading-ring::after{
-  content:'';position:absolute;inset:6px;border-radius:50%;
-  border:1px solid transparent;border-bottom-color:rgba(124,109,176,.4);
-  animation:nlSpin 2s linear infinite reverse;
-}
-@keyframes nlSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.nl-loading-text{font-family:var(--serif);font-size:18px;color:var(--gold-light);margin-bottom:6px}
-.nl-loading-sub{font-size:11px;color:var(--text-dim);animation:nlPulse 2s ease-in-out infinite}
-@keyframes nlPulse{0%,100%{opacity:.4}50%{opacity:1}}
-
-/* Result */
-.nl-result{display:none;text-align:left;position:relative;padding:8px 0}
-.nl-result.show{display:block}
-.nl-result-badge{
-  display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;
-  text-transform:uppercase;padding:5px 14px;border-radius:20px;
-  background:var(--gold-dim);color:var(--gold);margin-bottom:16px;
-}
-.nl-result-sign{
-  font-family:var(--serif);font-size:22px;font-weight:400;color:var(--white);
-  margin-bottom:14px;line-height:1.3;
-}
-.nl-result-text{
-  font-size:13.5px;color:var(--white-dim);line-height:1.85;margin-bottom:24px;
-}
-.nl-result-text p{margin-bottom:14px}
-.nl-result-text strong{color:var(--gold-light);font-weight:600}
-.nl-result-cta{
-  text-align:center;padding:24px 20px;margin:0 -12px;
-  border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1);
-  background:rgba(201,168,76,.02);border-radius:12px;
-}
-.nl-result-cta-text{font-size:12px;color:var(--text-mid);line-height:1.6;margin-bottom:14px}
-.nl-result-email-note{
-  font-size:11px;color:var(--text-dim);text-align:center;margin-top:18px;line-height:1.6;
-}
-
-/* Error */
-.nl-error{display:none;text-align:center;padding:20px 0;position:relative}
-.nl-error.show{display:block}
-
-/* ═══ ANIMATIONS ═══ */
-.reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.4,0,.2,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
-</style>
+    /* --- RESPONSIVE --- */
+    @media (max-width: 480px) {
+      .container { padding: 16px; }
+      .header h1 { font-size: 28px; }
+      .result-container { padding: 24px 18px; }
+      .cross-sell { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="cosmos"></div>
-<div class="content">
+<div class="bg-stars"></div>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-brand">S E L E N E</a>
-    <div class="nav-links">
-      <a href="https://carta.selenaura.com" data-es="Carta Astral" data-en="Birth Chart">Carta Astral</a>
-      <a href="https://tarot.selenaura.com">Tarot</a>
-      <a href="https://quiro.selenaura.com" data-es="Quirología" data-en="Palmistry">Quirología</a>
-      <a href="https://suenos.selenaura.com" data-es="Sueños" data-en="Dreams">Sueños</a>
-      <a href="/blog/">Blog</a>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-icon">☾</div>
+    <div class="header-brand">Selene · Sueños</div>
+    <h1>Descubre lo que tus sueños te dicen</h1>
+    <p>Interpretación onírica con base neurocientífica y sabiduría simbólica milenaria</p>
+  </div>
+
+  <!-- STEP 1: SUEÑO -->
+  <div id="step1" class="section active">
+    <div class="step-label">Paso 1 de 3</div>
+    <div class="step-title">Describe tu sueño</div>
+    <div class="step-desc">Cuantos más detalles recuerdes — lugares, personas, objetos, acciones — más profunda será la interpretación.</div>
+    <textarea id="sueno" placeholder="Anoche soñé que..."></textarea>
+    <button class="btn btn-gold" style="margin-top:20px" onclick="goToStep(2)" id="btn-step1">Continuar</button>
+  </div>
+
+  <!-- STEP 2: CONTEXTO -->
+  <div id="step2" class="section">
+    <button class="btn-back" onclick="goToStep(1)">← Volver</button>
+    <div class="step-label">Paso 2 de 3</div>
+    <div class="step-title">Contexto emocional</div>
+    <div class="step-desc">Esto nos permite conectar tu sueño con tu momento vital.</div>
+
+    <div class="field-label" style="margin-bottom:10px">¿Qué emociones sentiste durante el sueño?</div>
+    <div class="chips" id="emociones-chips">
+      <div class="chip" data-val="Miedo">Miedo</div>
+      <div class="chip" data-val="Ansiedad">Ansiedad</div>
+      <div class="chip" data-val="Tristeza">Tristeza</div>
+      <div class="chip" data-val="Confusión">Confusión</div>
+      <div class="chip" data-val="Curiosidad">Curiosidad</div>
+      <div class="chip" data-val="Ira">Ira</div>
+      <div class="chip" data-val="Alegría">Alegría</div>
+      <div class="chip" data-val="Paz">Paz</div>
+      <div class="chip" data-val="Urgencia">Urgencia</div>
+      <div class="chip" data-val="Nostalgia">Nostalgia</div>
+      <div class="chip" data-val="Vergüenza">Vergüenza</div>
     </div>
-    <div class="nav-right">
-      <div class="lang-toggle">
-        <span class="lang-option active" data-lang="es" onclick="setLang('es')">ES</span>
-        <span class="lang-option" data-lang="en" onclick="setLang('en')">EN</span>
+
+    <div class="field-label" style="margin-top:20px; margin-bottom:10px">¿A qué hora fue el sueño?</div>
+    <div class="chips" id="hora-chips">
+      <div class="chip" data-val="inicio_noche">Inicio de la noche</div>
+      <div class="chip" data-val="madrugada">Madrugada</div>
+      <div class="chip" data-val="no_recuerdo">No recuerdo</div>
+    </div>
+
+    <div class="toggle-row" onclick="toggleRecurrente()">
+      <div class="toggle" id="toggle-recurrente"></div>
+      <div class="toggle-label">Es un sueño recurrente o con elementos que se repiten</div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">¿Hay algo en tu vida que te preocupe o emocione especialmente? <span style="color:var(--white-40)">(opcional)</span></div>
+      <input type="text" id="contexto" placeholder="Cambio de trabajo, relación, decisión importante...">
+    </div>
+
+    <div class="optional-toggle" onclick="toggleOptional()">
+      <span id="opt-arrow">▸</span> Datos astrológicos (opcional — enriquece la interpretación)
+    </div>
+    <div class="optional-fields" id="optional-fields">
+      <div class="field-group">
+        <div class="field-label">Tu signo solar</div>
+        <div class="chips" id="signo-chips">
+          <div class="chip" data-val="Aries">Aries</div>
+          <div class="chip" data-val="Tauro">Tauro</div>
+          <div class="chip" data-val="Géminis">Géminis</div>
+          <div class="chip" data-val="Cáncer">Cáncer</div>
+          <div class="chip" data-val="Leo">Leo</div>
+          <div class="chip" data-val="Virgo">Virgo</div>
+          <div class="chip" data-val="Libra">Libra</div>
+          <div class="chip" data-val="Escorpio">Escorpio</div>
+          <div class="chip" data-val="Sagitario">Sagitario</div>
+          <div class="chip" data-val="Capricornio">Capricornio</div>
+          <div class="chip" data-val="Acuario">Acuario</div>
+          <div class="chip" data-val="Piscis">Piscis</div>
+        </div>
       </div>
-      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
+      <div class="field-group">
+        <div class="field-label">Fecha de nacimiento</div>
+        <input type="date" id="nacimiento">
       </div>
     </div>
-  </nav>
 
-  <!-- DROPDOWN OVERLAY -->
-  <div class="nav-dropdown-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <button class="btn btn-gold" style="margin-top:20px" onclick="goToStep(3)">Continuar</button>
+  </div>
 
-  <!-- DROPDOWN MENU -->
-  <div class="nav-dropdown" id="navDropdown">
-    <div class="nd-section">
-      <div class="nd-label" data-es="Consultas cósmicas" data-en="Cosmic readings">Consultas cósmicas</div>
-      <a href="https://tarot.selenaura.com" class="nd-item nd-item-tarot" onclick="toggleMenu()">
-        <div class="nd-icon">🃏</div>
-        <div class="nd-info"><div class="nd-name">Tarot</div><div class="nd-desc" data-es="22 Arcanos · Lectura intuitiva" data-en="22 Arcana · Intuitive reading">22 Arcanos · Lectura intuitiva</div></div>
-        <div class="nd-price" data-es="Gratis" data-en="Free">Gratis</div>
-      </a>
-      <a href="https://carta.selenaura.com" class="nd-item nd-item-astral" onclick="toggleMenu()">
-        <div class="nd-icon">☉</div>
-        <div class="nd-info"><div class="nd-name" data-es="Carta Astral" data-en="Birth Chart">Carta Astral</div><div class="nd-desc" data-es="15 secciones · Consulta con Selene" data-en="15 sections · Consult with Selene">15 secciones · Consulta con Selene</div></div>
-        <div class="nd-price">14,99 €</div>
-      </a>
-      <a href="https://quiro.selenaura.com" class="nd-item nd-item-quiro" onclick="toggleMenu()">
-        <div class="nd-icon">✋</div>
-        <div class="nd-info"><div class="nd-name" data-es="Quirología" data-en="Palmistry">Quirología</div><div class="nd-desc" data-es="Lectura personalizada de tu palma" data-en="Personalized palm reading">Lectura personalizada de tu palma</div></div>
-        <div class="nd-price" data-es="Gratis" data-en="Free">Gratis</div>
-      </a>
-      <a href="https://suenos.selenaura.com" class="nd-item nd-item-suenos" onclick="toggleMenu()">
-        <div class="nd-icon">☾</div>
-        <div class="nd-info"><div class="nd-name" data-es="Sueños" data-en="Dreams">Sueños</div><div class="nd-desc" data-es="Interpretación onírica · Neurociencia" data-en="Dream interpretation · Neuroscience">Interpretación onírica · Neurociencia</div></div>
-        <div class="nd-price" data-es="Gratis" data-en="Free">Gratis</div>
-      </a>
-      <a href="#horoscopo-section" class="nd-item nd-item-horo" onclick="toggleMenu()">
-        <div class="nd-icon">⭐</div>
-        <div class="nd-info"><div class="nd-name" data-es="Horóscopo Diario" data-en="Daily Horoscope">Horóscopo Diario</div><div class="nd-desc" data-es="Tránsitos planetarios reales" data-en="Real planetary transits">Tránsitos planetarios reales</div></div>
-        <div class="nd-price" data-es="Gratis" data-en="Free">Gratis</div>
-      </a>
-    </div>
-    <div class="nd-flourish">✦ ⟡ ✦</div>
-    <div class="nd-section">
-      <div class="nd-label" data-es="Formación" data-en="Education">Formación</div>
-      <a href="https://academia.selenaura.com" class="nd-item nd-item-academia" onclick="toggleMenu()">
-        <div class="nd-icon">📚</div>
-        <div class="nd-info"><div class="nd-name">Academia Selene</div><div class="nd-desc" data-es="Cursos con certificación" data-en="Certified courses">Cursos con certificación</div></div>
-      </a>
-      <a href="/blog/" class="nd-item nd-item-academia" onclick="toggleMenu()">
-        <div class="nd-icon">✦</div>
-        <div class="nd-info"><div class="nd-name">Blog</div><div class="nd-desc" data-es="Astrología y ciencia · Artículos semanales" data-en="Astrology & science · Weekly articles">Astrología y ciencia · Artículos semanales</div></div>
-      </a>
-    </div>
-    <div class="nd-flourish">✦</div>
-    <div class="nd-section">
-      <div class="nd-label" data-es="Conecta" data-en="Connect">Conecta</div>
-      <div class="nd-social">
-        <a href="https://www.instagram.com/selenaura" target="_blank">Instagram</a>
-        <a href="mailto:info@selenaura.com">info@selenaura.com</a>
+  <!-- STEP 3: TIER SELECTION -->
+  <div id="step3" class="section">
+    <button class="btn-back" onclick="goToStep(2)">← Volver</button>
+    <div class="step-label">Paso 3 de 3</div>
+    <div class="step-title">Elige tu interpretación</div>
+    <div class="step-desc">Ambas opciones están respaldadas por neurociencia del sueño.</div>
+
+    <div class="tier-cards">
+      <div class="tier-card" onclick="selectTier('express')">
+        <div class="tier-badge">GRATIS</div>
+        <div class="tier-name">Onírica Express</div>
+        <div class="tier-price">€0</div>
+        <div class="tier-desc">Interpretación rápida: marco científico principal, símbolos clave y una reflexión para tu día. Perfecta para una primera aproximación.</div>
+      </div>
+
+      <div class="tier-card featured" onclick="selectTier('profunda')">
+        <div class="tier-name">Onírica Profunda</div>
+        <div class="tier-price">€1,99</div>
+        <div class="tier-desc">Análisis completo (~800 palabras): neurociencia del sueño, simbolismo jungiano, conexión con tu momento vital, correlación astrológica y una práctica personalizada.</div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero fk-glow">
-    <div class="hero-frame">
-      <div class="hero-orb">
-        <div class="hero-orb-ring"></div>
-        <div class="hero-orb-inner">🌙</div>
-      </div>
-      <div class="hero-tag" data-es="Ciencia y consciencia de lo invisible" data-en="Science and awareness of the invisible">Ciencia y consciencia de lo invisible</div>
-      <h1 data-es="Descubre lo que<br>el cosmos quiere<br><em>revelarte</em>" data-en="Discover what<br>the cosmos wants to<br><em>reveal to you</em>">Descubre lo que<br>el cosmos quiere<br><em>revelarte</em></h1>
-      <p class="hero-sub" data-es="Astrología real, tarot intuitivo y quirología con base en neurociencia y cronobiología moderna. Cada lectura respaldada por estudios peer-reviewed." data-en="Real astrology, intuitive tarot and palmistry grounded in neuroscience and modern chronobiology. Every reading backed by peer-reviewed studies.">Astrología real, tarot intuitivo y quirología con base en neurociencia y cronobiología moderna. Cada lectura respaldada por estudios peer-reviewed.</p>
-      <div class="hero-ctas">
-        <a href="#productos" class="btn-gold" data-es="Explorar consultas" data-en="Explore readings">Explorar consultas</a>
-        <a href="https://tarot.selenaura.com" class="btn-outline" data-es="Tirada de tarot gratis →" data-en="Free tarot reading →">Tirada de tarot gratis →</a>
-      </div>
-      <p class="hero-note" data-es="5 experiencias únicas · Base científica · Sin compromiso" data-en="5 unique experiences · Science-based · No commitment">5 experiencias únicas · Base científica · Sin compromiso</p>
+  <!-- LOADING -->
+  <div id="loading" class="section">
+    <div class="loading-container">
+      <div class="moon-loader">☾</div>
+      <div class="loading-text">Selene interpreta tu sueño<span class="loading-dots"></span></div>
     </div>
-  </section>
-
-  <!-- FLOWER KNOWS DIVIDER -->
-  <div class="fk-divider fk-divider-lg">
-    <div class="fk-line"></div>
-    <svg width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M20 2C14 2 8 8 2 12C8 16 14 22 20 22C26 22 32 16 38 12C32 8 26 2 20 2Z" stroke="currentColor" stroke-width=".7" fill="none" opacity=".5"/><circle cx="20" cy="12" r="3" stroke="currentColor" stroke-width=".7" fill="none" opacity=".7"/><path d="M20 5V19M13 12H27" stroke="currentColor" stroke-width=".4" opacity=".3"/></svg>
-    <div class="fk-line"></div>
   </div>
 
-  <!-- TRUST BAR -->
-  <div class="trust-bar">
-    <div class="trust-item"><span class="trust-icon">🔬</span><span class="trust-text" data-es="30+ estudios peer-reviewed" data-en="30+ peer-reviewed studies">30+ estudios peer-reviewed</span></div>
-    <div class="trust-item"><span class="trust-icon">🌍</span><span class="trust-text" data-es="Datos astronómicos reales" data-en="Real astronomical data">Datos astronómicos reales</span></div>
-    <div class="trust-item"><span class="trust-icon">✦</span><span class="trust-text" data-es="Lecturas personalizadas" data-en="Personalized readings">Lecturas personalizadas</span></div>
-    <div class="trust-item"><span class="trust-icon">🧠</span><span class="trust-text" data-es="Neurociencia + tradición" data-en="Neuroscience + tradition">Neurociencia + tradición</span></div>
-  </div>
+  <!-- RESULT -->
+  <div id="result" class="section">
+    <div class="result-container">
+      <div class="result-header">
+        <h2>Tu Interpretación</h2>
+        <div class="result-tier" id="result-tier-label"></div>
+      </div>
+      <div class="result-text" id="result-text"></div>
+      <div class="result-footer">
+        <p>Interpretación generada por Selene · Ciencia y consciencia de lo invisible</p>
+      </div>
+    </div>
 
-  <!-- FLOWER KNOWS DIVIDER -->
-  <div class="fk-divider">
-    <div class="fk-line"></div>
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4C14 4 8 10 8 14C8 18 14 24 14 24C14 24 20 18 20 14C20 10 14 4 14 4Z" stroke="currentColor" stroke-width=".6" fill="none" opacity=".5"/><circle cx="14" cy="14" r="2" fill="currentColor" opacity=".3"/></svg>
-    <div class="fk-line"></div>
-  </div>
+    <!-- UPGRADE CTA (solo si fue express) -->
+    <div class="result-cta" id="upgrade-cta" style="display:none">
+      <h3>¿Quieres ir más profundo?</h3>
+      <p>La interpretación Onírica Profunda incluye análisis neurocientífico completo, simbolismo jungiano, correlación astrológica y una práctica personalizada.</p>
+      <button class="btn btn-gold" onclick="selectTier('profunda')">Interpretación Profunda · €1,99</button>
+    </div>
 
-  <!-- PRODUCTS -->
-  <section id="productos" class="fk-glow">
-    <div class="container">
-      <div class="section-tag" data-es="Consultas cósmicas" data-en="Cosmic readings">Consultas cósmicas</div>
-      <h2 class="section-title" data-es="Tu universo de experiencias" data-en="Your universe of experiences">Tu universo de experiencias</h2>
-      <p class="section-sub" data-es="Cinco portales de autoconocimiento, cada uno con su propia magia. Elige el que resuene contigo." data-en="Five portals of self-knowledge, each with its own magic. Choose the one that resonates with you.">Cinco portales de autoconocimiento, cada uno con su propia magia. Elige el que resuene contigo.</p>
-      <div class="products-grid">
-        <a href="https://tarot.selenaura.com" class="product-card card-tarot fk-frame fk-card-glow reveal">
-          <div class="accent-line"></div>
-          <div class="product-row-top"><div class="product-icon">🃏</div><span class="product-badge new">✦ Nuevo</span></div>
-          <div class="product-name" data-es="Tirada de Tarot" data-en="Tarot Reading">Tirada de Tarot</div>
-          <div class="product-desc" data-es="22 Arcanos Mayores. Ritual de respiración, selección intuitiva de cartas y lectura narrativa con psicología arquetípica de Jung y neurociencia de la intuición." data-en="22 Major Arcana. Breathing ritual, intuitive card selection and narrative reading with Jungian archetypal psychology and neuroscience of intuition.">22 Arcanos Mayores. Ritual de respiración, selección intuitiva de cartas y lectura narrativa con psicología arquetípica de Jung y neurociencia de la intuición.</div>
-          <div class="product-footer"><span class="product-price" data-es="Gratis — 1,99 €" data-en="Free — €1.99">Gratis — 1,99 €</span><span class="product-cta" data-es="Hacer mi tirada →" data-en="Get my reading →">Hacer mi tirada →</span></div>
+    <!-- CROSS-SELL -->
+    <div style="margin-top:28px">
+      <div style="font-family:var(--font-title); font-size:13px; color:var(--gold); letter-spacing:2px; text-transform:uppercase; text-align:center; margin-bottom:14px">
+        Sigue explorando
+      </div>
+      <div class="cross-sell">
+        <a href="https://carta.selenaura.com" target="_blank" rel="noopener">
+          <div class="cs-icon">✦</div>
+          <div class="cs-name">Carta Astral</div>
+          <div class="cs-desc">Tu mapa natal completo</div>
         </a>
-        <a href="https://carta.selenaura.com" class="product-card card-astral fk-frame fk-card-glow reveal stagger-1">
-          <div class="accent-line"></div>
-          <div class="product-row-top"><div class="product-icon">☉</div><span class="product-badge">Premium</span></div>
-          <div class="product-name" data-es="Carta Astral" data-en="Birth Chart">Carta Astral</div>
-          <div class="product-desc" data-es="Tu mapa cósmico completo: 15 secciones, La Consulta personalizada y chat con Selene. Basada en efemérides reales y cronobiología moderna." data-en="Your complete cosmic map: 15 sections, personalized Consultation and chat with Selene. Based on real ephemeris and modern chronobiology.">Tu mapa cósmico completo: 15 secciones, La Consulta personalizada y chat con Selene. Basada en efemérides reales y cronobiología moderna.</div>
-          <div class="product-footer"><span class="product-price" data-es="Gratis — 14,99 €" data-en="Free — €14.99">Gratis — 14,99 €</span><span class="product-cta" data-es="Ver mi carta →" data-en="View my chart →">Ver mi carta →</span></div>
+        <a href="https://tarot.selenaura.com" target="_blank" rel="noopener">
+          <div class="cs-icon">🃏</div>
+          <div class="cs-name">Tarot</div>
+          <div class="cs-desc">Lectura personalizada</div>
         </a>
-        <a href="https://quiro.selenaura.com" class="product-card card-quiro fk-frame fk-card-glow reveal stagger-2">
-          <div class="accent-line"></div>
-          <div class="product-row-top"><div class="product-icon">✋</div><span class="product-badge" data-es="Único" data-en="Unique">Único</span></div>
-          <div class="product-name" data-es="Quirología" data-en="Palmistry">Quirología</div>
-          <div class="product-desc" data-es="Análisis dermatoglífico de tu palma. 6 líneas, 7 montes planetarios, forma de mano y marcas especiales. Basado en los textos clásicos de Cheiro (1916) y Benham." data-en="Dermatoglyphic analysis of your palm. 6 lines, 7 planetary mounts, hand shape and special marks. Based on classic texts by Cheiro (1916) and Benham.">Análisis dermatoglífico de tu palma. 6 líneas, 7 montes planetarios, forma de mano y marcas especiales. Basado en los textos clásicos de Cheiro (1916) y Benham.</div>
-          <div class="product-footer"><span class="product-price" data-es="Gratis — 2,49 €" data-en="Free — €2.49">Gratis — 2,49 €</span><span class="product-cta" data-es="Analizar mi mano →" data-en="Analyze my palm →">Analizar mi mano →</span></div>
+        <a href="https://quiro.selenaura.com" target="_blank" rel="noopener">
+          <div class="cs-icon">🤚</div>
+          <div class="cs-name">Quirología</div>
+          <div class="cs-desc">Lee las líneas de tu mano</div>
         </a>
-        <a href="https://suenos.selenaura.com" class="product-card card-suenos fk-frame fk-card-glow reveal stagger-3">
-          <div class="accent-line"></div>
-          <div class="product-row-top"><div class="product-icon">☾</div><span class="product-badge new">✦ Nuevo</span></div>
-          <div class="product-name" data-es="Sueños" data-en="Dreams">Sueños</div>
-          <div class="product-desc" data-es="Interpretación onírica con neurociencia del sueño (Walker, Revonsuo, Schredl) y simbolismo jungiano. Descubre qué te dicen tus sueños con base científica real." data-en="Dream interpretation with sleep neuroscience (Walker, Revonsuo, Schredl) and Jungian symbolism. Discover what your dreams tell you with real scientific backing.">Interpretación onírica con neurociencia del sueño (Walker, Revonsuo, Schredl) y simbolismo jungiano. Descubre qué te dicen tus sueños con base científica real.</div>
-          <div class="product-footer"><span class="product-price" data-es="Gratis — 1,99 €" data-en="Free — €1.99">Gratis — 1,99 €</span><span class="product-cta" data-es="Interpretar mi sueño →" data-en="Interpret my dream →">Interpretar mi sueño →</span></div>
-        </a>
-        <a href="#horoscopo-section" class="product-card card-horoscopo fk-frame fk-card-glow reveal stagger-4">
-          <div class="accent-line"></div>
-          <div class="product-row-top"><div class="product-icon">⭐</div><span class="product-badge free" data-es="Gratis" data-en="Free">Gratis</span></div>
-          <div class="product-name" data-es="Horóscopo Diario" data-en="Daily Horoscope">Horóscopo Diario</div>
-          <div class="product-desc" data-es="Predicción personalizada para tu signo solar, actualizada cada día con los tránsitos planetarios reales. Selecciona tu signo y descubre qué dicen los astros hoy." data-en="Personalized prediction for your sun sign, updated daily with real planetary transits. Select your sign and discover what the stars say today.">Predicción personalizada para tu signo solar, actualizada cada día con los tránsitos planetarios reales. Selecciona tu signo y descubre qué dicen los astros hoy.</div>
-          <div class="product-footer"><span class="product-price" style="color:var(--teal)" data-es="Gratis" data-en="Free">Gratis</span><span class="product-cta" data-es="Leer mi horóscopo →" data-en="Read my horoscope →">Leer mi horóscopo →</span></div>
+        <a href="https://selenaura.com" target="_blank" rel="noopener">
+          <div class="cs-icon">☾</div>
+          <div class="cs-name">SelenaUra</div>
+          <div class="cs-desc">Horóscopo diario</div>
         </a>
       </div>
     </div>
-  </section>
 
-  <!-- LARGE FLOWER KNOWS ORNAMENT -->
-  <div class="fk-divider fk-divider-lg">
-    <div class="fk-line"></div>
-    <svg width="56" height="32" viewBox="0 0 56 32" fill="none">
-      <path d="M28 4C22 4 12 12 4 16C12 20 22 28 28 28C34 28 44 20 52 16C44 12 34 4 28 4Z" stroke="currentColor" stroke-width=".6" fill="none" opacity=".4"/>
-      <path d="M28 8C24 8 18 13 14 16C18 19 24 24 28 24C32 24 38 19 42 16C38 13 32 8 28 8Z" stroke="currentColor" stroke-width=".5" fill="none" opacity=".3"/>
-      <circle cx="28" cy="16" r="3.5" stroke="currentColor" stroke-width=".7" fill="none" opacity=".5"/>
-      <circle cx="28" cy="16" r="1.2" fill="currentColor" opacity=".4"/>
-      <line x1="4" y1="16" x2="24" y2="16" stroke="currentColor" stroke-width=".3" opacity=".2"/>
-      <line x1="32" y1="16" x2="52" y2="16" stroke="currentColor" stroke-width=".3" opacity=".2"/>
-    </svg>
-    <div class="fk-line"></div>
+    <button class="btn btn-outline" style="margin-top:24px" onclick="resetAll()">Interpretar otro sueño</button>
   </div>
 
-  <!-- TAROT SHOWCASE -->
-  <section class="tarot-showcase" id="tarot">
-    <div class="tarot-inner">
-      <div class="tarot-visual">
-        <div class="tarot-cards-fan">
-          <div class="fan-card"><div class="fan-card-frame"></div><div class="fan-card-pattern"></div><span class="fan-card-num">II</span><span class="fan-card-symbol">🌙</span><span class="fan-card-name">La Sacerdotisa</span></div>
-          <div class="fan-card"><div class="fan-card-frame"></div><div class="fan-card-pattern"></div><span class="fan-card-num">XVII</span><span class="fan-card-symbol">⭐</span><span class="fan-card-name">La Estrella</span></div>
-          <div class="fan-card"><div class="fan-card-frame"></div><div class="fan-card-pattern"></div><span class="fan-card-num">XXI</span><span class="fan-card-symbol">🌍</span><span class="fan-card-name">El Mundo</span></div>
-        </div>
-      </div>
-      <div class="tarot-info">
-        <h3 data-es="Los arcanos<br>quieren <em>hablarte</em>" data-en="The arcana<br>want to <em>speak to you</em>">Los arcanos<br>quieren <em>hablarte</em></h3>
-        <p data-es="El tarot no predice el futuro — revela lo que tu inconsciente ya sabe. Cada lectura de Selene integra la tradición hermética con estudios de neurociencia de la intuición." data-en="Tarot doesn't predict the future — it reveals what your unconscious already knows. Every Selene reading integrates the hermetic tradition with neuroscience studies on intuition.">El tarot no predice el futuro — revela lo que tu inconsciente ya sabe. Cada lectura de Selene integra la tradición hermética con estudios de neurociencia de la intuición.</p>
-        <div class="tarot-features">
-          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text" data-es="22 Arcanos Mayores con inversiones (30%)" data-en="22 Major Arcana with reversals (30%)">22 Arcanos Mayores con inversiones (30%)</span></div>
-          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text" data-es="Ritual de respiración guiada antes de elegir" data-en="Guided breathing ritual before choosing">Ritual de respiración guiada antes de elegir</span></div>
-          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text" data-es="Lectura narrativa con citas de Bechara, Jung, Kahneman" data-en="Narrative reading citing Bechara, Jung, Kahneman">Lectura narrativa con citas de Bechara, Jung, Kahneman</span></div>
-          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text" data-es="Cristal protector y ritual personalizado" data-en="Protective crystal and personalized ritual">Cristal protector y ritual personalizado</span></div>
-          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text" data-es="Express gratis (1 carta) · Profunda 1,99 € (3 cartas)" data-en="Express free (1 card) · Deep €1.99 (3 cards)">Express gratis (1 carta) · Profunda 1,99 € (3 cartas)</span></div>
-        </div>
-        <div class="tarot-ctas">
-          <a href="https://tarot.selenaura.com" class="btn-gold" data-es="Hacer mi tirada gratis" data-en="Get my free reading">Hacer mi tirada gratis</a>
-          <a href="https://tarot.selenaura.com" class="btn-outline" data-es="Saber más" data-en="Learn more">Saber más</a>
-        </div>
-      </div>
+  <!-- ERROR -->
+  <div id="error" class="section">
+    <div style="text-align:center; padding:48px 0">
+      <div style="font-size:40px; margin-bottom:16px">✧</div>
+      <div class="step-title">Algo no ha ido bien</div>
+      <p style="color:var(--white-60); margin-bottom:24px" id="error-text">Inténtalo de nuevo en unos momentos.</p>
+      <button class="btn btn-gold" onclick="resetAll()">Volver a empezar</button>
     </div>
-  </section>
-
-  <!-- DIVIDER -->
-  <div class="fk-divider">
-    <div class="fk-line"></div>
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4C14 4 8 10 8 14C8 18 14 24 14 24C14 24 20 18 20 14C20 10 14 4 14 4Z" stroke="currentColor" stroke-width=".6" fill="none" opacity=".5"/><circle cx="14" cy="14" r="2" fill="currentColor" opacity=".3"/></svg>
-    <div class="fk-line"></div>
   </div>
-
-  <!-- SCIENCE -->
-  <section class="science-section" id="ciencia">
-    <div class="container">
-      <div class="section-tag" data-es="Base científica" data-en="Scientific foundation">Base científica</div>
-      <h2 class="section-title" data-es="No es magia. Es ciencia." data-en="It's not magic. It's science.">No es magia. Es ciencia.</h2>
-      <p class="section-sub" data-es="Cada lectura de Selene integra hallazgos de estudios peer-reviewed publicados en revistas científicas de primer nivel." data-en="Every Selene reading integrates findings from peer-reviewed studies published in top-tier scientific journals.">Cada lectura de Selene integra hallazgos de estudios peer-reviewed publicados en revistas científicas de primer nivel.</p>
-      <div class="science-grid">
-        <div class="science-card fk-frame reveal"><div class="sci-number">30+</div><div class="sci-label" data-es="Estudios citados" data-en="Studies cited">Estudios citados<br><span style="font-size:10px;color:var(--text-dim)">2020–2025</span></div></div>
-        <div class="science-card fk-frame reveal stagger-1"><div class="sci-number">4</div><div class="sci-label" data-es="Disciplinas integradas" data-en="Integrated disciplines">Disciplinas integradas<br><span style="font-size:10px;color:var(--text-dim)">Neuro · Crono · Psico · Astro</span></div></div>
-        <div class="science-card fk-frame reveal stagger-2"><div class="sci-number">∞</div><div class="sci-label" data-es="Combinaciones únicas" data-en="Unique combinations">Combinaciones únicas<br><span style="font-size:10px;color:var(--text-dim)">Cada lectura es irrepetible</span></div></div>
-      </div>
-      <div class="fk-quote reveal" style="max-width:660px;margin:40px auto 0;border:1px solid rgba(201,168,76,.08);border-radius:16px">
-        <p style="font-family:var(--serif);font-size:14.5px;color:var(--white-dim);line-height:1.85;font-weight:300;font-style:italic" data-es="Bechara, Damasio et al. (1997) demostraron que los marcadores somáticos guían las decisiones intuitivas antes del razonamiento consciente. Kahneman (2011) distinguió el Sistema 1 intuitivo del Sistema 2 analítico. Lieberman (2000) definió la intuición como inteligencia inconsciente." data-en="Bechara, Damasio et al. (1997) demonstrated that somatic markers guide intuitive decisions before conscious reasoning. Kahneman (2011) distinguished the intuitive System 1 from the analytical System 2. Lieberman (2000) defined intuition as unconscious intelligence.">Bechara, Damasio et al. (1997) demostraron que los marcadores somáticos guían las decisiones intuitivas antes del razonamiento consciente. Kahneman (2011) distinguió el Sistema 1 intuitivo del Sistema 2 analítico. Lieberman (2000) definió la intuición como inteligencia inconsciente.</p>
-        <p style="font-size:10px;color:var(--text-dim);margin-top:12px" data-es="Fuentes: Current Biology · Psychological Bulletin · Frontiers in Psychology · Science Advances" data-en="Sources: Current Biology · Psychological Bulletin · Frontiers in Psychology · Science Advances">Fuentes: Current Biology · Psychological Bulletin · Frontiers in Psychology · Science Advances</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOROSCOPO -->
-  <section id="horoscopo-section" style="padding:50px 0 80px">
-    <div class="container">
-      <div class="section-tag" data-es="Tu signo hoy" data-en="Your sign today">Tu signo hoy</div>
-      <h2 class="section-title" data-es="Horóscopo diario" data-en="Daily horoscope">Horóscopo diario</h2>
-      <p class="section-sub" data-es="Selecciona tu signo solar y descubre qué dicen los tránsitos planetarios de hoy." data-en="Select your sun sign and discover what today's planetary transits reveal.">Selecciona tu signo solar y descubre qué dicen los tránsitos planetarios de hoy.</p>
-      <div class="zodiac-grid">
-        <div class="zodiac-btn" data-sign="aries">♈ Aries</div><div class="zodiac-btn" data-sign="tauro">♉ Tauro</div>
-        <div class="zodiac-btn" data-sign="geminis">♊ Géminis</div><div class="zodiac-btn" data-sign="cancer">♋ Cáncer</div>
-        <div class="zodiac-btn" data-sign="leo">♌ Leo</div><div class="zodiac-btn" data-sign="virgo">♍ Virgo</div>
-        <div class="zodiac-btn" data-sign="libra">♎ Libra</div><div class="zodiac-btn" data-sign="escorpio">♏ Escorpio</div>
-        <div class="zodiac-btn" data-sign="sagitario">♐ Sagitario</div><div class="zodiac-btn" data-sign="capricornio">♑ Capricornio</div>
-        <div class="zodiac-btn" data-sign="acuario">♒ Acuario</div><div class="zodiac-btn" data-sign="piscis">♓ Piscis</div>
-      </div>
-      <div class="horo-display" id="horoDisplay">
-        <div class="horo-sign-title" id="horoSignTitle"></div>
-        <div class="horo-date" id="horoDate"></div>
-        <div class="horo-text" id="horoText"></div>
-        <div class="horo-fact" id="horoFact" style="display:none">
-          <strong data-es="Dato cósmico del día" data-en="Cosmic fact of the day">Dato cósmico del día</strong>
-          <span id="horoFactText"></span>
-          <span id="horoFactSource" style="display:block;margin-top:6px;font-style:italic;font-size:11px"></span>
-        </div>
-        <div class="horo-cta">
-          <a href="https://carta.selenaura.com" data-es="Descubre tu carta astral completa →" data-en="Discover your full birth chart →">Descubre tu carta astral completa →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LARGE FLOWER KNOWS ORNAMENT -->
-  <div class="fk-divider fk-divider-lg">
-    <div class="fk-line"></div>
-    <svg width="56" height="32" viewBox="0 0 56 32" fill="none">
-      <path d="M28 4C22 4 12 12 4 16C12 20 22 28 28 28C34 28 44 20 52 16C44 12 34 4 28 4Z" stroke="currentColor" stroke-width=".6" fill="none" opacity=".4"/>
-      <circle cx="28" cy="16" r="3.5" stroke="currentColor" stroke-width=".7" fill="none" opacity=".5"/>
-      <circle cx="28" cy="16" r="1.2" fill="currentColor" opacity=".4"/>
-    </svg>
-    <div class="fk-line"></div>
-  </div>
-
-  <!-- ═══ LECTURA CÓSMICA EXPRESS ═══ -->
-  <section class="newsletter-section" id="lectura-express">
-    <div class="container">
-      <div class="newsletter-card fk-frame fk-frame-full fk-card-glow reveal">
-        <span class="fk-corner-tr"></span>
-        <span class="fk-corner-bl"></span>
-
-        <div id="nlFormWrap">
-          <span class="nl-icon">✨</span>
-          <h3 class="nl-title" data-es="Tu lectura cósmica<br><em>express</em>" data-en="Your express<br>cosmic <em>reading</em>">Tu lectura cósmica<br><em>express</em></h3>
-          <p class="nl-sub" data-es="Introduce tu fecha de nacimiento y recibe una lectura personalizada generada por Selene. Gratis, con base científica. Única e irrepetible." data-en="Enter your birth date and receive a personalized reading generated by Selene. Free, science-backed. Unique and unrepeatable.">Introduce tu fecha de nacimiento y recibe una lectura personalizada generada por Selene. Gratis, con base científica. Única e irrepetible.</p>
-
-          <div class="nl-form" id="nlForm">
-            <input type="email" class="nl-field" id="nlEmail" placeholder="Tu email" required autocomplete="email">
-            <input type="date" class="nl-field" id="nlBirth" required max="2010-12-31" min="1930-01-01">
-            <div class="nl-consent">
-              <input type="checkbox" id="nlConsent">
-              <label for="nlConsent" data-es="Acepto recibir mi lectura y comunicaciones de Selene. Puedo darme de baja en cualquier momento. <a href='/privacidad.html'>Política de Privacidad</a>" data-en="I agree to receive my reading and communications from Selene. I can unsubscribe anytime. <a href='/privacidad.html'>Privacy Policy</a>">Acepto recibir mi lectura y comunicaciones de Selene. Puedo darme de baja en cualquier momento. <a href="/privacidad.html">Política de Privacidad</a></label>
-            </div>
-            <button type="button" class="nl-submit" id="nlSubmit" disabled onclick="submitLectura()" data-es="Descubrir mi lectura ✦" data-en="Discover my reading ✦">Descubrir mi lectura ✦</button>
-          </div>
-
-          <div class="nl-legal" data-es="Responsable: Selene — selenaura.com (info@selenaura.com). Finalidad: generación y envío de lectura astrológica personalizada y contenido relacionado. Base legal: consentimiento del interesado (Art. 6.1.a RGPD). Destinatarios: MailerLite (UE), Anthropic (procesamiento IA). Derechos: acceso, rectificación, supresión, portabilidad y oposición escribiendo a info@selenaura.com." data-en="Controller: Selene — selenaura.com (info@selenaura.com). Purpose: generation and delivery of personalized astrological reading and related content. Legal basis: consent (Art. 6.1.a GDPR). Recipients: MailerLite (EU), Anthropic (AI processing). Rights: access, rectification, erasure, portability and objection by writing to info@selenaura.com.">Responsable: Selene — selenaura.com (info@selenaura.com). Finalidad: generación y envío de lectura astrológica personalizada y contenido relacionado. Base legal: consentimiento del interesado (Art. 6.1.a RGPD). Destinatarios: MailerLite (UE), Anthropic (procesamiento IA). Derechos: acceso, rectificación, supresión, portabilidad y oposición escribiendo a info@selenaura.com.</div>
-        </div>
-
-        <div class="nl-loading" id="nlLoading">
-          <div class="nl-loading-orb">
-            <div class="nl-loading-ring"></div>
-            <span>🌙</span>
-          </div>
-          <p class="nl-loading-text" data-es="Selene está consultando los astros..." data-en="Selene is consulting the stars...">Selene está consultando los astros...</p>
-          <p class="nl-loading-sub" data-es="Calculando posiciones planetarias de tu nacimiento" data-en="Calculating planetary positions from your birth">Calculando posiciones planetarias de tu nacimiento</p>
-        </div>
-
-        <div class="nl-result" id="nlResult">
-          <span class="nl-result-badge" data-es="✦ Tu Lectura Cósmica Express" data-en="✦ Your Express Cosmic Reading">✦ Tu Lectura Cósmica Express</span>
-          <div class="nl-result-sign" id="nlResultSign"></div>
-          <div class="nl-result-text" id="nlResultText"></div>
-          <div class="nl-result-cta">
-            <p class="nl-result-cta-text" data-es="Esta es solo una muestra. Tu carta astral completa tiene 15 secciones con La Consulta personalizada." data-en="This is just a sample. Your full birth chart has 15 sections with a personalized Consultation.">Esta es solo una muestra. Tu carta astral completa tiene 15 secciones con La Consulta personalizada.</p>
-            <a href="https://carta.selenaura.com" class="btn-gold" data-es="Ver mi carta astral completa →" data-en="View my full birth chart →">Ver mi carta astral completa →</a>
-          </div>
-          <p class="nl-result-email-note" data-es="📩 Hemos enviado esta lectura a tu email. Confirma tu suscripción para recibir contenido personalizado." data-en="📩 We've sent this reading to your email. Confirm your subscription for personalized content.">📩 Hemos enviado esta lectura a tu email. Confirma tu suscripción para recibir contenido personalizado.</p>
-        </div>
-
-        <div class="nl-error" id="nlError">
-          <span style="font-size:32px;display:block;margin-bottom:12px">⚡</span>
-          <p style="font-family:var(--serif);font-size:18px;color:var(--gold-light);margin-bottom:8px" data-es="Los astros están ocupados" data-en="The stars are busy">Los astros están ocupados</p>
-          <p style="font-size:12px;color:var(--text-mid);margin-bottom:16px" data-es="Ha ocurrido un error. Por favor, inténtalo de nuevo." data-en="An error occurred. Please try again.">Ha ocurrido un error. Por favor, inténtalo de nuevo.</p>
-          <button class="btn-outline" onclick="resetLectura()" data-es="Reintentar" data-en="Try again">Reintentar</button>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- FLOWER KNOWS DIVIDER -->
-  <div class="fk-divider">
-    <div class="fk-line"></div>
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4C14 4 8 10 8 14C8 18 14 24 14 24C14 24 20 18 20 14C20 10 14 4 14 4Z" stroke="currentColor" stroke-width=".6" fill="none" opacity=".5"/><circle cx="14" cy="14" r="2" fill="currentColor" opacity=".3"/></svg>
-    <div class="fk-line"></div>
-  </div>
-
-  <!-- ACADEMY -->
-  <section id="academia" style="padding:20px 0 90px">
-    <div class="container">
-      <div class="academy-teaser fk-frame fk-frame-full fk-card-glow reveal">
-        <span class="fk-corner-tr"></span>
-        <span class="fk-corner-bl"></span>
-        <div class="academy-badge" data-es="📚 Academia Selene" data-en="📚 Selene Academy">📚 Academia Selene</div>
-        <h3 data-es="Aprende a leer tu propio cielo" data-en="Learn to read your own sky">Aprende a leer tu propio cielo</h3>
-        <p data-es="Formación en desarrollo intuitivo con certificación. Cursos de astrología, tarot y consciencia respaldados por cronobiología y neurociencia. Narrados por Selene." data-en="Intuitive development training with certification. Astrology, tarot and consciousness courses backed by chronobiology and neuroscience. Narrated by Selene.">Formación en desarrollo intuitivo con certificación. Cursos de astrología, tarot y consciencia respaldados por cronobiología y neurociencia. Narrados por Selene.</p>
-        <a href="https://academia.selenaura.com" class="btn-gold" data-es="Explorar cursos" data-en="Explore courses">Explorar cursos</a>
-      </div>
-    </div>
-  </section>
 
   <!-- FOOTER -->
-  <div class="fk-rule"></div>
-  <footer>
-    <div class="footer-brand">S E L E N E</div>
-    <div class="footer-tagline" data-es="Ciencia y consciencia de lo invisible" data-en="Science and awareness of the invisible">Ciencia y consciencia de lo invisible</div>
-    <div class="footer-links">
-      <a href="https://carta.selenaura.com" data-es="Carta Astral" data-en="Birth Chart">Carta Astral</a>
-      <a href="https://tarot.selenaura.com">Tarot</a>
-      <a href="https://quiro.selenaura.com" data-es="Quirología" data-en="Palmistry">Quirología</a>
-      <a href="https://suenos.selenaura.com" data-es="Sueños" data-en="Dreams">Sueños</a>
-      <a href="https://academia.selenaura.com">Academia</a>
-      <a href="https://www.instagram.com/selenaura" target="_blank">Instagram</a>
-      <a href="mailto:info@selenaura.com" data-es="Contacto" data-en="Contact">Contacto</a>
-    </div>
-    <div class="footer-links" style="margin-bottom:12px">
-      <a href="/aviso-legal.html" data-es="Aviso Legal" data-en="Legal Notice">Aviso Legal</a>
-      <a href="/privacidad.html" data-es="Política de Privacidad" data-en="Privacy Policy">Política de Privacidad</a>
-      <a href="/cookies.html" data-es="Política de Cookies" data-en="Cookie Policy">Política de Cookies</a>
-      <a href="#" id="cookieSettingsLink" data-es="Configurar cookies" data-en="Cookie settings">Configurar cookies</a>
-    </div>
-    <div class="footer-legal" data-es="Selene es una herramienta de autoconocimiento basada en tradiciones milenarias e integrada con estudios científicos modernos. No constituye asesoramiento médico, psicológico, financiero ni legal. Las lecturas son para reflexión personal. © 2026 Selene." data-en="Selene is a self-knowledge tool based on ancient traditions integrated with modern scientific studies. It does not constitute medical, psychological, financial or legal advice. Readings are for personal reflection. © 2026 Selene.">Selene es una herramienta de autoconocimiento basada en tradiciones milenarias e integrada con estudios científicos modernos. No constituye asesoramiento médico, psicológico, financiero ni legal. Las lecturas son para reflexión personal. © 2026 Selene.</div>
-  </footer>
+  <div class="footer">
+    <div class="footer-brand">SelenaUra · Ciencia y consciencia de lo invisible</div>
+    <a href="https://selenaura.com/aviso-legal.html">Aviso Legal</a> ·
+    <a href="https://selenaura.com/privacidad.html">Privacidad</a> ·
+    <a href="https://selenaura.com/cookies.html">Cookies</a>
+  </div>
 
 </div>
 
 <script>
-// ═══ LANGUAGE ═══
-let currentLang='es';
-function setLang(lang){
-  currentLang=lang;
-  document.querySelectorAll('.lang-option').forEach(function(el){el.classList.toggle('active',el.dataset.lang===lang)});
-  document.querySelectorAll('[data-'+lang+']').forEach(function(el){var t=el.getAttribute('data-'+lang);if(t)el.innerHTML=t});
-  document.documentElement.lang=lang;
-}
+  // --- STATE ---
+  let state = {
+    sueno: '',
+    emociones: [],
+    hora: 'no_recuerdo',
+    recurrente: false,
+    contexto: '',
+    signo: '',
+    nacimiento: '',
+    tier: ''
+  };
 
-// ═══ HAMBURGER MENU ═══
-var menuOpen=false;
-function toggleMenu(){
-  menuOpen=!menuOpen;
-  document.getElementById('hamburger').classList.toggle('open',menuOpen);
-  document.getElementById('navDropdown').classList.toggle('open',menuOpen);
-  document.getElementById('menuOverlay').classList.toggle('open',menuOpen);
-  document.body.style.overflow=menuOpen?'hidden':'';
-}
-
-// ═══ SCROLL REVEAL ═══
-var observer=new IntersectionObserver(function(entries){
-  entries.forEach(function(entry){
-    if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}
-  });
-},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
-
-// ═══ EXTERNAL LINKS → NEW TAB ═══
-document.querySelectorAll('a[href^="http"]').forEach(function(a){
-  if(!a.href.includes(location.hostname)){
-    a.setAttribute('target','_blank');
-    a.setAttribute('rel','noopener');
-  }
-});
-
-// ═══ SUBDOMAIN LINKS → NEW TAB ═══
-document.querySelectorAll('a[href*="carta.selenaura"],a[href*="tarot.selenaura"],a[href*="quiro.selenaura"],a[href*="suenos.selenaura"],a[href*="academia.selenaura"]').forEach(function(a){
-  a.setAttribute('target','_blank');
-  a.setAttribute('rel','noopener');
-});
-
-// ═══ COOKIE SETTINGS LINK ═══
-var cookieLink=document.getElementById('cookieSettingsLink');
-if(cookieLink){
-  cookieLink.addEventListener('click',function(e){
-    e.preventDefault();
-    localStorage.removeItem('selene_cookie_consent');
-    location.reload();
-  });
-}
-
-// ═══ COOKIE BANNER ═══
-(function(){
-  if(localStorage.getItem('selene_cookie_consent'))return;
-  var banner=document.createElement('div');
-  banner.id='cookieBanner';
-  banner.innerHTML=
-    '<div style="position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:16px 20px;background:rgba(17,17,24,.97);border-top:1px solid rgba(201,168,76,.15);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">'+
-    '<p style="font-size:12px;color:#9A9AAF;margin:0;max-width:600px;line-height:1.7">'+
-    'Utilizamos cookies técnicas necesarias para el funcionamiento del sitio. Consulta nuestra '+
-    '<a href="/cookies.html" style="color:#C9A84C;text-decoration:none">Política de Cookies</a> para más información.'+
-    '</p>'+
-    '<div style="display:flex;gap:8px;flex-shrink:0">'+
-    '<button onclick="acceptCookies()" style="padding:8px 20px;border-radius:100px;border:none;background:linear-gradient(135deg,#C9A84C,#B8943F);color:#0A0A0F;font-size:11px;font-weight:600;cursor:pointer;font-family:Outfit,sans-serif;letter-spacing:.5px">Aceptar</button>'+
-    '<button onclick="acceptCookies()" style="padding:8px 20px;border-radius:100px;border:1px solid rgba(201,168,76,.2);background:none;color:#9A9AAF;font-size:11px;cursor:pointer;font-family:Outfit,sans-serif">Solo necesarias</button>'+
-    '</div></div>';
-  document.body.appendChild(banner);
-})();
-
-function acceptCookies(){
-  localStorage.setItem('selene_cookie_consent','accepted');
-  var b=document.getElementById('cookieBanner');
-  if(b)b.remove();
-}
-
-// ═══ LECTURA CÓSMICA EXPRESS ═══
-
-function getZodiacSign(dateStr){
-  var d=new Date(dateStr+'T12:00:00');
-  var day=d.getDate(), month=d.getMonth()+1;
-  var signs=[
-    {name:'Capricornio',symbol:'♑',en:'Capricorn',start:[12,22],end:[1,19]},
-    {name:'Acuario',symbol:'♒',en:'Aquarius',start:[1,20],end:[2,18]},
-    {name:'Piscis',symbol:'♓',en:'Pisces',start:[2,19],end:[3,20]},
-    {name:'Aries',symbol:'♈',en:'Aries',start:[3,21],end:[4,19]},
-    {name:'Tauro',symbol:'♉',en:'Taurus',start:[4,20],end:[5,20]},
-    {name:'Géminis',symbol:'♊',en:'Gemini',start:[5,21],end:[6,20]},
-    {name:'Cáncer',symbol:'♋',en:'Cancer',start:[6,21],end:[7,22]},
-    {name:'Leo',symbol:'♌',en:'Leo',start:[7,23],end:[8,22]},
-    {name:'Virgo',symbol:'♍',en:'Virgo',start:[8,23],end:[9,22]},
-    {name:'Libra',symbol:'♎',en:'Libra',start:[9,23],end:[10,22]},
-    {name:'Escorpio',symbol:'♏',en:'Scorpio',start:[10,23],end:[11,21]},
-    {name:'Sagitario',symbol:'♐',en:'Sagittarius',start:[11,22],end:[12,21]}
-  ];
-  for(var i=0;i<signs.length;i++){
-    var s=signs[i];
-    if(s.name==='Capricornio'){
-      if((month===12&&day>=22)||(month===1&&day<=19))return s;
-    }else{
-      if((month===s.start[0]&&day>=s.start[1])||(month===s.end[0]&&day<=s.end[1]))return s;
-    }
-  }
-  return signs[0];
-}
-
-(function(){
-  var email=document.getElementById('nlEmail');
-  var birth=document.getElementById('nlBirth');
-  var consent=document.getElementById('nlConsent');
-  var submit=document.getElementById('nlSubmit');
-  if(!email||!birth||!consent||!submit)return;
-
-  birth.addEventListener('change',function(){
-    this.classList.toggle('has-value',!!this.value);
-    checkValid();
-  });
-
-  function checkValid(){
-    var valid=email.value.indexOf('@')>0 && birth.value!=='' && consent.checked;
-    submit.disabled=!valid;
-  }
-  email.addEventListener('input',checkValid);
-  consent.addEventListener('change',checkValid);
-})();
-
-function showState(stateId){
-  ['nlFormWrap','nlLoading','nlResult','nlError'].forEach(function(id){
-    var el=document.getElementById(id);
-    if(el){el.style.display='none';el.classList.remove('show');}
-  });
-  var target=document.getElementById(stateId);
-  if(target){target.style.display='block';target.classList.add('show');}
-}
-
-function resetLectura(){
-  showState('nlFormWrap');
-  var submit=document.getElementById('nlSubmit');
-  var lang=document.documentElement.lang||'es';
-  submit.textContent=lang==='en'?'Discover my reading ✦':'Descubrir mi lectura ✦';
-  submit.disabled=false;
-}
-
-async function submitLectura(){
-  var email=document.getElementById('nlEmail').value.trim();
-  var birthDate=document.getElementById('nlBirth').value;
-  var consent=document.getElementById('nlConsent').checked;
-  if(!email||!birthDate||!consent)return;
-
-  var lang=document.documentElement.lang||'es';
-  var sign=getZodiacSign(birthDate);
-
-  showState('nlLoading');
-
-  try{
-    var API_URL='/api/lectura-express';
-
-    var response=await fetch(API_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        email:email,
-        birthDate:birthDate,
-        sign:sign.name,
-        signEn:sign.en,
-        lang:lang
-      })
+  // --- CHIPS ---
+  document.querySelectorAll('#emociones-chips .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('selected');
+      const val = chip.dataset.val;
+      if (state.emociones.includes(val)) {
+        state.emociones = state.emociones.filter(e => e !== val);
+      } else {
+        state.emociones.push(val);
+      }
     });
+  });
 
-    if(!response.ok) throw new Error('API error '+response.status);
-    var data=await response.json();
+  document.querySelectorAll('#hora-chips .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#hora-chips .chip').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      state.hora = chip.dataset.val;
+    });
+  });
 
-    document.getElementById('nlResultSign').innerHTML=sign.symbol+' '+(lang==='en'?sign.en:sign.name);
-    document.getElementById('nlResultText').innerHTML=data.reading||data.lectura||'';
+  document.querySelectorAll('#signo-chips .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#signo-chips .chip').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      state.signo = chip.dataset.val;
+    });
+  });
 
-    showState('nlResult');
-
-    document.getElementById('lectura-express').scrollIntoView({behavior:'smooth',block:'start'});
-
-  }catch(err){
-    console.error('Lectura Express error:',err);
-    showState('nlError');
+  // --- TOGGLE ---
+  function toggleRecurrente() {
+    state.recurrente = !state.recurrente;
+    document.getElementById('toggle-recurrente').classList.toggle('on', state.recurrente);
   }
-}
 
-// ═══ HORÓSCOPO DIARIO ═══
-let horoData = null;
+  function toggleOptional() {
+    const fields = document.getElementById('optional-fields');
+    const arrow = document.getElementById('opt-arrow');
+    fields.classList.toggle('open');
+    arrow.textContent = fields.classList.contains('open') ? '▾' : '▸';
+  }
 
-document.querySelectorAll('.zodiac-btn').forEach(btn => {
-  btn.addEventListener('click', () => loadHoroscope(btn));
-});
+  // --- NAVIGATION ---
+  function goToStep(n) {
+    if (n === 2) {
+      state.sueno = document.getElementById('sueno').value.trim();
+      if (!state.sueno) {
+        document.getElementById('sueno').style.borderColor = '#e74c3c';
+        setTimeout(() => document.getElementById('sueno').style.borderColor = '', 2000);
+        return;
+      }
+    }
+    if (n === 3) {
+      state.contexto = document.getElementById('contexto').value.trim();
+      state.nacimiento = document.getElementById('nacimiento').value;
+    }
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-async function loadHoroscope(btn) {
-  const sign = btn.dataset.sign;
-  if (!sign) return;
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-  document.querySelectorAll('.zodiac-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  // --- STRIPE URL ---
+  const STRIPE_PROFUNDA = 'https://buy.stripe.com/3cIaEQ4ADfBg0iE6CN4Ni07';
 
-  if (!horoData) {
+  // --- TIER SELECTION & API CALL ---
+  async function selectTier(tier) {
+    state.tier = tier;
+
+    // Profunda → open Stripe in new tab, then generate interpretation
+    if (tier === 'profunda') {
+      window.open(STRIPE_PROFUNDA, '_blank');
+    }
+
+    showSection('loading');
+
     try {
-      const resp = await fetch('/data/horoscope.json');
-      if (!resp.ok) throw new Error('No horoscope data');
-      horoData = await resp.json();
-    } catch(e) {
-      console.error('Horoscope fetch error:', e);
-      return;
+      const response = await fetch('/api/suenos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sueno: state.sueno,
+          emociones: state.emociones,
+          hora: state.hora,
+          contexto: state.contexto,
+          recurrente: state.recurrente,
+          signo: state.signo,
+          nacimiento: state.nacimiento,
+          tier: tier
+        })
+      });
+
+      if (!response.ok) throw new Error('API error');
+
+      const data = await response.json();
+
+      // Format text into paragraphs
+      const formatted = data.interpretacion
+        .split('\n\n')
+        .filter(p => p.trim())
+        .map(p => '<p>' + p.trim() + '</p>')
+        .join('');
+
+      document.getElementById('result-text').innerHTML = formatted;
+      document.getElementById('result-tier-label').textContent =
+        tier === 'express' ? 'Interpretación Express' : 'Interpretación Profunda';
+
+      // Show upgrade CTA only for express
+      document.getElementById('upgrade-cta').style.display =
+        tier === 'express' ? 'block' : 'none';
+
+      showSection('result');
+
+    } catch (err) {
+      console.error(err);
+      document.getElementById('error-text').textContent =
+        'No hemos podido conectar con Selene. Inténtalo de nuevo.';
+      showSection('error');
     }
   }
 
-  const signMap = {
-    'aries':'aries','tauro':'tauro','geminis':'geminis','cancer':'cancer',
-    'leo':'leo','virgo':'virgo','libra':'libra','escorpio':'escorpio',
-    'sagitario':'sagitario','capricornio':'capricornio','acuario':'acuario','piscis':'piscis'
-  };
-
-  const signKey = signMap[sign];
-  const reading = horoData.horoscopes?.[signKey];
-  if (!reading) return;
-
-  const signLabels = {
-    'aries':'♈ Aries','tauro':'♉ Tauro','geminis':'♊ Géminis','cancer':'♋ Cáncer',
-    'leo':'♌ Leo','virgo':'♍ Virgo','libra':'♎ Libra','escorpio':'♏ Escorpio',
-    'sagitario':'♐ Sagitario','capricornio':'♑ Capricornio','acuario':'♒ Acuario','piscis':'♓ Piscis'
-  };
-
-  document.getElementById('horoSignTitle').textContent = signLabels[sign];
-  document.getElementById('horoDate').textContent = horoData.date;
-  document.getElementById('horoText').textContent = reading;
-
-  if (horoData.cosmicFact) {
-    document.getElementById('horoFactText').textContent = horoData.cosmicFact.text;
-    document.getElementById('horoFactSource').textContent = horoData.cosmicFact.source;
-    document.getElementById('horoFact').style.display = 'block';
+  // --- RESET ---
+  function resetAll() {
+    state = { sueno: '', emociones: [], hora: 'no_recuerdo', recurrente: false, contexto: '', signo: '', nacimiento: '', tier: '' };
+    document.getElementById('sueno').value = '';
+    document.getElementById('contexto').value = '';
+    document.getElementById('nacimiento').value = '';
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    document.getElementById('toggle-recurrente').classList.remove('on');
+    document.getElementById('result-text').innerHTML = '';
+    showSection('step1');
+    document.getElementById('step1').classList.add('active');
   }
 
-  const display = document.getElementById('horoDisplay');
-  display.classList.add('visible');
-  display.scrollIntoView({behavior:'smooth', block:'nearest'});
-}
-
+  // --- DISABLE BUTTON IF EMPTY ---
+  document.getElementById('sueno').addEventListener('input', function() {
+    document.getElementById('btn-step1').disabled = !this.value.trim();
+  });
+  document.getElementById('btn-step1').disabled = true;
 </script>
+
 </body>
 </html>
