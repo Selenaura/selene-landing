@@ -3,17 +3,16 @@
  * Vercel Serverless Function
  * 
  * Flujo:
- *   1. Recibe email + fecha nacimiento + signo + idioma
+ *   1. Recibe email + fecha nacimiento + signo
  *   2. Claude Sonnet genera lectura personalizada (~3 párrafos)
- *   3. Suscribe email en MailerLite con campos custom
+ *   3. Suscribe email en Brevo con campos custom
  *   4. Devuelve lectura al frontend
  * 
- * Variables de entorno necesarias (Vercel → Settings → Environment Variables):
- *   ANTHROPIC_API_KEY   → tu clave de API de Anthropic
- *   MAILERLITE_API_KEY  → tu clave de API de MailerLite
- *   MAILERLITE_GROUP_ID → ID del grupo "Lectura Express" en MailerLite
+ * Variables de entorno (Vercel → Settings → Environment Variables):
+ *   ANTHROPIC_API_KEY → clave API Anthropic
+ *   BREVO_API_KEY     → clave API Brevo (xkeysib-...)
  * 
- * Coste estimado: ~€0,03-0,05 por lectura (Claude Sonnet)
+ * Coste estimado: ~€0.03-0.05 por lectura (Claude Sonnet)
  */
 
 module.exports = async function handler(req, res) {
@@ -34,9 +33,9 @@ module.exports = async function handler(req, res) {
     // ── 1. GENERAR LECTURA CON CLAUDE ──
     const reading = await generateReading({ birthDate, sign, signEn, lang });
 
-    // ── 2. SUSCRIBIR EN MAILERLITE (async, no bloquea respuesta) ──
-    subscribeToMailerLite({ email, birthDate, sign }).catch(err => {
-      console.error('MailerLite subscription error:', err.message);
+    // ── 2. SUSCRIBIR EN BREVO (async, no bloquea respuesta) ──
+    subscribeToBrevo({ email, birthDate, sign }).catch(err => {
+      console.error('Brevo subscription error:', err.message);
     });
 
     // ── 3. DEVOLVER LECTURA ──
@@ -50,7 +49,7 @@ module.exports = async function handler(req, res) {
     console.error('Lectura Express error:', error);
     return res.status(500).json({ error: 'Error generating reading' });
   }
-}
+};
 
 
 // ═══ CLAUDE SONNET — GENERACIÓN DE LECTURA ═══
@@ -59,7 +58,6 @@ async function generateReading({ birthDate, sign, signEn, lang }) {
   const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
   if (!ANTHROPIC_API_KEY) throw new Error('Missing ANTHROPIC_API_KEY');
 
-  // Calcular datos astrológicos básicos
   const birthInfo = parseBirthDate(birthDate);
 
   const systemPrompt = `Eres Selene, una astróloga científica que combina astrología con neurociencia y cronobiología. Tu voz es cálida, misteriosa pero precisa. Nunca inventas datos científicos — solo citas estudios reales.
@@ -74,7 +72,8 @@ REGLAS ESTRICTAS:
 - NO uses encabezados ni listas
 - Tono: científica mística, nunca "love spell" ni esotérico vacío
 - Idioma: ${lang === 'en' ? 'inglés' : 'español'}
-- Máximo 250 palabras total`;
+- Máximo 250 palabras total
+- NUNCA menciones IA, inteligencia artificial ni tecnología`;
 
   const userPrompt = `Genera una Lectura Cósmica Express para:
 - Signo solar: ${sign} (${signEn})
@@ -113,43 +112,57 @@ REGLAS ESTRICTAS:
 }
 
 
-// ═══ MAILERLITE — SUSCRIPCIÓN ═══
+// ═══ BREVO — SUSCRIPCIÓN ═══
 
-async function subscribeToMailerLite({ email, birthDate, sign }) {
-  const MAILERLITE_API_KEY = process.env.MAILERLITE_API_KEY;
-  const MAILERLITE_GROUP_ID = process.env.MAILERLITE_GROUP_ID;
+async function subscribeToBrevo({ email, birthDate, sign }) {
+  const BREVO_API_KEY = process.env.BREVO_API_KEY;
 
-  if (!MAILERLITE_API_KEY) {
-    console.warn('MailerLite API key not configured — skipping subscription');
+  if (!BREVO_API_KEY) {
+    console.warn('Brevo API key not configured — skipping subscription');
     return;
   }
 
-  const body = {
-    email: email,
-    fields: {
-      signo_solar: sign,
-      fecha_nacimiento: birthDate
-    },
-    status: 'unconfirmed' // Double opt-in: MailerLite enviará email de confirmación
-  };
-
-  // Si hay grupo, añadir
-  if (MAILERLITE_GROUP_ID) {
-    body.groups = [MAILERLITE_GROUP_ID];
-  }
-
-  const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
+  // Crear/actualizar contacto en Brevo
+  const response = await fetch('https://api.brevo.com/v3/contacts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${MAILERLITE_API_KEY}`
+      'api-key': BREVO_API_KEY
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify({
+      email: email,
+      attributes: {
+        SIGNO_SOLAR: sign,
+        FECHA_NACIMIENTO: birthDate
+      },
+      listIds: [2], // Lista por defecto de Brevo (ajustar si se crea lista específica)
+      updateEnabled: true // Si el contacto ya existe, actualiza sus datos
+    })
   });
 
   if (!response.ok) {
     const errText = await response.text();
-    throw new Error(`MailerLite error ${response.status}: ${errText}`);
+    // Si el error es "Contact already exist", no es un error real
+    if (errText.includes('Contact already exist')) {
+      console.log('Brevo: contact already exists, updating...');
+      // Actualizar contacto existente
+      await fetch(`https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': BREVO_API_KEY
+        },
+        body: JSON.stringify({
+          attributes: {
+            SIGNO_SOLAR: sign,
+            FECHA_NACIMIENTO: birthDate
+          },
+          listIds: [2]
+        })
+      });
+      return;
+    }
+    throw new Error(`Brevo error ${response.status}: ${errText}`);
   }
 
   return response.json();
@@ -163,7 +176,6 @@ function parseBirthDate(dateStr) {
   const month = d.getMonth() + 1;
   const day = d.getDate();
 
-  // Estación (hemisferio norte)
   let season;
   if ((month === 3 && day >= 20) || month === 4 || month === 5 || (month === 6 && day <= 20)) {
     season = 'primavera';
@@ -175,7 +187,6 @@ function parseBirthDate(dateStr) {
     season = 'invierno';
   }
 
-  // Signo → Elemento y Modalidad
   const signData = getSignFromDate(month, day);
 
   return {
@@ -204,5 +215,5 @@ function getSignFromDate(month, day) {
   for (const s of signs) {
     if (s.check(month, day)) return s;
   }
-  return signs[0]; // fallback Capricornio
+  return signs[0];
 }
