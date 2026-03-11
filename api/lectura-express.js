@@ -1,233 +1,108 @@
 /**
 
-- ═══ LECTURA EXPRESS ═══
-- Vercel Serverless Function
-- 
-- Flujo:
-- 1. Recibe email + fecha nacimiento + signo
-- 1. Claude Sonnet genera lectura personalizada (~3 párrafos)
-- 1. Suscribe email en Brevo con campos custom
-- 1. Devuelve lectura al frontend
-- 
-- Variables de entorno (Vercel → Settings → Environment Variables):
-- ANTHROPIC_API_KEY → clave API Anthropic
-- BREVO_API_KEY     → clave API Brevo (xkeysib-…)
-- 
-- Coste estimado: ~€0.03-0.05 por lectura (Claude Sonnet)
+- LECTURA EXPRESS — Vercel Serverless Function
+- selenaura.com/api/lectura-express
   */
 
 module.exports = async function handler(req, res) {
-// CORS
 res.setHeader(‘Access-Control-Allow-Origin’, ‘*’);
 res.setHeader(‘Access-Control-Allow-Methods’, ‘POST, OPTIONS’);
 res.setHeader(‘Access-Control-Allow-Headers’, ‘Content-Type’);
+
 if (req.method === ‘OPTIONS’) return res.status(200).end();
 if (req.method !== ‘POST’) return res.status(405).json({ error: ‘Method not allowed’ });
 
 try {
-const { email, birthDate, sign, signEn, lang = ‘es’, emailOnly } = req.body;
+var body = req.body || {};
+var email = body.email;
+var birthDate = body.birthDate;
+var sign = body.sign || ‘’;
+var signEn = body.signEn || ‘’;
+var lang = body.lang || ‘es’;
+var emailOnly = body.emailOnly;
 
 ```
-// Step 2: Email-only capture (just subscribe to Brevo, no reading)
+// Step 2: Email-only (subscribe to Brevo)
 if (emailOnly && email) {
-  subscribeToBrevo({ email, birthDate, sign }).catch(err => {
-    console.error('Brevo subscription error:', err.message);
-  });
+  subscribeToBrevo(email, birthDate, sign).catch(function(e) { console.error('Brevo error:', e.message); });
   return res.status(200).json({ subscribed: true });
 }
 
-// Step 1: Generate reading (email optional)
+// Step 1: Generate reading
 if (!birthDate || !sign) {
-  return res.status(400).json({ error: 'Missing required fields: birthDate, sign' });
+  return res.status(400).json({ error: 'Missing birthDate or sign' });
 }
 
-const reading = await generateReading({ birthDate, sign, signEn, lang });
+var reading = await generateReading(birthDate, sign, signEn, lang);
 
-// If email provided (legacy flow), subscribe in background
 if (email) {
-  subscribeToBrevo({ email, birthDate, sign }).catch(err => {
-    console.error('Brevo subscription error:', err.message);
-  });
+  subscribeToBrevo(email, birthDate, sign).catch(function(e) { console.error('Brevo error:', e.message); });
 }
 
-return res.status(200).json({
-  reading: reading,
-  sign: sign,
-  signEn: signEn
-});
+return res.status(200).json({ reading: reading, sign: sign, signEn: signEn });
 ```
 
-} catch (error) {
-console.error(‘Lectura Express error:’, error);
-return res.status(500).json({ error: ‘Error generating reading’ });
+} catch (err) {
+console.error(‘Lectura Express error:’, err);
+return res.status(500).json({ error: ‘Error generating reading’, detail: err.message });
 }
 };
 
-// ═══ CLAUDE SONNET — GENERACIÓN DE LECTURA ═══
+async function generateReading(birthDate, sign, signEn, lang) {
+var apiKey = process.env.ANTHROPIC_API_KEY;
+if (!apiKey) throw new Error(‘Missing ANTHROPIC_API_KEY’);
 
-async function generateReading({ birthDate, sign, signEn, lang }) {
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-if (!ANTHROPIC_API_KEY) throw new Error(‘Missing ANTHROPIC_API_KEY’);
+var date = new Date(birthDate + ‘T12:00:00Z’);
+var month = date.getUTCMonth();
+var season = month >= 2 && month <= 4 ? ‘primavera’ : month >= 5 && month <= 7 ? ‘verano’ : month >= 8 && month <= 10 ? ‘otono’ : ‘invierno’;
 
-const birthInfo = parseBirthDate(birthDate);
+var systemPrompt = ’Eres Selene, astrologa y guia de autoconocimiento de SelenaUra. Combinas astrologia con neurociencia y cronobiologia real. Tu voz es intima, calida, directa. Tuteas siempre. NUNCA menciones IA, inteligencia artificial, algoritmos, GPT, Claude ni tecnologia. Eres Selene.\n\nREGLAS:\n- Escribe exactamente 3 parrafos cortos (4-5 lineas cada uno)\n- Usa HTML: <p> para parrafos, <strong> para enfasis\n- Primer parrafo: personalidad del signo + dato de cronobiologia real\n- Segundo parrafo: transitos actuales y consejo practico\n- Tercer parrafo: invitacion a descubrir su carta natal completa (ascendente y luna)\n- NO uses emojis ni listas\n- Idioma: ’ + (lang === ‘en’ ? ‘ingles’ : ‘espanol’) + ‘\n- Maximo 250 palabras\n- NUNCA seas generica, cada frase para ESTA persona’;
 
-const systemPrompt = `Eres Selene — astróloga, neurocientífica y guía de autoconocimiento de SelenaUra (“Ciencia y consciencia de lo invisible”).
+var userPrompt = ‘Genera una Lectura Express para:\n- Signo solar: ’ + sign + ’ (’ + signEn + ’)\n- Fecha de nacimiento: ’ + birthDate + ’\n- Estacion: ’ + season;
 
-NUNCA menciones IA, inteligencia artificial, algoritmos, GPT, Claude ni tecnología. Eres Selene.
-
-QUIÉN ERES: Combinas astrología tradicional con neurociencia y cronobiología real. La ciencia es tu credibilidad, no tu voz. Tu voz es íntima, cálida, directa — como una amiga brillante que sabe de ciencia y tradición. Cuando alguien lee tu lectura, debe sentir que la conoces, que la ves, que por fin alguien pone palabras a lo que siente. Tuteas siempre.
-
-REGLAS ESTRICTAS:
-
-- Escribe exactamente 3 párrafos cortos (4-5 líneas cada uno)
-- Usa HTML: <p> para párrafos, <strong> para énfasis en conceptos clave
-- Primer párrafo: personalidad del signo solar + un dato de cronobiología o neurociencia real vinculado a nacer en esa época del año (ej: estudios sobre estacionalidad y temperamento). Hazlo personal — que sienta que hablas de ella, no de su signo en general.
-- Segundo párrafo: qué está pasando ahora mismo en su cielo según tránsitos generales + cómo le afecta + un consejo práctico y concreto
-- Tercer párrafo: invitación a descubrir más sobre su carta natal completa, mencionando ascendente y luna como piezas que le faltan para entenderse del todo
-- NO uses emojis
-- NO uses encabezados ni listas
-- Tono: íntimo y directo, con la ciencia integrada naturalmente en la narrativa
-- Idioma: ${lang === ‘en’ ? ‘inglés’ : ‘español’}
-- Máximo 250 palabras total
-- NUNCA seas genérica — cada frase debe sentirse escrita para ESTA persona`;
-  
-  const userPrompt = `Genera una Lectura Express para:
-- Signo solar: ${sign} (${signEn})
-- Fecha de nacimiento: ${birthDate}
-- Nacido en: ${birthInfo.season}
-- Elemento: ${birthInfo.element}
-- Modalidad: ${birthInfo.modality}`;
-  
-  const response = await fetch(‘https://api.anthropic.com/v1/messages’, {
-  method: ‘POST’,
-  headers: {
-  ‘Content-Type’: ‘application/json’,
-  ‘x-api-key’: ANTHROPIC_API_KEY,
-  ‘anthropic-version’: ‘2023-06-01’
-  },
-  body: JSON.stringify({
-  model: ‘claude-sonnet-4-6’,
-  max_tokens: 600,
-  system: systemPrompt,
-  messages: [{ role: ‘user’, content: userPrompt }]
-  })
-  });
-  
-  if (!response.ok) {
-  const errText = await response.text();
-  throw new Error(`Claude API error ${response.status}: ${errText}`);
-  }
-  
-  const data = await response.json();
-  const text = data.content
-  .filter(block => block.type === ‘text’)
-  .map(block => block.text)
-  .join(’’);
-  
-  return text;
-  }
-
-// ═══ BREVO — SUSCRIPCIÓN ═══
-
-async function subscribeToBrevo({ email, birthDate, sign }) {
-const BREVO_API_KEY = process.env.BREVO_API_KEY;
-
-if (!BREVO_API_KEY) {
-console.warn(‘Brevo API key not configured — skipping subscription’);
-return;
-}
-
-// Crear/actualizar contacto en Brevo
-const response = await fetch(‘https://api.brevo.com/v3/contacts’, {
+var response = await fetch(‘https://api.anthropic.com/v1/messages’, {
 method: ‘POST’,
 headers: {
 ‘Content-Type’: ‘application/json’,
-‘api-key’: BREVO_API_KEY
+‘x-api-key’: apiKey,
+‘anthropic-version’: ‘2023-06-01’
 },
 body: JSON.stringify({
-email: email,
-attributes: {
-SIGNO_SOLAR: sign,
-FECHA_NACIMIENTO: birthDate
-},
-listIds: [2], // Lista por defecto de Brevo (ajustar si se crea lista específica)
-updateEnabled: true // Si el contacto ya existe, actualiza sus datos
+model: ‘claude-sonnet-4-6’,
+max_tokens: 600,
+system: systemPrompt,
+messages: [{ role: ‘user’, content: userPrompt }]
 })
 });
 
 if (!response.ok) {
-const errText = await response.text();
-// Si el error es “Contact already exist”, no es un error real
-if (errText.includes(‘Contact already exist’)) {
-console.log(‘Brevo: contact already exists, updating…’);
-// Actualizar contacto existente
-await fetch(`https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`, {
-method: ‘PUT’,
+var errText = await response.text();
+throw new Error(’Claude API ’ + response.status + ’: ’ + errText);
+}
+
+var data = await response.json();
+var text = ‘’;
+for (var i = 0; i < data.content.length; i++) {
+if (data.content[i].type === ‘text’) text += data.content[i].text;
+}
+return text;
+}
+
+async function subscribeToBrevo(email, birthDate, sign) {
+var brevoKey = process.env.BREVO_API_KEY;
+if (!brevoKey) { console.warn(‘No BREVO_API_KEY’); return; }
+
+await fetch(‘https://api.brevo.com/v3/contacts’, {
+method: ‘POST’,
 headers: {
 ‘Content-Type’: ‘application/json’,
-‘api-key’: BREVO_API_KEY
+‘api-key’: brevoKey
 },
 body: JSON.stringify({
-attributes: {
-SIGNO_SOLAR: sign,
-FECHA_NACIMIENTO: birthDate
-},
-listIds: [2]
+email: email,
+listIds: [2],
+attributes: { SIGNO_SOLAR: sign || ‘’, FECHA_NACIMIENTO: birthDate || ‘’ },
+updateEnabled: true
 })
 });
-return;
-}
-throw new Error(`Brevo error ${response.status}: ${errText}`);
-}
-
-return response.json();
-}
-
-// ═══ UTILIDADES ASTROLÓGICAS ═══
-
-function parseBirthDate(dateStr) {
-const d = new Date(dateStr + ‘T12:00:00’);
-const month = d.getMonth() + 1;
-const day = d.getDate();
-
-let season;
-if ((month === 3 && day >= 20) || month === 4 || month === 5 || (month === 6 && day <= 20)) {
-season = ‘primavera’;
-} else if ((month === 6 && day >= 21) || month === 7 || month === 8 || (month === 9 && day <= 21)) {
-season = ‘verano’;
-} else if ((month === 9 && day >= 22) || month === 10 || month === 11 || (month === 11 && day <= 21)) {
-season = ‘otoño’;
-} else {
-season = ‘invierno’;
-}
-
-const signData = getSignFromDate(month, day);
-
-return {
-season,
-element: signData.element,
-modality: signData.modality
-};
-}
-
-function getSignFromDate(month, day) {
-const signs = [
-{ name: ‘Capricornio’, element: ‘Tierra’, modality: ‘Cardinal’, check: (m, d) => (m === 12 && d >= 22) || (m === 1 && d <= 19) },
-{ name: ‘Acuario’, element: ‘Aire’, modality: ‘Fijo’, check: (m, d) => (m === 1 && d >= 20) || (m === 2 && d <= 18) },
-{ name: ‘Piscis’, element: ‘Agua’, modality: ‘Mutable’, check: (m, d) => (m === 2 && d >= 19) || (m === 3 && d <= 20) },
-{ name: ‘Aries’, element: ‘Fuego’, modality: ‘Cardinal’, check: (m, d) => (m === 3 && d >= 21) || (m === 4 && d <= 19) },
-{ name: ‘Tauro’, element: ‘Tierra’, modality: ‘Fijo’, check: (m, d) => (m === 4 && d >= 20) || (m === 5 && d <= 20) },
-{ name: ‘Géminis’, element: ‘Aire’, modality: ‘Mutable’, check: (m, d) => (m === 5 && d >= 21) || (m === 6 && d <= 20) },
-{ name: ‘Cáncer’, element: ‘Agua’, modality: ‘Cardinal’, check: (m, d) => (m === 6 && d >= 21) || (m === 7 && d <= 22) },
-{ name: ‘Leo’, element: ‘Fuego’, modality: ‘Fijo’, check: (m, d) => (m === 7 && d >= 23) || (m === 8 && d <= 22) },
-{ name: ‘Virgo’, element: ‘Tierra’, modality: ‘Mutable’, check: (m, d) => (m === 8 && d >= 23) || (m === 9 && d <= 22) },
-{ name: ‘Libra’, element: ‘Aire’, modality: ‘Cardinal’, check: (m, d) => (m === 9 && d >= 23) || (m === 10 && d <= 22) },
-{ name: ‘Escorpio’, element: ‘Agua’, modality: ‘Fijo’, check: (m, d) => (m === 10 && d >= 23) || (m === 11 && d <= 21) },
-{ name: ‘Sagitario’, element: ‘Fuego’, modality: ‘Mutable’, check: (m, d) => (m === 11 && d >= 22) || (m === 12 && d <= 21) }
-];
-
-for (const s of signs) {
-if (s.check(month, day)) return s;
-}
-return signs[0];
 }
