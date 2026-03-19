@@ -567,6 +567,27 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
 .reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.4,0,.2,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+
+/* Hero form contrast overrides */
+.hero .nl-field{
+  background:rgba(240,237,228,0.06);
+  border:1px solid rgba(201,168,76,0.3);
+  color:#F0EDE4;
+  font-size:15px;
+}
+.hero .nl-field:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,168,76,0.12);
+}
+.hero .nl-submit{
+  font-size:15px;
+  padding:16px 32px;
+}
+.hero .nl-submit:disabled{
+  opacity:.55;
+  background:linear-gradient(135deg,rgba(201,168,76,0.4),rgba(212,175,55,0.4));
+  color:rgba(10,10,15,0.6);
+}
 </style>
 
 </head>
@@ -665,7 +686,7 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
       <div class="hero-tag" data-es="Ciencia y consciencia de lo invisible" data-en="Science and awareness of the invisible">Ciencia y consciencia de lo invisible</div>
       <h1 data-es="Hay algo en tu<br>carta natal que<br><em>nadie te ha contado</em>" data-en="There's something in<br>your birth chart that<br><em>no one has told you</em>">Hay algo en tu<br>carta natal que<br><em>nadie te ha contado</em></h1>
       <p class="hero-sub" data-es="30 segundos. Tu fecha de nacimiento. Y una lectura que no vas a olvidar. Con la ciencia detrás." data-en="30 seconds. Your birth date. And a reading you won't forget. Science-backed.">30 segundos. Tu fecha de nacimiento. Y una lectura que no vas a olvidar. Con la ciencia detrás.</p>
-      <div class="nl-form" id="nlForm" style="max-width:340px;margin:0 auto">
+      <div class="nl-form" id="nlForm" style="max-width:380px;margin:0 auto">
         <input type="date" class="nl-field" id="nlBirth" required max="2010-12-31" min="1930-01-01">
         <button type="button" class="nl-submit" id="nlSubmit" disabled onclick="submitLectura()" data-es="Quiero mi lectura ✦" data-en="I want my reading ✦">Quiero mi lectura ✦</button>
       </div>
