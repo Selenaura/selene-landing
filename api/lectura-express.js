@@ -24,6 +24,8 @@ module.exports = async function handler(req, res) {
       }
       // Track: email capturado
       trackFunnelEvent('email_capturado', sign, email).catch(function(e) { console.error('Track error:', e.message); });
+      // Schedule nurture email sequence (steps 2-5)
+      scheduleEmailSequence(email, sign, signEn, lang).catch(function(e) { console.error('Schedule sequence error:', e.message); });
       return res.status(200).json({ subscribed: true });
     }
     if (!birthDate || !sign) {
@@ -34,6 +36,8 @@ module.exports = async function handler(req, res) {
       try { await subscribeToBrevo(email, birthDate, sign); } catch(e) { console.error('Brevo error:', e.message); }
       // Track: email capturado (email given with reading)
       trackFunnelEvent('email_capturado', sign, email).catch(function(e) { console.error('Track error:', e.message); });
+      // Schedule nurture email sequence (steps 2-5)
+      scheduleEmailSequence(email, sign, signEn, lang).catch(function(e) { console.error('Schedule sequence error:', e.message); });
     }
     // Track: lectura generada
     await trackFunnelEvent('lectura_generada', sign, email || null).catch(function(e) { console.error('Track error:', e.message); });
@@ -138,6 +142,60 @@ async function trackFunnelEvent(eventType, sign, email) {
       email: email || null
     })
   });
+}
+
+async function scheduleEmailSequence(email, sign, signEn, lang) {
+  var url = process.env.SUPABASE_URL;
+  var key = process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key) { console.warn('No SUPABASE vars for email sequence'); return; }
+
+  // Check if sequence already exists for this email
+  var checkRes = await fetch(url + '/rest/v1/email_sequence?email=eq.' + encodeURIComponent(email) + '&limit=1', {
+    headers: {
+      'apikey': key,
+      'Authorization': 'Bearer ' + key
+    }
+  });
+  var existing = await checkRes.json();
+  if (Array.isArray(existing) && existing.length > 0) {
+    console.log('Email sequence already exists for ' + email);
+    return;
+  }
+
+  // Schedule 4 emails: step 2 (day 2), step 3 (day 5), step 4 (day 8), step 5 (day 12)
+  var now = Date.now();
+  var DAY = 86400000;
+  var steps = [
+    { step: 2, delay: 2 * DAY },
+    { step: 3, delay: 5 * DAY },
+    { step: 4, delay: 8 * DAY },
+    { step: 5, delay: 12 * DAY }
+  ];
+
+  var rows = steps.map(function(s) {
+    return {
+      email: email,
+      signo_solar: sign || null,
+      signo_en: signEn || null,
+      lang: lang || 'es',
+      step: s.step,
+      next_send_at: new Date(now + s.delay).toISOString(),
+      sent: false
+    };
+  });
+
+  await fetch(url + '/rest/v1/email_sequence', {
+    method: 'POST',
+    headers: {
+      'apikey': key,
+      'Authorization': 'Bearer ' + key,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify(rows)
+  });
+
+  console.log('Scheduled 4 nurture emails for ' + email);
 }
 
 function buildEmailHtml(readingHtml, signName, lang) {

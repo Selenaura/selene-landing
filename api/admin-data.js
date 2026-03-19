@@ -35,13 +35,14 @@ module.exports = async function handler(req, res) {
       return res.status(403).json({ error: 'No tienes acceso al panel de administracion' });
     }
 
-    const [stripeData, brevoContacts, brevoListInfo, brevoEmailStats, funnelData, academiaData] = await Promise.allSettled([
+    const [stripeData, brevoContacts, brevoListInfo, brevoEmailStats, funnelData, academiaData, emailFunnelData] = await Promise.allSettled([
       fetchStripe(),
       fetchBrevoContacts(),
       fetchBrevoListInfo(),
       fetchBrevoEmailStats(),
       fetchFunnel(),
-      fetchAcademia()
+      fetchAcademia(),
+      fetchEmailFunnel()
     ]);
 
     return res.status(200).json({
@@ -52,6 +53,7 @@ module.exports = async function handler(req, res) {
       brevo_email: brevoEmailStats.status === 'fulfilled' ? brevoEmailStats.value : { error: brevoEmailStats.reason?.message },
       funnel: funnelData.status === 'fulfilled' ? funnelData.value : { error: funnelData.reason?.message },
       academia: academiaData.status === 'fulfilled' ? academiaData.value : { error: academiaData.reason?.message },
+      email_funnel: emailFunnelData.status === 'fulfilled' ? emailFunnelData.value : { error: emailFunnelData.reason?.message },
       generated_at: new Date().toISOString()
     });
 
@@ -342,5 +344,52 @@ async function fetchAcademia() {
     avg_quiz_score: avgScore,
     avg_xp: avgXp,
     profiles: profiles
+  };
+}
+
+async function fetchEmailFunnel() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key) return { error: 'SUPABASE_SERVICE_KEY no configurada' };
+
+  const headers = {
+    'apikey': key,
+    'Authorization': `Bearer ${key}`,
+    'Content-Type': 'application/json'
+  };
+
+  // Get all email sequence records
+  const [totalRes, pendingRes, sentRes] = await Promise.all([
+    fetch(`${url}/rest/v1/email_sequence?select=step,sent,email&order=created_at.desc&limit=200`, { headers }),
+    fetch(`${url}/rest/v1/email_sequence?select=id&sent=eq.false&limit=0`, {
+      headers: { ...headers, 'Prefer': 'count=exact' }
+    }),
+    fetch(`${url}/rest/v1/email_sequence?select=id&sent=eq.true&limit=0`, {
+      headers: { ...headers, 'Prefer': 'count=exact' }
+    })
+  ]);
+
+  const allRecords = await totalRes.json();
+  const pendingCount = parseInt(pendingRes.headers.get('content-range')?.split('/')[1] || '0');
+  const sentCount = parseInt(sentRes.headers.get('content-range')?.split('/')[1] || '0');
+
+  // Count by step
+  const byStep = { 2: { total: 0, sent: 0 }, 3: { total: 0, sent: 0 }, 4: { total: 0, sent: 0 }, 5: { total: 0, sent: 0 } };
+  const uniqueEmails = new Set();
+
+  (Array.isArray(allRecords) ? allRecords : []).forEach(r => {
+    if (byStep[r.step]) {
+      byStep[r.step].total++;
+      if (r.sent) byStep[r.step].sent++;
+    }
+    if (r.email) uniqueEmails.add(r.email.toLowerCase());
+  });
+
+  return {
+    total_scheduled: pendingCount + sentCount,
+    total_sent: sentCount,
+    total_pending: pendingCount,
+    unique_contacts: uniqueEmails.size,
+    by_step: byStep
   };
 }

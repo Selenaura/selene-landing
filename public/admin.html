@@ -151,6 +151,17 @@
     </div>
   </div>
 
+  <!-- Email Funnel Nurture -->
+  <div class="section">
+    <h2>Secuencia de nurturing</h2>
+    <div class="metrics" style="grid-template-columns: repeat(4, 1fr);" id="nurture-metrics">
+      <div class="metric gold"><div class="label">Contactos en secuencia</div><div class="value" id="m-nurture-contacts">--</div><div class="sub" id="m-nurture-contacts-sub"></div></div>
+      <div class="metric green"><div class="label">Emails enviados</div><div class="value" id="m-nurture-sent">--</div><div class="sub" id="m-nurture-sent-sub"></div></div>
+      <div class="metric blue"><div class="label">Pendientes</div><div class="value" id="m-nurture-pending">--</div><div class="sub" id="m-nurture-pending-sub"></div></div>
+      <div class="metric"><div class="label">Progreso</div><div class="value" id="m-nurture-progress">--</div><div class="sub" id="m-nurture-progress-sub"></div></div>
+    </div>
+  </div>
+
   <!-- Funnel -->
   <div class="section">
     <h2>Funnel de conversion</h2>
@@ -279,6 +290,7 @@ async function loadData() {
     document.getElementById('updated-at').textContent = new Date(data.generated_at).toLocaleString('es-ES');
 
     renderMetrics(data);
+    renderNurture(data);
     renderFunnel(data);
     renderDailyChart(data);
     renderSignosChart(data);
@@ -511,6 +523,31 @@ function renderAcademia(data) {
   container.innerHTML = stats.map(function(s) {
     return '<div class="academia-stat"><div class="stat-value">' + s.value + '</div><div class="stat-label">' + s.label + '</div></div>';
   }).join('');
+}
+
+function renderNurture(data) {
+  var ef = data.email_funnel || {};
+  if (ef.error) {
+    document.getElementById('m-nurture-contacts').textContent = '!!';
+    document.getElementById('m-nurture-contacts-sub').textContent = ef.error;
+    return;
+  }
+
+  document.getElementById('m-nurture-contacts').textContent = ef.unique_contacts || 0;
+  document.getElementById('m-nurture-contacts-sub').textContent = (ef.total_scheduled || 0) + ' emails programados';
+
+  document.getElementById('m-nurture-sent').textContent = ef.total_sent || 0;
+  var steps = ef.by_step || {};
+  var stepInfo = 'E2: ' + (steps[2]?.sent || 0) + ' · E3: ' + (steps[3]?.sent || 0) + ' · E4: ' + (steps[4]?.sent || 0) + ' · E5: ' + (steps[5]?.sent || 0);
+  document.getElementById('m-nurture-sent-sub').textContent = stepInfo;
+
+  document.getElementById('m-nurture-pending').textContent = ef.total_pending || 0;
+  document.getElementById('m-nurture-pending-sub').textContent = 'En cola de envio';
+
+  var total = (ef.total_sent || 0) + (ef.total_pending || 0);
+  var pct = total > 0 ? Math.round((ef.total_sent / total) * 100) : 0;
+  document.getElementById('m-nurture-progress').textContent = pct + '%';
+  document.getElementById('m-nurture-progress-sub').textContent = 'Secuencia completada';
 }
 
 function renderStatus(data) {

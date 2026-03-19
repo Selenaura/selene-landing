@@ -15,8 +15,19 @@
       "dest": "/api/admin-data.js"
     },
     {
+      "src": "/api/email-funnel",
+      "methods": ["GET", "POST"],
+      "dest": "/api/email-funnel.js"
+    },
+    {
       "src": "/admin",
       "dest": "/admin.html"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/email-funnel",
+      "schedule": "0 */2 * * *"
     }
   ]
 }
