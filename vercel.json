@@ -8,6 +8,15 @@
       "src": "/api/stripe-webhook",
       "methods": ["POST"],
       "dest": "/api/stripe-webhook.js"
+    },
+    {
+      "src": "/api/admin-data",
+      "methods": ["GET"],
+      "dest": "/api/admin-data.js"
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin.html"
     }
   ]
 }
