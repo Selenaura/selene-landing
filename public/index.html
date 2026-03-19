@@ -565,6 +565,130 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
 .reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.4,0,.2,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+
+/* ═══ AUTH ═══ */
+.auth-btn{
+padding:7px 18px;border-radius:20px;font-family:var(--sans);font-size:11px;font-weight:600;
+letter-spacing:.5px;cursor:pointer;transition:all .3s;border:1px solid rgba(201,168,76,.2);
+background:transparent;color:var(--gold);
+}
+.auth-btn:hover{background:var(--gold-dim);border-color:rgba(201,168,76,.35)}
+.auth-btn-primary{
+background:linear-gradient(135deg,var(--gold),#D4AF37);color:var(--bg);border:none;
+}
+.auth-btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(201,168,76,.2)}
+.auth-user-btn{
+display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;
+border:1px solid rgba(201,168,76,.15);background:rgba(201,168,76,.06);
+cursor:pointer;transition:all .3s;position:relative;
+}
+.auth-user-btn:hover{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.1)}
+.auth-user-avatar{
+width:26px;height:26px;border-radius:50%;background:var(--gold-dim);
+display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gold);
+font-family:var(--serif);font-weight:600;
+}
+.auth-user-name{font-size:11px;color:var(--gold-light);font-weight:500;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.auth-user-menu{
+position:absolute;top:calc(100% + 8px);right:0;min-width:180px;
+background:rgba(14,14,22,.97);border:1px solid rgba(201,168,76,.12);border-radius:12px;
+padding:8px;opacity:0;pointer-events:none;transform:translateY(-4px);transition:all .25s;z-index:60;
+backdrop-filter:blur(16px);
+}
+.auth-user-menu.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+.auth-user-menu a,.auth-user-menu button{
+display:block;width:100%;padding:10px 14px;border:none;background:none;
+font-family:var(--sans);font-size:12px;color:var(--white-dim);text-align:left;
+border-radius:8px;cursor:pointer;transition:all .2s;text-decoration:none;
+}
+.auth-user-menu a:hover,.auth-user-menu button:hover{background:rgba(201,168,76,.06);color:var(--gold-light)}
+.auth-user-menu hr{border:none;border-top:1px solid rgba(201,168,76,.08);margin:4px 0}
+
+/* Auth Modal */
+.auth-overlay{
+position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;
+opacity:0;pointer-events:none;transition:opacity .3s;
+display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.auth-overlay.open{opacity:1;pointer-events:auto}
+.auth-modal{
+width:100%;max-width:420px;background:linear-gradient(160deg,#111120,#0C0C18);
+border:1px solid rgba(201,168,76,.12);border-radius:20px;
+padding:36px 32px 28px;position:relative;
+transform:scale(.95) translateY(10px);transition:transform .3s;
+}
+.auth-overlay.open .auth-modal{transform:scale(1) translateY(0)}
+.auth-close{
+position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;
+border:1px solid rgba(201,168,76,.1);background:none;color:var(--text-mid);
+font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+transition:all .2s;
+}
+.auth-close:hover{border-color:rgba(201,168,76,.3);color:var(--gold)}
+.auth-tabs{display:flex;gap:0;margin-bottom:24px;border-bottom:1px solid rgba(201,168,76,.08)}
+.auth-tab{
+flex:1;padding:10px;text-align:center;font-size:13px;font-weight:500;
+color:var(--text-dim);cursor:pointer;transition:all .3s;
+border-bottom:2px solid transparent;background:none;border-top:none;border-left:none;border-right:none;
+font-family:var(--sans);
+}
+.auth-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.auth-tab:hover:not(.active){color:var(--white-dim)}
+.auth-form{display:none}
+.auth-form.active{display:block}
+.auth-form-title{font-family:var(--serif);font-size:22px;font-weight:300;text-align:center;margin-bottom:6px}
+.auth-form-sub{font-size:12px;color:var(--text-mid);text-align:center;margin-bottom:20px;line-height:1.5}
+.auth-field{
+display:block;width:100%;padding:12px 16px;border-radius:10px;
+border:1px solid rgba(201,168,76,.1);background:rgba(10,10,15,.6);
+color:var(--white);font-family:var(--sans);font-size:13px;
+transition:all .3s;outline:none;margin-bottom:12px;
+appearance:none;-webkit-appearance:none;
+}
+.auth-field::placeholder{color:var(--text-dim)}
+.auth-field:focus{border-color:rgba(201,168,76,.3);box-shadow:0 0 0 3px rgba(201,168,76,.06)}
+input[type="date"].auth-field{color:var(--text-dim)}
+input[type="date"].auth-field.has-value{color:var(--white)}
+input[type="date"].auth-field::-webkit-calendar-picker-indicator{filter:invert(.7) sepia(.3) hue-rotate(10deg);cursor:pointer}
+.auth-submit{
+display:block;width:100%;padding:13px;border:none;border-radius:50px;cursor:pointer;
+background:linear-gradient(135deg,var(--gold),#D4AF37);color:var(--bg);
+font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.5px;
+transition:all .3s;box-shadow:0 4px 20px rgba(201,168,76,.18);margin-top:4px;
+}
+.auth-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.28)}
+.auth-submit:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.auth-error{
+display:none;padding:10px 14px;border-radius:8px;margin-bottom:12px;
+background:rgba(220,80,80,.1);border:1px solid rgba(220,80,80,.2);
+font-size:11px;color:#e88;line-height:1.5;text-align:center;
+}
+.auth-error.show{display:block}
+.auth-success{
+display:none;padding:10px 14px;border-radius:8px;margin-bottom:12px;
+background:rgba(76,175,80,.08);border:1px solid rgba(76,175,80,.2);
+font-size:11px;color:#4CAF50;line-height:1.5;text-align:center;
+}
+.auth-success.show{display:block}
+.auth-divider{
+display:flex;align-items:center;gap:12px;margin:16px 0;font-size:10px;color:var(--text-dim);
+}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.08)}
+.auth-forgot{
+display:block;text-align:center;font-size:11px;color:var(--text-dim);
+margin-top:12px;cursor:pointer;transition:color .2s;background:none;border:none;
+font-family:var(--sans);
+}
+.auth-forgot:hover{color:var(--gold)}
+.auth-legal{font-size:9px;color:var(--text-dim);text-align:center;margin-top:14px;line-height:1.6}
+.auth-legal a{color:var(--gold);text-decoration:underline;text-underline-offset:2px}
+@media(max-width:768px){
+.auth-btns-desktop{display:none}
+.auth-modal{padding:28px 20px 24px;max-height:90vh;overflow-y:auto}
+}
+@media(min-width:769px){
+.auth-btns-mobile{display:none !important}
+}
 </style>
 
 </head>
@@ -584,6 +708,26 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
       <a href="/blog/">Blog</a>
     </div>
     <div class="nav-right">
+      <!-- Auth buttons (desktop) - hidden when logged in -->
+      <div class="auth-btns-desktop" id="authBtnsDesktop">
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="auth-btn" onclick="openAuthModal('login')" data-es="Entrar" data-en="Log in">Entrar</button>
+          <button class="auth-btn auth-btn-primary" onclick="openAuthModal('register')" data-es="Registro" data-en="Sign up">Registro</button>
+        </div>
+      </div>
+      <!-- User menu (desktop) - shown when logged in -->
+      <div class="auth-btns-desktop" id="authUserDesktop" style="display:none">
+        <div class="auth-user-btn" onclick="toggleUserMenu()">
+          <div class="auth-user-avatar" id="authAvatarDesktop"></div>
+          <span class="auth-user-name" id="authNameDesktop"></span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="auth-user-menu" id="authUserMenu">
+          <a href="https://academia.selenaura.com" data-es="Academia Selene" data-en="Selene Academy">Academia Selene</a>
+          <hr>
+          <button onclick="authLogout()" data-es="Cerrar sesion" data-en="Log out">Cerrar sesion</button>
+        </div>
+      </div>
       <div class="lang-toggle">
         <span class="lang-option active" data-lang="es" onclick="setLang('es')">ES</span>
         <span class="lang-option" data-lang="en" onclick="setLang('en')">EN</span>
@@ -640,6 +784,26 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
         <div class="nd-icon">✦</div>
         <div class="nd-info"><div class="nd-name">Blog</div><div class="nd-desc" data-es="Astrología y ciencia · Artículos semanales" data-en="Astrology & science · Weekly articles">Astrología y ciencia · Artículos semanales</div></div>
       </a>
+    </div>
+    <div class="nd-flourish">✦</div>
+    <!-- Auth in mobile menu -->
+    <div class="nd-section auth-btns-mobile" id="authBtnsMobile">
+      <div class="nd-label" data-es="Tu cuenta" data-en="Your account">Tu cuenta</div>
+      <div style="display:flex;gap:10px;padding:4px 16px">
+        <button class="auth-btn" onclick="toggleMenu();openAuthModal('login')" style="flex:1" data-es="Entrar" data-en="Log in">Entrar</button>
+        <button class="auth-btn auth-btn-primary" onclick="toggleMenu();openAuthModal('register')" style="flex:1" data-es="Registro" data-en="Sign up">Registro</button>
+      </div>
+    </div>
+    <div class="nd-section auth-btns-mobile" id="authUserMobile" style="display:none">
+      <div class="nd-label" data-es="Tu cuenta" data-en="Your account">Tu cuenta</div>
+      <div style="padding:4px 16px;font-size:13px;color:var(--gold-light);margin-bottom:8px" id="authNameMobile"></div>
+      <a href="https://academia.selenaura.com" class="nd-item nd-item-academia" onclick="toggleMenu()">
+        <div class="nd-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.3"><path d="M4 4h6c1.1 0 2 .9 2 2v14c0-.55-.45-1-1-1H4V4zM20 4h-6c-1.1 0-2 .9-2 2v14c0-.55.45-1 1-1h7V4z"/></svg></div>
+        <div class="nd-info"><div class="nd-name" data-es="Academia" data-en="Academy">Academia</div></div>
+      </a>
+      <div style="padding:4px 16px">
+        <button class="auth-btn" onclick="toggleMenu();authLogout()" style="width:100%" data-es="Cerrar sesion" data-en="Log out">Cerrar sesion</button>
+      </div>
     </div>
     <div class="nd-flourish">✦</div>
     <div class="nd-section">
@@ -998,6 +1162,53 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
     <div class="footer-legal" data-es="Selene es una herramienta de autoconocimiento basada en tradiciones milenarias e integrada con estudios científicos modernos. No constituye asesoramiento médico, psicológico, financiero ni legal. Las lecturas son para reflexión personal. © 2026 Selene." data-en="Selene is a self-knowledge tool based on ancient traditions integrated with modern scientific studies. It does not constitute medical, psychological, financial or legal advice. Readings are for personal reflection. © 2026 Selene.">Selene es una herramienta de autoconocimiento basada en tradiciones milenarias e integrada con estudios científicos modernos. No constituye asesoramiento médico, psicológico, financiero ni legal. Las lecturas son para reflexión personal. © 2026 Selene.</div>
   </footer>
 
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="authOverlay" onclick="if(event.target===this)closeAuthModal()">
+  <div class="auth-modal">
+    <button class="auth-close" onclick="closeAuthModal()">&times;</button>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')" data-es="Iniciar sesion" data-en="Log in">Iniciar sesion</button>
+      <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')" data-es="Crear cuenta" data-en="Create account">Crear cuenta</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="auth-form active" id="formLogin">
+      <div class="auth-form-title" data-es="Bienvenida de vuelta" data-en="Welcome back">Bienvenida de vuelta</div>
+      <div class="auth-form-sub" data-es="Accede a tu cuenta Selene" data-en="Access your Selene account">Accede a tu cuenta Selene</div>
+      <div class="auth-error" id="loginError"></div>
+      <input type="email" class="auth-field" id="loginEmail" placeholder="Email" autocomplete="email">
+      <input type="password" class="auth-field" id="loginPassword" placeholder="Contrasena" data-placeholder-es="Contrasena" data-placeholder-en="Password" autocomplete="current-password">
+      <button class="auth-submit" id="loginSubmit" onclick="authLogin()" data-es="Entrar" data-en="Log in">Entrar</button>
+      <button class="auth-forgot" onclick="switchAuthTab('forgot')" data-es="He olvidado mi contrasena" data-en="Forgot my password?">He olvidado mi contrasena</button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="auth-form" id="formRegister">
+      <div class="auth-form-title" data-es="Unete a Selene" data-en="Join Selene">Unete a Selene</div>
+      <div class="auth-form-sub" data-es="Crea tu cuenta y accede a todas las experiencias" data-en="Create your account and access all experiences">Crea tu cuenta y accede a todas las experiencias</div>
+      <div class="auth-error" id="registerError"></div>
+      <div class="auth-success" id="registerSuccess"></div>
+      <input type="text" class="auth-field" id="registerName" placeholder="Nombre" data-placeholder-es="Nombre" data-placeholder-en="Name" autocomplete="given-name">
+      <input type="email" class="auth-field" id="registerEmail" placeholder="Email" autocomplete="email">
+      <input type="password" class="auth-field" id="registerPassword" placeholder="Contrasena (min. 6 caracteres)" data-placeholder-es="Contrasena (min. 6 caracteres)" data-placeholder-en="Password (min. 6 characters)" autocomplete="new-password">
+      <input type="date" class="auth-field" id="registerBirth" max="2010-12-31" min="1930-01-01">
+      <button class="auth-submit" id="registerSubmit" onclick="authRegister()" data-es="Crear cuenta" data-en="Create account">Crear cuenta</button>
+      <div class="auth-legal" data-es="Al registrarte aceptas nuestros <a href='/aviso-legal.html'>Terminos</a> y <a href='/privacidad.html'>Politica de Privacidad</a>" data-en="By signing up you agree to our <a href='/aviso-legal.html'>Terms</a> and <a href='/privacidad.html'>Privacy Policy</a>">Al registrarte aceptas nuestros <a href="/aviso-legal.html">Terminos</a> y <a href="/privacidad.html">Politica de Privacidad</a></div>
+    </div>
+
+    <!-- FORGOT PASSWORD FORM -->
+    <div class="auth-form" id="formForgot">
+      <div class="auth-form-title" data-es="Recuperar contrasena" data-en="Reset password">Recuperar contrasena</div>
+      <div class="auth-form-sub" data-es="Te enviaremos un enlace para restablecer tu contrasena" data-en="We'll send you a link to reset your password">Te enviaremos un enlace para restablecer tu contrasena</div>
+      <div class="auth-error" id="forgotError"></div>
+      <div class="auth-success" id="forgotSuccess"></div>
+      <input type="email" class="auth-field" id="forgotEmail" placeholder="Email" autocomplete="email">
+      <button class="auth-submit" id="forgotSubmit" onclick="authForgotPassword()" data-es="Enviar enlace" data-en="Send link">Enviar enlace</button>
+      <button class="auth-forgot" onclick="switchAuthTab('login')" data-es="Volver al inicio de sesion" data-en="Back to login">Volver al inicio de sesion</button>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <script>
@@ -1235,6 +1446,288 @@ async function submitEmail(){
   document.getElementById('nlEmailCapture').style.display='none';
   document.getElementById('nlEmailSaved').style.display='block';
 }
+// ═══ AUTH (SUPABASE) ═══
+var _supabase = null;
+var _authUser = null;
+
+(async function initAuth() {
+  try {
+    // Load Supabase CDN dynamically
+    await new Promise(function(resolve, reject) {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+
+    // Fetch config from server (env vars)
+    var configResp = await fetch('/api/supabase-config');
+    if (!configResp.ok) { console.warn('Supabase not configured'); return; }
+    var config = await configResp.json();
+    if (!config.url || !config.key) return;
+
+    _supabase = window.supabase.createClient(config.url, config.key);
+
+    // Check existing session
+    var sessionResult = await _supabase.auth.getSession();
+    if (sessionResult.data.session) {
+      await onAuthStateChange(sessionResult.data.session.user);
+    }
+
+    // Listen for auth changes
+    _supabase.auth.onAuthStateChange(function(event, session) {
+      if (event === 'SIGNED_IN' && session) {
+        onAuthStateChange(session.user);
+      } else if (event === 'SIGNED_OUT') {
+        onAuthStateChange(null);
+      }
+    });
+  } catch(e) {
+    console.warn('Auth init error:', e.message);
+  }
+})();
+
+async function onAuthStateChange(user) {
+  _authUser = user;
+  var btnsDesktop = document.getElementById('authBtnsDesktop');
+  var userDesktop = document.getElementById('authUserDesktop');
+  var btnsMobile = document.getElementById('authBtnsMobile');
+  var userMobile = document.getElementById('authUserMobile');
+
+  if (user) {
+    // Get profile data
+    var name = '';
+    if (_supabase) {
+      try {
+        var profileResult = await _supabase.from('profiles').select('name').eq('id', user.id).single();
+        if (profileResult.data) name = profileResult.data.name || '';
+      } catch(e) {}
+    }
+    if (!name) name = user.email ? user.email.split('@')[0] : '';
+    var initial = name.charAt(0).toUpperCase();
+
+    // Desktop
+    if (btnsDesktop) btnsDesktop.style.display = 'none';
+    if (userDesktop) {
+      userDesktop.style.display = 'block';
+      document.getElementById('authAvatarDesktop').textContent = initial;
+      document.getElementById('authNameDesktop').textContent = name;
+    }
+    // Mobile
+    if (btnsMobile) btnsMobile.style.display = 'none';
+    if (userMobile) {
+      userMobile.style.display = 'block';
+      document.getElementById('authNameMobile').textContent = '✦ ' + name;
+    }
+  } else {
+    // Desktop
+    if (btnsDesktop) btnsDesktop.style.display = 'block';
+    if (userDesktop) userDesktop.style.display = 'none';
+    // Mobile
+    if (btnsMobile) btnsMobile.style.display = 'block';
+    if (userMobile) userMobile.style.display = 'none';
+  }
+}
+
+function openAuthModal(tab) {
+  document.getElementById('authOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  switchAuthTab(tab || 'login');
+}
+
+function closeAuthModal() {
+  document.getElementById('authOverlay').classList.remove('open');
+  if (!menuOpen) document.body.style.overflow = '';
+  // Clear errors/successes
+  document.querySelectorAll('.auth-error,.auth-success').forEach(function(el) { el.classList.remove('show'); el.textContent = ''; });
+}
+
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-form').forEach(function(f) { f.classList.remove('active'); });
+  document.querySelectorAll('.auth-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.auth-error,.auth-success').forEach(function(el) { el.classList.remove('show'); el.textContent = ''; });
+
+  var form = document.getElementById('form' + tab.charAt(0).toUpperCase() + tab.slice(1));
+  if (form) form.classList.add('active');
+
+  if (tab === 'login') document.getElementById('tabLogin').classList.add('active');
+  else if (tab === 'register') document.getElementById('tabRegister').classList.add('active');
+  else if (tab === 'forgot') document.getElementById('tabLogin').classList.add('active');
+}
+
+function toggleUserMenu() {
+  var menu = document.getElementById('authUserMenu');
+  menu.classList.toggle('open');
+  // Close on outside click
+  if (menu.classList.contains('open')) {
+    setTimeout(function() {
+      document.addEventListener('click', closeUserMenuOnOutside);
+    }, 10);
+  }
+}
+
+function closeUserMenuOnOutside(e) {
+  var menu = document.getElementById('authUserMenu');
+  var btn = menu.parentElement;
+  if (!btn.contains(e.target)) {
+    menu.classList.remove('open');
+    document.removeEventListener('click', closeUserMenuOnOutside);
+  }
+}
+
+async function authRegister() {
+  if (!_supabase) { showAuthError('registerError', 'Servicio no disponible'); return; }
+
+  var name = document.getElementById('registerName').value.trim();
+  var email = document.getElementById('registerEmail').value.trim();
+  var password = document.getElementById('registerPassword').value;
+  var birth = document.getElementById('registerBirth').value;
+  var lang = currentLang;
+
+  if (!name) { showAuthError('registerError', lang === 'en' ? 'Please enter your name' : 'Introduce tu nombre'); return; }
+  if (!email || email.indexOf('@') < 1) { showAuthError('registerError', lang === 'en' ? 'Please enter a valid email' : 'Introduce un email valido'); return; }
+  if (password.length < 6) { showAuthError('registerError', lang === 'en' ? 'Password must be at least 6 characters' : 'La contrasena debe tener al menos 6 caracteres'); return; }
+
+  var btn = document.getElementById('registerSubmit');
+  btn.disabled = true;
+  btn.textContent = lang === 'en' ? 'Creating...' : 'Creando...';
+
+  try {
+    var result = await _supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: { name: name, birth_date: birth || null }
+      }
+    });
+
+    if (result.error) throw result.error;
+
+    // Save profile
+    if (result.data.user) {
+      await _supabase.from('profiles').upsert({
+        id: result.data.user.id,
+        name: name,
+        email: email,
+        birth_date: birth || null,
+        created_at: new Date().toISOString()
+      });
+
+      // Also subscribe to Brevo if birth date provided
+      if (birth) {
+        var sign = getZodiacSign(birth);
+        fetch('/api/lectura-express', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, birthDate: birth, sign: sign.name, signEn: sign.en, lang: lang, emailOnly: true })
+        }).catch(function() {});
+      }
+    }
+
+    // Check if email confirmation is required
+    if (result.data.user && !result.data.session) {
+      showAuthSuccess('registerSuccess', lang === 'en'
+        ? 'Account created! Check your email to confirm.'
+        : 'Cuenta creada! Revisa tu email para confirmar.');
+      btn.textContent = lang === 'en' ? 'Create account' : 'Crear cuenta';
+      btn.disabled = false;
+    } else {
+      closeAuthModal();
+    }
+
+  } catch(err) {
+    var msg = err.message || 'Error';
+    if (msg.includes('already registered')) msg = lang === 'en' ? 'This email is already registered' : 'Este email ya esta registrado';
+    showAuthError('registerError', msg);
+    btn.textContent = lang === 'en' ? 'Create account' : 'Crear cuenta';
+    btn.disabled = false;
+  }
+}
+
+async function authLogin() {
+  if (!_supabase) { showAuthError('loginError', 'Servicio no disponible'); return; }
+
+  var email = document.getElementById('loginEmail').value.trim();
+  var password = document.getElementById('loginPassword').value;
+  var lang = currentLang;
+
+  if (!email) { showAuthError('loginError', lang === 'en' ? 'Please enter your email' : 'Introduce tu email'); return; }
+  if (!password) { showAuthError('loginError', lang === 'en' ? 'Please enter your password' : 'Introduce tu contrasena'); return; }
+
+  var btn = document.getElementById('loginSubmit');
+  btn.disabled = true;
+  btn.textContent = lang === 'en' ? 'Logging in...' : 'Entrando...';
+
+  try {
+    var result = await _supabase.auth.signInWithPassword({ email: email, password: password });
+    if (result.error) throw result.error;
+    closeAuthModal();
+  } catch(err) {
+    var msg = err.message || 'Error';
+    if (msg.includes('Invalid login')) msg = lang === 'en' ? 'Incorrect email or password' : 'Email o contrasena incorrectos';
+    showAuthError('loginError', msg);
+  }
+
+  btn.textContent = lang === 'en' ? 'Log in' : 'Entrar';
+  btn.disabled = false;
+}
+
+async function authForgotPassword() {
+  if (!_supabase) { showAuthError('forgotError', 'Servicio no disponible'); return; }
+
+  var email = document.getElementById('forgotEmail').value.trim();
+  var lang = currentLang;
+
+  if (!email || email.indexOf('@') < 1) { showAuthError('forgotError', lang === 'en' ? 'Please enter a valid email' : 'Introduce un email valido'); return; }
+
+  var btn = document.getElementById('forgotSubmit');
+  btn.disabled = true;
+  btn.textContent = lang === 'en' ? 'Sending...' : 'Enviando...';
+
+  try {
+    var result = await _supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin
+    });
+    if (result.error) throw result.error;
+    showAuthSuccess('forgotSuccess', lang === 'en'
+      ? 'Reset link sent! Check your inbox.'
+      : 'Enlace enviado! Revisa tu bandeja de entrada.');
+  } catch(err) {
+    showAuthError('forgotError', err.message || 'Error');
+  }
+
+  btn.textContent = lang === 'en' ? 'Send link' : 'Enviar enlace';
+  btn.disabled = false;
+}
+
+async function authLogout() {
+  if (!_supabase) return;
+  await _supabase.auth.signOut();
+  var menu = document.getElementById('authUserMenu');
+  if (menu) menu.classList.remove('open');
+}
+
+function showAuthError(id, msg) {
+  var el = document.getElementById(id);
+  if (el) { el.textContent = msg; el.classList.add('show'); }
+}
+
+function showAuthSuccess(id, msg) {
+  var el = document.getElementById(id);
+  if (el) { el.textContent = msg; el.classList.add('show'); }
+}
+
+// Handle date field styling in auth modal
+(function() {
+  var regBirth = document.getElementById('registerBirth');
+  if (regBirth) {
+    regBirth.addEventListener('change', function() {
+      this.classList.toggle('has-value', !!this.value);
+    });
+  }
+})();
+
 // ═══ HORÓSCOPO DIARIO ═══
 let horoData = null;
 
