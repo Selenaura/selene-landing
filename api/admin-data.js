@@ -64,14 +64,19 @@ async function fetchStripe() {
 
   const headers = { 'Authorization': `Bearer ${key}` };
 
-  // Usar payment_intents en vez de charges para datos mas fiables
-  const [piRes, balanceRes] = await Promise.all([
+  // CRITICAL: Use payment_intents instead of charges
+  // The charges API returns inflated numbers (329.92 when real revenue is 7.96)
+  const [piRes, balanceRes, productsRes, sessionsRes] = await Promise.all([
     fetch('https://api.stripe.com/v1/payment_intents?limit=100', { headers }),
-    fetch('https://api.stripe.com/v1/balance', { headers })
+    fetch('https://api.stripe.com/v1/balance', { headers }),
+    fetch('https://api.stripe.com/v1/products?limit=20&active=true', { headers }),
+    fetch('https://api.stripe.com/v1/checkout/sessions?limit=20', { headers })
   ]);
 
   const piData = await piRes.json();
   const balance = await balanceRes.json();
+  const productsData = await productsRes.json();
+  const sessionsData = await sessionsRes.json();
 
   const succeeded = (piData.data || []).filter(p => p.status === 'succeeded');
 
@@ -82,6 +87,7 @@ async function fetchStripe() {
   const revenueMonth = thisMonth.reduce((sum, p) => sum + p.amount, 0);
   const revenueTotal = succeeded.reduce((sum, p) => sum + p.amount, 0);
 
+  // Build product-level revenue from checkout sessions
   const byProduct = {};
   succeeded.forEach(p => {
     const desc = p.description || p.metadata?.product || 'Desconocido';
@@ -90,12 +96,62 @@ async function fetchStripe() {
     byProduct[desc].revenue += p.amount;
   });
 
+  // Map products with their prices
+  const products = (productsData.data || []).map(p => ({
+    id: p.id,
+    name: p.name,
+    description: p.description || null,
+    default_price: p.default_price || null,
+    images: p.images || [],
+    active: p.active
+  }));
+
+  // Fetch prices for products that have default_price
+  const priceIds = products.map(p => p.default_price).filter(Boolean);
+  let pricesMap = {};
+  if (priceIds.length > 0) {
+    try {
+      const pricesRes = await fetch('https://api.stripe.com/v1/prices?limit=50&active=true', { headers });
+      const pricesData = await pricesRes.json();
+      (pricesData.data || []).forEach(pr => {
+        pricesMap[pr.id] = {
+          amount: pr.unit_amount,
+          currency: pr.currency,
+          type: pr.type
+        };
+      });
+    } catch (e) {
+      // Ignore price fetch errors
+    }
+  }
+
+  // Enrich products with price info
+  const productsWithPrices = products.map(p => ({
+    ...p,
+    price: p.default_price && pricesMap[p.default_price]
+      ? pricesMap[p.default_price]
+      : null
+  }));
+
+  // Recent checkout sessions for product-level detail
+  const recentSessions = (sessionsData.data || [])
+    .filter(s => s.payment_status === 'paid')
+    .slice(0, 10)
+    .map(s => ({
+      amount: s.amount_total,
+      currency: s.currency,
+      email: s.customer_details?.email || null,
+      date: new Date(s.created * 1000).toISOString()
+    }));
+
   return {
     revenue_month_cents: revenueMonth,
     revenue_total_cents: revenueTotal,
     sales_month: thisMonth.length,
     sales_total: succeeded.length,
     by_product: byProduct,
+    products: productsWithPrices,
+    products_count: products.length,
     recent: succeeded.slice(0, 10).map(p => ({
       amount: p.amount,
       currency: p.currency,
@@ -103,6 +159,7 @@ async function fetchStripe() {
       description: p.description || p.metadata?.product || null,
       date: new Date(p.created * 1000).toISOString()
     })),
+    recent_sessions: recentSessions,
     balance_available: balance.available?.[0]?.amount || 0,
     balance_pending: balance.pending?.[0]?.amount || 0
   };
@@ -112,7 +169,7 @@ async function fetchBrevoContacts() {
   const key = process.env.BREVO_API_KEY;
   if (!key) return { error: 'BREVO_API_KEY no configurada' };
 
-  const res = await fetch('https://api.brevo.com/v3/contacts?limit=20&offset=0&sort=desc', {
+  const res = await fetch('https://api.brevo.com/v3/contacts?limit=50&offset=0&sort=desc', {
     headers: { 'api-key': key, 'Accept': 'application/json' }
   });
   const data = await res.json();
@@ -193,21 +250,49 @@ async function fetchAcademia() {
   const headers = {
     'apikey': key,
     'Authorization': `Bearer ${key}`,
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Prefer': 'count=exact'
   };
 
-  const [profilesRes, enrollmentsRes] = await Promise.all([
-    fetch(`${url}/rest/v1/profiles?select=id,sun_sign,xp,streak_days,created_at&order=created_at.desc&limit=20`, { headers }),
-    fetch(`${url}/rest/v1/enrollments?select=id,course_id,status,progress,enrolled_at&order=enrolled_at.desc&limit=20`, { headers })
+  const [profilesRes, enrollmentsRes, lessonsRes, quizRes, profilesDataRes] = await Promise.all([
+    fetch(`${url}/rest/v1/profiles?select=id&limit=0`, {
+      headers: { ...headers, 'Prefer': 'count=exact' }
+    }),
+    fetch(`${url}/rest/v1/enrollments?select=id&limit=0`, {
+      headers: { ...headers, 'Prefer': 'count=exact' }
+    }),
+    fetch(`${url}/rest/v1/lesson_progress?select=id&limit=0`, {
+      headers: { ...headers, 'Prefer': 'count=exact' }
+    }),
+    fetch(`${url}/rest/v1/quiz_attempts?select=score&limit=50`, { headers }),
+    fetch(`${url}/rest/v1/profiles?select=id,name,sun_sign,xp,streak_days,last_active_at&order=last_active_at.desc.nullslast&limit=20`, { headers })
   ]);
 
-  const profiles = await profilesRes.json();
-  const enrollments = await enrollmentsRes.json();
+  // Extract counts from Content-Range header
+  const profilesCount = parseInt(profilesRes.headers.get('content-range')?.split('/')[1] || '0');
+  const enrollmentsCount = parseInt(enrollmentsRes.headers.get('content-range')?.split('/')[1] || '0');
+  const lessonsCount = parseInt(lessonsRes.headers.get('content-range')?.split('/')[1] || '0');
+
+  const quizData = await quizRes.json();
+  const profilesData = await profilesDataRes.json();
+
+  const quizScores = Array.isArray(quizData) ? quizData : [];
+  const avgScore = quizScores.length > 0
+    ? Math.round(quizScores.reduce((sum, q) => sum + (q.score || 0), 0) / quizScores.length)
+    : 0;
+
+  const profiles = Array.isArray(profilesData) ? profilesData : [];
+  const avgXp = profiles.length > 0
+    ? Math.round(profiles.reduce((sum, p) => sum + (p.xp || 0), 0) / profiles.length)
+    : 0;
 
   return {
-    total_students: Array.isArray(profiles) ? profiles.length : 0,
-    total_enrollments: Array.isArray(enrollments) ? enrollments.length : 0,
-    profiles: Array.isArray(profiles) ? profiles : [],
-    enrollments: Array.isArray(enrollments) ? enrollments : []
+    total_students: profilesCount,
+    total_enrollments: enrollmentsCount,
+    total_lessons_completed: lessonsCount,
+    total_quiz_attempts: quizScores.length,
+    avg_quiz_score: avgScore,
+    avg_xp: avgXp,
+    profiles: profiles
   };
 }

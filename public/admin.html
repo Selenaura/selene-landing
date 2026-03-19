@@ -16,6 +16,7 @@
   body { background: var(--bg); color: var(--white); font-family: 'Outfit', sans-serif; min-height: 100vh; }
   h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
 
+  /* Login */
   .login-wrap { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; }
   .login-box { max-width: 360px; width: 100%; text-align: center; }
   .login-box h1 { font-size: 2rem; color: var(--gold); margin-bottom: 0.5rem; }
@@ -26,51 +27,76 @@
   .login-error { color: var(--red); font-size: 0.8rem; margin-top: 1rem; display: none; }
   .login-loading { color: var(--muted); font-size: 0.85rem; margin-top: 1rem; display: none; }
 
-  .dashboard { display: none; max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+  /* Dashboard */
+  .dashboard { display: none; max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
   .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #222; flex-wrap: wrap; gap: 8px; }
   .dash-header h1 { font-size: 1.5rem; color: var(--gold); }
   .dash-header .meta { font-size: 0.75rem; color: var(--muted); }
   .header-actions { display: flex; gap: 8px; align-items: center; }
-  .btn-sm { background: none; border: 1px solid var(--gold-dim); color: var(--gold); padding: 6px 14px; border-radius: 6px; font-family: 'Outfit', sans-serif; font-size: 0.8rem; cursor: pointer; }
+  .btn-sm { background: none; border: 1px solid var(--gold-dim); color: var(--gold); padding: 6px 14px; border-radius: 6px; font-family: 'Outfit', sans-serif; font-size: 0.8rem; cursor: pointer; transition: background 0.15s; }
   .btn-sm:hover { background: var(--bg3); }
   .btn-sm.logout { border-color: #444; color: var(--muted); }
 
-  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 2rem; }
+  /* KPI Cards */
+  .metrics { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 2rem; }
+  @media (max-width: 900px) { .metrics { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
   .metric { background: var(--bg2); border: 1px solid #222; border-radius: 10px; padding: 1rem; }
-  .metric .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
-  .metric .value { font-size: 1.5rem; font-weight: 500; }
-  .metric .sub { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+  .metric .label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .metric .value { font-size: 1.4rem; font-weight: 500; }
+  .metric .sub { font-size: 0.68rem; color: var(--muted); margin-top: 2px; }
   .metric.gold .value { color: var(--gold); }
   .metric.green .value { color: var(--green); }
   .metric.blue .value { color: var(--blue); }
 
+  /* Sections */
   .section { margin-bottom: 2rem; }
   .section h2 { font-size: 1.2rem; color: var(--gold); margin-bottom: 1rem; }
+
+  /* Funnel */
+  .funnel-wrap { background: var(--bg2); border: 1px solid #222; border-radius: 10px; padding: 1.2rem; }
+  .funnel-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .funnel-bar:last-child { margin-bottom: 0; }
+  .funnel-bar .bar-label { font-size: 0.8rem; color: var(--muted); width: 140px; flex-shrink: 0; }
+  .funnel-bar .bar-track { flex: 1; height: 26px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+  .funnel-bar .bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; display: flex; align-items: center; padding-left: 8px; font-size: 0.75rem; font-weight: 500; min-width: fit-content; }
+  .funnel-bar .bar-fill.l { background: var(--blue); }
+  .funnel-bar .bar-fill.e { background: var(--gold); color: var(--bg); }
+  .funnel-bar .bar-fill.c { background: var(--green); }
+
+  /* Charts */
   .chart-wrap { background: var(--bg2); border: 1px solid #222; border-radius: 10px; padding: 1rem; position: relative; height: 280px; }
   .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 2rem; }
   @media (max-width: 700px) { .charts-grid { grid-template-columns: 1fr; } }
 
+  /* Tables */
   table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-  th { text-align: left; color: var(--muted); font-weight: 400; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 12px; border-bottom: 1px solid #222; }
+  th { text-align: left; color: var(--muted); font-weight: 400; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 12px; border-bottom: 1px solid #222; }
   td { padding: 8px 12px; border-bottom: 1px solid #1a1a22; }
   .table-wrap { background: var(--bg2); border: 1px solid #222; border-radius: 10px; overflow: hidden; }
   .tables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 2rem; }
   @media (max-width: 700px) { .tables-grid { grid-template-columns: 1fr; } }
 
+  /* Products grid */
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .product-card { background: var(--bg2); border: 1px solid #222; border-radius: 10px; padding: 1rem; }
+  .product-card .product-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--white); margin-bottom: 4px; }
+  .product-card .product-price { font-size: 1.1rem; color: var(--gold); font-weight: 500; }
+  .product-card .product-price.no-price { color: var(--muted); font-size: 0.8rem; }
+
+  /* Academia */
+  .academia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+  .academia-stat { background: var(--bg2); border: 1px solid #222; border-radius: 10px; padding: 1rem; text-align: center; }
+  .academia-stat .stat-value { font-size: 1.5rem; font-weight: 500; color: var(--gold); }
+  .academia-stat .stat-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+
+  /* Status */
   .status-list { display: grid; gap: 8px; }
   .status-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--bg2); border: 1px solid #222; border-radius: 8px; font-size: 0.85rem; }
   .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .dot.ok { background: var(--green); }
   .dot.warn { background: #F59E0B; }
   .dot.err { background: var(--red); }
-
-  .funnel-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-  .funnel-bar .bar-label { font-size: 0.8rem; color: var(--muted); width: 120px; flex-shrink: 0; }
-  .funnel-bar .bar-track { flex: 1; height: 24px; background: var(--bg); border-radius: 4px; overflow: hidden; }
-  .funnel-bar .bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; display: flex; align-items: center; padding-left: 8px; font-size: 0.75rem; font-weight: 500; min-width: fit-content; }
-  .funnel-bar .bar-fill.l { background: var(--blue); }
-  .funnel-bar .bar-fill.e { background: var(--gold); color: var(--bg); }
-  .funnel-bar .bar-fill.c { background: var(--green); }
 
   .empty { color: var(--muted); font-size: 0.85rem; padding: 1.5rem; text-align: center; }
   .spin { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--gold-dim); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -81,7 +107,7 @@
 
 <div id="login" class="login-wrap">
   <div class="login-box">
-    <h1>✦ Selene</h1>
+    <h1>Selene</h1>
     <p>Panel de control</p>
     <button class="google-btn" onclick="signInWithGoogle()">
       <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
@@ -95,8 +121,8 @@
 <div id="dash" class="dashboard">
   <div class="dash-header">
     <div>
-      <h1>✦ Selene · Panel de control</h1>
-      <div class="meta"><span id="user-name"></span> · <span id="updated-at"></span></div>
+      <h1>Selene - Panel de control</h1>
+      <div class="meta"><span id="user-name"></span> - <span id="updated-at"></span></div>
     </div>
     <div class="header-actions">
       <button class="btn-sm" onclick="loadData()">Actualizar</button>
@@ -104,20 +130,23 @@
     </div>
   </div>
 
+  <!-- KPI Cards -->
   <div class="metrics" id="metrics">
-    <div class="metric gold"><div class="label">Ingresos mes</div><div class="value" id="m-revenue">—</div><div class="sub" id="m-revenue-sub"></div></div>
-    <div class="metric blue"><div class="label">Leads mes</div><div class="value" id="m-leads">—</div><div class="sub" id="m-leads-sub"></div></div>
-    <div class="metric"><div class="label">Lecturas hoy</div><div class="value" id="m-lecturas">—</div><div class="sub" id="m-lecturas-sub"></div></div>
-    <div class="metric green"><div class="label">Ventas mes</div><div class="value" id="m-sales">—</div><div class="sub" id="m-sales-sub"></div></div>
-    <div class="metric"><div class="label">Alumnos</div><div class="value" id="m-students">—</div><div class="sub" id="m-students-sub"></div></div>
-    <div class="metric"><div class="label">Contactos Brevo</div><div class="value" id="m-brevo">—</div><div class="sub" id="m-brevo-sub"></div></div>
+    <div class="metric gold"><div class="label">Ingresos totales</div><div class="value" id="m-revenue">--</div><div class="sub" id="m-revenue-sub"></div></div>
+    <div class="metric green"><div class="label">Saldo Stripe</div><div class="value" id="m-balance">--</div><div class="sub" id="m-balance-sub"></div></div>
+    <div class="metric"><div class="label">Ventas totales</div><div class="value" id="m-sales">--</div><div class="sub" id="m-sales-sub"></div></div>
+    <div class="metric blue"><div class="label">Leads Brevo</div><div class="value" id="m-leads">--</div><div class="sub" id="m-leads-sub"></div></div>
+    <div class="metric"><div class="label">Alumnos academia</div><div class="value" id="m-students">--</div><div class="sub" id="m-students-sub"></div></div>
+    <div class="metric"><div class="label">Tasa conversion</div><div class="value" id="m-conversion">--</div><div class="sub" id="m-conversion-sub"></div></div>
   </div>
 
+  <!-- Funnel -->
   <div class="section">
-    <h2>Funnel este mes</h2>
-    <div id="funnel-bars" style="background:var(--bg2);border:1px solid #222;border-radius:10px;padding:1rem;"></div>
+    <h2>Funnel de conversion</h2>
+    <div class="funnel-wrap" id="funnel-bars"></div>
   </div>
 
+  <!-- Charts -->
   <div class="charts-grid">
     <div class="section">
       <h2>Actividad diaria (30 dias)</h2>
@@ -129,6 +158,7 @@
     </div>
   </div>
 
+  <!-- Tables -->
   <div class="tables-grid">
     <div class="section">
       <h2>Ultimas ventas</h2>
@@ -140,11 +170,19 @@
     </div>
   </div>
 
+  <!-- Productos -->
   <div class="section">
-    <h2>Ingresos por producto</h2>
-    <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Ventas</th><th>Ingresos</th></tr></thead><tbody id="tb-products"></tbody></table></div>
+    <h2>Productos</h2>
+    <div class="products-grid" id="products-grid"></div>
   </div>
 
+  <!-- Academia -->
+  <div class="section">
+    <h2>Academia</h2>
+    <div class="academia-grid" id="academia-grid"></div>
+  </div>
+
+  <!-- Status -->
   <div class="section">
     <h2>Estado de sistemas</h2>
     <div class="status-list" id="status-list"></div>
@@ -154,21 +192,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-const SUPABASE_URL = 'https://lerfefvqfwdsubchzqyk.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxlcmZlZnZxZndkc3ViY2h6cXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NDU2MTIsImV4cCI6MjA4OTIyMTYxMn0.1SJ0CxI3ouJa33RhmvAw9ORGBrADAFS_hn0-yeRX4Xo';
+var SUPABASE_URL = 'https://lerfefvqfwdsubchzqyk.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxlcmZlZnZxZndkc3ViY2h6cXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NDU2MTIsImV4cCI6MjA4OTIyMTYxMn0.1SJ0CxI3ouJa33RhmvAw9ORGBrADAFS_hn0-yeRX4Xo';
 
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-let dailyChartInstance = null;
-let signosChartInstance = null;
+var dailyChartInstance = null;
+var signosChartInstance = null;
 
 async function init() {
-  const { data: { session } } = await sb.auth.getSession();
+  var result = await sb.auth.getSession();
+  var session = result.data.session;
   if (session) {
     showDashboard(session);
   }
 
-  sb.auth.onAuthStateChange((event, session) => {
+  sb.auth.onAuthStateChange(function(event, session) {
     if (event === 'SIGNED_IN' && session) {
       showDashboard(session);
     }
@@ -179,14 +218,14 @@ async function signInWithGoogle() {
   document.getElementById('login-loading').style.display = 'block';
   document.getElementById('login-err').style.display = 'none';
 
-  const { error } = await sb.auth.signInWithOAuth({
+  var result = await sb.auth.signInWithOAuth({
     provider: 'google',
     options: { redirectTo: window.location.origin + '/admin' }
   });
 
-  if (error) {
+  if (result.error) {
     document.getElementById('login-loading').style.display = 'none';
-    document.getElementById('login-err').textContent = error.message;
+    document.getElementById('login-err').textContent = result.error.message;
     document.getElementById('login-err').style.display = 'block';
   }
 }
@@ -206,10 +245,11 @@ async function showDashboard(session) {
 
 async function loadData() {
   try {
-    const { data: { session } } = await sb.auth.getSession();
+    var result = await sb.auth.getSession();
+    var session = result.data.session;
     if (!session) { signOut(); return; }
 
-    const res = await fetch('/api/admin-data', {
+    var res = await fetch('/api/admin-data', {
       headers: { 'Authorization': 'Bearer ' + session.access_token }
     });
 
@@ -224,7 +264,7 @@ async function loadData() {
 
     if (!res.ok) throw new Error('Error ' + res.status);
 
-    const data = await res.json();
+    var data = await res.json();
     document.getElementById('updated-at').textContent = new Date(data.generated_at).toLocaleString('es-ES');
 
     renderMetrics(data);
@@ -233,73 +273,116 @@ async function loadData() {
     renderSignosChart(data);
     renderSalesTable(data);
     renderLeadsTable(data);
-    renderProductsTable(data);
+    renderProducts(data);
+    renderAcademia(data);
     renderStatus(data);
 
   } catch (err) {
-    console.error(err);
+    console.error('Error cargando datos:', err);
   }
 }
 
-function fmt(cents) { return (cents / 100).toFixed(2).replace('.', ',') + ' \u20AC'; }
-function fmtDate(iso) { if (!iso) return '\u2014'; return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }); }
-function maskEmail(e) { if (!e) return '\u2014'; const [u, d] = e.split('@'); return u.slice(0, 3) + '***@' + d; }
+function fmt(cents) {
+  return (cents / 100).toFixed(2).replace('.', ',') + ' \u20AC';
+}
+
+function fmtDate(iso) {
+  if (!iso) return '\u2014';
+  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+}
+
+function maskEmail(e) {
+  if (!e) return '\u2014';
+  var parts = e.split('@');
+  if (parts.length !== 2) return '\u2014';
+  return parts[0].slice(0, 3) + '***@' + parts[1];
+}
 
 function renderMetrics(data) {
-  const s = data.stripe || {};
-  const f = data.funnel || {};
-  const b = data.brevo_contacts || {};
-  const bl = data.brevo_list || {};
-  const a = data.academia || {};
+  var s = data.stripe || {};
+  var f = data.funnel || {};
+  var b = data.brevo_contacts || {};
+  var bl = data.brevo_list || {};
+  var a = data.academia || {};
 
-  document.getElementById('m-revenue').textContent = s.error ? '\u26A0\uFE0F' : fmt(s.revenue_month_cents || 0);
-  document.getElementById('m-revenue-sub').textContent = s.error ? s.error : 'Total: ' + fmt(s.revenue_total_cents || 0);
+  // Ingresos totales
+  document.getElementById('m-revenue').textContent = s.error ? '!!' : fmt(s.revenue_total_cents || 0);
+  document.getElementById('m-revenue-sub').textContent = s.error ? s.error : 'Este mes: ' + fmt(s.revenue_month_cents || 0);
 
-  document.getElementById('m-leads').textContent = f.error ? '\u26A0\uFE0F' : (f.month?.email_capturado || 0);
-  document.getElementById('m-leads-sub').textContent = f.error ? f.error : 'Total Brevo: ' + (bl.totalSubscribers || b.total || '?');
+  // Saldo Stripe
+  document.getElementById('m-balance').textContent = s.error ? '!!' : fmt(s.balance_available || 0);
+  document.getElementById('m-balance-sub').textContent = s.error ? s.error : 'Pendiente: ' + fmt(s.balance_pending || 0);
 
-  document.getElementById('m-lecturas').textContent = f.error ? '\u26A0\uFE0F' : (f.today?.lectura_generada || 0);
-  document.getElementById('m-lecturas-sub').textContent = 'Mes: ' + (f.month?.lectura_generada || 0);
+  // Ventas totales
+  document.getElementById('m-sales').textContent = s.error ? '!!' : (s.sales_total || 0);
+  document.getElementById('m-sales-sub').textContent = 'Este mes: ' + (s.sales_month || 0);
 
-  document.getElementById('m-sales').textContent = s.error ? '\u26A0\uFE0F' : (s.sales_month || 0);
-  document.getElementById('m-sales-sub').textContent = 'Total: ' + (s.sales_total || 0);
+  // Leads Brevo
+  var totalLeads = bl.totalSubscribers || b.total || 0;
+  document.getElementById('m-leads').textContent = b.error ? '!!' : totalLeads;
+  document.getElementById('m-leads-sub').textContent = b.error ? b.error : 'Lista Lectura Express';
 
-  document.getElementById('m-students').textContent = a.error ? '\u26A0\uFE0F' : (a.total_students || 0);
-  document.getElementById('m-students-sub').textContent = 'Matriculados: ' + (a.total_enrollments || 0);
+  // Alumnos academia
+  document.getElementById('m-students').textContent = a.error ? '!!' : (a.total_students || 0);
+  document.getElementById('m-students-sub').textContent = 'Matriculas: ' + (a.total_enrollments || 0);
 
-  document.getElementById('m-brevo').textContent = b.error ? '\u26A0\uFE0F' : (bl.totalSubscribers || b.total || 0);
-  document.getElementById('m-brevo-sub').textContent = 'Lista Lectura Express';
+  // Tasa conversion (leads -> compras)
+  var salesTotal = s.sales_total || 0;
+  var leadsTotal = totalLeads || 0;
+  var convRate = leadsTotal > 0 ? ((salesTotal / leadsTotal) * 100).toFixed(1) : '0,0';
+  if (typeof convRate === 'number') convRate = convRate.toString().replace('.', ',');
+  else convRate = convRate.replace('.', ',');
+  document.getElementById('m-conversion').textContent = convRate + '%';
+  document.getElementById('m-conversion-sub').textContent = salesTotal + ' ventas / ' + leadsTotal + ' leads';
 }
 
 function renderFunnel(data) {
-  const f = data.funnel?.month || {};
-  const lecturas = f.lectura_generada || 0;
-  const emails = f.email_capturado || 0;
-  const compras = f.compra || 0;
-  const max = Math.max(lecturas, 1);
-  const convLE = lecturas > 0 ? Math.round((emails / lecturas) * 100) : 0;
-  const convEC = emails > 0 ? Math.round((compras / emails) * 100) : 0;
+  var f = data.funnel?.month || {};
+  var b = data.brevo_contacts || {};
+  var s = data.stripe || {};
 
-  document.getElementById('funnel-bars').innerHTML =
-    '<div class="funnel-bar"><span class="bar-label">Lecturas</span><div class="bar-track"><div class="bar-fill l" style="width:' + Math.max((lecturas/max)*100, lecturas ? 8 : 0) + '%">' + lecturas + '</div></div></div>' +
-    '<div class="funnel-bar"><span class="bar-label">Emails (' + convLE + '%)</span><div class="bar-track"><div class="bar-fill e" style="width:' + Math.max((emails/max)*100, emails ? 8 : 0) + '%">' + emails + '</div></div></div>' +
-    '<div class="funnel-bar"><span class="bar-label">Compras (' + convEC + '%)</span><div class="bar-track"><div class="bar-fill c" style="width:' + Math.max((compras/max)*100, compras ? 8 : 0) + '%">' + compras + '</div></div></div>';
+  var lecturas = f.lectura_generada || 0;
+  var emails = f.email_capturado || 0;
+  var compras = f.compra || 0;
+
+  // If funnel is empty, use totals from other sources
+  var totalLeads = (data.brevo_list || {}).totalSubscribers || b.total || 0;
+  var totalSales = s.sales_total || 0;
+
+  // Use the larger of funnel data or actual totals for display
+  if (totalLeads > emails) emails = totalLeads;
+  if (totalSales > compras) compras = totalSales;
+
+  var max = Math.max(lecturas, emails, compras, 1);
+
+  var convLE = lecturas > 0 ? Math.round((emails / lecturas) * 100) : (emails > 0 ? 100 : 0);
+  var convEC = emails > 0 ? Math.round((compras / emails) * 100) : 0;
+
+  var html = '';
+  html += '<div class="funnel-bar"><span class="bar-label">Lecturas</span><div class="bar-track"><div class="bar-fill l" style="width:' + Math.max((lecturas/max)*100, lecturas ? 10 : 0) + '%">' + lecturas + '</div></div></div>';
+  html += '<div class="funnel-bar"><span class="bar-label">Emails (' + convLE + '%)</span><div class="bar-track"><div class="bar-fill e" style="width:' + Math.max((emails/max)*100, emails ? 10 : 0) + '%">' + emails + '</div></div></div>';
+  html += '<div class="funnel-bar"><span class="bar-label">Compras (' + convEC + '%)</span><div class="bar-track"><div class="bar-fill c" style="width:' + Math.max((compras/max)*100, compras ? 10 : 0) + '%">' + compras + '</div></div></div>';
+
+  document.getElementById('funnel-bars').innerHTML = html;
 }
 
 function renderDailyChart(data) {
-  const daily = data.funnel?.daily || {};
-  const days = Object.keys(daily).sort();
-  const el = document.getElementById('dailyChart');
+  var daily = data.funnel?.daily || {};
+  var days = Object.keys(daily).sort();
+  var el = document.getElementById('dailyChart');
 
-  if (days.length === 0 || !el) {
-    if (el) el.parentElement.innerHTML = '<div class="empty">Sin datos de funnel aun.<br>Apareceran cuando el tracking este conectado.</div>';
+  if (!el) return;
+
+  if (days.length === 0) {
+    var parent = el.parentElement;
+    if (parent) parent.innerHTML = '<div class="empty">Sin datos de funnel aun.<br>Apareceran cuando el tracking este conectado.</div>';
     return;
   }
 
-  const labels = days.map(function(d) { var dt = new Date(d); return dt.getDate() + '/' + (dt.getMonth()+1); });
+  var labels = days.map(function(d) { var dt = new Date(d); return dt.getDate() + '/' + (dt.getMonth()+1); });
 
   if (dailyChartInstance) dailyChartInstance.destroy();
-  dailyChartInstance = new Chart(document.getElementById('dailyChart'), {
+  dailyChartInstance = new Chart(el, {
     type: 'bar',
     data: {
       labels: labels,
@@ -324,17 +407,20 @@ function renderSignosChart(data) {
   var signos = data.brevo_contacts?.signos || {};
   var labels = Object.keys(signos);
   var values = Object.values(signos);
-  var el2 = document.getElementById('signosChart');
+  var el = document.getElementById('signosChart');
 
-  if (labels.length === 0 || !el2) {
-    if (el2) el2.parentElement.innerHTML = '<div class="empty">Sin datos de signos en Brevo.</div>';
+  if (!el) return;
+
+  if (labels.length === 0) {
+    var parent = el.parentElement;
+    if (parent) parent.innerHTML = '<div class="empty">Sin datos de signos en Brevo.</div>';
     return;
   }
 
   var colors = ['#E24B4A','#4CAF50','#C9A84C','#5B8DEF','#F59E0B','#8B5CF6','#EC4899','#14B8A6','#F97316','#6366F1','#22D3EE','#A78BFA'];
 
   if (signosChartInstance) signosChartInstance.destroy();
-  signosChartInstance = new Chart(document.getElementById('signosChart'), {
+  signosChartInstance = new Chart(el, {
     type: 'doughnut',
     data: { labels: labels, datasets: [{ data: values, backgroundColor: colors.slice(0, labels.length), borderWidth: 0 }] },
     options: {
@@ -348,44 +434,106 @@ function renderSignosChart(data) {
 function renderSalesTable(data) {
   var sales = data.stripe?.recent || [];
   var tb = document.getElementById('tb-sales');
+  if (!tb) return;
   if (sales.length === 0) { tb.innerHTML = '<tr><td colspan="3" class="empty">Sin ventas registradas</td></tr>'; return; }
-  tb.innerHTML = sales.map(function(s) { return '<tr><td style="color:var(--gold);font-weight:500">' + fmt(s.amount) + '</td><td>' + (s.description || '\u2014') + '</td><td style="color:var(--muted)">' + fmtDate(s.date) + '</td></tr>'; }).join('');
+  tb.innerHTML = sales.map(function(s) {
+    return '<tr><td style="color:var(--gold);font-weight:500">' + fmt(s.amount) + '</td><td>' + (s.description || '\u2014') + '</td><td style="color:var(--muted)">' + fmtDate(s.date) + '</td></tr>';
+  }).join('');
 }
 
 function renderLeadsTable(data) {
   var leads = data.brevo_contacts?.contacts || [];
   var tb = document.getElementById('tb-leads');
+  if (!tb) return;
   if (leads.length === 0) { tb.innerHTML = '<tr><td colspan="3" class="empty">Sin leads registrados</td></tr>'; return; }
-  tb.innerHTML = leads.slice(0, 10).map(function(l) { return '<tr><td>' + maskEmail(l.email) + '</td><td>' + (l.signo || '\u2014') + '</td><td style="color:var(--muted)">' + fmtDate(l.created) + '</td></tr>'; }).join('');
+  tb.innerHTML = leads.slice(0, 10).map(function(l) {
+    return '<tr><td>' + maskEmail(l.email) + '</td><td>' + (l.signo || '\u2014') + '</td><td style="color:var(--muted)">' + fmtDate(l.created) + '</td></tr>';
+  }).join('');
 }
 
-function renderProductsTable(data) {
-  var prods = data.stripe?.by_product || {};
-  var tb = document.getElementById('tb-products');
-  var entries = Object.entries(prods).sort(function(a, b) { return b[1].revenue - a[1].revenue; });
-  if (entries.length === 0) { tb.innerHTML = '<tr><td colspan="3" class="empty">Sin ventas por producto</td></tr>'; return; }
-  tb.innerHTML = entries.map(function(e) { return '<tr><td>' + e[0] + '</td><td>' + e[1].count + '</td><td style="color:var(--gold)">' + fmt(e[1].revenue) + '</td></tr>'; }).join('');
+function renderProducts(data) {
+  var products = data.stripe?.products || [];
+  var container = document.getElementById('products-grid');
+  if (!container) return;
+
+  if (products.length === 0) {
+    container.innerHTML = '<div class="empty">Sin productos en Stripe</div>';
+    return;
+  }
+
+  container.innerHTML = products.map(function(p) {
+    var priceHtml = '';
+    if (p.price && p.price.amount) {
+      priceHtml = '<div class="product-price">' + fmt(p.price.amount) + '</div>';
+    } else {
+      priceHtml = '<div class="product-price no-price">Sin precio asignado</div>';
+    }
+    return '<div class="product-card"><div class="product-name">' + p.name + '</div>' + priceHtml + '</div>';
+  }).join('');
+}
+
+function renderAcademia(data) {
+  var a = data.academia || {};
+  var container = document.getElementById('academia-grid');
+  if (!container) return;
+
+  if (a.error) {
+    container.innerHTML = '<div class="empty">' + a.error + '</div>';
+    return;
+  }
+
+  var stats = [
+    { value: a.total_students || 0, label: 'Alumnos' },
+    { value: a.total_enrollments || 0, label: 'Matriculas' },
+    { value: a.total_lessons_completed || 0, label: 'Lecciones completadas' },
+    { value: a.avg_quiz_score || 0, label: 'Media quiz (%)' },
+    { value: a.avg_xp || 0, label: 'XP medio' }
+  ];
+
+  container.innerHTML = stats.map(function(s) {
+    return '<div class="academia-stat"><div class="stat-value">' + s.value + '</div><div class="stat-label">' + s.label + '</div></div>';
+  }).join('');
 }
 
 function renderStatus(data) {
   var items = [];
 
-  if (data.stripe?.error) items.push({ status: 'err', text: 'Stripe: ' + data.stripe.error });
-  else items.push({ status: 'ok', text: 'Stripe conectado \u2014 saldo disponible: ' + fmt(data.stripe?.balance_available || 0) });
-
-  if (data.brevo_contacts?.error) items.push({ status: 'err', text: 'Brevo: ' + data.brevo_contacts.error });
-  else items.push({ status: 'ok', text: 'Brevo conectado \u2014 ' + (data.brevo_contacts?.total || 0) + ' contactos totales' });
-
-  if (data.funnel?.error) items.push({ status: 'warn', text: 'Supabase funnel: ' + data.funnel.error });
-  else {
-    var total = (data.funnel?.month?.lectura_generada || 0) + (data.funnel?.month?.email_capturado || 0);
-    items.push({ status: total > 0 ? 'ok' : 'warn', text: total > 0 ? 'Funnel tracking activo \u2014 ' + total + ' eventos este mes' : 'Funnel: tabla existe pero 0 eventos (tracking pendiente de conectar)' });
+  // Stripe
+  if (data.stripe?.error) {
+    items.push({ status: 'err', text: 'Stripe: ' + data.stripe.error });
+  } else {
+    items.push({ status: 'ok', text: 'Stripe conectado - saldo disponible: ' + fmt(data.stripe?.balance_available || 0) });
   }
 
-  if (data.academia?.error) items.push({ status: 'warn', text: 'Academia: ' + data.academia.error });
-  else items.push({ status: 'ok', text: 'Academia \u2014 ' + (data.academia?.total_students || 0) + ' perfiles, ' + (data.academia?.total_enrollments || 0) + ' matriculas' });
+  // Brevo
+  if (data.brevo_contacts?.error) {
+    items.push({ status: 'err', text: 'Brevo: ' + data.brevo_contacts.error });
+  } else {
+    items.push({ status: 'ok', text: 'Brevo conectado - ' + (data.brevo_contacts?.total || 0) + ' contactos totales' });
+  }
 
-  document.getElementById('status-list').innerHTML = items.map(function(i) { return '<div class="status-item"><span class="dot ' + i.status + '"></span>' + i.text + '</div>'; }).join('');
+  // Supabase funnel
+  if (data.funnel?.error) {
+    items.push({ status: 'warn', text: 'Supabase funnel: ' + data.funnel.error });
+  } else {
+    var total = (data.funnel?.month?.lectura_generada || 0) + (data.funnel?.month?.email_capturado || 0) + (data.funnel?.month?.compra || 0);
+    if (total > 0) {
+      items.push({ status: 'ok', text: 'Funnel tracking activo - ' + total + ' eventos este mes' });
+    } else {
+      items.push({ status: 'warn', text: 'Funnel: tabla existe pero 0 eventos (tracking pendiente de conectar)' });
+    }
+  }
+
+  // Academia
+  if (data.academia?.error) {
+    items.push({ status: 'warn', text: 'Academia: ' + data.academia.error });
+  } else {
+    items.push({ status: 'ok', text: 'Academia - ' + (data.academia?.total_students || 0) + ' perfiles, ' + (data.academia?.total_enrollments || 0) + ' matriculas' });
+  }
+
+  document.getElementById('status-list').innerHTML = items.map(function(i) {
+    return '<div class="status-item"><span class="dot ' + i.status + '"></span>' + i.text + '</div>';
+  }).join('');
 }
 
 init();
