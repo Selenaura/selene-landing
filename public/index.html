@@ -490,7 +490,9 @@ transition:all .3s;outline:none;width:100%;appearance:none;-webkit-appearance:no
 .nl-field:focus{border-color:rgba(201,168,76,.35);box-shadow:0 0 0 3px rgba(201,168,76,.06)}
 input[type=“date”].nl-field{color:var(–text-dim)}
 input[type=“date”].nl-field.has-value{color:var(–white)}
-input[type=“date”].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7) sepia(.3) hue-rotate(10deg);cursor:pointer}
+input[type=”date”].nl-field::-webkit-calendar-picker-indicator{filter:invert(.7) sepia(.3) hue-rotate(10deg);cursor:pointer}
+input[type=”date”]{-webkit-text-fill-color:#F0EDE4;min-height:44px}
+input[type=”date”]::-webkit-datetime-edit{color:#F0EDE4}
 .nl-consent{display:flex;align-items:flex-start;gap:10px;text-align:left;position:relative;margin-top:4px}
 .nl-consent input[type=“checkbox”]{
 width:18px;height:18px;min-width:18px;flex-shrink:0;margin-top:1px;cursor:pointer;
@@ -663,10 +665,11 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
       <div class="hero-tag" data-es="Ciencia y consciencia de lo invisible" data-en="Science and awareness of the invisible">Ciencia y consciencia de lo invisible</div>
       <h1 data-es="Hay algo en tu<br>carta natal que<br><em>nadie te ha contado</em>" data-en="There's something in<br>your birth chart that<br><em>no one has told you</em>">Hay algo en tu<br>carta natal que<br><em>nadie te ha contado</em></h1>
       <p class="hero-sub" data-es="30 segundos. Tu fecha de nacimiento. Y una lectura que no vas a olvidar. Con la ciencia detrás." data-en="30 seconds. Your birth date. And a reading you won't forget. Science-backed.">30 segundos. Tu fecha de nacimiento. Y una lectura que no vas a olvidar. Con la ciencia detrás.</p>
-      <div class="hero-ctas">
-        <a href="#lectura-express" class="btn-gold" style="font-size:16px;padding:18px 36px" data-es="Quiero saber ✦" data-en="I want to know ✦">Quiero saber ✦</a>
+      <div class="nl-form" id="nlForm" style="max-width:340px;margin:0 auto">
+        <input type="date" class="nl-field" id="nlBirth" required max="2010-12-31" min="1930-01-01">
+        <button type="button" class="nl-submit" id="nlSubmit" disabled onclick="submitLectura()" data-es="Quiero mi lectura ✦" data-en="I want my reading ✦">Quiero mi lectura ✦</button>
       </div>
-      <p class="hero-note" data-es="30 segundos · Gratis · Con ciencia real detrás" data-en="30 seconds · Free · Real science behind it">30 segundos · Gratis · Con ciencia real detrás</p>
+      <p class="hero-note" data-es="Gratis · 30 segundos · Sin email · Con ciencia real" data-en="Free · 30 seconds · No email · Real science">Gratis · 30 segundos · Sin email · Con ciencia real</p>
     </div>
   </section>
 
@@ -735,23 +738,6 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
         <span class="fk-corner-tr"></span>
         <span class="fk-corner-bl"></span>
 
-```
-    <!-- ── STEP 1: BIRTH DATE ONLY (valor antes de pedir email) ── -->
-    <div id="nlFormWrap">
-      <div style="background:rgba(74,111,165,0.08);border:1px solid rgba(74,111,165,0.15);border-radius:8px;padding:8px 14px;margin-bottom:8px;text-align:center">
-        <p style="font-family:var(--serif);font-size:12px;color:var(--blue-light);font-style:italic;line-height:1.5" data-es="Saturno acaba de entrar en Aries — un tránsito que solo ocurre cada 29 años" data-en="Saturn just entered Aries — a transit that only happens every 29 years">Saturno acaba de entrar en Aries — un tránsito que solo ocurre cada 29 años</p>
-      </div>
-      <span class="nl-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="1.5" fill="#C9A84C" opacity=".5"/><path d="M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2" stroke-opacity=".4"/></svg></span>
-      <h3 class="nl-title" data-es="¿Qué dice tu cielo<br>natal <em>sobre ti</em>?" data-en="What does your<br>birth chart <em>say about you</em>?">¿Qué dice tu cielo<br>natal <em>sobre ti</em>?</h3>
-      <p class="nl-sub" data-es="Solo tu fecha de nacimiento. Selene hace el resto." data-en="Just your birth date. Selene does the rest.">Solo tu fecha de nacimiento. Selene hace el resto.</p>
-
-      <div class="nl-form" id="nlForm">
-        <input type="date" class="nl-field" id="nlBirth" required max="2010-12-31" min="1930-01-01">
-        <button type="button" class="nl-submit" id="nlSubmit" disabled onclick="submitLectura()" data-es="Quiero saberlo ✦" data-en="I want to know ✦">Quiero saberlo ✦</button>
-      </div>
-      <p style="font-size:10px;color:var(--text-dim);margin-top:8px;text-align:center" data-es="Gratis · Sin compromiso · Con ciencia real" data-en="Free · No commitment · Real science">Gratis · Sin compromiso · Con ciencia real</p>
-    </div>
-
     <!-- ── LOADING STATE ── -->
     <div class="nl-loading" id="nlLoading">
       <div class="nl-loading-orb">
@@ -806,7 +792,6 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
 
   </div>
 </div>
-```
 
   </section>
 
@@ -835,10 +820,10 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
         </a>
         <a href="https://carta.selenaura.com" class="product-card card-astral fk-frame fk-card-glow reveal stagger-1">
           <div class="accent-line"></div>
-          <div class="product-row-top"><div class="product-icon">☉</div><span class="product-badge">Premium</span></div>
+          <div class="product-row-top"><div class="product-icon">☉</div><span class="product-badge free" data-es="Gratis" data-en="Free">Gratis</span></div>
           <div class="product-name" data-es="Carta Astral" data-en="Birth Chart">Carta Astral</div>
           <div class="product-desc" data-es="Sol, luna, ascendente y 12 capas más de ti. Incluye La Consulta — donde Selene responde la pregunta que no te atreves a hacer en voz alta." data-en="Sun, moon, rising and 12 more layers of you. Includes The Consultation — where Selene answers the question you don't dare say out loud.">Sol, luna, ascendente y 12 capas más de ti. Incluye La Consulta — donde Selene responde la pregunta que no te atreves a hacer en voz alta.</div>
-          <div class="product-footer"><span class="product-price" data-es="Gratis — 14,99 €" data-en="Free — €14.99">Gratis — 14,99 €</span><span class="product-cta" data-es="Ver mi carta →" data-en="View my chart →">Ver mi carta →</span></div>
+          <div class="product-footer"><span class="product-price" data-es="Gratis" data-en="Free">Gratis</span><span class="product-cta" data-es="Ver mi carta →" data-en="View my chart →">Ver mi carta →</span></div>
         </a>
         <a href="https://quiro.selenaura.com" class="product-card card-quiro fk-frame fk-card-glow reveal stagger-2">
           <div class="accent-line"></div>
@@ -1143,7 +1128,7 @@ function setupEmailCapture(){
 
 // State transitions
 function showState(stateId){
-  ['nlFormWrap','nlLoading','nlResult','nlError'].forEach(function(id){
+  ['nlLoading','nlResult','nlError'].forEach(function(id){
     var el=document.getElementById(id);
     if(el){el.style.display='none';el.classList.remove('show');}
   });
@@ -1152,10 +1137,15 @@ function showState(stateId){
 }
 
 function resetLectura(){
-  showState('nlFormWrap');
+  ['nlLoading','nlResult','nlError'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el){el.style.display='none';el.classList.remove('show');}
+  });
   var submit=document.getElementById('nlSubmit');
   submit.disabled=true;
   document.getElementById('nlBirth').value='';
+  document.getElementById('nlBirth').classList.remove('has-value');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 // Step 1: Generate reading (NO email needed)
