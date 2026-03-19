@@ -14,9 +14,13 @@ module.exports = async function handler(req, res) {
     var emailOnly = body.emailOnly;
     if (emailOnly && email) {
       var readingHtml = body.readingHtml || '';
-      subscribeToBrevo(email, birthDate, sign).catch(function(e) { console.error('Brevo error:', e.message); });
+      try {
+        await subscribeToBrevo(email, birthDate, sign);
+      } catch(e) { console.error('Brevo subscribe error:', e.message); }
       if (readingHtml) {
-        sendReadingEmail(email, sign, signEn, readingHtml, lang).catch(function(e) { console.error('Brevo email error:', e.message); });
+        try {
+          await sendReadingEmail(email, sign, signEn, readingHtml, lang);
+        } catch(e) { console.error('Brevo email error:', e.message); }
       }
       return res.status(200).json({ subscribed: true });
     }
@@ -25,7 +29,7 @@ module.exports = async function handler(req, res) {
     }
     var reading = await generateReading(birthDate, sign, signEn, lang);
     if (email) {
-      subscribeToBrevo(email, birthDate, sign).catch(function(e) { console.error('Brevo error:', e.message); });
+      try { await subscribeToBrevo(email, birthDate, sign); } catch(e) { console.error('Brevo error:', e.message); }
     }
     return res.status(200).json({ reading: reading, sign: sign, signEn: signEn });
   } catch (err) {
