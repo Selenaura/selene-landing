@@ -13,7 +13,11 @@ module.exports = async function handler(req, res) {
     var lang = body.lang || 'es';
     var emailOnly = body.emailOnly;
     if (emailOnly && email) {
+      var readingHtml = body.readingHtml || '';
       subscribeToBrevo(email, birthDate, sign).catch(function(e) { console.error('Brevo error:', e.message); });
+      if (readingHtml) {
+        sendReadingEmail(email, sign, signEn, readingHtml, lang).catch(function(e) { console.error('Brevo email error:', e.message); });
+      }
       return res.status(200).json({ subscribed: true });
     }
     if (!birthDate || !sign) {
@@ -78,4 +82,83 @@ async function subscribeToBrevo(email, birthDate, sign) {
       updateEnabled: true
     })
   });
+}
+
+async function sendReadingEmail(email, sign, signEn, readingHtml, lang) {
+  var brevoKey = process.env.BREVO_API_KEY;
+  if (!brevoKey) { console.warn('No BREVO_API_KEY for email'); return; }
+  
+  var signName = lang === 'en' ? (signEn || sign) : (sign || signEn);
+  var subject = lang === 'en' 
+    ? '✦ Your cosmic reading, ' + signName
+    : '✦ Tu lectura cósmica, ' + signName;
+  
+  var htmlContent = buildEmailHtml(readingHtml, signName, lang);
+  
+  await fetch('https://api.brevo.com/v3/smtp/email', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'api-key': brevoKey
+    },
+    body: JSON.stringify({
+      sender: { name: 'Selene', email: 'selene@selenaura.com' },
+      to: [{ email: email }],
+      subject: subject,
+      htmlContent: htmlContent
+    })
+  });
+}
+
+function buildEmailHtml(readingHtml, signName, lang) {
+  var isEn = lang === 'en';
+  return '<!DOCTYPE html>' +
+    '<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>' +
+    '<body style="margin:0;padding:0;background-color:#0A0A0F;font-family:Georgia,serif;">' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0A0A0F;">' +
+    '<tr><td align="center" style="padding:40px 20px;">' +
+    '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">' +
+    '<tr><td align="center" style="padding:32px 0 24px;">' +
+    '<p style="font-family:Georgia,serif;font-size:24px;letter-spacing:6px;color:#C9A84C;margin:0;">S E L E N E</p>' +
+    '<p style="font-family:Georgia,serif;font-size:12px;font-style:italic;color:rgba(240,237,228,0.4);margin:8px 0 0;letter-spacing:1px;">' + 
+    (isEn ? 'Science and awareness of the invisible' : 'Ciencia y consciencia de lo invisible') + '</p>' +
+    '</td></tr>' +
+    '<tr><td align="center" style="padding:0 40px;">' +
+    '<div style="height:1px;background:linear-gradient(90deg,transparent,#C9A84C,transparent);max-width:200px;margin:0 auto;"></div>' +
+    '</td></tr>' +
+    '<tr><td align="center" style="padding:28px 0 8px;">' +
+    '<span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 18px;border-radius:20px;background:rgba(201,168,76,0.12);color:#C9A84C;">' +
+    (isEn ? '✦ Your Express Cosmic Reading' : '✦ Tu Lectura Cósmica Express') + '</span>' +
+    '</td></tr>' +
+    '<tr><td align="center" style="padding:12px 0 4px;">' +
+    '<p style="font-family:Georgia,serif;font-size:26px;color:#F0EDE4;margin:0;font-weight:400;">' + signName + '</p>' +
+    '</td></tr>' +
+    '<tr><td style="padding:20px 32px 28px;">' +
+    '<div style="font-family:Georgia,serif;font-size:15px;color:rgba(240,237,228,0.75);line-height:1.85;">' +
+    readingHtml +
+    '</div>' +
+    '</td></tr>' +
+    '<tr><td align="center" style="padding:0 40px;">' +
+    '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.3),transparent);max-width:300px;margin:0 auto;"></div>' +
+    '</td></tr>' +
+    '<tr><td align="center" style="padding:28px 32px;">' +
+    '<p style="font-family:Georgia,serif;font-size:15px;font-style:italic;color:rgba(240,237,228,0.6);line-height:1.7;margin:0 0 20px;">' +
+    (isEn 
+      ? 'This is just a glimpse. Your full birth chart has 15 layers &mdash; including The Consultation, where Selene answers the question you carry inside.'
+      : 'Esto es solo una muestra. Tu carta natal completa tiene 15 capas &mdash; incluida La Consulta, donde Selene responde la pregunta que llevas dentro.') +
+    '</p>' +
+    '<a href="https://carta.selenaura.com" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#C9A84C,#D4AF37);color:#0A0A0F;border-radius:50px;font-family:Arial,sans-serif;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:0.5px;">' +
+    (isEn ? 'Discover your full birth chart →' : 'Descubre tu carta natal completa →') +
+    '</a>' +
+    '</td></tr>' +
+    '<tr><td align="center" style="padding:32px 20px 16px;">' +
+    '<p style="font-family:Georgia,serif;font-size:20px;letter-spacing:5px;color:rgba(201,168,76,0.4);margin:0 0 12px;">✦</p>' +
+    '<p style="font-size:11px;color:rgba(240,237,228,0.25);line-height:1.7;margin:0;">' +
+    (isEn
+      ? 'You received this email because you requested a reading at selenaura.com<br>If you no longer wish to receive emails, <a href="{{unsubscribe}}" style="color:rgba(201,168,76,0.4);">unsubscribe here</a>.'
+      : 'Recibes este email porque solicitaste una lectura en selenaura.com<br>Si no deseas recibir más emails, <a href="{{unsubscribe}}" style="color:rgba(201,168,76,0.4);">date de baja aquí</a>.') +
+    '</p>' +
+    '<p style="font-size:10px;color:rgba(240,237,228,0.15);margin:12px 0 0;">© 2026 Selene · selenaura.com</p>' +
+    '</td></tr>' +
+    '</table></td></tr></table></body></html>';
 }
