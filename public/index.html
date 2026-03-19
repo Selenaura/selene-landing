@@ -1215,7 +1215,8 @@ async function submitEmail(){
         sign:sign?sign.name:'',
         signEn:sign?sign.en:'',
         lang:lang,
-        emailOnly:true
+        emailOnly:true,
+        readingHtml:document.getElementById('nlResultText').innerHTML||''
       })
     });
   }catch(e){
