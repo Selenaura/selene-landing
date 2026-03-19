@@ -134,10 +134,21 @@
   <div class="metrics" id="metrics">
     <div class="metric gold"><div class="label">Ingresos totales</div><div class="value" id="m-revenue">--</div><div class="sub" id="m-revenue-sub"></div></div>
     <div class="metric green"><div class="label">Saldo Stripe</div><div class="value" id="m-balance">--</div><div class="sub" id="m-balance-sub"></div></div>
-    <div class="metric"><div class="label">Ventas totales</div><div class="value" id="m-sales">--</div><div class="sub" id="m-sales-sub"></div></div>
+    <div class="metric"><div class="label">Ventas / AOV</div><div class="value" id="m-sales">--</div><div class="sub" id="m-sales-sub"></div></div>
     <div class="metric blue"><div class="label">Leads Brevo</div><div class="value" id="m-leads">--</div><div class="sub" id="m-leads-sub"></div></div>
-    <div class="metric"><div class="label">Alumnos academia</div><div class="value" id="m-students">--</div><div class="sub" id="m-students-sub"></div></div>
-    <div class="metric"><div class="label">Tasa conversion</div><div class="value" id="m-conversion">--</div><div class="sub" id="m-conversion-sub"></div></div>
+    <div class="metric"><div class="label">Checkout</div><div class="value" id="m-checkout">--</div><div class="sub" id="m-checkout-sub"></div></div>
+    <div class="metric"><div class="label">Alumnos</div><div class="value" id="m-students">--</div><div class="sub" id="m-students-sub"></div></div>
+  </div>
+
+  <!-- Email Marketing -->
+  <div class="section">
+    <h2>Email marketing</h2>
+    <div class="metrics" style="grid-template-columns: repeat(4, 1fr);" id="email-metrics">
+      <div class="metric"><div class="label">Emails enviados</div><div class="value" id="m-email-sent">--</div><div class="sub" id="m-email-sent-sub"></div></div>
+      <div class="metric green"><div class="label">Tasa apertura</div><div class="value" id="m-email-open">--</div><div class="sub" id="m-email-open-sub"></div></div>
+      <div class="metric blue"><div class="label">Tasa clics</div><div class="value" id="m-email-click">--</div><div class="sub" id="m-email-click-sub"></div></div>
+      <div class="metric"><div class="label">Bajas</div><div class="value" id="m-email-unsub">--</div><div class="sub" id="m-email-unsub-sub"></div></div>
+    </div>
   </div>
 
   <!-- Funnel -->
@@ -300,7 +311,6 @@ function maskEmail(e) {
 
 function renderMetrics(data) {
   var s = data.stripe || {};
-  var f = data.funnel || {};
   var b = data.brevo_contacts || {};
   var bl = data.brevo_list || {};
   var a = data.academia || {};
@@ -313,53 +323,61 @@ function renderMetrics(data) {
   document.getElementById('m-balance').textContent = s.error ? '!!' : fmt(s.balance_available || 0);
   document.getElementById('m-balance-sub').textContent = s.error ? s.error : 'Pendiente: ' + fmt(s.balance_pending || 0);
 
-  // Ventas totales
+  // Ventas + AOV
   document.getElementById('m-sales').textContent = s.error ? '!!' : (s.sales_total || 0);
-  document.getElementById('m-sales-sub').textContent = 'Este mes: ' + (s.sales_month || 0);
+  var aovText = s.aov_cents ? 'AOV: ' + fmt(s.aov_cents) : 'Este mes: ' + (s.sales_month || 0);
+  document.getElementById('m-sales-sub').textContent = aovText;
 
   // Leads Brevo
   var totalLeads = bl.totalSubscribers || b.total || 0;
   document.getElementById('m-leads').textContent = b.error ? '!!' : totalLeads;
-  document.getElementById('m-leads-sub').textContent = b.error ? b.error : 'Lista Lectura Express';
+  var lcr = b.lcr || 0;
+  document.getElementById('m-leads-sub').textContent = b.error ? b.error : 'LCR: ' + lcr + '% compraron';
+
+  // Checkout conversion
+  document.getElementById('m-checkout').textContent = s.error ? '!!' : (s.checkout_conversion || 0) + '%';
+  document.getElementById('m-checkout-sub').textContent = (s.checkout_paid || 0) + ' pagados / ' + (s.checkout_abandoned || 0) + ' abandonados';
 
   // Alumnos academia
   document.getElementById('m-students').textContent = a.error ? '!!' : (a.total_students || 0);
   document.getElementById('m-students-sub').textContent = 'Matriculas: ' + (a.total_enrollments || 0);
 
-  // Tasa conversion (leads -> compras)
-  var salesTotal = s.sales_total || 0;
-  var leadsTotal = totalLeads || 0;
-  var convRate = leadsTotal > 0 ? ((salesTotal / leadsTotal) * 100).toFixed(1) : '0,0';
-  if (typeof convRate === 'number') convRate = convRate.toString().replace('.', ',');
-  else convRate = convRate.replace('.', ',');
-  document.getElementById('m-conversion').textContent = convRate + '%';
-  document.getElementById('m-conversion-sub').textContent = salesTotal + ' ventas / ' + leadsTotal + ' leads';
+  // Email marketing stats
+  var em = data.brevo_email || {};
+  if (!em.error) {
+    document.getElementById('m-email-sent').textContent = em.sent || 0;
+    document.getElementById('m-email-sent-sub').textContent = 'Entregados: ' + (em.delivered || 0);
+    document.getElementById('m-email-open').textContent = (em.open_rate || 0) + '%';
+    document.getElementById('m-email-open-sub').textContent = (em.opens || 0) + ' aperturas';
+    document.getElementById('m-email-click').textContent = (em.click_rate || 0) + '%';
+    document.getElementById('m-email-click-sub').textContent = (em.clicks || 0) + ' clics';
+    document.getElementById('m-email-unsub').textContent = em.unsubscribes || 0;
+    document.getElementById('m-email-unsub-sub').textContent = 'Tasa: ' + (em.unsubscribe_rate || 0) + '%';
+  } else {
+    document.getElementById('m-email-sent').textContent = '!!';
+    document.getElementById('m-email-sent-sub').textContent = em.error;
+  }
 }
 
 function renderFunnel(data) {
   var f = data.funnel?.month || {};
-  var b = data.brevo_contacts || {};
-  var s = data.stripe || {};
 
   var lecturas = f.lectura_generada || 0;
   var emails = f.email_capturado || 0;
   var compras = f.compra || 0;
 
-  // If funnel is empty, use totals from other sources
-  var totalLeads = (data.brevo_list || {}).totalSubscribers || b.total || 0;
-  var totalSales = s.sales_total || 0;
+  // Only show funnel if we have actual tracking data
+  if (lecturas === 0 && emails === 0 && compras === 0) {
+    document.getElementById('funnel-bars').innerHTML = '<div class="empty">El tracking del funnel no esta conectado todavia.<br>Cuando se active, aqui veras: Lecturas → Emails → Compras con tasas de conversion reales.</div>';
+    return;
+  }
 
-  // Use the larger of funnel data or actual totals for display
-  if (totalLeads > emails) emails = totalLeads;
-  if (totalSales > compras) compras = totalSales;
-
-  var max = Math.max(lecturas, emails, compras, 1);
-
-  var convLE = lecturas > 0 ? Math.round((emails / lecturas) * 100) : (emails > 0 ? 100 : 0);
+  var max = Math.max(lecturas, 1);
+  var convLE = lecturas > 0 ? Math.round((emails / lecturas) * 100) : 0;
   var convEC = emails > 0 ? Math.round((compras / emails) * 100) : 0;
 
   var html = '';
-  html += '<div class="funnel-bar"><span class="bar-label">Lecturas</span><div class="bar-track"><div class="bar-fill l" style="width:' + Math.max((lecturas/max)*100, lecturas ? 10 : 0) + '%">' + lecturas + '</div></div></div>';
+  html += '<div class="funnel-bar"><span class="bar-label">Lecturas</span><div class="bar-track"><div class="bar-fill l" style="width:' + Math.max((lecturas/max)*100, 10) + '%">' + lecturas + '</div></div></div>';
   html += '<div class="funnel-bar"><span class="bar-label">Emails (' + convLE + '%)</span><div class="bar-track"><div class="bar-fill e" style="width:' + Math.max((emails/max)*100, emails ? 10 : 0) + '%">' + emails + '</div></div></div>';
   html += '<div class="funnel-bar"><span class="bar-label">Compras (' + convEC + '%)</span><div class="bar-track"><div class="bar-fill c" style="width:' + Math.max((compras/max)*100, compras ? 10 : 0) + '%">' + compras + '</div></div></div>';
 

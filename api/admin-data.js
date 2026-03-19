@@ -35,10 +35,11 @@ module.exports = async function handler(req, res) {
       return res.status(403).json({ error: 'No tienes acceso al panel de administracion' });
     }
 
-    const [stripeData, brevoContacts, brevoListInfo, funnelData, academiaData] = await Promise.allSettled([
+    const [stripeData, brevoContacts, brevoListInfo, brevoEmailStats, funnelData, academiaData] = await Promise.allSettled([
       fetchStripe(),
       fetchBrevoContacts(),
       fetchBrevoListInfo(),
+      fetchBrevoEmailStats(),
       fetchFunnel(),
       fetchAcademia()
     ]);
@@ -48,6 +49,7 @@ module.exports = async function handler(req, res) {
       stripe: stripeData.status === 'fulfilled' ? stripeData.value : { error: stripeData.reason?.message },
       brevo_contacts: brevoContacts.status === 'fulfilled' ? brevoContacts.value : { error: brevoContacts.reason?.message },
       brevo_list: brevoListInfo.status === 'fulfilled' ? brevoListInfo.value : { error: brevoListInfo.reason?.message },
+      brevo_email: brevoEmailStats.status === 'fulfilled' ? brevoEmailStats.value : { error: brevoEmailStats.reason?.message },
       funnel: funnelData.status === 'fulfilled' ? funnelData.value : { error: funnelData.reason?.message },
       academia: academiaData.status === 'fulfilled' ? academiaData.value : { error: academiaData.reason?.message },
       generated_at: new Date().toISOString()
@@ -133,22 +135,38 @@ async function fetchStripe() {
       : null
   }));
 
-  // Recent checkout sessions for product-level detail
-  const recentSessions = (sessionsData.data || [])
-    .filter(s => s.payment_status === 'paid')
-    .slice(0, 10)
-    .map(s => ({
-      amount: s.amount_total,
-      currency: s.currency,
-      email: s.customer_details?.email || null,
-      date: new Date(s.created * 1000).toISOString()
-    }));
+  // Checkout sessions analysis
+  const allSessions = sessionsData.data || [];
+  const paidSessions = allSessions.filter(s => s.payment_status === 'paid');
+  const abandonedSessions = allSessions.filter(s => s.payment_status !== 'paid');
+
+  const recentSessions = paidSessions.slice(0, 10).map(s => ({
+    amount: s.amount_total,
+    currency: s.currency,
+    email: s.customer_details?.email || null,
+    date: new Date(s.created * 1000).toISOString()
+  }));
+
+  // AOV (Average Order Value)
+  const aov = succeeded.length > 0 ? Math.round(revenueTotal / succeeded.length) : 0;
+
+  // Unique buyers (by email from checkout sessions)
+  const uniqueEmails = new Set();
+  paidSessions.forEach(s => {
+    if (s.customer_details?.email) uniqueEmails.add(s.customer_details.email.toLowerCase());
+  });
 
   return {
     revenue_month_cents: revenueMonth,
     revenue_total_cents: revenueTotal,
     sales_month: thisMonth.length,
     sales_total: succeeded.length,
+    aov_cents: aov,
+    unique_buyers: uniqueEmails.size,
+    checkout_total: allSessions.length,
+    checkout_paid: paidSessions.length,
+    checkout_abandoned: abandonedSessions.length,
+    checkout_conversion: allSessions.length > 0 ? Math.round((paidSessions.length / allSessions.length) * 100) : 0,
     by_product: byProduct,
     products: productsWithPrices,
     products_count: products.length,
@@ -188,7 +206,10 @@ async function fetchBrevoContacts() {
     if (s) signos[s] = (signos[s] || 0) + 1;
   });
 
-  return { contacts, signos, total: data.count || 0 };
+  const compradores = (data.contacts || []).filter(c => c.attributes?.HA_COMPRADO === true).length;
+  const lcr = (data.count || 0) > 0 ? Math.round((compradores / (data.count || 1)) * 100) : 0;
+
+  return { contacts, signos, total: data.count || 0, compradores, lcr };
 }
 
 async function fetchBrevoListInfo() {
@@ -199,6 +220,33 @@ async function fetchBrevoListInfo() {
     headers: { 'api-key': key, 'Accept': 'application/json' }
   });
   return await res.json();
+}
+
+async function fetchBrevoEmailStats() {
+  const key = process.env.BREVO_API_KEY;
+  if (!key) return { error: 'BREVO_API_KEY no configurada' };
+
+  const res = await fetch('https://api.brevo.com/v3/smtp/statistics/aggregatedReport', {
+    headers: { 'api-key': key, 'Accept': 'application/json' }
+  });
+  const data = await res.json();
+
+  const sent = data.requests || 0;
+  const delivered = data.delivered || 0;
+  const opens = data.uniqueOpens || data.opens || 0;
+  const clicks = data.uniqueClicks || data.clicks || 0;
+  const unsubscribes = data.unsubscribed || 0;
+
+  return {
+    sent,
+    delivered,
+    opens,
+    clicks,
+    unsubscribes,
+    open_rate: delivered > 0 ? Math.round((opens / delivered) * 100) : 0,
+    click_rate: delivered > 0 ? Math.round((clicks / delivered) * 100) : 0,
+    unsubscribe_rate: delivered > 0 ? ((unsubscribes / delivered) * 100).toFixed(2) : '0'
+  };
 }
 
 async function fetchFunnel() {
