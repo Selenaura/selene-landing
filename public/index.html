@@ -590,6 +590,13 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
   background:linear-gradient(135deg,rgba(201,168,76,0.4),rgba(212,175,55,0.4));
   color:rgba(10,10,15,0.6);
 }
+.hero-spin{
+  display:inline-block;width:16px;height:16px;
+  border:2px solid rgba(10,10,15,0.3);border-top-color:var(--bg);
+  border-radius:50%;animation:heroSpin .8s linear infinite;
+  vertical-align:middle;margin-right:6px;
+}
+@keyframes heroSpin{to{transform:rotate(360deg)}}
 </style>
 
 </head>
@@ -1168,10 +1175,17 @@ function resetLectura(){
     var el=document.getElementById(id);
     if(el){el.style.display='none';el.classList.remove('show');}
   });
-  var submit=document.getElementById('nlSubmit');
-  submit.disabled=true;
-  document.getElementById('nlBirth').value='';
-  document.getElementById('nlBirth').classList.remove('has-value');
+  var heroBtn = document.getElementById('nlSubmit');
+  if(heroBtn) {
+    heroBtn.innerHTML = currentLang === 'en' ? 'I want my reading ✦' : 'Quiero mi lectura ✦';
+    heroBtn.disabled = true;
+  }
+  var heroInput = document.getElementById('nlBirth');
+  if(heroInput) {
+    heroInput.disabled = false;
+    heroInput.value = '';
+    heroInput.classList.remove('has-value');
+  }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -1179,6 +1193,15 @@ function resetLectura(){
 async function submitLectura(){
   var birthDate=document.getElementById('nlBirth').value;
   if(!birthDate)return;
+
+  // Immediate visual feedback on the button
+  var heroBtn = document.getElementById('nlSubmit');
+  var heroInput = document.getElementById('nlBirth');
+  if(heroBtn) {
+    heroBtn.disabled = true;
+    heroBtn.innerHTML = '<span class="hero-spin"></span> Leyendo tu cielo...';
+  }
+  if(heroInput) heroInput.disabled = true;
 
   var lang=document.documentElement.lang||'es';
   var sign=getZodiacSign(birthDate);
@@ -1208,6 +1231,11 @@ async function submitLectura(){
     document.getElementById('nlResultText').innerHTML=data.reading||data.lectura||'';
 
     showState('nlResult');
+    if(heroBtn) {
+      heroBtn.innerHTML = currentLang === 'en' ? 'I want my reading ✦' : 'Quiero mi lectura ✦';
+      heroBtn.disabled = true;
+    }
+    if(heroInput) { heroInput.disabled = false; heroInput.value = ''; }
     setupEmailCapture();
 
     document.getElementById('lectura-express').scrollIntoView({behavior:'smooth',block:'start'});
@@ -1215,6 +1243,11 @@ async function submitLectura(){
   }catch(err){
     console.error('Lectura Express error:',err);
     showState('nlError');
+    if(heroBtn) {
+      heroBtn.innerHTML = currentLang === 'en' ? 'I want my reading ✦' : 'Quiero mi lectura ✦';
+      heroBtn.disabled = true;
+    }
+    if(heroInput) { heroInput.disabled = false; heroInput.value = ''; }
   }
 }
 
