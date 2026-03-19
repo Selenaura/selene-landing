@@ -157,18 +157,18 @@
 const SUPABASE_URL = 'https://lerfefvqfwdsubchzqyk.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxlcmZlZnZxZndkc3ViY2h6cXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NDU2MTIsImV4cCI6MjA4OTIyMTYxMn0.1SJ0CxI3ouJa33RhmvAw9ORGBrADAFS_hn0-yeRX4Xo';
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 let dailyChartInstance = null;
 let signosChartInstance = null;
 
 async function init() {
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await sb.auth.getSession();
   if (session) {
     showDashboard(session);
   }
 
-  supabase.auth.onAuthStateChange((event, session) => {
+  sb.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN' && session) {
       showDashboard(session);
     }
@@ -179,7 +179,7 @@ async function signInWithGoogle() {
   document.getElementById('login-loading').style.display = 'block';
   document.getElementById('login-err').style.display = 'none';
 
-  const { error } = await supabase.auth.signInWithOAuth({
+  const { error } = await sb.auth.signInWithOAuth({
     provider: 'google',
     options: { redirectTo: window.location.origin + '/admin' }
   });
@@ -192,7 +192,7 @@ async function signInWithGoogle() {
 }
 
 async function signOut() {
-  await supabase.auth.signOut();
+  await sb.auth.signOut();
   document.getElementById('dash').style.display = 'none';
   document.getElementById('login').style.display = 'flex';
 }
@@ -206,7 +206,7 @@ async function showDashboard(session) {
 
 async function loadData() {
   try {
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await sb.auth.getSession();
     if (!session) { signOut(); return; }
 
     const res = await fetch('/api/admin-data', {
@@ -218,7 +218,7 @@ async function loadData() {
       document.getElementById('login').style.display = 'flex';
       document.getElementById('login-err').textContent = 'Tu cuenta no tiene acceso al panel de administracion';
       document.getElementById('login-err').style.display = 'block';
-      await supabase.auth.signOut();
+      await sb.auth.signOut();
       return;
     }
 
