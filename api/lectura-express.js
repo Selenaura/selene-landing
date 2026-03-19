@@ -102,7 +102,7 @@ async function sendReadingEmail(email, sign, signEn, readingHtml, lang) {
       'api-key': brevoKey
     },
     body: JSON.stringify({
-      sender: { name: 'Selene', email: 'selene@selenaura.com' },
+      sender: { name: 'Selene', email: 'info@selenaura.com' },
       to: [{ email: email }],
       subject: subject,
       htmlContent: htmlContent
