@@ -289,9 +289,10 @@ function renderFunnel(data) {
 function renderDailyChart(data) {
   const daily = data.funnel?.daily || {};
   const days = Object.keys(daily).sort();
+  const el = document.getElementById('dailyChart');
 
-  if (days.length === 0) {
-    document.getElementById('dailyChart').parentElement.innerHTML = '<div class="empty">Sin datos de funnel aun.<br>Apareceran cuando el tracking este conectado.</div>';
+  if (days.length === 0 || !el) {
+    if (el) el.parentElement.innerHTML = '<div class="empty">Sin datos de funnel aun.<br>Apareceran cuando el tracking este conectado.</div>';
     return;
   }
 
@@ -323,9 +324,10 @@ function renderSignosChart(data) {
   var signos = data.brevo_contacts?.signos || {};
   var labels = Object.keys(signos);
   var values = Object.values(signos);
+  var el2 = document.getElementById('signosChart');
 
-  if (labels.length === 0) {
-    document.getElementById('signosChart').parentElement.innerHTML = '<div class="empty">Sin datos de signos en Brevo.</div>';
+  if (labels.length === 0 || !el2) {
+    if (el2) el2.parentElement.innerHTML = '<div class="empty">Sin datos de signos en Brevo.</div>';
     return;
   }
 

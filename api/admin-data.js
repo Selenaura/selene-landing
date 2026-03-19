@@ -64,29 +64,30 @@ async function fetchStripe() {
 
   const headers = { 'Authorization': `Bearer ${key}` };
 
-  const [chargesRes, balanceRes] = await Promise.all([
-    fetch('https://api.stripe.com/v1/charges?limit=20', { headers }),
+  // Usar payment_intents en vez de charges para datos mas fiables
+  const [piRes, balanceRes] = await Promise.all([
+    fetch('https://api.stripe.com/v1/payment_intents?limit=100', { headers }),
     fetch('https://api.stripe.com/v1/balance', { headers })
   ]);
 
-  const charges = await chargesRes.json();
+  const piData = await piRes.json();
   const balance = await balanceRes.json();
 
-  const succeeded = (charges.data || []).filter(c => c.status === 'succeeded');
+  const succeeded = (piData.data || []).filter(p => p.status === 'succeeded');
 
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).getTime() / 1000;
-  const thisMonth = succeeded.filter(c => c.created >= startOfMonth);
+  const thisMonth = succeeded.filter(p => p.created >= startOfMonth);
 
-  const revenueMonth = thisMonth.reduce((sum, c) => sum + c.amount, 0);
-  const revenueTotal = succeeded.reduce((sum, c) => sum + c.amount, 0);
+  const revenueMonth = thisMonth.reduce((sum, p) => sum + p.amount, 0);
+  const revenueTotal = succeeded.reduce((sum, p) => sum + p.amount, 0);
 
   const byProduct = {};
-  succeeded.forEach(c => {
-    const desc = c.description || c.metadata?.product || 'Desconocido';
+  succeeded.forEach(p => {
+    const desc = p.description || p.metadata?.product || 'Desconocido';
     if (!byProduct[desc]) byProduct[desc] = { count: 0, revenue: 0 };
     byProduct[desc].count++;
-    byProduct[desc].revenue += c.amount;
+    byProduct[desc].revenue += p.amount;
   });
 
   return {
@@ -95,12 +96,12 @@ async function fetchStripe() {
     sales_month: thisMonth.length,
     sales_total: succeeded.length,
     by_product: byProduct,
-    recent: succeeded.slice(0, 10).map(c => ({
-      amount: c.amount,
-      currency: c.currency,
-      email: c.billing_details?.email || c.receipt_email || null,
-      description: c.description || c.metadata?.product || null,
-      date: new Date(c.created * 1000).toISOString()
+    recent: succeeded.slice(0, 10).map(p => ({
+      amount: p.amount,
+      currency: p.currency,
+      email: p.receipt_email || p.metadata?.email || null,
+      description: p.description || p.metadata?.product || null,
+      date: new Date(p.created * 1000).toISOString()
     })),
     balance_available: balance.available?.[0]?.amount || 0,
     balance_pending: balance.pending?.[0]?.amount || 0
