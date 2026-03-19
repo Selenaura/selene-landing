@@ -464,7 +464,8 @@ footer{padding:48px 24px 28px;text-align:center}
 .footer-legal{font-size:10px;color:var(–text-dim);line-height:1.8;max-width:580px;margin:0 auto}
 
 /* ═══ NEWSLETTER / LECTURA EXPRESS ═══ */
-.newsletter-section{padding:20px 0 20px}
+.newsletter-section{display:none;padding:20px 0 20px}
+.newsletter-section.active{display:block}
 .newsletter-card{
 max-width:620px;margin:0 auto;padding:44px 36px;text-align:center;
 border:1px solid rgba(201,168,76,.1);border-radius:24px;
@@ -1156,6 +1157,10 @@ function showState(stateId){
   });
   var target=document.getElementById(stateId);
   if(target){target.style.display='block';target.classList.add('show');}
+  var section=document.getElementById('lectura-express');
+  if(section&&(stateId==='nlLoading'||stateId==='nlResult'||stateId==='nlError')){
+    section.classList.add('active');
+  }
 }
 
 function resetLectura(){
