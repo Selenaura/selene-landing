@@ -138,7 +138,7 @@ function buildEmailHtml(readingHtml, signName, lang) {
     '<p style="font-family:Georgia,serif;font-size:26px;color:#F0EDE4;margin:0;font-weight:400;">' + signName + '</p>' +
     '</td></tr>' +
     '<tr><td style="padding:20px 32px 28px;">' +
-    '<div style="font-family:Georgia,serif;font-size:15px;color:rgba(240,237,228,0.75);line-height:1.85;">' +
+    '<div style="font-family:Georgia,serif;font-size:15px;color:rgba(240,237,228,0.75);line-height:1.85;text-align:justify;">' +
     readingHtml +
     '</div>' +
     '</td></tr>' +
