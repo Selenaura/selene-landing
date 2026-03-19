@@ -44,7 +44,12 @@ module.exports = async function handler(req, res) {
         console.log('Brevo updated for', email, '-', productName);
       } catch (err) {
         console.error('Brevo update failed:', err.message);
-        // Don't fail the webhook - Stripe would retry
+      }
+      try {
+        await trackFunnelEvent('compra', null, email, productName, session.amount_total || 0);
+        console.log('Funnel event tracked: compra', email);
+      } catch (err) {
+        console.error('Funnel track failed:', err.message);
       }
     }
   }
@@ -90,6 +95,28 @@ function verifyStripeSignature(payload, sigHeader, secret) {
   }
 
   return JSON.parse(payload);
+}
+
+async function trackFunnelEvent(eventType, sign, email, producto, importeCents) {
+  var url = process.env.SUPABASE_URL;
+  var key = process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key) { console.warn('No SUPABASE vars for tracking'); return; }
+  await fetch(url + '/rest/v1/funnel_events', {
+    method: 'POST',
+    headers: {
+      'apikey': key,
+      'Authorization': 'Bearer ' + key,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({
+      event_type: eventType,
+      signo_solar: sign || null,
+      email: email || null,
+      producto: producto || null,
+      importe_cents: importeCents || null
+    })
+  });
 }
 
 async function updateBrevoContact(email, productName, amount) {

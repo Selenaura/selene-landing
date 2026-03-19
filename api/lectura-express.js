@@ -22,6 +22,8 @@ module.exports = async function handler(req, res) {
           await sendReadingEmail(email, sign, signEn, readingHtml, lang);
         } catch(e) { console.error('Brevo email error:', e.message); }
       }
+      // Track: email capturado
+      trackFunnelEvent('email_capturado', sign, email).catch(function(e) { console.error('Track error:', e.message); });
       return res.status(200).json({ subscribed: true });
     }
     if (!birthDate || !sign) {
@@ -30,7 +32,11 @@ module.exports = async function handler(req, res) {
     var reading = await generateReading(birthDate, sign, signEn, lang);
     if (email) {
       try { await subscribeToBrevo(email, birthDate, sign); } catch(e) { console.error('Brevo error:', e.message); }
+      // Track: email capturado (email given with reading)
+      trackFunnelEvent('email_capturado', sign, email).catch(function(e) { console.error('Track error:', e.message); });
     }
+    // Track: lectura generada
+    await trackFunnelEvent('lectura_generada', sign, email || null).catch(function(e) { console.error('Track error:', e.message); });
     return res.status(200).json({ reading: reading, sign: sign, signEn: signEn });
   } catch (err) {
     console.error('Lectura Express error:', err);
@@ -110,6 +116,26 @@ async function sendReadingEmail(email, sign, signEn, readingHtml, lang) {
       to: [{ email: email }],
       subject: subject,
       htmlContent: htmlContent
+    })
+  });
+}
+
+async function trackFunnelEvent(eventType, sign, email) {
+  var url = process.env.SUPABASE_URL;
+  var key = process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key) { console.warn('No SUPABASE vars for tracking'); return; }
+  await fetch(url + '/rest/v1/funnel_events', {
+    method: 'POST',
+    headers: {
+      'apikey': key,
+      'Authorization': 'Bearer ' + key,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({
+      event_type: eventType,
+      signo_solar: sign || null,
+      email: email || null
     })
   });
 }
