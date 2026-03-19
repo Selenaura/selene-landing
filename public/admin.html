@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Selene · Panel de control</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0A0A0F; --bg2: #12121A; --bg3: #1A1A25;
+    --gold: #C9A84C; --gold-dim: #8B7535; --white: #F0EDE4;
+    --muted: #8A8A9A; --green: #4CAF50; --red: #E24B4A; --blue: #5B8DEF;
+  }
+  body { background: var(--bg); color: var(--white); font-family: 'Outfit', sans-serif; min-height: 100vh; }
+  h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+
+  .login-wrap { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; }
+  .login-box { max-width: 360px; width: 100%; text-align: center; }
+  .login-box h1 { font-size: 2rem; color: var(--gold); margin-bottom: 0.5rem; }
+  .login-box p { color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; }
+  .google-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; background: var(--white); color: #333; border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+  .google-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.2); }
+  .google-btn svg { width: 20px; height: 20px; }
+  .login-error { color: var(--red); font-size: 0.8rem; margin-top: 1rem; display: none; }
+  .login-loading { color: var(--muted); font-size: 0.85rem; margin-top: 1rem; display: none; }
+
+  .dashboard { display: none; max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+  .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #222; flex-wrap: wrap; gap: 8px; }
+  .dash-header h1 { font-size: 1.5rem; color: var(--gold); }
+  .dash-header .meta { font-size: 0.75rem; color: var(--muted); }
+  .header-actions { display: flex; gap: 8px; align-items: center; }
+  .btn-sm { background: none; border: 1px solid var(--gold-dim); color: var(--gold); padding: 6px 14px; border-radius: 6px; font-family: 'Outfit', sans-serif; font-size: 0.8rem; cursor: pointer; }
+  .btn-sm:hover { background: var(--bg3); }
+  .btn-sm.logout { border-color: #444; color: var(--muted); }
+
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 2rem; }
+  .metric { background: var(--bg2); border: 1px solid #222; border-radius: 10px; padding: 1rem; }
+  .metric .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .metric .value { font-size: 1.5rem; font-weight: 500; }
+  .metric .sub { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+  .metric.gold .value { color: var(--gold); }
+  .metric.green .value { color: var(--green); }
+  .metric.blue .value { color: var(--blue); }
+
+  .section { margin-bottom: 2rem; }
+  .section h2 { font-size: 1.2rem; color: var(--gold); margin-bottom: 1rem; }
+  .chart-wrap { background: var(--bg2); border: 1px solid #222; border-radius: 10px; padding: 1rem; position: relative; height: 280px; }
+  .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 2rem; }
+  @media (max-width: 700px) { .charts-grid { grid-template-columns: 1fr; } }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th { text-align: left; color: var(--muted); font-weight: 400; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 12px; border-bottom: 1px solid #222; }
+  td { padding: 8px 12px; border-bottom: 1px solid #1a1a22; }
+  .table-wrap { background: var(--bg2); border: 1px solid #222; border-radius: 10px; overflow: hidden; }
+  .tables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 2rem; }
+  @media (max-width: 700px) { .tables-grid { grid-template-columns: 1fr; } }
+
+  .status-list { display: grid; gap: 8px; }
+  .status-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--bg2); border: 1px solid #222; border-radius: 8px; font-size: 0.85rem; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot.ok { background: var(--green); }
+  .dot.warn { background: #F59E0B; }
+  .dot.err { background: var(--red); }
+
+  .funnel-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .funnel-bar .bar-label { font-size: 0.8rem; color: var(--muted); width: 120px; flex-shrink: 0; }
+  .funnel-bar .bar-track { flex: 1; height: 24px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+  .funnel-bar .bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; display: flex; align-items: center; padding-left: 8px; font-size: 0.75rem; font-weight: 500; min-width: fit-content; }
+  .funnel-bar .bar-fill.l { background: var(--blue); }
+  .funnel-bar .bar-fill.e { background: var(--gold); color: var(--bg); }
+  .funnel-bar .bar-fill.c { background: var(--green); }
+
+  .empty { color: var(--muted); font-size: 0.85rem; padding: 1.5rem; text-align: center; }
+  .spin { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--gold-dim); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div id="login" class="login-wrap">
+  <div class="login-box">
+    <h1>✦ Selene</h1>
+    <p>Panel de control</p>
+    <button class="google-btn" onclick="signInWithGoogle()">
+      <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Entrar con Google
+    </button>
+    <div id="login-err" class="login-error"></div>
+    <div id="login-loading" class="login-loading"><span class="spin"></span> Verificando...</div>
+  </div>
+</div>
+
+<div id="dash" class="dashboard">
+  <div class="dash-header">
+    <div>
+      <h1>✦ Selene · Panel de control</h1>
+      <div class="meta"><span id="user-name"></span> · <span id="updated-at"></span></div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-sm" onclick="loadData()">Actualizar</button>
+      <button class="btn-sm logout" onclick="signOut()">Cerrar sesion</button>
+    </div>
+  </div>
+
+  <div class="metrics" id="metrics">
+    <div class="metric gold"><div class="label">Ingresos mes</div><div class="value" id="m-revenue">—</div><div class="sub" id="m-revenue-sub"></div></div>
+    <div class="metric blue"><div class="label">Leads mes</div><div class="value" id="m-leads">—</div><div class="sub" id="m-leads-sub"></div></div>
+    <div class="metric"><div class="label">Lecturas hoy</div><div class="value" id="m-lecturas">—</div><div class="sub" id="m-lecturas-sub"></div></div>
+    <div class="metric green"><div class="label">Ventas mes</div><div class="value" id="m-sales">—</div><div class="sub" id="m-sales-sub"></div></div>
+    <div class="metric"><div class="label">Alumnos</div><div class="value" id="m-students">—</div><div class="sub" id="m-students-sub"></div></div>
+    <div class="metric"><div class="label">Contactos Brevo</div><div class="value" id="m-brevo">—</div><div class="sub" id="m-brevo-sub"></div></div>
+  </div>
+
+  <div class="section">
+    <h2>Funnel este mes</h2>
+    <div id="funnel-bars" style="background:var(--bg2);border:1px solid #222;border-radius:10px;padding:1rem;"></div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="section">
+      <h2>Actividad diaria (30 dias)</h2>
+      <div class="chart-wrap"><canvas id="dailyChart"></canvas></div>
+    </div>
+    <div class="section">
+      <h2>Signos solares</h2>
+      <div class="chart-wrap"><canvas id="signosChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="tables-grid">
+    <div class="section">
+      <h2>Ultimas ventas</h2>
+      <div class="table-wrap"><table><thead><tr><th>Importe</th><th>Producto</th><th>Fecha</th></tr></thead><tbody id="tb-sales"></tbody></table></div>
+    </div>
+    <div class="section">
+      <h2>Ultimos leads</h2>
+      <div class="table-wrap"><table><thead><tr><th>Email</th><th>Signo</th><th>Fecha</th></tr></thead><tbody id="tb-leads"></tbody></table></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Ingresos por producto</h2>
+    <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Ventas</th><th>Ingresos</th></tr></thead><tbody id="tb-products"></tbody></table></div>
+  </div>
+
+  <div class="section">
+    <h2>Estado de sistemas</h2>
+    <div class="status-list" id="status-list"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = 'https://lerfefvqfwdsubchzqyk.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxlcmZlZnZxZndkc3ViY2h6cXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NDU2MTIsImV4cCI6MjA4OTIyMTYxMn0.1SJ0CxI3ouJa33RhmvAw9ORGBrADAFS_hn0-yeRX4Xo';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let dailyChartInstance = null;
+let signosChartInstance = null;
+
+async function init() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session) {
+    showDashboard(session);
+  }
+
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN' && session) {
+      showDashboard(session);
+    }
+  });
+}
+
+async function signInWithGoogle() {
+  document.getElementById('login-loading').style.display = 'block';
+  document.getElementById('login-err').style.display = 'none';
+
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.origin + '/admin' }
+  });
+
+  if (error) {
+    document.getElementById('login-loading').style.display = 'none';
+    document.getElementById('login-err').textContent = error.message;
+    document.getElementById('login-err').style.display = 'block';
+  }
+}
+
+async function signOut() {
+  await supabase.auth.signOut();
+  document.getElementById('dash').style.display = 'none';
+  document.getElementById('login').style.display = 'flex';
+}
+
+async function showDashboard(session) {
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('dash').style.display = 'block';
+  document.getElementById('user-name').textContent = session.user.user_metadata?.full_name || session.user.email;
+  await loadData();
+}
+
+async function loadData() {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) { signOut(); return; }
+
+    const res = await fetch('/api/admin-data', {
+      headers: { 'Authorization': 'Bearer ' + session.access_token }
+    });
+
+    if (res.status === 403) {
+      document.getElementById('dash').style.display = 'none';
+      document.getElementById('login').style.display = 'flex';
+      document.getElementById('login-err').textContent = 'Tu cuenta no tiene acceso al panel de administracion';
+      document.getElementById('login-err').style.display = 'block';
+      await supabase.auth.signOut();
+      return;
+    }
+
+    if (!res.ok) throw new Error('Error ' + res.status);
+
+    const data = await res.json();
+    document.getElementById('updated-at').textContent = new Date(data.generated_at).toLocaleString('es-ES');
+
+    renderMetrics(data);
+    renderFunnel(data);
+    renderDailyChart(data);
+    renderSignosChart(data);
+    renderSalesTable(data);
+    renderLeadsTable(data);
+    renderProductsTable(data);
+    renderStatus(data);
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function fmt(cents) { return (cents / 100).toFixed(2).replace('.', ',') + ' \u20AC'; }
+function fmtDate(iso) { if (!iso) return '\u2014'; return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }); }
+function maskEmail(e) { if (!e) return '\u2014'; const [u, d] = e.split('@'); return u.slice(0, 3) + '***@' + d; }
+
+function renderMetrics(data) {
+  const s = data.stripe || {};
+  const f = data.funnel || {};
+  const b = data.brevo_contacts || {};
+  const bl = data.brevo_list || {};
+  const a = data.academia || {};
+
+  document.getElementById('m-revenue').textContent = s.error ? '\u26A0\uFE0F' : fmt(s.revenue_month_cents || 0);
+  document.getElementById('m-revenue-sub').textContent = s.error ? s.error : 'Total: ' + fmt(s.revenue_total_cents || 0);
+
+  document.getElementById('m-leads').textContent = f.error ? '\u26A0\uFE0F' : (f.month?.email_capturado || 0);
+  document.getElementById('m-leads-sub').textContent = f.error ? f.error : 'Total Brevo: ' + (bl.totalSubscribers || b.total || '?');
+
+  document.getElementById('m-lecturas').textContent = f.error ? '\u26A0\uFE0F' : (f.today?.lectura_generada || 0);
+  document.getElementById('m-lecturas-sub').textContent = 'Mes: ' + (f.month?.lectura_generada || 0);
+
+  document.getElementById('m-sales').textContent = s.error ? '\u26A0\uFE0F' : (s.sales_month || 0);
+  document.getElementById('m-sales-sub').textContent = 'Total: ' + (s.sales_total || 0);
+
+  document.getElementById('m-students').textContent = a.error ? '\u26A0\uFE0F' : (a.total_students || 0);
+  document.getElementById('m-students-sub').textContent = 'Matriculados: ' + (a.total_enrollments || 0);
+
+  document.getElementById('m-brevo').textContent = b.error ? '\u26A0\uFE0F' : (bl.totalSubscribers || b.total || 0);
+  document.getElementById('m-brevo-sub').textContent = 'Lista Lectura Express';
+}
+
+function renderFunnel(data) {
+  const f = data.funnel?.month || {};
+  const lecturas = f.lectura_generada || 0;
+  const emails = f.email_capturado || 0;
+  const compras = f.compra || 0;
+  const max = Math.max(lecturas, 1);
+  const convLE = lecturas > 0 ? Math.round((emails / lecturas) * 100) : 0;
+  const convEC = emails > 0 ? Math.round((compras / emails) * 100) : 0;
+
+  document.getElementById('funnel-bars').innerHTML =
+    '<div class="funnel-bar"><span class="bar-label">Lecturas</span><div class="bar-track"><div class="bar-fill l" style="width:' + Math.max((lecturas/max)*100, lecturas ? 8 : 0) + '%">' + lecturas + '</div></div></div>' +
+    '<div class="funnel-bar"><span class="bar-label">Emails (' + convLE + '%)</span><div class="bar-track"><div class="bar-fill e" style="width:' + Math.max((emails/max)*100, emails ? 8 : 0) + '%">' + emails + '</div></div></div>' +
+    '<div class="funnel-bar"><span class="bar-label">Compras (' + convEC + '%)</span><div class="bar-track"><div class="bar-fill c" style="width:' + Math.max((compras/max)*100, compras ? 8 : 0) + '%">' + compras + '</div></div></div>';
+}
+
+function renderDailyChart(data) {
+  const daily = data.funnel?.daily || {};
+  const days = Object.keys(daily).sort();
+
+  if (days.length === 0) {
+    document.getElementById('dailyChart').parentElement.innerHTML = '<div class="empty">Sin datos de funnel aun.<br>Apareceran cuando el tracking este conectado.</div>';
+    return;
+  }
+
+  const labels = days.map(function(d) { var dt = new Date(d); return dt.getDate() + '/' + (dt.getMonth()+1); });
+
+  if (dailyChartInstance) dailyChartInstance.destroy();
+  dailyChartInstance = new Chart(document.getElementById('dailyChart'), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: 'Lecturas', data: days.map(function(d) { return daily[d].lectura_generada; }), backgroundColor: '#5B8DEF' },
+        { label: 'Emails', data: days.map(function(d) { return daily[d].email_capturado; }), backgroundColor: '#C9A84C' },
+        { label: 'Compras', data: days.map(function(d) { return daily[d].compra; }), backgroundColor: '#4CAF50' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#8A8A9A', font: { family: 'Outfit', size: 11 } } } },
+      scales: {
+        x: { ticks: { color: '#8A8A9A', font: { size: 10 } }, grid: { color: '#1A1A25' } },
+        y: { beginAtZero: true, ticks: { color: '#8A8A9A', stepSize: 1 }, grid: { color: '#1A1A25' } }
+      }
+    }
+  });
+}
+
+function renderSignosChart(data) {
+  var signos = data.brevo_contacts?.signos || {};
+  var labels = Object.keys(signos);
+  var values = Object.values(signos);
+
+  if (labels.length === 0) {
+    document.getElementById('signosChart').parentElement.innerHTML = '<div class="empty">Sin datos de signos en Brevo.</div>';
+    return;
+  }
+
+  var colors = ['#E24B4A','#4CAF50','#C9A84C','#5B8DEF','#F59E0B','#8B5CF6','#EC4899','#14B8A6','#F97316','#6366F1','#22D3EE','#A78BFA'];
+
+  if (signosChartInstance) signosChartInstance.destroy();
+  signosChartInstance = new Chart(document.getElementById('signosChart'), {
+    type: 'doughnut',
+    data: { labels: labels, datasets: [{ data: values, backgroundColor: colors.slice(0, labels.length), borderWidth: 0 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'right', labels: { color: '#8A8A9A', font: { family: 'Outfit', size: 10 }, padding: 6, boxWidth: 10 } } },
+      cutout: '55%'
+    }
+  });
+}
+
+function renderSalesTable(data) {
+  var sales = data.stripe?.recent || [];
+  var tb = document.getElementById('tb-sales');
+  if (sales.length === 0) { tb.innerHTML = '<tr><td colspan="3" class="empty">Sin ventas registradas</td></tr>'; return; }
+  tb.innerHTML = sales.map(function(s) { return '<tr><td style="color:var(--gold);font-weight:500">' + fmt(s.amount) + '</td><td>' + (s.description || '\u2014') + '</td><td style="color:var(--muted)">' + fmtDate(s.date) + '</td></tr>'; }).join('');
+}
+
+function renderLeadsTable(data) {
+  var leads = data.brevo_contacts?.contacts || [];
+  var tb = document.getElementById('tb-leads');
+  if (leads.length === 0) { tb.innerHTML = '<tr><td colspan="3" class="empty">Sin leads registrados</td></tr>'; return; }
+  tb.innerHTML = leads.slice(0, 10).map(function(l) { return '<tr><td>' + maskEmail(l.email) + '</td><td>' + (l.signo || '\u2014') + '</td><td style="color:var(--muted)">' + fmtDate(l.created) + '</td></tr>'; }).join('');
+}
+
+function renderProductsTable(data) {
+  var prods = data.stripe?.by_product || {};
+  var tb = document.getElementById('tb-products');
+  var entries = Object.entries(prods).sort(function(a, b) { return b[1].revenue - a[1].revenue; });
+  if (entries.length === 0) { tb.innerHTML = '<tr><td colspan="3" class="empty">Sin ventas por producto</td></tr>'; return; }
+  tb.innerHTML = entries.map(function(e) { return '<tr><td>' + e[0] + '</td><td>' + e[1].count + '</td><td style="color:var(--gold)">' + fmt(e[1].revenue) + '</td></tr>'; }).join('');
+}
+
+function renderStatus(data) {
+  var items = [];
+
+  if (data.stripe?.error) items.push({ status: 'err', text: 'Stripe: ' + data.stripe.error });
+  else items.push({ status: 'ok', text: 'Stripe conectado \u2014 saldo disponible: ' + fmt(data.stripe?.balance_available || 0) });
+
+  if (data.brevo_contacts?.error) items.push({ status: 'err', text: 'Brevo: ' + data.brevo_contacts.error });
+  else items.push({ status: 'ok', text: 'Brevo conectado \u2014 ' + (data.brevo_contacts?.total || 0) + ' contactos totales' });
+
+  if (data.funnel?.error) items.push({ status: 'warn', text: 'Supabase funnel: ' + data.funnel.error });
+  else {
+    var total = (data.funnel?.month?.lectura_generada || 0) + (data.funnel?.month?.email_capturado || 0);
+    items.push({ status: total > 0 ? 'ok' : 'warn', text: total > 0 ? 'Funnel tracking activo \u2014 ' + total + ' eventos este mes' : 'Funnel: tabla existe pero 0 eventos (tracking pendiente de conectar)' });
+  }
+
+  if (data.academia?.error) items.push({ status: 'warn', text: 'Academia: ' + data.academia.error });
+  else items.push({ status: 'ok', text: 'Academia \u2014 ' + (data.academia?.total_students || 0) + ' perfiles, ' + (data.academia?.total_enrollments || 0) + ' matriculas' });
+
+  document.getElementById('status-list').innerHTML = items.map(function(i) { return '<div class="status-item"><span class="dot ' + i.status + '"></span>' + i.text + '</div>'; }).join('');
+}
+
+init();
+</script>
+</body>
+</html>
