@@ -1,5 +1,8 @@
 const crypto = require('crypto');
 
+// Disable Vercel's automatic body parsing - we need the raw body for signature verification
+module.exports.config = { api: { bodyParser: false } };
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -11,6 +14,9 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Webhook not configured' });
   }
 
+  // Read raw body from stream
+  const rawBody = await getRawBody(req);
+
   // Verify Stripe signature
   const sig = req.headers['stripe-signature'];
   if (!sig) {
@@ -19,7 +25,6 @@ module.exports = async function handler(req, res) {
 
   let event;
   try {
-    const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
     event = verifyStripeSignature(rawBody, sig, webhookSecret);
   } catch (err) {
     console.error('Signature verification failed:', err.message);
@@ -30,7 +35,7 @@ module.exports = async function handler(req, res) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
     const email = session.customer_details && session.customer_details.email;
-    const productName = session.metadata && session.metadata.product_name || 'Carta Astral';
+    const productName = (session.metadata && session.metadata.product_name) || 'Carta Astral';
     const amount = session.amount_total ? (session.amount_total / 100).toFixed(2) : '0';
 
     if (email) {
@@ -46,6 +51,15 @@ module.exports = async function handler(req, res) {
 
   return res.status(200).json({ received: true });
 };
+
+function getRawBody(req) {
+  return new Promise(function(resolve, reject) {
+    var chunks = [];
+    req.on('data', function(chunk) { chunks.push(chunk); });
+    req.on('end', function() { resolve(Buffer.concat(chunks).toString('utf8')); });
+    req.on('error', reject);
+  });
+}
 
 function verifyStripeSignature(payload, sigHeader, secret) {
   const parts = {};
