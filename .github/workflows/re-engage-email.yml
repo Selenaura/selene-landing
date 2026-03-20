@@ -1,0 +1,21 @@
+name: Monthly Re-engagement Check
+on:
+  schedule:
+    # 1st of each month at 8:00 UTC = 10:00 hora España (CEST)
+    - cron: '0 8 1 * *'
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger re-engagement check
+        run: |
+          RESPONSE=$(curl -s -w "\n%{http_code}" "${{ secrets.SITE_URL }}/api/re-engage")
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+          echo "Status: $HTTP_CODE"
+          echo "Response: $BODY"
+          if [ "$HTTP_CODE" -ge 400 ]; then
+            echo "::error::Re-engagement check failed with status $HTTP_CODE"
+            exit 1
+          fi

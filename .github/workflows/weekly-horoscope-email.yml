@@ -1,0 +1,21 @@
+name: Weekly Horoscope Email
+on:
+  schedule:
+    # Monday 6:00 UTC = 8:00 hora España (CEST)
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger weekly horoscope email
+        run: |
+          RESPONSE=$(curl -s -w "\n%{http_code}" "${{ secrets.SITE_URL }}/api/weekly-horoscope")
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+          echo "Status: $HTTP_CODE"
+          echo "Response: $BODY"
+          if [ "$HTTP_CODE" -ge 400 ]; then
+            echo "::error::Weekly horoscope email failed with status $HTTP_CODE"
+            exit 1
+          fi

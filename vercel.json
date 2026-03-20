@@ -30,6 +30,11 @@
       "dest": "/api/compatibilidad.js"
     },
     {
+      "src": "/api/re-engage",
+      "methods": ["GET"],
+      "dest": "/api/re-engage.js"
+    },
+    {
       "src": "/admin",
       "dest": "/admin.html"
     }
@@ -38,10 +43,6 @@
     {
       "path": "/api/email-funnel",
       "schedule": "0 */2 * * *"
-    },
-    {
-      "path": "/api/weekly-horoscope",
-      "schedule": "0 6 * * 1"
     }
   ]
 }

@@ -159,6 +159,9 @@ async function markSent(url, key, id) {
 // Step 10 (+1h): Post-purchase thanks
 // Step 11 (+3d): Ask for testimonial
 // Step 12 (+7d): Cross-sell
+// Step 20 (RE1): Re-engagement — soft check-in (no links)
+// Step 21 (RE2): Re-engagement — value + free horoscope CTA
+// Step 22 (RE3): Re-engagement — farewell + opt-in CTA
 // ═══════════════════════════════════════════════════════════
 
 function getEmailContent(step, sign, signEn, lang) {
@@ -231,6 +234,31 @@ function getEmailContent(step, sign, signEn, lang) {
       showCta: true,
       ctaUrl: 'https://tarot.selenaura.com',
       ctaText: isEn ? 'Try your free tarot reading \u2192' : 'Hacer mi tirada de tarot gratis \u2192'
+    },
+    20: {
+      subject: isEn
+        ? 'Still there, ' + signName + '?'
+        : '\u00bfSigues ah\u00ed, ' + signName + '?',
+      body: isEn ? getStep20En(signName) : getStep20Es(signName),
+      showCta: false
+    },
+    21: {
+      subject: isEn
+        ? 'Your sky has changed, ' + signName
+        : 'Tu cielo ha cambiado, ' + signName,
+      body: isEn ? getStep21En(signName) : getStep21Es(signName),
+      showCta: true,
+      ctaUrl: 'https://selenaura.com',
+      ctaText: isEn ? 'See your updated horoscope \u2192' : 'Ver tu hor\u00f3scopo actualizado \u2192'
+    },
+    22: {
+      subject: isEn
+        ? 'Last message, ' + signName + ' \u2014 unless you want to stay'
+        : '\u00daltimo mensaje, ' + signName + ' \u2014 a menos que quieras quedarte',
+      body: isEn ? getStep22En(signName) : getStep22Es(signName),
+      showCta: true,
+      ctaUrl: 'https://selenaura.com',
+      ctaText: isEn ? 'I want to keep receiving \u2192' : 'Quiero seguir recibiendo \u2192'
     }
   };
 
@@ -558,6 +586,102 @@ function getPostPurchase3En(sign) {
     '</p>' +
     '<p style="' + P_BODY + '">' +
     'And if you want to go deeper, the 3-card reading costs less than a coffee.' +
+    '</p>';
+}
+
+// ═══════════════════════════════════════════════════════════
+// RE-ENGAGEMENT EMAILS (Steps 20, 21, 22)
+// ═══════════════════════════════════════════════════════════
+
+var P_BODY_J = 'font-family:Georgia,serif;font-size:15px;color:rgba(240,237,228,0.75);line-height:1.85;margin:0 0 16px;text-align:justify;';
+
+function getStep20Es(sign) {
+  return '<p style="' + P_GOLD + '">Hola, ' + sign + '.</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'Hace tiempo que no te escribo. El cielo ha cambiado mucho desde la \u00faltima vez.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'Los planetas no se detienen: Saturno sigue su tr\u00e1nsito lento y transformador, Venus ha cruzado nuevos signos, y la Luna ha completado decenas de ciclos desde que nos le\u00edmos por \u00faltima vez.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'Si ya no quieres recibir mis mensajes, lo entiendo. Pero si a\u00fan tienes curiosidad... <strong style="color:#C9A84C;">responde a este email con una sola palabra: \u201csigo\u201d</strong>.' +
+    '</p>' +
+    '<p style="' + P_ITALIC + '">' +
+    'Selene' +
+    '</p>';
+}
+
+function getStep20En(sign) {
+  return '<p style="' + P_GOLD + '">Hello, ' + sign + '.</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'It\'s been a while since I last wrote. The sky has changed a lot since then.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'The planets don\'t stop: Saturn continues its slow, transformative transit, Venus has crossed new signs, and the Moon has completed dozens of cycles since we last read together.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'If you no longer want to receive my messages, I understand. But if you\'re still curious... <strong style="color:#C9A84C;">reply to this email with one word: \u201cstay\u201d</strong>.' +
+    '</p>' +
+    '<p style="' + P_ITALIC + '">' +
+    'Selene' +
+    '</p>';
+}
+
+function getStep21Es(sign) {
+  return '<p style="' + P_GOLD + '">' + sign + ', tu cielo ha cambiado.</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'Desde la \u00faltima vez que nos conectamos, han pasado cosas importantes en el cosmos que te afectan directamente.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'Los tr\u00e1nsitos planetarios de estas semanas est\u00e1n moviendo energ\u00edas en \u00e1reas clave de tu carta: relaciones, trabajo interior y decisiones que llevas posponiendo. <strong style="color:#C9A84C;">Marte y Venus est\u00e1n activando zonas de tu cielo que no puedes ignorar</strong>.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'He actualizado tu hor\u00f3scopo con lo que el cielo dice para ti ahora mismo. Es gratuito, como siempre.' +
+    '</p>';
+}
+
+function getStep21En(sign) {
+  return '<p style="' + P_GOLD + '">' + sign + ', your sky has changed.</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'Since we last connected, important things have happened in the cosmos that directly affect you.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'The planetary transits of recent weeks are moving energy in key areas of your chart: relationships, inner work, and decisions you\'ve been postponing. <strong style="color:#C9A84C;">Mars and Venus are activating zones in your sky that you can\'t ignore</strong>.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'I\'ve updated your horoscope with what the sky says for you right now. It\'s free, as always.' +
+    '</p>';
+}
+
+function getStep22Es(sign) {
+  return '<p style="' + P_GOLD + '">' + sign + ',</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'Este es mi \u00faltimo email.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'He disfrutado escribirte sobre tu cielo, tus tr\u00e1nsitos y lo que las estrellas ve\u00edan para ti. Pero entiendo que las prioridades cambian, y no quiero llenar tu bandeja con algo que ya no te sirve.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'Si quieres seguir recibiendo tus actualizaciones c\u00f3smicas, simplemente <strong style="color:#C9A84C;">haz clic en el bot\u00f3n de abajo</strong>. Si no, te deseo el mejor de los cielos.' +
+    '</p>' +
+    '<p style="' + P_ITALIC + '">' +
+    'Con cari\u00f1o estelar,<br>Selene' +
+    '</p>';
+}
+
+function getStep22En(sign) {
+  return '<p style="' + P_GOLD + '">' + sign + ',</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'This is my last email.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'I\'ve enjoyed writing to you about your sky, your transits, and what the stars saw for you. But I understand priorities change, and I don\'t want to fill your inbox with something that no longer serves you.' +
+    '</p>' +
+    '<p style="' + P_BODY_J + '">' +
+    'If you want to keep receiving your cosmic updates, simply <strong style="color:#C9A84C;">click the button below</strong>. If not, I wish you the best of skies.' +
+    '</p>' +
+    '<p style="' + P_ITALIC + '">' +
+    'With starlight,<br>Selene' +
     '</p>';
 }
 
