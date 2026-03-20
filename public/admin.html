@@ -162,6 +162,23 @@
     </div>
   </div>
 
+  <!-- New Features -->
+  <div class="section">
+    <h2>Nuevas funcionalidades</h2>
+    <div class="metrics" style="grid-template-columns: repeat(4, 1fr);" id="new-features-metrics">
+      <div class="metric blue"><div class="label">Compatibilidad</div><div class="value" id="m-compat">--</div><div class="sub" id="m-compat-sub"></div></div>
+      <div class="metric green"><div class="label">Horoscopo semanal</div><div class="value" id="m-weekly">--</div><div class="sub" id="m-weekly-sub"></div></div>
+      <div class="metric"><div class="label">Emails en cola</div><div class="value" id="m-queue">--</div><div class="sub" id="m-queue-sub"></div></div>
+      <div class="metric gold"><div class="label">Post-compra enviados</div><div class="value" id="m-postpurchase">--</div><div class="sub" id="m-postpurchase-sub"></div></div>
+    </div>
+  </div>
+
+  <!-- Productos por tipo (compras funnel) -->
+  <div class="section">
+    <h2>Productos (ventas por funnel)</h2>
+    <div class="products-grid" id="funnel-products-grid"></div>
+  </div>
+
   <!-- Funnel -->
   <div class="section">
     <h2>Funnel de conversion</h2>
@@ -291,12 +308,14 @@ async function loadData() {
 
     renderMetrics(data);
     renderNurture(data);
+    renderNewFeatures(data);
     renderFunnel(data);
     renderDailyChart(data);
     renderSignosChart(data);
     renderSalesTable(data);
     renderLeadsTable(data);
     renderProducts(data);
+    renderFunnelProducts(data);
     renderAcademia(data);
     renderStatus(data);
 
@@ -550,6 +569,45 @@ function renderNurture(data) {
   document.getElementById('m-nurture-progress-sub').textContent = 'Secuencia completada';
 }
 
+function renderNewFeatures(data) {
+  var nf = data.new_features || {};
+  if (nf.error) {
+    document.getElementById('m-compat').textContent = '!!';
+    document.getElementById('m-compat-sub').textContent = nf.error;
+    return;
+  }
+
+  document.getElementById('m-compat').textContent = nf.compatibilidad_count || 0;
+  document.getElementById('m-compat-sub').textContent = 'Lecturas de compatibilidad';
+
+  document.getElementById('m-weekly').textContent = nf.weekly_horoscope_count || 0;
+  document.getElementById('m-weekly-sub').textContent = 'Emails semanales enviados';
+
+  document.getElementById('m-queue').textContent = nf.email_queue_count || 0;
+  document.getElementById('m-queue-sub').textContent = 'Pendientes de envio';
+
+  document.getElementById('m-postpurchase').textContent = nf.post_purchase_sent || 0;
+  document.getElementById('m-postpurchase-sub').textContent = 'Secuencia post-compra';
+}
+
+function renderFunnelProducts(data) {
+  var nf = data.new_features || {};
+  var container = document.getElementById('funnel-products-grid');
+  if (!container) return;
+
+  var byProduct = nf.compras_by_product || {};
+  var keys = Object.keys(byProduct);
+
+  if (keys.length === 0) {
+    container.innerHTML = '<div class="empty">Sin compras registradas en el funnel este mes</div>';
+    return;
+  }
+
+  container.innerHTML = keys.map(function(name) {
+    return '<div class="product-card"><div class="product-name">' + name + '</div><div class="product-price">' + byProduct[name] + ' ventas</div></div>';
+  }).join('');
+}
+
 function renderStatus(data) {
   var items = [];
 
@@ -584,6 +642,15 @@ function renderStatus(data) {
     items.push({ status: 'warn', text: 'Academia: ' + data.academia.error });
   } else {
     items.push({ status: 'ok', text: 'Academia - ' + (data.academia?.total_students || 0) + ' perfiles, ' + (data.academia?.total_enrollments || 0) + ' matriculas' });
+  }
+
+  // New features
+  if (data.new_features?.error) {
+    items.push({ status: 'warn', text: 'Nuevas funcionalidades: ' + data.new_features.error });
+  } else {
+    var compat = data.new_features?.compatibilidad_count || 0;
+    var weekly = data.new_features?.weekly_horoscope_count || 0;
+    items.push({ status: 'ok', text: 'Nuevas funcionalidades - ' + compat + ' compatibilidades, ' + weekly + ' horoscopos semanales' });
   }
 
   document.getElementById('status-list').innerHTML = items.map(function(i) {

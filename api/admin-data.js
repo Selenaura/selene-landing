@@ -35,14 +35,15 @@ module.exports = async function handler(req, res) {
       return res.status(403).json({ error: 'No tienes acceso al panel de administracion' });
     }
 
-    const [stripeData, brevoContacts, brevoListInfo, brevoEmailStats, funnelData, academiaData, emailFunnelData] = await Promise.allSettled([
+    const [stripeData, brevoContacts, brevoListInfo, brevoEmailStats, funnelData, academiaData, emailFunnelData, newFeaturesData] = await Promise.allSettled([
       fetchStripe(),
       fetchBrevoContacts(),
       fetchBrevoListInfo(),
       fetchBrevoEmailStats(),
       fetchFunnel(),
       fetchAcademia(),
-      fetchEmailFunnel()
+      fetchEmailFunnel(),
+      fetchNewFeatures()
     ]);
 
     return res.status(200).json({
@@ -54,6 +55,7 @@ module.exports = async function handler(req, res) {
       funnel: funnelData.status === 'fulfilled' ? funnelData.value : { error: funnelData.reason?.message },
       academia: academiaData.status === 'fulfilled' ? academiaData.value : { error: academiaData.reason?.message },
       email_funnel: emailFunnelData.status === 'fulfilled' ? emailFunnelData.value : { error: emailFunnelData.reason?.message },
+      new_features: newFeaturesData.status === 'fulfilled' ? newFeaturesData.value : { error: newFeaturesData.reason?.message },
       generated_at: new Date().toISOString()
     });
 
@@ -391,5 +393,66 @@ async function fetchEmailFunnel() {
     total_pending: pendingCount,
     unique_contacts: uniqueEmails.size,
     by_step: byStep
+  };
+}
+
+async function fetchNewFeatures() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key) return { error: 'SUPABASE_SERVICE_KEY no configurada' };
+
+  const headers = {
+    'apikey': key,
+    'Authorization': `Bearer ${key}`,
+    'Content-Type': 'application/json',
+    'Prefer': 'count=exact'
+  };
+
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
+
+  const [compatRes, weeklyRes, emailQueueRes, postPurchaseRes, productBreakdownRes] = await Promise.all([
+    // Compatibility readings count
+    fetch(`${url}/rest/v1/funnel_events?select=id&event_type=eq.compatibilidad&limit=0`, {
+      headers: { ...headers, 'Prefer': 'count=exact' }
+    }),
+    // Weekly horoscope emails sent
+    fetch(`${url}/rest/v1/funnel_events?select=id&event_type=eq.weekly_horoscope&limit=0`, {
+      headers: { ...headers, 'Prefer': 'count=exact' }
+    }),
+    // Emails in queue (pending in email_sequence)
+    fetch(`${url}/rest/v1/email_sequence?select=id&sent=eq.false&limit=0`, {
+      headers: { ...headers, 'Prefer': 'count=exact' }
+    }),
+    // Post-purchase emails sent (step >= 10 and sent = true)
+    fetch(`${url}/rest/v1/email_sequence?select=id&step=gte.10&sent=eq.true&limit=0`, {
+      headers: { ...headers, 'Prefer': 'count=exact' }
+    }),
+    // Product breakdown from funnel_events compra events
+    fetch(`${url}/rest/v1/funnel_events?select=metadata,created_at&event_type=eq.compra&created_at=gte.${thirtyDaysAgo}T00:00:00Z`, { headers })
+  ]);
+
+  const compatCount = parseInt(compatRes.headers.get('content-range')?.split('/')[1] || '0');
+  const weeklyCount = parseInt(weeklyRes.headers.get('content-range')?.split('/')[1] || '0');
+  const emailQueueCount = parseInt(emailQueueRes.headers.get('content-range')?.split('/')[1] || '0');
+  const postPurchaseCount = parseInt(postPurchaseRes.headers.get('content-range')?.split('/')[1] || '0');
+
+  const productEvents = await productBreakdownRes.json();
+  const byProduct = {};
+  (Array.isArray(productEvents) ? productEvents : []).forEach(e => {
+    let producto = 'Desconocido';
+    if (e.metadata) {
+      const meta = typeof e.metadata === 'string' ? JSON.parse(e.metadata) : e.metadata;
+      producto = meta.producto || meta.product || 'Desconocido';
+    }
+    if (!byProduct[producto]) byProduct[producto] = 0;
+    byProduct[producto]++;
+  });
+
+  return {
+    compatibilidad_count: compatCount,
+    weekly_horoscope_count: weeklyCount,
+    email_queue_count: emailQueueCount,
+    post_purchase_sent: postPurchaseCount,
+    compras_by_product: byProduct
   };
 }
