@@ -408,7 +408,7 @@ function getStep5Es(sign) {
     '\u2014 La Consulta: donde te respondo la pregunta que llevas dentro' +
     '</p>' +
     '<div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:20px;margin:16px 0;text-align:center;">' +
-    '<p style="font-family:Georgia,serif;font-size:14px;color:rgba(240,237,228,0.5);margin:0 0 4px;text-decoration:line-through;">Precio habitual: 47 \u20ac</p>' +
+    '<p style="font-family:Georgia,serif;font-size:14px;color:rgba(240,237,228,0.5);margin:0 0 4px;text-decoration:line-through;">Precio habitual: 44,99 \u20ac</p>' +
     '<p style="font-family:Georgia,serif;font-size:24px;color:#C9A84C;margin:0 0 8px;font-weight:600;">27 \u20ac</p>' +
     '<p style="font-family:Georgia,serif;font-size:13px;color:rgba(240,237,228,0.5);margin:0;">Oferta de bienvenida \u2014 solo por email</p>' +
     '</div>' +
@@ -432,7 +432,7 @@ function getStep5En(sign) {
     '\u2014 The Consultation: where I answer the question you carry inside' +
     '</p>' +
     '<div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:20px;margin:16px 0;text-align:center;">' +
-    '<p style="font-family:Georgia,serif;font-size:14px;color:rgba(240,237,228,0.5);margin:0 0 4px;text-decoration:line-through;">Regular price: \u20ac47</p>' +
+    '<p style="font-family:Georgia,serif;font-size:14px;color:rgba(240,237,228,0.5);margin:0 0 4px;text-decoration:line-through;">Regular price: \u20ac44.99</p>' +
     '<p style="font-family:Georgia,serif;font-size:24px;color:#C9A84C;margin:0 0 8px;font-weight:600;">\u20ac27</p>' +
     '<p style="font-family:Georgia,serif;font-size:13px;color:rgba(240,237,228,0.5);margin:0;">Welcome offer \u2014 email exclusive</p>' +
     '</div>' +
