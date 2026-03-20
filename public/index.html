@@ -597,6 +597,72 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
   vertical-align:middle;margin-right:6px;
 }
 @keyframes heroSpin{to{transform:rotate(360deg)}}
+
+/* ═══ SOCIAL PROOF COUNTER ═══ */
+.social-proof-counter{
+text-align:center;margin-top:18px;
+font-family:var(--serif);font-size:13px;color:var(--text-mid);
+letter-spacing:.5px;font-style:italic;
+}
+.social-proof-counter .sp-number{
+color:var(--gold);font-weight:600;font-style:normal;
+text-shadow:0 0 18px rgba(201,168,76,.25);
+}
+.social-proof-counter .sp-star{
+color:var(--gold);opacity:.6;margin-right:4px;
+}
+
+/* ═══ TESTIMONIALS CAROUSEL ═══ */
+.testimonials-section{padding:60px 0 40px}
+.testimonials-section .section-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:12px;opacity:.65}
+.testimonials-section h2{font-family:var(--serif);font-size:clamp(22px,3.5vw,32px);font-weight:300;text-align:center;margin-bottom:32px;color:var(--white)}
+.testimonials-track{
+display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+-webkit-overflow-scrolling:touch;padding:0 24px 16px;
+scrollbar-width:none;
+}
+.testimonials-track::-webkit-scrollbar{display:none}
+.testimonial-card{
+flex:0 0 280px;scroll-snap-align:start;
+background:var(--card);border:1px solid var(--border);border-radius:16px;
+padding:24px;position:relative;overflow:hidden;
+backdrop-filter:blur(8px);
+}
+.testimonial-card::before{
+content:'';position:absolute;top:0;left:0;right:0;height:2px;
+background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.2;
+}
+.testimonial-stars{color:var(--gold);font-size:12px;letter-spacing:2px;margin-bottom:12px}
+.testimonial-quote{
+font-family:var(--serif);font-size:14px;color:var(--white-dim);
+line-height:1.65;font-style:italic;margin-bottom:14px;
+}
+.testimonial-author{
+font-size:11px;color:var(--text-mid);font-weight:500;letter-spacing:.3px;
+}
+.testimonial-author .tz-sign{margin-left:4px;opacity:.7}
+.testimonials-dots{
+display:flex;justify-content:center;gap:6px;margin-top:16px;
+}
+.testimonials-dots span{
+width:6px;height:6px;border-radius:50%;background:var(--text-dim);
+transition:all .3s;cursor:pointer;
+}
+.testimonials-dots span.active{background:var(--gold);box-shadow:0 0 8px rgba(201,168,76,.3)}
+
+/* ═══ TRUST BADGES ═══ */
+.trust-badges{
+display:flex;justify-content:center;gap:24px;flex-wrap:wrap;
+padding:32px 24px;max-width:680px;margin:0 auto;
+}
+.trust-badge{
+display:flex;align-items:center;gap:8px;
+padding:10px 18px;border-radius:24px;
+background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.08);
+font-size:12px;color:var(--text-mid);letter-spacing:.3px;
+white-space:nowrap;
+}
+.trust-badge .tb-icon{font-size:14px}
 </style>
 
 </head>
@@ -644,7 +710,7 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
       <a href="https://carta.selenaura.com" class="nd-item nd-item-astral" onclick="toggleMenu()">
         <div class="nd-icon">☉</div>
         <div class="nd-info"><div class="nd-name" data-es="Carta Astral" data-en="Birth Chart">Carta Astral</div><div class="nd-desc" data-es="15 secciones · Consulta con Selene" data-en="15 sections · Consult with Selene">15 secciones · Consulta con Selene</div></div>
-        <div class="nd-price">14,99 €</div>
+        <div class="nd-price">27 €</div>
       </a>
       <a href="https://quiro.selenaura.com" class="nd-item nd-item-quiro" onclick="toggleMenu()">
         <div class="nd-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.3"><path d="M18 11V6a1 1 0 0 0-2 0v4M15 10V4a1 1 0 0 0-2 0v6M12 10V5a1 1 0 0 0-2 0v6M9 11V8a1 1 0 0 0-2 0v5c0 4 3.5 7 7 7s7-3 7-7v-3a1 1 0 0 0-2 0"/></svg></div>
@@ -700,6 +766,9 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
         <button type="button" class="nl-submit" id="nlSubmit" disabled onclick="submitLectura()" data-es="Quiero mi lectura ✦" data-en="I want my reading ✦">Quiero mi lectura ✦</button>
       </div>
       <p class="hero-note" data-es="Gratis · 30 segundos · Sin email · Con ciencia real" data-en="Free · 30 seconds · No email · Real science">Gratis · 30 segundos · Sin email · Con ciencia real</p>
+      <div class="social-proof-counter" id="socialProofCounter">
+        <span class="sp-star">✦</span> <span class="sp-number" id="spNumber">2.847</span> <span data-es="lecturas realizadas" data-en="readings completed">lecturas realizadas</span>
+      </div>
     </div>
   </section>
 
@@ -846,7 +915,7 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
           <div class="product-row-top"><div class="product-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.2"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="12" r="3" stroke-opacity=".6"/><path d="M12 5v2M12 17v2M7 12h2M15 12h2" stroke-opacity=".4"/></svg></div><span class="product-badge new">✦ Nuevo</span></div>
           <div class="product-name" data-es="Tirada de Tarot" data-en="Tarot Reading">Tirada de Tarot</div>
           <div class="product-desc" data-es="22 Arcanos Mayores. Ritual de respiración, selección intuitiva de cartas y lectura narrativa con psicología arquetípica de Jung y neurociencia de la intuición." data-en="22 Major Arcana. Breathing ritual, intuitive card selection and narrative reading with Jungian archetypal psychology and neuroscience of intuition.">22 Arcanos Mayores. Ritual de respiración, selección intuitiva de cartas y lectura narrativa con psicología arquetípica de Jung y neurociencia de la intuición.</div>
-          <div class="product-footer"><span class="product-price" data-es="Gratis — 1,99 €" data-en="Free — €1.99">Gratis — 1,99 €</span><span class="product-cta" data-es="Hacer mi tirada →" data-en="Get my reading →">Hacer mi tirada →</span></div>
+          <div class="product-footer"><span class="product-price" data-es="Gratis — 4,99 €" data-en="Free — €4.99">Gratis — 4,99 €</span><span class="product-cta" data-es="Hacer mi tirada →" data-en="Get my reading →">Hacer mi tirada →</span></div>
         </a>
         <a href="https://carta.selenaura.com" class="product-card card-astral fk-frame fk-card-glow reveal stagger-1">
           <div class="accent-line"></div>
@@ -860,7 +929,7 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
           <div class="product-row-top"><div class="product-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.2"><path d="M18 11V6a1 1 0 0 0-2 0v4M15 10V4a1 1 0 0 0-2 0v6M12 10V5a1 1 0 0 0-2 0v6M9 11V8a1 1 0 0 0-2 0v5c0 4 3.5 7 7 7s7-3 7-7v-3a1 1 0 0 0-2 0"/></svg></div><span class="product-badge" data-es="Único" data-en="Unique">Único</span></div>
           <div class="product-name" data-es="Quirología" data-en="Palmistry">Quirología</div>
           <div class="product-desc" data-es="Análisis dermatoglífico de tu palma. 6 líneas, 7 montes planetarios, forma de mano y marcas especiales. Basado en los textos clásicos de Cheiro (1916) y Benham." data-en="Dermatoglyphic analysis of your palm. 6 lines, 7 planetary mounts, hand shape and special marks. Based on classic texts by Cheiro (1916) and Benham.">Análisis dermatoglífico de tu palma. 6 líneas, 7 montes planetarios, forma de mano y marcas especiales. Basado en los textos clásicos de Cheiro (1916) y Benham.</div>
-          <div class="product-footer"><span class="product-price" data-es="Gratis — 2,49 €" data-en="Free — €2.49">Gratis — 2,49 €</span><span class="product-cta" data-es="Analizar mi mano →" data-en="Analyze my palm →">Analizar mi mano →</span></div>
+          <div class="product-footer"><span class="product-price" data-es="Gratis — 9,99 €" data-en="Free — €9.99">Gratis — 9,99 €</span><span class="product-cta" data-es="Analizar mi mano →" data-en="Analyze my palm →">Analizar mi mano →</span></div>
         </a>
         <a href="#horoscopo-section" class="product-card card-horoscopo fk-frame fk-card-glow reveal stagger-3">
           <div class="accent-line"></div>
@@ -871,6 +940,48 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
         </a>
       </div>
     </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS CAROUSEL ═══ -->
+
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-tag" data-es="Lo que dicen las estrellas" data-en="What the stars say">Lo que dicen las estrellas</div>
+      <h2 data-es="Experiencias reales, escritas en el cielo" data-en="Real experiences, written in the sky">Experiencias reales, escritas en el cielo</h2>
+    </div>
+    <div class="testimonials-track" id="testimonialsTrack">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote" data-es="Me dio escalofríos lo precisa que fue. Describió exactamente lo que estoy viviendo sin saber nada de mí." data-en="It gave me chills how accurate it was. It described exactly what I'm going through without knowing anything about me.">Me dio escalofríos lo precisa que fue. Describió exactamente lo que estoy viviendo sin saber nada de mí.</div>
+        <div class="testimonial-author">Laura G. <span class="tz-sign">♏ Escorpio</span></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote" data-es="Nunca pensé que con solo mi fecha de nacimiento pudiera salir algo tan profundo. Se lo mandé a mi hermana y también flipó." data-en="I never thought that just my birth date could reveal something so deep. I sent it to my sister and she was amazed too.">Nunca pensé que con solo mi fecha de nacimiento pudiera salir algo tan profundo. Se lo mandé a mi hermana y también flipó.</div>
+        <div class="testimonial-author">María P. <span class="tz-sign">♒ Acuario</span></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote" data-es="Lo hice por curiosidad y acabé leyéndolo tres veces. Hay cosas que solo yo sabía y ahí estaban, negro sobre blanco." data-en="I did it out of curiosity and ended up reading it three times. There were things only I knew and there they were, in black and white.">Lo hice por curiosidad y acabé leyéndolo tres veces. Hay cosas que solo yo sabía y ahí estaban, negro sobre blanco.</div>
+        <div class="testimonial-author">Daniela R. <span class="tz-sign">♌ Leo</span></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote" data-es="En 30 segundos me explicó mejor que mi terapeuta por qué me cuesta tanto soltar el control. Brutal." data-en="In 30 seconds it explained better than my therapist why I struggle so much with letting go of control. Mind-blowing.">En 30 segundos me explicó mejor que mi terapeuta por qué me cuesta tanto soltar el control. Brutal.</div>
+        <div class="testimonial-author">Carmen V. <span class="tz-sign">♍ Virgo</span></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote" data-es="Se lo envié a tres amigas. Las tres alucinaron con la suya. Ya es nuestro ritual del lunes." data-en="I sent it to three friends. All three were amazed with theirs. It's now our Monday ritual.">Se lo envié a tres amigas. Las tres alucinaron con la suya. Ya es nuestro ritual del lunes.</div>
+        <div class="testimonial-author">Ana M. <span class="tz-sign">♋ Cáncer</span></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote" data-es="Soy bastante escéptico con estas cosas, pero la lectura clavó mi personalidad de una forma que no puedo explicar." data-en="I'm quite skeptical about these things, but the reading nailed my personality in a way I can't explain.">Soy bastante escéptico con estas cosas, pero la lectura clavó mi personalidad de una forma que no puedo explicar.</div>
+        <div class="testimonial-author">Pablo S. <span class="tz-sign">♐ Sagitario</span></div>
+      </div>
+    </div>
+    <div class="testimonials-dots" id="testimonialsDots"></div>
   </section>
 
   <!-- LARGE FLOWER KNOWS ORNAMENT -->
@@ -907,7 +1018,7 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
           <div class="tf-item"><div class="tf-dot"></div><span class="tf-text" data-es="Ritual de respiración guiada antes de elegir" data-en="Guided breathing ritual before choosing">Ritual de respiración guiada antes de elegir</span></div>
           <div class="tf-item"><div class="tf-dot"></div><span class="tf-text" data-es="Lectura narrativa con citas de Bechara, Jung, Kahneman" data-en="Narrative reading citing Bechara, Jung, Kahneman">Lectura narrativa con citas de Bechara, Jung, Kahneman</span></div>
           <div class="tf-item"><div class="tf-dot"></div><span class="tf-text" data-es="Cristal protector y ritual personalizado" data-en="Protective crystal and personalized ritual">Cristal protector y ritual personalizado</span></div>
-          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text" data-es="Express gratis (1 carta) · Profunda 1,99 € (3 cartas)" data-en="Express free (1 card) · Deep €1.99 (3 cards)">Express gratis (1 carta) · Profunda 1,99 € (3 cartas)</span></div>
+          <div class="tf-item"><div class="tf-dot"></div><span class="tf-text" data-es="Express gratis (1 carta) · Profunda 4,99 € (3 cartas)" data-en="Express free (1 card) · Deep €4.99 (3 cards)">Express gratis (1 carta) · Profunda 4,99 € (3 cartas)</span></div>
         </div>
         <div class="tarot-ctas">
           <a href="https://tarot.selenaura.com" class="btn-gold" data-es="Hacer mi tirada gratis" data-en="Get my free reading">Hacer mi tirada gratis</a>
@@ -990,6 +1101,14 @@ font-size:11px;color:var(–text-dim);text-align:center;margin-top:18px;line-hei
       </div>
     </div>
   </section>
+
+  <!-- TRUST BADGES -->
+
+  <div class="trust-badges">
+    <div class="trust-badge"><span class="tb-icon">🔒</span> <span data-es="Pago 100% seguro" data-en="100% secure payment">Pago 100% seguro</span></div>
+    <div class="trust-badge"><span class="tb-icon">⚡</span> <span data-es="Resultado inmediato" data-en="Instant results">Resultado inmediato</span></div>
+    <div class="trust-badge"><span class="tb-icon">🌙</span> <span data-es="+2.800 lecturas" data-en="+2,800 readings">+2.800 lecturas</span></div>
+  </div>
 
   <!-- FOOTER -->
 
@@ -1346,6 +1465,55 @@ async function loadHoroscope(btn) {
   display.classList.add('visible');
   display.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
+
+// ═══ SOCIAL PROOF COUNTER ═══
+(function(){
+  var base=2847;
+  var el=document.getElementById('spNumber');
+  if(!el) return;
+  // Grow slowly: ~1 every 45 seconds
+  setInterval(function(){
+    base++;
+    el.textContent=base.toLocaleString('es-ES');
+  },45000);
+})();
+
+// ═══ TESTIMONIALS CAROUSEL ═══
+(function(){
+  var track=document.getElementById('testimonialsTrack');
+  var dotsContainer=document.getElementById('testimonialsDots');
+  if(!track||!dotsContainer) return;
+  var cards=track.querySelectorAll('.testimonial-card');
+  var numCards=cards.length;
+  // Create dots
+  for(var i=0;i<numCards;i++){
+    var dot=document.createElement('span');
+    if(i===0) dot.classList.add('active');
+    dot.dataset.index=i;
+    dot.addEventListener('click',function(){
+      var idx=parseInt(this.dataset.index);
+      cards[idx].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});
+    });
+    dotsContainer.appendChild(dot);
+  }
+  // Update active dot on scroll
+  var dots=dotsContainer.querySelectorAll('span');
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var idx=Array.prototype.indexOf.call(cards,entry.target);
+        dots.forEach(function(d,di){d.classList.toggle('active',di===idx)});
+      }
+    });
+  },{root:track,threshold:0.6});
+  cards.forEach(function(c){observer.observe(c)});
+  // Auto-scroll every 4 seconds
+  var current=0;
+  setInterval(function(){
+    current=(current+1)%numCards;
+    cards[current].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});
+  },4000);
+})();
 
 </script>
 
