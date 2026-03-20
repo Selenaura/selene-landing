@@ -103,9 +103,9 @@ async function sendReadingEmail(email, sign, signEn, readingHtml, lang) {
   if (!brevoKey) { console.warn('No BREVO_API_KEY for email'); return; }
   
   var signName = lang === 'en' ? (signEn || sign) : (sign || signEn);
-  var subject = lang === 'en' 
-    ? '✦ Your cosmic reading, ' + signName
-    : '✦ Tu lectura cósmica, ' + signName;
+  var subject = lang === 'en'
+    ? 'Your reading is here \u2014 this is what I saw'
+    : 'Tu lectura est\u00e1 aqu\u00ed \u2014 esto es lo que vi';
   
   var htmlContent = buildEmailHtml(readingHtml, signName, lang);
   
@@ -116,7 +116,7 @@ async function sendReadingEmail(email, sign, signEn, readingHtml, lang) {
       'api-key': brevoKey
     },
     body: JSON.stringify({
-      sender: { name: 'Selene', email: 'info@selenaura.com' },
+      sender: { name: 'Selene', email: 'selene@selenaura.com' },
       to: [{ email: email }],
       subject: subject,
       htmlContent: htmlContent
@@ -162,14 +162,15 @@ async function scheduleEmailSequence(email, sign, signEn, lang) {
     return;
   }
 
-  // Schedule 4 emails: step 2 (day 2), step 3 (day 5), step 4 (day 8), step 5 (day 12)
+  // Schedule 5 emails: step 2 (day 3), step 3 (day 7), step 4 (day 10), step 5 (day 14), step 6 (day 21)
   var now = Date.now();
   var DAY = 86400000;
   var steps = [
-    { step: 2, delay: 2 * DAY },
-    { step: 3, delay: 5 * DAY },
-    { step: 4, delay: 8 * DAY },
-    { step: 5, delay: 12 * DAY }
+    { step: 2, delay: 3 * DAY },
+    { step: 3, delay: 7 * DAY },
+    { step: 4, delay: 10 * DAY },
+    { step: 5, delay: 14 * DAY },
+    { step: 6, delay: 21 * DAY }
   ];
 
   var rows = steps.map(function(s) {
@@ -195,7 +196,7 @@ async function scheduleEmailSequence(email, sign, signEn, lang) {
     body: JSON.stringify(rows)
   });
 
-  console.log('Scheduled 4 nurture emails for ' + email);
+  console.log('Scheduled 5 nurture emails for ' + email);
 }
 
 function buildEmailHtml(readingHtml, signName, lang) {
@@ -229,15 +230,24 @@ function buildEmailHtml(readingHtml, signName, lang) {
     '<tr><td align="center" style="padding:0 40px;">' +
     '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.3),transparent);max-width:300px;margin:0 auto;"></div>' +
     '</td></tr>' +
-    '<tr><td align="center" style="padding:28px 32px;">' +
-    '<p style="font-family:Georgia,serif;font-size:15px;font-style:italic;color:rgba(240,237,228,0.6);line-height:1.7;margin:0 0 20px;">' +
-    (isEn 
-      ? 'This is just a glimpse. Your full birth chart has 15 layers &mdash; including The Consultation, where Selene answers the question you carry inside.'
-      : 'Esto es solo una muestra. Tu carta natal completa tiene 15 capas &mdash; incluida La Consulta, donde Selene responde la pregunta que llevas dentro.') +
+    '<tr><td style="padding:28px 32px;">' +
+    '<p style="font-family:Georgia,serif;font-size:15px;font-style:italic;color:rgba(240,237,228,0.6);line-height:1.7;margin:0 0 12px;">' +
+    (isEn
+      ? 'This is just a glimpse. Your birth chart has 15 layers &mdash; and there are things there I think you need to know.'
+      : 'Esto es solo un fragmento. Tu carta natal tiene 15 capas &mdash; y hay cosas ah\u00ed que creo que necesitas saber.') +
     '</p>' +
-    '<a href="https://carta.selenaura.com" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#C9A84C,#D4AF37);color:#0A0A0F;border-radius:50px;font-family:Arial,sans-serif;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:0.5px;">' +
-    (isEn ? 'Discover your full birth chart →' : 'Descubre tu carta natal completa →') +
-    '</a>' +
+    '<p style="font-family:Georgia,serif;font-size:15px;color:rgba(240,237,228,0.6);line-height:1.7;margin:0;">' +
+    (isEn
+      ? 'But first, sit with what you just read. Reread it tomorrow. Sometimes what matters most isn\u2019t obvious the first time.'
+      : 'Pero primero, qu\u00e9date con lo que acabas de leer. Rel\u00e9elo ma\u00f1ana. A veces lo que m\u00e1s importa no se ve a la primera.') +
+    '</p>' +
+    '</td></tr>' +
+    '<tr><td style="padding:0 32px 20px;">' +
+    '<p style="font-family:Georgia,serif;font-size:13px;font-style:italic;color:rgba(240,237,228,0.4);margin:0;">' +
+    (isEn
+      ? 'PD: If something you read resonated, I\u2019d love to know. Just reply to this email.'
+      : 'PD: Si algo de lo que le\u00edste te reson\u00f3, me encantar\u00eda saberlo. Solo responde a este email.') +
+    '</p>' +
     '</td></tr>' +
     '<tr><td align="center" style="padding:32px 20px 16px;">' +
     '<p style="font-family:Georgia,serif;font-size:20px;letter-spacing:5px;color:rgba(201,168,76,0.4);margin:0 0 12px;">✦</p>' +

@@ -51,6 +51,14 @@ module.exports = async function handler(req, res) {
       } catch (err) {
         console.error('Funnel track failed:', err.message);
       }
+
+      // Schedule post-purchase email sequence
+      try {
+        await schedulePostPurchase(email, productName);
+        console.log('Post-purchase emails scheduled for', email);
+      } catch (err) {
+        console.error('Post-purchase schedule failed:', err.message);
+      }
     }
   }
 
@@ -116,6 +124,60 @@ async function trackFunnelEvent(eventType, sign, email, producto, importeCents) 
       producto: producto || null,
       importe_cents: importeCents || null
     })
+  });
+}
+
+async function schedulePostPurchase(email, productName) {
+  var url = process.env.SUPABASE_URL;
+  var key = process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key) { console.warn('No SUPABASE vars for post-purchase'); return; }
+
+  var now = Date.now();
+  var HOUR = 3600000;
+  var DAY = 86400000;
+
+  // Get sign from Brevo contact (if available)
+  var sign = null;
+  var brevoKey = process.env.BREVO_API_KEY;
+  if (brevoKey) {
+    try {
+      var cRes = await fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
+        headers: { 'api-key': brevoKey, 'Accept': 'application/json' }
+      });
+      if (cRes.ok) {
+        var contact = await cRes.json();
+        sign = contact.attributes && contact.attributes.SIGNO_SOLAR || null;
+      }
+    } catch (e) { /* ignore */ }
+  }
+
+  var steps = [
+    { step: 10, delay: 1 * HOUR },
+    { step: 11, delay: 3 * DAY },
+    { step: 12, delay: 7 * DAY }
+  ];
+
+  var rows = steps.map(function(s) {
+    return {
+      email: email,
+      signo_solar: sign,
+      signo_en: null,
+      lang: 'es',
+      step: s.step,
+      next_send_at: new Date(now + s.delay).toISOString(),
+      sent: false
+    };
+  });
+
+  await fetch(url + '/rest/v1/email_sequence', {
+    method: 'POST',
+    headers: {
+      'apikey': key,
+      'Authorization': 'Bearer ' + key,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify(rows)
   });
 }
 
