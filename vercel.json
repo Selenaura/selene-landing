@@ -20,6 +20,16 @@
       "dest": "/api/email-funnel.js"
     },
     {
+      "src": "/api/weekly-horoscope",
+      "methods": ["GET"],
+      "dest": "/api/weekly-horoscope.js"
+    },
+    {
+      "src": "/api/compatibilidad",
+      "methods": ["POST"],
+      "dest": "/api/compatibilidad.js"
+    },
+    {
       "src": "/admin",
       "dest": "/admin.html"
     }
@@ -28,6 +38,10 @@
     {
       "path": "/api/email-funnel",
       "schedule": "0 */2 * * *"
+    },
+    {
+      "path": "/api/weekly-horoscope",
+      "schedule": "0 6 * * 1"
     }
   ]
 }
