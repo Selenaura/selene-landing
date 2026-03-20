@@ -38,11 +38,5 @@
       "src": "/admin",
       "dest": "/admin.html"
     }
-  ],
-  "crons": [
-    {
-      "path": "/api/email-funnel",
-      "schedule": "0 */2 * * *"
-    }
   ]
 }
