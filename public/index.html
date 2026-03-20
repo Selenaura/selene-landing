@@ -1751,7 +1751,8 @@ async function submitCompatibilidad(){
     dot.dataset.index=i;
     dot.addEventListener('click',function(){
       var idx=parseInt(this.dataset.index);
-      cards[idx].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});
+      var card=cards[idx];
+      track.scrollTo({left:card.offsetLeft-track.offsetLeft,behavior:'smooth'});
     });
     dotsContainer.appendChild(dot);
   }
@@ -1766,11 +1767,12 @@ async function submitCompatibilidad(){
     });
   },{root:track,threshold:0.6});
   cards.forEach(function(c){observer.observe(c)});
-  // Auto-scroll every 4 seconds
+  // Auto-scroll every 4 seconds (horizontal only — never hijack page scroll)
   var current=0;
   setInterval(function(){
     current=(current+1)%numCards;
-    cards[current].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});
+    var card=cards[current];
+    track.scrollTo({left:card.offsetLeft-track.offsetLeft,behavior:'smooth'});
   },4000);
 })();
 
