@@ -73,7 +73,8 @@
       "focus": "Cada arcano como arquetipo junguiano, breve significado de los 22, Jung y la sincronicidad, el tarot como herramienta proyectiva (similar a test de Rorschach), estudios sobre intuición y toma de decisiones",
       "cta": "tarot",
       "category": "Tarot",
-      "status": "pending"
+      "status": "published",
+      "publishedAt": "2026-03-23"
     },
     {
       "slug": "eclipse-solar-2026",
@@ -231,7 +232,12 @@
     {
       "slug": "carta-astral-gratis-hora-nacimiento",
       "title": "Carta astral gratis con hora de nacimiento: guía paso a paso",
-      "keywords": ["carta astral gratis con hora de nacimiento", "carta astral gratis", "carta natal gratis online", "calcular carta astral"],
+      "keywords": [
+        "carta astral gratis con hora de nacimiento",
+        "carta astral gratis",
+        "carta natal gratis online",
+        "calcular carta astral"
+      ],
       "focus": "Por qué la hora exacta es imprescindible (ascendente cambia cada 2h), cómo obtener tu hora de nacimiento (registro civil, libro de familia), diferencia entre carta solar y carta completa, estudio Gauquelin sobre posición planetaria y hora de nacimiento, tutorial paso a paso para generar carta gratuita con Selene",
       "cta": "carta-astral",
       "category": "Guía esencial",
@@ -240,7 +246,12 @@
     {
       "slug": "venus-en-los-signos-significado",
       "title": "Venus en los signos: qué dice de tu forma de amar y atraer",
-      "keywords": ["venus en los signos", "venus en carta natal", "venus astrología amor", "venus signo significado"],
+      "keywords": [
+        "venus en los signos",
+        "venus en carta natal",
+        "venus astrología amor",
+        "venus signo significado"
+      ],
       "focus": "Venus como planeta del amor y los valores, Venus en cada signo (breve), neurociencia del enamoramiento (Fisher 2005 dopamina/oxitocina), estilos de apego de Bowlby y correlación con Venus en elementos, cómo encontrar tu Venus en la carta natal",
       "cta": "carta-astral",
       "category": "Guía esencial",
@@ -249,7 +260,12 @@
     {
       "slug": "pluton-en-acuario-2024-2044",
       "title": "Plutón en Acuario 2024-2044: el tránsito que redefine una era",
-      "keywords": ["plutón en acuario", "pluton acuario 2024", "tránsito plutón acuario", "plutón generacional"],
+      "keywords": [
+        "plutón en acuario",
+        "pluton acuario 2024",
+        "tránsito plutón acuario",
+        "plutón generacional"
+      ],
       "focus": "Ciclo de Plutón (248 años), historia de Plutón en Acuario (Revolución Francesa 1778-1798), paralelismos con IA y revolución digital, transformación de estructuras de poder, estudio de ciclos históricos de Strauss-Howe, qué esperar en tecnología, democracia y colectividad hasta 2044",
       "cta": "carta-astral",
       "category": "Tránsitos generacionales",
@@ -258,7 +274,12 @@
     {
       "slug": "ritual-luna-nueva-manifestacion",
       "title": "Ritual de luna nueva: cómo manifestar intenciones con base científica",
-      "keywords": ["luna nueva ritual", "ritual luna nueva", "manifestar luna nueva", "luna nueva significado"],
+      "keywords": [
+        "luna nueva ritual",
+        "ritual luna nueva",
+        "manifestar luna nueva",
+        "luna nueva significado"
+      ],
       "focus": "Ciclo lunar y fases (luna nueva como inicio), neurociencia de la intención y visualización (estudio Pascual-Leone 1995 sobre práctica mental), escritura expresiva de Pennebaker como ritual, establecimiento de metas según psicología positiva (Locke & Latham), ritual práctico paso a paso alineado con evidencia",
       "cta": "lectura-express",
       "category": "Ciclos lunares",
@@ -267,7 +288,12 @@
     {
       "slug": "planeta-regente-de-cada-signo",
       "title": "Qué planeta rige tu signo: regencias planetarias explicadas",
-      "keywords": ["qué planeta rige mi signo", "planetas regentes signos", "regencias planetarias", "planeta de cada signo"],
+      "keywords": [
+        "qué planeta rige mi signo",
+        "planetas regentes signos",
+        "regencias planetarias",
+        "planeta de cada signo"
+      ],
       "focus": "Sistema de regencias clásico y moderno, cada signo y su planeta regente, dignidades planetarias (domicilio, exaltación, caída, exilio), historia de las regencias desde Ptolomeo, cómo la regencia afecta la interpretación de tu carta natal, analogías con funciones psicológicas",
       "cta": "carta-astral",
       "category": "Guía esencial",
@@ -276,7 +302,12 @@
     {
       "slug": "casas-astrologicas-vacias-significado",
       "title": "Casas astrológicas vacías: qué significan y por qué no preocuparte",
-      "keywords": ["casas astrológicas vacías significado", "casas vacías carta natal", "casa vacía astrología", "no tengo planetas en casa"],
+      "keywords": [
+        "casas astrológicas vacías significado",
+        "casas vacías carta natal",
+        "casa vacía astrología",
+        "no tengo planetas en casa"
+      ],
       "focus": "Por qué tener casas vacías es normal (10 planetas, 12 casas), el regente de la casa vacía como clave interpretativa, desmitificar el miedo a casas vacías, analogía con la psicología humanista (no tener conflicto en un área no es malo), cómo leer casas vacías con el signo en la cúspide",
       "cta": "carta-astral",
       "category": "Guía esencial",
@@ -285,7 +316,12 @@
     {
       "slug": "sinastria-que-es-compatibilidad",
       "title": "Sinastría: qué es y cómo analizar la compatibilidad de pareja",
-      "keywords": ["sinastría qué es", "sinastría pareja", "sinastría compatibilidad", "carta sinastría"],
+      "keywords": [
+        "sinastría qué es",
+        "sinastría pareja",
+        "sinastría compatibilidad",
+        "carta sinastría"
+      ],
       "focus": "Definición de sinastría (superposición de dos cartas natales), aspectos clave (conjunción Venus-Marte, Luna-Sol), teoría del apego y compatibilidad (Hazan & Shaver 1987), diferencia entre sinastría y carta compuesta, los 5 aspectos más importantes en sinastría, herramienta de compatibilidad Selene",
       "cta": "compatibilidad",
       "category": "Relaciones",
@@ -294,7 +330,12 @@
     {
       "slug": "nodos-lunares-significado-carta-natal",
       "title": "Nodos lunares en tu carta natal: misión de vida y karma",
-      "keywords": ["nodos lunares significado", "nodo norte carta natal", "nodo sur significado", "nodos lunares en signos"],
+      "keywords": [
+        "nodos lunares significado",
+        "nodo norte carta natal",
+        "nodo sur significado",
+        "nodos lunares en signos"
+      ],
       "focus": "Qué son los nodos lunares (puntos de intersección orbital), nodo norte como dirección de crecimiento y nodo sur como zona de confort, nodos en cada signo (breve), psicología del propósito vital (Frankl, logoterapia), cómo los nodos reflejan patrones de autosabotaje y superación personal",
       "cta": "carta-astral",
       "category": "Guía avanzada",
@@ -303,7 +344,12 @@
     {
       "slug": "revolucion-solar-que-es",
       "title": "Revolución solar: qué es y cómo leer tu carta de cumpleaños",
-      "keywords": ["revolución solar qué es", "revolución solar astrología", "carta de cumpleaños astrología", "revolución solar interpretación"],
+      "keywords": [
+        "revolución solar qué es",
+        "revolución solar astrología",
+        "carta de cumpleaños astrología",
+        "revolución solar interpretación"
+      ],
       "focus": "Definición de revolución solar (carta del retorno solar anual), cómo se calcula, diferencia con carta natal, qué mirar primero (ascendente de RS, planetas en casas angulares), estudios sobre efecto cumpleaños en psicología (Phillips 2010), cómo usarla como herramienta de planificación anual",
       "cta": "carta-astral",
       "category": "Guía avanzada",
@@ -312,7 +358,12 @@
     {
       "slug": "jupiter-en-cancer-2026",
       "title": "Júpiter en Cáncer 2025-2026: expansión emocional y hogar",
-      "keywords": ["júpiter en cáncer 2026", "jupiter cancer 2025", "tránsito júpiter cáncer", "júpiter exaltado"],
+      "keywords": [
+        "júpiter en cáncer 2026",
+        "jupiter cancer 2025",
+        "tránsito júpiter cáncer",
+        "júpiter exaltado"
+      ],
       "focus": "Júpiter exaltado en Cáncer (dignidad máxima), fechas del tránsito, qué áreas de vida expande (hogar, familia, seguridad emocional), ciclo de Júpiter de 12 años (última vez en Cáncer 2013-2014), neurociencia del apego seguro (Bowlby, Schore), cómo aprovechar este tránsito según tu carta natal",
       "cta": "carta-astral",
       "category": "Tránsitos 2026",
@@ -321,7 +372,12 @@
     {
       "slug": "astrologia-y-ansiedad-gestion-emocional",
       "title": "Astrología y ansiedad: herramientas astrológicas para la calma",
-      "keywords": ["astrología y ansiedad", "ansiedad signos zodiacales", "gestión emocional astrología", "astrología bienestar mental"],
+      "keywords": [
+        "astrología y ansiedad",
+        "ansiedad signos zodiacales",
+        "gestión emocional astrología",
+        "astrología bienestar mental"
+      ],
       "focus": "Prevalencia de ansiedad (OMS datos 2024), cómo cada signo/elemento experimenta la ansiedad de forma distinta, Luna y Saturno como indicadores de patrones ansiosos, técnicas de regulación emocional basadas en evidencia (TCC, mindfulness - Kabat-Zinn 1990), la carta natal como mapa de vulnerabilidades y recursos, cuándo buscar ayuda profesional",
       "cta": "carta-astral",
       "category": "Bienestar",
@@ -330,7 +386,12 @@
     {
       "slug": "sonar-con-agua-significado-astrologico",
       "title": "Soñar con agua: significado astrológico y psicológico profundo",
-      "keywords": ["soñar con agua significado astrológico", "soñar con agua astrología", "sueños agua significado", "agua en los sueños"],
+      "keywords": [
+        "soñar con agua significado astrológico",
+        "soñar con agua astrología",
+        "sueños agua significado",
+        "agua en los sueños"
+      ],
       "focus": "Simbolismo del agua en astrología (elemento emocional, signos de agua), arquetipos acuáticos en Jung (inconsciente colectivo, el mar como símbolo del inconsciente), estudios sobre contenido onírico y procesamiento emocional (Walker 2017 'Why We Sleep'), tipos de sueños con agua y su interpretación dual (astrológica + psicológica), Luna y Neptuno como planetas del mundo onírico",
       "cta": "lectura-express",
       "category": "Simbología",
