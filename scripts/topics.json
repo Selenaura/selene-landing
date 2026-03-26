@@ -83,7 +83,8 @@
       "focus": "Eclipse solar total 12 agosto 2026 visible desde España, datos astronómicos, tradición astrológica de eclipses, estudios sobre comportamiento humano durante eclipses, efectos en animales documentados",
       "cta": "carta-astral",
       "category": "Eventos cósmicos",
-      "status": "pending"
+      "status": "published",
+      "publishedAt": "2026-03-26"
     },
     {
       "slug": "luna-llena-significado-efectos",
