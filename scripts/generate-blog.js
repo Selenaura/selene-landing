@@ -57,6 +57,9 @@ async function main() {
   generateBlogIndex(data.topics);
   console.log('Blog index regenerated.');
 
+  // 6. Regenerate sitemap with new article
+  regenerateSitemap(data.topics);
+
   console.log('Done!');
 }
 
@@ -65,7 +68,7 @@ async function main() {
 async function generateArticle(topic, config) {
   const today = new Date().toISOString().split('T')[0];
 
-  const systemPrompt = `Eres la redactora principal de Selene (selenaura.com), una plataforma de astrología y desarrollo intuitivo con base científica. Tu voz es "científica mística": combinas profundidad espiritual con rigor científico. 
+  const systemPrompt = `Eres la redactora principal de Selene (selenaura.com), una plataforma de astrología y desarrollo intuitivo con base científica. Tu voz es "científica mística": combinas profundidad espiritual con rigor científico.
 
 REGLAS DE ESCRITURA:
 - Escribe en español de España (no latinoamericano)
@@ -83,7 +86,43 @@ REGLAS DE ESCRITURA:
 - NUNCA hagas afirmaciones pseudocientíficas sin fundamento. Si algo es tradición astrológica, di "la tradición astrológica interpreta..." Si algo es ciencia, cita la fuente
 - NUNCA menciones "inteligencia artificial", "IA", "AI" ni "generado por IA" en el contenido visible. Las herramientas se presentan como "Selene", no como tecnología
 - Al final, incluye un CTA natural hacia el producto relevante
-- NO incluyas el DOCTYPE, head, nav ni footer — solo el contenido del <article>. Empieza directamente con el primer párrafo`;
+- NO incluyas el DOCTYPE, head, nav ni footer — solo el contenido del <article>. Empieza directamente con el primer párrafo
+
+ESTRUCTURA OBLIGATORIA PARA VISIBILIDAD EN BUSCADORES (AEO/GEO):
+
+1. RESPUESTA DIRECTA AL INICIO (primeros 2 párrafos):
+   - El primer párrafo responde directamente a la pregunta principal del artículo
+   - Formato: "[Término o pregunta principal]. [Definición directa en 1-2 frases]."
+
+2. BLOQUE DE DEFINICIÓN (antes del primer H2):
+   Si el artículo define un concepto, incluir un párrafo con formato:
+   "[Término] es [definición concisa]. [Expansión con contexto científico o histórico]."
+
+3. ESTADÍSTICAS CON FUENTE (mínimo 2 por artículo):
+   Formato: "[Dato específico] (Fuente: [Autor/Institución, año])."
+   NUNCA inventar estadísticas. Solo usar datos verificables.
+
+4. SECCIÓN FAQ OBLIGATORIA (al final del artículo, ANTES del CTA):
+   Incluir entre 3 y 5 preguntas frecuentes con respuesta directa.
+   Formato HTML:
+   <h2>Preguntas frecuentes sobre [tema]</h2>
+   <h3>¿[Pregunta concreta]?</h3>
+   <p>[Respuesta directa en 2-4 frases. Sin relleno.]</p>
+
+5. DATOS DE FAQ para schema (OBLIGATORIO al final, después de todo el contenido visible):
+   Incluir un bloque JSON comentado:
+   <!-- FAQS_JSON
+   [
+     {"question": "¿Pregunta 1?", "answer": "Respuesta 1 completa."},
+     {"question": "¿Pregunta 2?", "answer": "Respuesta 2 completa."}
+   ]
+   -->
+
+6. PÁRRAFOS CORTOS: Máximo 3-4 líneas por párrafo. Los sistemas de búsqueda extraen bloques cortos mejor.
+
+7. HEADINGS DESCRIPTIVOS: Cada H2 y H3 debe ser una respuesta parcial, no solo un título temático.
+   Mal: "Tipos de líneas"
+   Bien: "Las 6 líneas principales y qué revela cada una"`;
 
   const userPrompt = `Escribe un artículo de blog SEO para Selene sobre:
 
@@ -124,15 +163,32 @@ Para el CTA final usa este formato:
     .map(b => b.text)
     .join('');
 
+  // Extract FAQs from content if present
+  const faqs = extractFaqs(content);
+
   // Wrap in full HTML page
-  return wrapInTemplate(topic, content, today);
+  return wrapInTemplate(topic, content, today, faqs);
 }
 
 // ═══ HTML TEMPLATE ═══
 
-function wrapInTemplate(topic, articleContent, date) {
+function wrapInTemplate(topic, articleContent, date, faqs) {
   const readingTime = Math.ceil(articleContent.split(/\s+/).length / 200);
-  
+
+  // Build FAQPage schema if FAQs exist
+  const faqSchema = faqs && faqs.length > 0 ? `
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": ${JSON.stringify(faqs.map(f => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+  })))}
+}
+</script>` : '';
+
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -144,6 +200,10 @@ function wrapInTemplate(topic, articleContent, date) {
 <meta property="og:title" content="${topic.title}">
 <meta property="og:description" content="${topic.focus.substring(0, 155)}">
 <meta property="og:type" content="article">
+<meta property="og:url" content="https://selenaura.com/blog/${topic.slug}.html">
+<meta property="og:locale" content="es_ES">
+<meta property="article:published_time" content="${date}">
+<meta property="article:author" content="SelenaUra">
 <link rel="canonical" href="https://selenaura.com/blog/${topic.slug}.html">
 <meta name="p:domain_verify" content="597160e7a6e46fe761d945c8de0f9b87"/>
 <!-- Pinterest Tag -->
@@ -161,13 +221,17 @@ pintrk('page');
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "${topic.title.replace(/"/g, '\\"')}",
-  "author": {"@type": "Organization", "name": "Selene", "url": "https://selenaura.com"},
-  "publisher": {"@type": "Organization", "name": "Selene"},
+  "author": {"@type": "Organization", "name": "SelenaUra", "url": "https://selenaura.com"},
+  "publisher": {"@type": "Organization", "name": "SelenaUra", "logo": {"@type": "ImageObject", "url": "https://selenaura.com/favicon.svg"}},
   "datePublished": "${date}",
   "dateModified": "${date}",
-  "description": "${topic.focus.substring(0, 155).replace(/"/g, '\\"')}"
+  "description": "${topic.focus.substring(0, 155).replace(/"/g, '\\"')}",
+  "inLanguage": "es",
+  "url": "https://selenaura.com/blog/${topic.slug}.html",
+  "about": {"@type": "Thing", "name": "${topic.category}"}
 }
 </script>
+${faqSchema}
 <style>
 :root{
   --bg:#0A0A0F;--card:rgba(255,255,255,.03);--border:rgba(255,255,255,.06);
@@ -375,6 +439,115 @@ ${cards}
 </html>`;
 
   fs.writeFileSync(path.join(BLOG_DIR, 'index.html'), indexHtml, 'utf-8');
+}
+
+// ═══ FAQ EXTRACTION ═══
+
+function extractFaqs(content) {
+  const match = content.match(/<!--\s*FAQS_JSON\s*([\s\S]*?)-->/);
+  if (!match) return [];
+  try {
+    return JSON.parse(match[1].trim());
+  } catch (e) {
+    console.warn('Could not parse FAQS_JSON:', e.message);
+    return [];
+  }
+}
+
+// ═══ SITEMAP GENERATOR ═══
+
+function regenerateSitemap(topics) {
+  const published = topics
+    .filter(t => t.status === 'published')
+    .sort((a, b) => (b.publishedAt || '').localeCompare(a.publishedAt || ''));
+
+  const today = new Date().toISOString().split('T')[0];
+
+  const blogUrls = published.map(t => `  <url>
+    <loc>https://selenaura.com/blog/${t.slug}.html</loc>
+    <lastmod>${t.publishedAt || today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>`).join('\n');
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main pages -->
+  <url>
+    <loc>https://selenaura.com/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://selenaura.com/blog/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Published blog articles -->
+${blogUrls}
+
+  <!-- Product pages -->
+  <url>
+    <loc>https://selenaura.com/carta-gratis.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Subdomains -->
+  <url>
+    <loc>https://carta.selenaura.com/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tarot.selenaura.com/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://quiro.selenaura.com/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://academy.selenaura.com/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Legal pages -->
+  <url>
+    <loc>https://selenaura.com/aviso-legal.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://selenaura.com/privacidad.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://selenaura.com/cookies.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>
+`;
+
+  const sitemapPath = path.join(__dirname, '..', 'public', 'sitemap.xml');
+  fs.writeFileSync(sitemapPath, sitemap, 'utf-8');
+  console.log('Sitemap regenerated.');
 }
 
 // ═══ UTILITIES ═══
